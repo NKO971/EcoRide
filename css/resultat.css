@@ -1,0 +1,174 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden; /* Empeche le débordemant horizontal */
+}
+
+
+/* Fin du travaille sur la barre de recherche */
+
+.conteneur-global {
+    display: flex;
+    gap: 2rem;
+}
+
+ .recap-resultat { 
+    font-size: var(--font-size-normal);
+    white-space: nowrap;  
+    color: var(--color-dark); 
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: var(--radius-medium);
+    border: 0.1rem solid var(--color-primary);
+    align-items: center;
+    background-color: var(--color-white);
+}  
+
+.recap {
+    margin: var(--spacing-sm);
+    flex: 1; /* Permet de prendre tout l'espace disponible */
+    text-align: center;
+}
+
+/* Travaille sur les filtres */
+fieldset {
+    border: solid 0.1rem var(--color-primary);
+    height: auto;
+    width: 100%;
+}
+
+h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: var(--font-size-xlarge);
+    color: var(--color-dark);
+    white-space: nowrap;
+}
+
+.filtre {
+    font-size: var(--font-size-normal);
+    color: var(--color-primary);
+    padding: 1rem 1.5rem ;
+    margin: 1rem auto;
+}
+
+.separation-2 {
+    height: 2%;
+    padding: 0.3rem;
+    background-color: var(--color-primary);
+    border-radius: var(--radius-medium);
+    margin: var(--spacing-md) 0;
+    margin-left: var(--spacing-xs);
+    flex-shrink: 0;
+    width: 90%;   
+}
+/* Fin du travaille sur les filtres */
+
+/* Travaille sur les résultats */
+.material-symbols-outlined {
+    color: var(--color-primary);
+}
+
+.conteneurResultat {
+    margin-bottom: 2rem;
+}
+
+
+.photo-profil {
+    width: 4rem;
+    height: 4rem;
+    border-radius: var(--radius-medium);
+    margin-right: var(--spacing-lg);
+    object-fit: cover; /* Assure que l'image remplit le conteneur sans déformation */
+}
+
+.covoiturage {
+    margin-top: var(--spacing-xl);
+    border: 0.1rem solid var(--color-primary);
+    border-radius: var(--radius-medium);
+    padding: var(--spacing-sm);
+    font-family: 'Montserrat', sans-serif;
+    color: var(--color-dark);
+}
+
+.destinationHorraire {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+}
+
+.tempsTrajet {
+    display: flex;
+    
+    gap: 1rem;
+    align-items: center;
+}
+
+.separation-3 {
+    border: 0.1rem solid var(--color-dark);
+    width: var(--spacing-xl);
+}
+
+.info-conducteur {
+    display: grid;
+    grid-template-columns: 60px 2fr 80px 1fr 2fr 80px; /* ajuster selon contenu*/ 
+    align-items: center;
+    text-align: center;
+}
+
+.ligneDeSeparation {
+    border-bottom: var(--color-primary) 0.1rem solid;
+    margin: var(--spacing-xs);    
+}
+
+
+
+/* ============================================
+   RESPONSIVE - Mobile uniquement
+   ============================================ */
+
+@media (max-width: 991.98px) {
+    fieldset {
+        width: 80%;
+        height: auto;
+        margin: 0 auto var(--spacing-lg);
+        
+    }
+
+     .conteneurFiltre {
+        display: flex;
+        align-items: center;
+        text-wrap: nowrap;
+        gap: 0.5rem;
+    }
+}
+
+ @media (max-width: 767.98px) {
+    .divBouton {
+        display: flex;
+        justify-content: center;
+    }
+
+    fieldset {
+        width: 80%;
+        height: auto;
+        margin: 0 auto var(--spacing-md);
+        background-color: var(--color-secondary);
+        border: none; 
+    }
+
+    .btnFiltre {
+        width: 90%;
+        font-size: var(--font-size-large);
+        background-color: var(--color-secondary);
+        color: var(--color-primary);
+        border-radius: var(--radius-medium);
+        border-color: var(--color-primary);
+    }  
+}
+
+@media (max-width: 575.98px) {
+    .covoiturage,
+    h3, .info-conducteur {
+        font-size: var(--font-size-small);
+    }
+}

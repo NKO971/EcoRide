@@ -1,0 +1,304 @@
+/* ============================================
+   VARIABLES CSS - Centralisées pour tout le site
+   ============================================ */
+
+/* Force le fond vert du header */
+header,
+header nav,
+header .navbar {
+    background-color: #91ECB8 !important;
+}
+
+/* Supprime les backgrounds Bootstrap par défaut */
+.bg-body-tertiary {
+    background-color: #91ECB8 !important;
+}
+
+.navbar {
+    border: none !important;
+}
+
+:root {
+    /* Couleurs principales */
+    --color-primary: #3498DB;
+    /* Bleu principal */
+    --color-secondary: #91ECB8;
+    /* Vert menthe */
+    --color-dark: #2C3E50;
+    /* Gris foncé pour textes */
+    --color-light: #6f8092;
+    /* Gris clair */
+    --color-white: #ffffff;
+    --color-background: #f9f9f9;
+
+    /* Espacements standardisés */
+    --spacing-xs: 0.5rem;
+    /* 8px */
+    --spacing-sm: 1rem;
+    /* 16px */
+    --spacing-md: 1.5rem;
+    /* 24px */
+    --spacing-lg: 2rem;
+    /* 32px */
+    --spacing-xl: 3rem;
+    /* 48px */
+
+    /* Tailles de police */
+    --font-size-small: 0.875rem;
+    --font-size-normal: 1.25rem;
+    --font-size-large: 1.5rem;
+    --font-size-xlarge: 2rem;
+
+    /* Border radius */
+    --radius-small: 0.3125rem;
+    --radius-medium: 1.5625rem;
+    --radius-large: 3.125rem;
+
+    /* Ombres */
+    --shadow-small: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* ============================================
+   RESET CSS - Uniformiser tous les navigateurs
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: var(--font-size-normal);
+    color: var(--color-dark);
+    background-color: var(--color-white);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* ============================================
+   HEADER & NAVIGATION
+   ============================================ */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--color-secondary);
+    box-shadow: var(--shadow-small);
+}
+
+.navbar {
+    background-color: var(--color-secondary);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+    min-height: 88px;
+    padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 60px;
+    width: auto;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.nav-link {
+    color: var(--color-dark);
+    font-size: var(--font-size-xlarge);
+    text-decoration: none;
+    white-space: nowrap;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--color-primary);
+}
+
+.nav-link.active {
+    color: rgba(44, 62, 80, 0.5);
+}
+
+/* Bouton hamburger sur mobile */
+.navbar-toggler {
+    border: 2px solid var(--color-dark);
+    background-color: transparent;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='%232C3E50' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='%232C3E50' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+
+/* ============================================
+   BARRE DE RECHERCHE BOOTSTRAP - Réutilisable
+   ============================================ */
+
+.bdr {
+    width: 90%;
+    max-width: 1000px;
+    margin: var(--spacing-xl) auto;
+    background-color: var(--color-white);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-medium);
+    padding: var(--spacing-xs);
+    box-shadow: var(--shadow-medium);
+}
+
+.bdr .input-group {
+    gap: var(--spacing-sm);
+    padding: 0;
+}
+
+.bdr .form-control {
+    border: none;
+    outline: none;
+    font-size: var(--font-size-large);
+    color: var(--color-primary);
+    font-family: 'Montserrat', sans-serif;
+    background-color: transparent;
+    padding: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+}
+
+.bdr .form-control::placeholder {
+    color: var(--color-dark);
+    opacity: 0.7;
+}
+
+.bdr .form-control:focus {
+    background-color: rgba(145, 236, 184, 0.1);
+    border-radius: var(--radius-small);
+    box-shadow: none;
+}
+
+/* Spécifique pour l'input date */
+.bdr input[type="date"] {
+    display: flex;
+    align-items: center;
+    padding-left: var(--spacing-sm);
+}
+
+/* Icône calendrier */
+.bdr input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.7;
+    margin-left: auto;
+}
+
+.bdr input[type="date"]::-moz-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+/* Bouton de recherche */
+.bdr .btn-primary {
+    background-color: var(--color-secondary) !important;
+    color: var(--color-primary) !important;
+    border: none !important;
+    border-radius: var(--radius-medium) !important;
+    padding: var(--spacing-sm) var(--spacing-lg) !important;
+    font-size: var(--font-size-large) !important;
+    font-weight: bold !important;
+    transition: all 0.3s ease !important;
+    white-space: nowrap !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+.bdr .btn-primary:hover {
+    background-color: var(--color-primary) !important;
+    color: var(--color-white) !important;
+    transform: scale(1.02) !important;
+    border: none !important;
+}
+
+
+
+/* Bouton "Proposez un trajet" */
+.button button {
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: var(--font-size-large);
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-medium);
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+
+    /* 👇 POUR CENTRER LE TEXTE DANS LE BOUTON */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.button button:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    transform: scale(1.05);
+}
+
+/* ============================================
+   FOOTER STYLES - Réutilisable
+   ============================================ */
+footer a {
+    color: var(--color-light);
+    /* #6f8092 */
+    font-size: var(--font-size-small);
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+footer a:hover {
+    color: var(--color-dark);
+    /* Gris plus foncé au survol */
+}
+

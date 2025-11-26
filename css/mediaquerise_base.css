@@ -1,0 +1,192 @@
+/* Media Query : Navigation mobile */
+@media (max-width: 991.98px) {
+
+    .navbar-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+        padding-top: var(--spacing-md);
+    }
+
+    .nav-link {
+        font-size: var(--font-size-large);
+        width: 100%;
+        padding: var(--spacing-sm);
+    }
+}
+
+@media (max-width: 575.98px) {
+     .navbar-brand{
+        width: 50%;
+        max-width: 100%;
+    }
+    .logo {
+        width: 80%;
+    }
+    .navbar {
+        padding: var(--spacing-sm);
+    }
+}
+
+/* ============================================
+   BARRE DE RECHERCHE BOOTSTRAP - MEDIA QUERIES
+   ============================================ */
+
+/* Tablette (< 992px) */
+@media (max-width: 991.98px) {
+    .bdr {
+        width: 75%;
+        padding: var(--spacing-md);
+        
+    }
+    
+    .bdr .form-control {
+        font-size: var(--font-size-normal);border: solid 1px #BDC3C7;
+        border-radius: var(--radius-small);
+    }
+    .bdr .btn-primary {
+        font-size: var(--font-size-normal) !important;
+    }
+
+    .bdr .input-group {
+        flex-direction: column; /* 👈 CLEF ! Force l'empilement */
+        gap: var(--spacing-sm);
+    }
+    
+    .bdr input[type="text"],
+    .bdr input[type="date"] {
+        text-align: center;
+        justify-content: center;
+        justify-content: center;
+        box-shadow: 0 0 5px var(--color-primary);transition: box-shadow 0.3s ease;
+    }
+}
+
+/* Mobile (< 768px) - EMPILE VERTICALEMENT */
+@media (max-width: 767.98px) {
+    .bdr {
+        width: 95%;
+        margin: var(--spacing-lg) auto;
+        padding: var(--spacing-sm);
+    }
+    
+    .bdr .input-group {
+        flex-direction: column; /* 👈 CLEF ! Force l'empilement */
+        gap: var(--spacing-sm);
+    }
+    
+    /* Chaque colonne prend 100% */
+    .bdr .col-12,
+    .bdr .col-md-6,
+    .bdr .col-md-8,
+    .bdr .col-lg-3 {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-bottom: 0;
+    }
+    
+    .bdr .form-control {
+        width: 100%;
+        font-size: 1rem; /* 16px minimum pour éviter zoom iOS */
+        padding: var(--spacing-sm);
+    }
+    
+    .bdr .btn-primary {
+        width: 100% !important;
+        font-size: 1rem !important;
+        padding: var(--spacing-md) !important;
+    }
+    
+    .bdr .d-grid {
+        width: 100%;
+    }
+
+}
+
+/* Petit mobile (< 576px) */
+@media (max-width: 575.98px) {
+    .bdr {
+        width: 98%;
+        border-radius: var(--radius-small);
+        padding: var(--spacing-xs);
+    }
+    
+    .bdr .input-group {
+        gap: var(--spacing-xs);
+    }
+}
+
+
+/* ============================================
+   MEDIA QUERIES - RESPONSIVE
+   ============================================ */
+
+/* Tablette (< 992px) */
+@media (max-width: 991.98px) {
+    .search-container {
+        width: 95%;
+        padding: var(--spacing-md);
+    }
+
+    .search-form {
+        gap: var(--spacing-md);
+    }
+
+    .search-field {
+        min-width: 200px;
+    }
+
+    .search-separator {
+        display: none;
+        /* On cache les séparateurs sur tablette */
+    }
+}
+
+/* Mobile (< 768px) */
+@media (max-width: 767.98px) {
+    .search-container {
+        width: 95%;
+        margin: var(--spacing-lg) auto;
+        padding: var(--spacing-md);
+    }
+
+    .search-form {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .search-field {
+        width: 100%;
+        min-width: unset;
+        padding: var(--spacing-sm);
+        background-color: var(--color-background);
+        border-radius: var(--radius-small);
+    }
+
+    .search-field input {
+        font-size: var(--font-size-normal);
+    }
+
+    .search-btn {
+        width: 100%;
+        padding: var(--spacing-md);
+    }
+
+    .search-separator {
+        display: none;
+    }
+}
+
+/* Petit mobile (< 576px) */
+@media (max-width: 575.98px) {
+    .search-container {
+        width: 100%;
+        border-radius: var(--radius-small);
+        margin: var(--spacing-md) auto;
+    }
+
+    .search-field input,
+    .search-btn {
+        font-size: var(--font-size-normal);
+    }
+}

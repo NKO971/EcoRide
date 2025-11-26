@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoRide - Connexion-inscription</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/mediaquerise_base.css">
+    <link rel="stylesheet" href="/css/connexion-inscription.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <!-- Je récupère des icons sur google front -->
+    <script src="/js/bootstrap.bundle.min.js" defer></script>
+    <script src="/js/jquery-3.7.1.min.js" defer></script>
+
+
+</head>
+
+<body>
+
+  <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <!-- Logo -->
+                <a class="navbar-brand" href="/HTML/EcoRide_Accueil.html">
+                    <img src="/Image/EcoRide.svg" alt="logo EcoRide" class="logo">
+                </a>
+
+                <!-- Bouton hamburger mobile -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Menu navigation -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link" href="/HTML/EcoRide_Accueil.html">Accueil</a>
+                        <a class="nav-link" href="/HTML/Connexion-inscription.html">Connexion/Inscription</a>
+                        <a class="nav-link" href="/HTML/Ecoride_publier_un_trajet.html">Publier un trajet</a>
+                        <a class="nav-link" href="/HTML/contact.html">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container-fluid px-4">
+            <div class="row gx-5 justify-content-evenly">
+                <div class="col-12 col-md-6 col-lg-5 formulaires1">
+                    <!-- Formulaire de connexion -->
+                    <form action="" method="post">
+                        <fieldset class="fieldset-connexion">
+                            <legend>Connexion</legend>
+                            <div class="connexion">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div><br>
+                            <div class="connexion">
+                                <label for="pass">Mot de passe</label>
+                                <input type="password" id="pass" required>
+                            </div><br>
+                            <div class="connexion">
+                                <label class="checkbox">
+                                    <!-- Ici pas de for parceque la checkbox est a l'intérieur du label -->
+                                    <input type="checkbox" name="restez-connecte"> <!-- Pareil pour l'id -->
+                                    Restez connecté
+                                </label>
+                            </div><br>
+                            <div>
+                                <button type="submit">Connexion</button>
+                            </div><br>
+                            <div>
+                                <button type="button"
+                                    onclick="location.href='mot-de-passe-mot-de-passe-oublie.html'">Mot de passe
+                                    oublié</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="col-12 col-md-6 col-lg-5 formulaires2">
+                    <!-- Formulaire d'inscription -->
+                    <form action="" method="post">
+                        <fieldset class="fieldset-inscription">
+                            <legend>Inscription</legend>
+                            <div class="inscription">
+                                <label for="nom">Nom</label>
+                                <input type="text" id="nom" name="nom" required>
+                            </div><br>
+                            <div class="inscription">
+                                <label for="prenom">Prénom</label>
+                                <input type="text" id="prenom" name="prenom" required>
+                            </div><br>
+                            <div class="inscription">
+                                <label for="email-inscription">Email</label>
+                                <input type="email" id="email-inscription" name="email-inscription" required>
+                            </div><br>
+                            <div class="inscription">
+                                <label for="mot-de-passe">Mot de passe</label>
+                                <input type="password" id="mot-de-passe" name="mot-de-passe" required>
+                            </div><br>
+                            <div class="inscription">
+                                <label for="confirmer-mot-de-passe">Confirmer mot de passe</label>
+                                <input type="password" id="confirmer-mot-de-passe" name="confirmer-mot-de-passe"
+                                    required>
+                            </div><br>
+                            <div>
+                                <button type="submit">Inscription</button>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+  <footer>
+        <!-- Pied de page avec informations de contact -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl text-center">
+                    <a href="mailto:EcoRide@hotmail.com" class="contact-mail">EcoRide@hotmail.com</a>
+                </div>
+                <div class="col-xl text-center">
+                    <a href="" class="mentions-legales">Mention légales</a>
+                </div>
+                <div class="col-xl text-center">
+                    <a href="" class="reseaux-sociaux">Réseaux sociaux</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoRide - Accueil</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/header-et-footer.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/mediaquerise_base.css">
+    <link rel="stylesheet" href="/css/detail_covoiturage.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <script src="/js/bootstrap.bundle.min.js" defer></script>
+    <script src="/js/jquery-3.7.1.min.js" defer></script>
+    <!-- Je récupère des icons sur google front -->
+
+</head>
+
+<body>
+ <header>
+        <!-- Logo et menu de navigation -->
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"> <img src="/Image/EcoRide.svg" alt="logo EcoRide" class="logo"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse nav-fill" id="navbarNav">
+
+                    <a class="nav-link mx-auto" style="min-width: 100px;" href="/HTML/EcoRide_Accueil.html">Accueil</a>
+
+
+                    <a class="nav-link mx-auto" style="min-width: 200px;" href="/HTML/Connexion-inscription.html">Connexion/Inscription</a>
+
+
+                    <a class="nav-link mx-auto" style="min-width: 200px;" href="/HTML/Ecoride_publier_un_trajet.html">Publier un trajet</a>
+
+
+                    <a class="nav-link mx-auto" style="min-width: 100px;" href="/HTML/contact.html">Contact</a>
+
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="row">
+
+            <div class="col-6 test">
+                <div class="row recap">
+                    <div class="col-2 ville">
+                        <span class="bold">Paris</span>
+                    </div>
+                    <div class="col-2 departTrajet">
+                        <span class="bold">10 h 30</span>
+                    </div>
+                    <div class="col-1 traitSeparation"></div>
+                    <div class="col-2 tempsTrajet">
+                        <span>06 H 07</span>
+                    </div>
+                    <div class="col-1 traitSeparation"></div>
+                    <div class="col-2 arriveeTrajet">
+                        <span class="bold">16 h 37</span>
+                    </div>
+
+                    <div class="col-2 ville">
+                        <span class="bold">Toulouse</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="row detailCovoiturage">
+                    <div class="col">
+                        <div class="conducteur">
+                            <div class="profil">
+                                <img src="/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82878.png"
+                                    alt="photo de profil jean dupont" class="photo-profil">
+                                <h4>Jean Dupond</h4>
+                            </div>
+                            <div class="noteConducteur">
+                                <span class="material-symbols-outlined">star</span>
+                                <span>4.5/5 Avis : 2</span>
+                            </div>
+                            <div>
+                                <span class="material-symbols-outlined">electric_car</span>
+                                <span>Voiture électrique.</span>
+                            </div>
+
+                            <div class="critères_conducteur">
+                                <p>Non fumeur, pas d'animaux.</p>
+                            </div>
+                            <div class="separation"></div>
+                            <div>
+                                <span class="material-symbols-outlined">calendar_month</span>
+                                <span>La réservation sera confirmée par le conducteur</span>
+                            </div>
+                            <div class="nombrePlace">
+                                <span class="material-symbols-outlined">person</span>
+                                <span>2 places restantes.</span>
+                            </div>
+                            <div class="button">
+                                <button class="btn btn-primary">Contact conducteur</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="row reservation">
+                    <div class="col-6">
+                        <div class="nombrePlace">
+                            <span class="material-symbols-outlined">person</span>
+                            <span>1 place</span>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="prixPlace">
+                            <span class="material-symbols-outlined">credit_score</span>
+                            <span>8 crédits</span>
+                        </div>
+                    </div>
+
+                    <div class="row envoiReservationButton">
+                        <button class="btn btn-primary">Demande de réservation</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+  <footer>
+        <!-- Pied de page avec informations de contact -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl text-center">
+                    <a href="mailto:EcoRide@hotmail.com" class="contact-mail">EcoRide@hotmail.com</a>
+                </div>
+                <div class="col-xl text-center">
+                    <a href="" class="mentions-legales">Mention légales</a>
+                </div>
+                <div class="col-xl text-center">
+                    <a href="" class="reseaux-sociaux">Réseaux sociaux</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</html>
