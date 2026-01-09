@@ -4,20 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoRide - Trajet</title>
+    <title>EcoRide - Accueil</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/mediaquerise_base.css">
-    <link rel="stylesheet" href="/css/publier-un-trajet.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Je récupère des icons sur google front -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
     <script src="/js/bootstrap.bundle.min.js" defer></script>
     <script src="/js/jquery-3.7.1.min.js" defer></script>
-    <!-- Je récupère des icons sur google front -->
+
 
 </head>
 
 <body>
+
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
@@ -39,6 +41,7 @@
                         <a class="nav-link" href="/HTML/Connexion-inscription.html">Connexion/Inscription</a>
                         <a class="nav-link" href="/HTML/Ecoride_publier_un_trajet.html">Publier un trajet</a>
                         <a class="nav-link" href="/HTML/contact.html">Contact</a>
+                        <a class="nav-link" href="/HTML/Espace_utilisateur.html">Mon compte</a>
                     </div>
                 </div>
             </div>
@@ -46,65 +49,56 @@
     </header>
 
     <main>
+        <!-- Barre de recherche -->
+<div class="bdr">
+        <form class="input-group d-flex flex-wrap justify-content-center">
+            <!-- Ville de départ -->
+            <div class="col-12 col-md-8 col-lg-2 mx-auto">
+                <label for="vdd" class="visually-hidden">Ville de départ</label>
+                <input type="text" placeholder="Départ" id="vdd" value="" class="form-control">
+            </div>
+
+            <!-- Ville d'arrivée -->
+            <div class="col-12 col-md-8
+            col-lg-2 mx-auto">
+                <label for="vda" class="visually-hidden">Ville d'arrivée</label>
+                <input type="text" placeholder="Arrivée" id="vda" value="" class="form-control">
+            </div>
+            
+            <!-- Date -->
+            <div class="col-12 col-md-8 col-lg-2 mx-auto">
+                <label for="dateTrajet" class="visually-hidden">Date du trajet</label>
+                <input type="date" id="dateTrajet" name="dateTrajet" class="date form-control">
+            </div>
+            
+            <!-- Bouton -->
+            <div class="col-12 col-md-4 col-lg-3 d-grid mx-auto">
+                <button class="btn btn-primary" type="submit">Rechercher</button>
+            </div>
+        </form>
+</div>
+<!-- Fin barre de recherche -->
+        </div>
+
+        <img src="/Image/6365344.jpg" alt="Image d'illustration" class="illustration-image">
         
-            <div class="col-4">
-                   <!-- Dans l'attribut action placer (une URL) où doivent être envoyés les données provenant du formulaire.-->
-              <form action="" method="post">
-    <fieldset>
-        <legend>Publier un trajet</legend>
-
-        <div class="form-group">
-            <label for="lieu_depart" class="visually-hidden">Ville de départ</label>
-            <input type="text" id="lieu_depart" name="lieu_depart" placeholder="Ville de départ" required>
-        </div>
-
-        <div class="form-group">
-            <label for="lieu_arrivee" class="visually-hidden">Ville d'arrivée</label>
-            <input type="text" id="lieu_arrivee" name="lieu_arrivee" placeholder="Ville d'arrivée" required>
-        </div>
-
-        <div class="row">
-            <div class="col-12 col-md-6">
-                <label for="date_depart">Date de départ</label>
-                <input type="date" id="date_depart" name="date_depart" class="form-control" required>
+        <div class="conteneur">
+            <div class="texte">
+                <p>
+                    EcoRide est une plateforme de covoiturage éco-responsable conçue pour faciliter les trajets
+                    quotidiens tout en réduisant l’impact environnemental.
+                    Que vous soyez conducteur ou passager, trouvez ou proposez facilement un trajet, en toute
+                    sécurité.<br>
+                    Grâce à une interface intuitive, EcoRide favorise une mobilité partagée, économique et respectueuse
+                    de la planète.
+                    Rejoignez une communauté engagée dans un mode de transport plus durable !
+                </p>
             </div>
-            <div class="col-12 col-md-6">
-                <label for="heure_depart">Heure de départ</label>
-                <input type="time" id="heure_depart" name="heure_depart" class="form-control" required>
             </div>
-        </div>
-
-        <div class="row mt-3">
-            <div class="col-12 col-md-6">
-                <label for="date_arrivee">Date d'arrivée</label>
-                <input type="date" id="date_arrivee" name="date_arrivee" class="form-control" required>
-            </div>
-            <div class="col-12 col-md-6">
-                <label for="heure_arrivee">Heure d'arrivée</label>
-                <input type="time" id="heure_arrivee" name="heure_arrivee" class="form-control" required>
-            </div>
-        </div>
-
-        <div class="form-group mt-3">
-            <label for="nb_place" class="visually-hidden">Nombre de places</label>
-            <input type="number" id="nb_place" name="nb_place" min="1" max="6" placeholder="Nombre de places" required>
-        </div>
-
-        <div class="form-group">
-            <label for="prix_personne" class="visually-hidden">Prix en euros</label>
-            <input type="number" id="prix_personne" name="prix_personne" step="0.01" placeholder="Prix en €" required>
-        </div>
-<!-- Bouton pour publier le trajet -->
-        <button type="submit" class="publier-btn">Publier</button>
-    </fieldset>
-</form>
-            </div>
-            <div class="col-8">
                 <div class="image-container">
                     <img class="image" src="/Image/7178884.jpg" alt="Image d'illustration" class="illustration-image">
                 </div>
-            </div>
-            <!-- <img src="/Image/7178884.jpg" alt="Image d'illustration" class="illustration-image"> -->
+        </div>
     </main>
 
     <footer>
