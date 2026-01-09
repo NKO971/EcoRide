@@ -35,32 +35,12 @@ main img {
 
 .texte {
     max-width: 60%;
+    margin: auto;
 }
 
 .texte p {
     margin: 0 0 var(--spacing-md) 0; /* Espace sous les paragraphes */
-    line-height: 1.8;
 }
-
-/* Bouton proposer un trajet */
-.button button {
-    padding: var(--spacing-md) var(--spacing-xl);
-    font-size: var(--font-size-large);
-    background-color: var(--color-secondary);
-    color: var(--color-primary);
-    border: 2px solid var(--color-primary);
-    border-radius: var(--radius-medium);
-    font-weight: bold;
-    transition: all 0.3s ease; /* Animation douce */
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap; /* POUR CENTRER LE TEXTE DANS LE BOUTON */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
 
 /* ============================================
    RESPONSIVE - Mobile & Tablette

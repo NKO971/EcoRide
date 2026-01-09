@@ -79,266 +79,353 @@
         <!-- Fin barre de recherche -->
         <!-- Formulaire de tri -->
 
-<!-- Fieldset pour mobile -->
- 
-<div class="container-xl">
-        <div class="row" style="--bs-gap: 1rem">
-             <!-- Bouton visible uniquement sur mobile  -->
-        <div class="divBouton">
-            <button class="btnFiltre col-12 d-md-none mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#BoutonFiltre"
-                aria-expanded="false" aria-controls="BoutonFiltre">
-                <span class="material-symbols-outlined">filter_list</span> Afficher filtres.
-            </button>
-        </div>
+        <!-- Fieldset pour mobile -->
+
+        <div class="container-xl">
+            <div class="row" style="--bs-gap: 1rem">
+                <!-- Bouton visible uniquement sur mobile  -->
+                <div class="divBouton">
+                    <button class="btnFiltre col-12 d-md-none mb-3" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#BoutonFiltre" aria-expanded="false" aria-controls="BoutonFiltre">
+                        <span class="material-symbols-outlined">filter_list</span> Afficher filtres.
+                    </button>
+                </div>
                 <div class="col-md-3 offset-md-1">
-                <fieldset id="BoutonFiltre" class="collapse d-md-block">
-                    <form action="" method="get" class="filtre">
-                        <h2>Trier par</h2>
-                        <div class="conteneurFiltre">
-                            <input type="checkbox" id="plus-rapide" name="plus-rapide">
-                            <label for="plus-rapide"> Le plus rapide.</label>
-                        </div>
-                        <div class="conteneurFiltre">
-                            <input type="checkbox" id="plus-ecologique" name="plus-ecologique">
-                            <label for="plus-ecologique">Le plus écologique.</label>
-                        </div>
-                        <div class="conteneurFiltre">
-                            <input type="checkbox" id="mieux-note" name="mieux-note">
-                            <label for="mieux-note">Les mieux notés.</label>
-                        </div>
-                        <div class="conteneurFiltre">
-                            <input type="checkbox" id="moins-chere" name="moins-chere">
-                            <label for="moins-chere">Le moins cher</label>
-                        </div class="conteneurFiltre">
-                        <div class="separation-2"></div>
-                        <h2>Horaires</h2>
-                        <div class="conteneurFiltre">
-                            <input type="checkbox" id="avant-6h" name="avant-6h">
-                            <label for="avant-6h">Avant 6 h 00</label>
-                        </div>
-                        <div class="conteneurFiltre">
-                            <input type="checkbox" id="entre-6h-et-12" name="entre-6h-et-12">
-                            <label for="entre-6h-et-12">6 h 00 - 12 h 00</label>
-                        </div>
-                        <div class="conteneurFiltre">
-                            <input type="checkbox" id="entre-12h-et-18h" name="entre-12h-et-18h">
-                            <label for="entre-12h-et-18h">12 h 00 - 18 h 00</label>
-                        </div>
-                        <div class="conteneurFiltre">
-                            <input type="checkbox" id="apres-18h" name="apres-18h">
-                            <label for="apres-18h">Après 18 h 00</label>
-                        </div>
-                        <div class="separation-2"></div>
-                        <h2>Sécurité</h2>
-                        <div class="conteneurFiltre">
-                            <input type="checkbox" id="profile-verifie" name="profile-verifie">
-                            <label for="profile-verifie">Profil vérifié</label>
-                        </div>
-                        <div class="conteneurFiltre">
-                            <input type="checkbox" id="femme-conductrice" name="femme-conductrice">
-                            <label for="femme-conductrice">Femme conductrice</label>
-                        </div>
-                        <div class="conteneurFiltre">
-                            <input type="checkbox" id="note-superieur-a-3" name="note-superieur-a-3">
-                            <label for="note-superieur-a-3">note-superieur-a-3</label>
-                        </div>
-                    </form>
-                </fieldset>
-            </div>
-        
+                    <fieldset id="BoutonFiltre" class="collapse d-md-block">
+                        <form action="" method="get" class="filtre">
+                            <h2>Trier par</h2>
+                            <div class="conteneurFiltre">
+                                <input type="checkbox" id="plus-rapide" name="plus-rapide">
+                                <label for="plus-rapide"> Le plus rapide.</label>
+                            </div>
+                            <div class="conteneurFiltre">
+                                <input type="checkbox" id="plus-ecologique" name="plus-ecologique">
+                                <label for="plus-ecologique">Le plus écologique.</label>
+                            </div>
+                            <div class="conteneurFiltre">
+                                <input type="checkbox" id="mieux-note" name="mieux-note">
+                                <label for="mieux-note">Les mieux notés.</label>
+                            </div>
+                            <div class="conteneurFiltre">
+                                <input type="checkbox" id="moins-chere" name="moins-chere">
+                                <label for="moins-chere">Le moins cher</label>
+                            </div class="conteneurFiltre">
+                            <div class="separation-2"></div>
+                            <h2>Horaires</h2>
+                            <div class="conteneurFiltre">
+                                <input type="checkbox" id="avant-6h" name="avant-6h">
+                                <label for="avant-6h">Avant 6 h 00</label>
+                            </div>
+                            <div class="conteneurFiltre">
+                                <input type="checkbox" id="entre-6h-et-12" name="entre-6h-et-12">
+                                <label for="entre-6h-et-12">6 h 00 - 12 h 00</label>
+                            </div>
+                            <div class="conteneurFiltre">
+                                <input type="checkbox" id="entre-12h-et-18h" name="entre-12h-et-18h">
+                                <label for="entre-12h-et-18h">12 h 00 - 18 h 00</label>
+                            </div>
+                            <div class="conteneurFiltre">
+                                <input type="checkbox" id="apres-18h" name="apres-18h">
+                                <label for="apres-18h">Après 18 h 00</label>
+                            </div>
+                            <div class="separation-2"></div>
+                            <h2>Sécurité</h2>
+                            <div class="conteneurFiltre">
+                                <input type="checkbox" id="profile-verifie" name="profile-verifie">
+                                <label for="profile-verifie">Profil vérifié</label>
+                            </div>
+                            <div class="conteneurFiltre">
+                                <input type="checkbox" id="femme-conductrice" name="femme-conductrice">
+                                <label for="femme-conductrice">Femme conductrice</label>
+                            </div>
+                            <div class="conteneurFiltre">
+                                <input type="checkbox" id="note-superieur-a-3" name="note-superieur-a-3">
+                                <label for="note-superieur-a-3">note-superieur-a-3</label>
+                            </div>
+                        </form>
+                    </fieldset>
+                </div>
 
-<!-- Fieldset pour desktop -->
-            
-               
-            
 
-            
+                <!-- Fieldset pour desktop -->
+
+
+
+
+
                 <!-- Section résultat -->
-<div class="conteneurResultat col-12 col-md-8">
-            <div class="recap"> 
-                <section class="recap-resultat">
-                        <div class="recapTotal">Total: 4</div>
-                        <div class="recapEcolo">Voiture électrique: 3</div>
-                        <div class="recapThermique">Voiture thermique: 1</div>
-                    </section>
-            </div> 
-            
-                    <section class="resultat ">
-                        <div class="covoiturage ">
-                            <div class="destinationHorraire">
-                                <div class="trajet  ">
-                                    <h3>Paris Toulouse</h3>
-                                </div>
-                                <div class="tempsTrajet d-flex flex-nowrap">
-                                    <span>10 h 30</span>
-                                    <div class="separation-3"></div>
-                                    <span class="tempsTrajetTotal">06 h 07</span>
-                                    <div class="separation-3"></div>
-                                    <span>16 h 37</span>
-                                </div>
+                <div class="conteneurResultat col-12 col-md-8">
+                    <div class="recap">
+                        <section class="recap-resultat">
+                            <div class="recapTotal">Total: 4</div>
+                            <div class="recapEcolo">Voiture électrique: 3</div>
+                            <div class="recapThermique">Voiture thermique: 1</div>
+                        </section>
+                    </div>
+
+                    <div class="covoiturage">
+                        <div class="destinationHoraire">
+
+                            <div class="trajet">
+                                <span class="départ">Paris</span>
+                                <span class="arrivée">Toulouse</span>
                             </div>
-                            <div class="ligneDeSeparation"></div>
-                            <div class="info-conducteur">
-                                <div class="photoDeProfil">
-                                    <img src="/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82878.png"
-                                        alt="photo de profil jean dupont" class="photo-profil">
-                                </div>
+
+                            <div class="heure_depart">10h30</div>
+                            <div class="FlechesH">
+                                <span class="material-symbols-outlined">
+                                    line_end_arrow_notch
+                                </span>
+                            </div>
+                            <div class="tempsTrajetTotal">06h37</div>
+                            <div class="FlechesH">
+                                <span class="material-symbols-outlined">
+                                    line_end_arrow_notch
+                                </span>
+                            </div>
+                            <div class="heure_arrivee">16h07</div>
+                            <div class="date_arrivee">24/05/2026
+                            </div>
+
+                        </div>
+                        <div class="ligneDeSeparation">
+                            <hr />
+                        </div>
+
+                        <div class="info-conducteur">
+
+                            <div class="photoDeProfil">
+                                <img src="/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82878.png"
+                                    alt="photo" class="photoDeProfil">
+                            </div>
 
 
-                                <h4>Jean Dupond</h4>
-                                <div class="note">
-                                    <span class="material-symbols-outlined">star</span>
-                                    <span>4.5</span>
-                                </div>
+                            <div class="pseudo">
 
+                                <span class="prénom">Jean</span>
+                                <span class="nom">Dupond</span>
+                            </div>
+                            <div class="note">
+                                <span class="material-symbols-outlined">star</span>
+                                <span>4,5</span>
+                            </div>
+                            <div class="icon-electrique">
                                 <span class="material-symbols-outlined">electric_car</span>
-
-
-                                <div>
-                                    <span class="material-symbols-outlined" credit_score>credit_score</span>
-                                    <span>8 crédits</span>
-                                </div>
-
-                                <div class="passagerResultat">
-                                    <span>2</span>
-                                    <span class="material-symbols-outlined">person</span>
-                                </div>
-
+                                <span>Energie</span>
                             </div>
-                        </div>
-                    </section>
 
-                    <section class="resultat">
-                        <div class="covoiturage">
-                            <div class="destinationHorraire">
-                                <div class="trajet">
-                                    <h3>Paris Toulouse</h3>
-                                </div>
-                                <div class="tempsTrajet">
-                                    <span>08 h 30</span>
-                                    <div class="separation-3"></div>
-                                    <span class="tempsTrajetTotal">07 h 07</span>
-                                    <div class="separation-3"></div>
-                                    <span>15 h 37</span>
-                                </div>
+                            <div class="icon-credit">
+                                <span class="material-symbols-outlined">credit_score</span>
+                                <span>5</span>
                             </div>
-                            <div class="ligneDeSeparation"></div>
-                            <div class="info-conducteur">
-                                <div class="photoDeProfil">
-                                    <img src="/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82876.png"
-                                        alt="photo de profil jean dupont" class="photo-profil">
-                                </div>
 
-                                <h4>Erika Bichara</h4>
-                                <div class="note">
-                                    <span class="material-symbols-outlined">star</span>
-                                    <span>3.5</span>
-                                </div>
-                                <div class="icon-electrique">
-                                    <span class="material-symbols-outlined">electric_car</span>
-                                </div>
-                                <div class="icon-credit">
-                                    <span class="material-symbols-outlined">credit_score</span>
-                                    <span>6 crédits</span>
-                                </div>
-                                <div class="passagerResultat">
-                                    <span>1</span>
-                                    <span class="material-symbols-outlined">person</span>
-                                </div>
-
+                            <div class="passagerResultat">
+                                <span class="material-symbols-outlined">person</span>
+                                <span>2</span>
                             </div>
 
                         </div>
-                    </section>
+                    </div>
+                    <!-- FIN premier  -->
 
-                    <section class="resultat">
-                        <div class="covoiturage">
-                            <div class="destinationHorraire">
-                                <div class="trajet">
-                                    <h3>Paris Toulouse</h3>
-                                </div>
-                                <div class="tempsTrajet">
-                                    <span>19 h 30</span>
-                                    <div class="separation-3"></div>
-                                    <span class="tempsTrajetTotal">06 h 07</span>
-                                    <div class="separation-3"></div>
-                                    <span>01 h 07</span>
-                                </div>
+                    <div class="covoiturage">
+                        <div class="destinationHoraire">
+
+                            <div class="trajet">
+                                <span class="départ">Paris</span>
+                                <span class="arrivée">Toulouse</span>
                             </div>
-                            <div class="ligneDeSeparation"></div>
-                            <div class="info-conducteur">
-                                <div class="photoDeProfil">
-                                    <img src="/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82877.png"
-                                        alt="photo de profil jean dupont" class="photo-profil">
-                                </div>
 
-                                <h4>Léa Martin</h4>
-                                <div class="note">
-                                    <span class="material-symbols-outlined">star</span>
-                                    <span>5</span>
-                                </div>
-                                <div class="icon-electrique">
-                                    <span class="material-symbols-outlined">electric_car</span>
-                                </div>
-                                <div class="icon-credit">
-                                    <span class="material-symbols-outlined">credit_score</span>
-                                    <span>9 crédits</span>
-                                </div>
-                                <div class="passagerResultat">
-                                    <span>4</span>
-                                    <span class="material-symbols-outlined">person</span>
-                                </div>
-
+                            <div class="heure_depart">08h30</div>
+                            <div class="FlechesH">
+                                <span class="material-symbols-outlined">
+                                    line_end_arrow_notch
+                                </span>
+                            </div>
+                            <div class="tempsTrajetTotal">07h07</div>
+                            <div class="FlechesH">
+                                <span class="material-symbols-outlined">
+                                    line_end_arrow_notch
+                                </span>
+                            </div>
+                            <div class="heure_arrivee">15h37</div>
+                            <div class="date_arrivee">24/05/2026
                             </div>
 
                         </div>
-                    </section>
+                        <div class="ligneDeSeparation">
+                            <hr />
+                        </div>
 
-                    <section class="resultat">
-                        <div class="covoiturage">
-                            <div class="destinationHorraire">
-                                <div class="trajet">
-                                    <h3>Paris Toulouse</h3>
-                                </div>
-                                <div class="tempsTrajet">
-                                    <span>10 h 30</span>
-                                    <div class="separation-3"></div>
-                                    <span class="tempsTrajetTotal">06 h 07</span>
-                                    <div class="separation-3"></div>
-                                    <span>16 h 37</span>
-                                </div>
+                        <div class="info-conducteur">
+
+                            <div class="photoDeProfil">
+                                <img src="/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82876.png"
+                                    alt="photo" class="photoDeProfil">
                             </div>
-                            <div class="ligneDeSeparation"></div>
-                            <div class="info-conducteur">
-                                <div class="photoDeProfil">
-                                    <img src="/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82879.png"
-                                        alt="photo de profil jean dupont" class="photo-profil">
-                                </div>
 
-                                <h4>Marc Calabre</h4>
-                                <div class="note">
-                                    <span class="material-symbols-outlined">star</span>
-                                    <span>2.5</span>
-                                </div>
-                                <div class="icon-electrique">
-                                    <span class="material-symbols-outlined">car_crash</span>
-                                </div>
-                                <div class="icon-credit">
-                                    <span class="material-symbols-outlined">credit_score</span>
-                                    <span>8 crédits</span>
-                                </div>
-                                <div class="passagerResultat">
-                                    <span>2</span>
-                                    <span class="material-symbols-outlined">person</span>
-                                </div>
 
+                            <div class="pseudo">
+
+                                <span class="prénom">Erika</span>
+                                <span class="nom">Bichara</span>
+                            </div>
+                            <div class="note">
+                                <span class="material-symbols-outlined">star</span>
+                                <span>3,5</span>
+                            </div>
+                            <div class="icon-electrique">
+                                <span class="material-symbols-outlined">electric_car</span>
+                                <span>Energie</span>
+                            </div>
+
+                            <div class="icon-credit">
+                                <span class="material-symbols-outlined">credit_score</span>
+                                <span>6</span>
+                            </div>
+
+                            <div class="passagerResultat">
+                                <span class="material-symbols-outlined">person</span>
+                                <span>1</span>
                             </div>
 
                         </div>
-                    </section>
-            </div>
-        </div>
-    </div>
+                    </div>
+                    <!-- Fin deuxièmes -->
+
+
+                    <div class="covoiturage">
+                        <div class="destinationHoraire">
+
+                            <div class="trajet">
+                                <span class="départ">Paris</span>
+                                <span class="arrivée">Toulouse</span>
+                            </div>
+
+                            <div class="heure_depart">19h00</div>
+                            <div class="FlechesH">
+                                <span class="material-symbols-outlined">
+                                    line_end_arrow_notch
+                                </span>
+                            </div>
+                            <div class="tempsTrajetTotal">06h07</div>
+                            <div class="FlechesH">
+                                <span class="material-symbols-outlined">
+                                    line_end_arrow_notch
+                                </span>
+                            </div>
+                            <div class="heure_arrivee">01h07</div>
+                            <div class="date_arrivee">25/05/2026
+                            </div>
+
+                        </div>
+                        <div class="ligneDeSeparation">
+                            <hr />
+                        </div>
+
+                        <div class="info-conducteur">
+
+                            <div class="photoDeProfil">
+                                <img src="/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82877.png"
+                                    alt="photo" class="photoDeProfil">
+                            </div>
+
+
+                            <div class="pseudo">
+
+                                <span class="prénom">Léa</span>
+                                <span class="nom">Martin</span>
+                            </div>
+                            <div class="note">
+                                <span class="material-symbols-outlined">star</span>
+                                <span>5,0</span>
+                            </div>
+                            <div class="icon-electrique">
+                                <span class="material-symbols-outlined">electric_car</span>
+                                <span>Energie</span>
+                            </div>
+
+                            <div class="icon-credit">
+                                <span class="material-symbols-outlined">credit_score</span>
+                                <span>4</span>
+                            </div>
+
+                            <div class="passagerResultat">
+                                <span class="material-symbols-outlined">person</span>
+                                <span>4</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- fin troisièmes -->
+                    <div class="covoiturage">
+                        <div class="destinationHoraire">
+
+                            <div class="trajet">
+                                <span class="départ">Paris</span>
+                                <span class="arrivée">Toulouse</span>
+                            </div>
+
+                            <div class="heure_depart">10h30</div>
+                            <div class="FlechesH">
+                                <span class="material-symbols-outlined">
+                                    line_end_arrow_notch
+                                </span>
+                            </div>
+                            <div class="tempsTrajetTotal">06h30</div>
+                            <div class="FlechesH">
+                                <span class="material-symbols-outlined">
+                                    line_end_arrow_notch
+                                </span>
+                            </div>
+                            <div class="heure_arrivee">16h07</div>
+                            <div class="date_arrivee">24/05/2026
+                            </div>
+
+                        </div>
+                        <div class="ligneDeSeparation">
+                            <hr />
+                        </div>
+
+                        <div class="info-conducteur">
+
+                            <div class="photoDeProfil">
+                                <img src="/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82879.png"
+                                    alt="photo" class="photoDeProfil">
+                            </div>
+
+
+                            <div class="pseudo">
+
+                                <span class="prénom">Marc</span>
+                                <span class="nom">Calabre</span>
+                            </div>
+                            <div class="note">
+                                <span class="material-symbols-outlined">star</span>
+                                <span>2,5</span>
+                            </div>
+                            <div class="icon-electrique">
+                                <span class="material-symbols-outlined">car_crash</span>
+                                <span>Energie</span>
+                            </div>
+
+                            <div class="icon-credit">
+                                <span class="material-symbols-outlined">credit_score</span>
+                                <span>8</span>
+                            </div>
+
+                            <div class="passagerResultat">
+                                <span class="material-symbols-outlined">person</span>
+                                <span>2</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- fin quatrièmes -->
+
+                    <!-- <div class="separation-3"></div> -->
+                    <!-- <div class="ligneDeSeparation"></div> -->
+
     </main>
     <footer>
         <!-- Pied de page avec informations de contact -->

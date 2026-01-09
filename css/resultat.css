@@ -2,7 +2,8 @@ body {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     min-height: 100vh;
-    overflow-x: hidden; /* Empeche le débordemant horizontal */
+    overflow-x: hidden;
+    /* Empeche le débordemant horizontal */
 }
 
 
@@ -13,20 +14,21 @@ body {
     gap: 2rem;
 }
 
- .recap-resultat { 
+.recap-resultat {
     font-size: var(--font-size-normal);
-    white-space: nowrap;  
-    color: var(--color-dark); 
+    white-space: nowrap;
+    color: var(--color-dark);
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     border-radius: var(--radius-medium);
     border: 0.1rem solid var(--color-primary);
     align-items: center;
     background-color: var(--color-white);
-}  
+}
 
 .recap {
     margin: var(--spacing-sm);
-    flex: 1; /* Permet de prendre tout l'espace disponible */
+    flex: 1;
+    /* Permet de prendre tout l'espace disponible */
     text-align: center;
 }
 
@@ -47,7 +49,7 @@ h2 {
 .filtre {
     font-size: var(--font-size-normal);
     color: var(--color-primary);
-    padding: 1rem 1.5rem ;
+    padding: 1rem 1.5rem;
     margin: 1rem auto;
 }
 
@@ -59,8 +61,9 @@ h2 {
     margin: var(--spacing-md) 0;
     margin-left: var(--spacing-xs);
     flex-shrink: 0;
-    width: 90%;   
+    width: 90%;
 }
+
 /* Fin du travaille sur les filtres */
 
 /* Travaille sur les résultats */
@@ -73,12 +76,13 @@ h2 {
 }
 
 
-.photo-profil {
+.photoDeProfil {
     width: 4rem;
     height: 4rem;
     border-radius: var(--radius-medium);
     margin-right: var(--spacing-lg);
-    object-fit: cover; /* Assure que l'image remplit le conteneur sans déformation */
+    object-fit: cover;
+    /* Assure que l'image remplit le conteneur sans déformation */
 }
 
 .covoiturage {
@@ -90,15 +94,14 @@ h2 {
     color: var(--color-dark);
 }
 
-.destinationHorraire {
+.destinationHoraire {
     display: flex;
     justify-content: space-between;
-    align-items: center;    
+    align-items: center;
 }
 
-.tempsTrajet {
+.heure_depart {
     display: flex;
-    
     gap: 1rem;
     align-items: center;
 }
@@ -110,14 +113,14 @@ h2 {
 
 .info-conducteur {
     display: grid;
-    grid-template-columns: 60px 2fr 80px 1fr 2fr 80px; /* ajuster selon contenu*/ 
+    grid-template-columns: 60px 2fr 80px 1fr 2fr 80px;
+    /* ajuster selon contenu*/
     align-items: center;
     text-align: center;
 }
 
 .ligneDeSeparation {
-    border-bottom: var(--color-primary) 0.1rem solid;
-    margin: var(--spacing-xs);    
+    color: var(--color-primary);
 }
 
 
@@ -131,10 +134,10 @@ h2 {
         width: 80%;
         height: auto;
         margin: 0 auto var(--spacing-lg);
-        
+
     }
 
-     .conteneurFiltre {
+    .conteneurFiltre {
         display: flex;
         align-items: center;
         text-wrap: nowrap;
@@ -142,7 +145,7 @@ h2 {
     }
 }
 
- @media (max-width: 767.98px) {
+@media (max-width: 767.98px) {
     .divBouton {
         display: flex;
         justify-content: center;
@@ -153,7 +156,7 @@ h2 {
         height: auto;
         margin: 0 auto var(--spacing-md);
         background-color: var(--color-secondary);
-        border: none; 
+        border: none;
     }
 
     .btnFiltre {
@@ -163,12 +166,91 @@ h2 {
         color: var(--color-primary);
         border-radius: var(--radius-medium);
         border-color: var(--color-primary);
-    }  
+    }
 }
 
 @media (max-width: 575.98px) {
-    .covoiturage,
-    h3, .info-conducteur {
-        font-size: var(--font-size-small);
+    hr {
+        border-top: 2px solid var(--color-primary);
     }
+
+    .covoiturage {
+        border: solid 1px var(--color-primary);
+        border-radius: var(--radius-medium);
+        font-size: var(--font-size-small);
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin: 2rem 0;
+    }
+
+    .info-conducteur,
+    .destinationHoraire {
+        margin: 1rem;
+        display: flex;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .info-conducteur {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .info-conducteur {
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    img {
+        max-width: 50px;
+        border-radius: 50%;
+        height: auto;
+
+    }
+
+    .photoDeProfil {
+
+        display: flex;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .note {
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .icon-electrique {
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .icon-credit {
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .passagerResultat {
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .pseudo,
+    .trajet {
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+        font-size: var(--font-size-normal);
+    }
+
 }

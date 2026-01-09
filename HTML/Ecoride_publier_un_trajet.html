@@ -46,43 +46,58 @@
     </header>
 
     <main>
-        <div class="row">
+        
             <div class="col-4">
-                <form action="" method="get">
-                    <!-- Dans l'attribut action placer (une URL) où doivent être envoyés les données provenant du formulaire.-->
-                    <fieldset>
-                        <legend>Publier un trajet</legend>
-                        <div class="form-group">
-                            <label for="depart"></label>
-                            <span class="material-symbols-outlined">edit</span>
-                            <input type="test" id="depart" name="depart" placeholder="Ville de départ" required>
-                        </div>
-                       
-                        <div class="form-group">
-                            <label for="arrivee"></label>
-                            <span class="material-symbols-outlined">edit</span>
-                            <input type="text" id="arrivee" name="arrivee" placeholder="Ville d'arrivée" required>
-                        </div>
-                       
-                        <div class="col-12 col-md-4 col-lg-6">
-                            <label for="dateTrajet" class="visually-hidden">Date du trajet</label>
-                            <input type="date" id="dateTrajet" name="dateTrajet" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="passagers"></label>
-                            <input type="number" id="passagers" name="passagers" min="1" max="6" placeholder="Passagers"
-                                required>
-                        </div>
-                       
-                        <div class="form-group">
-                            <label for="prix"></label>
-                            <input type="number" id="prix" name="prix" placeholder="Prix en €" required>
-                        </div>
-                       
-                        <!-- Bouton pour publier le trajt -->
-                        <button type="submit" class="publier-btn">Publier</button>
-                    </fieldset>
-                </form>
+                   <!-- Dans l'attribut action placer (une URL) où doivent être envoyés les données provenant du formulaire.-->
+              <form action="" method="post">
+    <fieldset>
+        <legend>Publier un trajet</legend>
+
+        <div class="form-group">
+            <label for="lieu_depart" class="visually-hidden">Ville de départ</label>
+            <input type="text" id="lieu_depart" name="lieu_depart" placeholder="Ville de départ" required>
+        </div>
+
+        <div class="form-group">
+            <label for="lieu_arrivee" class="visually-hidden">Ville d'arrivée</label>
+            <input type="text" id="lieu_arrivee" name="lieu_arrivee" placeholder="Ville d'arrivée" required>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <label for="date_depart">Date de départ</label>
+                <input type="date" id="date_depart" name="date_depart" class="form-control" required>
+            </div>
+            <div class="col-12 col-md-6">
+                <label for="heure_depart">Heure de départ</label>
+                <input type="time" id="heure_depart" name="heure_depart" class="form-control" required>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-12 col-md-6">
+                <label for="date_arrivee">Date d'arrivée</label>
+                <input type="date" id="date_arrivee" name="date_arrivee" class="form-control" required>
+            </div>
+            <div class="col-12 col-md-6">
+                <label for="heure_arrivee">Heure d'arrivée</label>
+                <input type="time" id="heure_arrivee" name="heure_arrivee" class="form-control" required>
+            </div>
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="nb_place" class="visually-hidden">Nombre de places</label>
+            <input type="number" id="nb_place" name="nb_place" min="1" max="6" placeholder="Nombre de places" required>
+        </div>
+
+        <div class="form-group">
+            <label for="prix_personne" class="visually-hidden">Prix en euros</label>
+            <input type="number" id="prix_personne" name="prix_personne" step="0.01" placeholder="Prix en €" required>
+        </div>
+<!-- Bouton pour publier le trajet -->
+        <button type="submit" class="publier-btn">Publier</button>
+    </fieldset>
+</form>
             </div>
             <div class="col-8">
                 <div class="image-container">

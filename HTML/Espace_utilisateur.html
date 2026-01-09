@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoRide - Espace utilisateur</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/mediaquerise_base.css">
+    <link rel="stylesheet" href="/css/espace_utilisateur.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <!-- Je récupère des icons sur google front -->
+    <script src="/js/bootstrap.bundle.min.js" defer></script>
+    <script src="/js/jquery-3.7.1.min.js" defer></script>
+
+
+</head>
+
+<body>
+
+  <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <!-- Logo -->
+                <a class="navbar-brand" href="/HTML/EcoRide_Accueil.html">
+                    <img src="/Image/EcoRide.svg" alt="logo EcoRide" class="logo">
+                </a>
+
+                <!-- Bouton hamburger mobile -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Menu navigation -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link" href="/HTML/EcoRide_Accueil.html">Accueil</a>
+                        <a class="nav-link" href="/HTML/Connexion-inscription.html">Connexion/Inscription</a>
+                        <a class="nav-link" href="/HTML/Ecoride_publier_un_trajet.html">Publier un trajet</a>
+                        <a class="nav-link" href="/HTML/contact.html">Contact</a>
+                        <a class="nav-link" href="/HTML/Espace_utilisateur.html">Mon compte</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+       <section class="infos-personnelles mb-5 p-4 border rounded shadow-sm">
+    <legend class="mb-4">Mes informations de profil</legend>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="telephone" class="form-label">Téléphone</label>
+                <input type="tel" class="form-control" id="telephone" name="telephone" placeholder="06 00 00 00 00">
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="date_naissance" class="form-label">Date de naissance</label>
+                <input type="date" class="form-control" id="date_naissance" name="date_naissance">
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="adresse" class="form-label">Adresse complète</label>
+                <input type="text" class="form-control" id="adresse" name="adresse" placeholder="123 rue de l'Écologie, 31000 Toulouse">
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="photo" class="form-label">Photo de profil</label>
+                <input class="form-control" type="file" id="photo" name="photo">
+            </div>
+        </div>
+    </div>
+
+    <div class="actions-formulaire mt-5 text-center">
+        <button type="submit" class="btn-sauvegarde-profil">
+            Enregistrer mon profil
+        </button>
+    </div>
+</section>
+
+<section class="choix-role mb-5 p-4 border rounded shadow-sm">
+    <legend class="mb-3">Mon statut sur la plateforme</legend>
+    <p class="text-muted">Je choisis mon rôle sur EcoRide :</p>
+
+    <div class="roles d-flex gap-3">
+        <div class="form-check role-card">
+            <input class="form-check-input" type="radio" name="role_utilisateur" id="passager" value="passager" checked>
+            <label class="form-check-label" for="passager">
+                <strong>Passager</strong><br>
+                <small>Je cherche des trajets</small>
+            </label>
+        </div>
+
+        <div class="form-check role-card">
+            <input class="form-check-input" type="radio" name="role_utilisateur" id="chauffeur" value="chauffeur">
+            <label class="form-check-label" for="chauffeur">
+                <strong>Chauffeur</strong><br>
+                <small>Je propose mes services</small>
+            </label>
+        </div>
+
+        <div class="form-check role-card">
+            <input class="form-check-input" type="radio" name="role_utilisateur" id="les_deux" value="les_deux">
+            <label class="form-check-label" for="les_deux">
+                <strong>Les deux</strong><br>
+                <small>Je voyage et je conduis</small>
+            </label>
+        </div>
+    </div>
+</section>
+
+<div class="conteneur-chauffeur-flex">
+<!-- Formualire véhicule -->
+    <section id="section_vehicule">
+        <fieldset class="infos-vehicule">
+            <legend>Mon Véhicule</legend>
+            <div class="row g-3">
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="modele">Modèle du véhicule</label>
+                        <input type="text" id="modele" name="modele" class="form-control" placeholder="Ex: Renault Clio" required>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="immatriculation">Immatriculation</label>
+                        <input type="text" id="immatriculation" name="immatriculation" class="form-control" placeholder="AA-123-BB" required>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="date_immat">1ère immatriculation</label>
+                        <input type="date" id="date_immat" name="date_immat" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="couleur">Couleur</label>
+                        <input type="text" id="couleur" name="couleur" class="form-control" placeholder="Ex: Gris Anthracite">
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="energie">Type d'énergie</label>
+                        <select id="energie" name="energie" class="form-select">
+                            <option value="" selected disabled>Choisir l'énergie...</option>
+                            <option value="electrique">Électrique</option>
+                            <option value="essence">Essence</option>
+                            <option value="diesel">Diesel</option>
+                            <option value="hybride">Hybride</option>
+                            <option value="gpl">GPL</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-12 text-center mt-3">
+                    <button type="submit" class="publier-btn">Enregistrer le véhicule</button>
+                </div>
+            </div>
+        </fieldset>
+        <button type="button" class="btn btn-outline-primary btn-sm mt-2">+ Ajouter un autre véhicule</button>
+    </section>
+<!-- Formulaire Trajet -->
+    <section id="section_trajet" class="form-trajet">
+        <div class="infos-trajet">
+            <form action="" method="post">
+                <fieldset>
+                    <legend>Publier un trajet</legend>
+
+                    <div class="form-group mb-3">
+                        <label for="lieu_depart" class="visually-hidden">Ville de départ</label>
+                        <input type="text" id="lieu_depart" name="lieu_depart" class="form-control" placeholder="Ville de départ" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="lieu_arrivee" class="visually-hidden">Ville d'arrivée</label>
+                        <input type="text" id="lieu_arrivee" name="lieu_arrivee" class="form-control" placeholder="Ville d'arrivée" required>
+                    </div>
+
+                    <div class="row g-2">
+                        <div class="col-12 col-md-6">
+                            <label for="date_depart">Date de départ</label>
+                            <input type="date" id="date_depart" name="date_depart" class="form-control" required>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="heure_depart">Heure de départ</label>
+                            <input type="time" id="heure_depart" name="heure_depart" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="row g-2 mt-3">
+                        <div class="col-12 col-md-6">
+                            <label for="date_arrivee">Date d'arrivée</label>
+                            <input type="date" id="date_arrivee" name="date_arrivee" class="form-control" required>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="heure_arrivee">Heure d'arrivée</label>
+                            <input type="time" id="heure_arrivee" name="heure_arrivee" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="nb_place" class="visually-hidden">Nombre de places</label>
+                        <input type="number" id="nb_place" name="nb_place" class="form-control" min="1" max="6" placeholder="Nombre de places" required>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="prix_personne" class="visually-hidden">Prix en crédits</label>
+                        <input type="number" id="prix_personne" name="prix_personne" class="form-control" step="0.01" placeholder="Prix en crédits" required>
+                    </div>
+
+                    <h4 class="mt-4">Mes Préférences</h4>
+                    <div class="d-flex gap-4 mt-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="accept_fumeur" name="pref_fumeur">
+                            <label class="form-check-label" for="accept_fumeur">
+                                Fumeur
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="accept_animaux" name="pref_animaux">
+                            <label class="form-check-label" for="accept_animaux">
+                                Animaux
+                            </label>
+                        </div>
+                    </div>
+                    <!-- Type du boutton submit pour envoyer les infos -->
+                    <div class="text-center mt-4">
+                        <button type="submit" class="publier-btn">Publier</button>
+                </fieldset>
+            </form>
+                </main>
+
+      <footer>
+        <!-- Pied de page avec informations de contact -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl text-center">
+                    <a href="mailto:EcoRide@hotmail.com" class="contact-mail">EcoRide@hotmail.com</a>
+                </div>
+                <div class="col-xl text-center">
+                    <a href="" class="mentions-legales">Mention légales</a>
+                </div>
+                <div class="col-xl text-center">
+                    <a href="" class="reseaux-sociaux">Réseaux sociaux</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
