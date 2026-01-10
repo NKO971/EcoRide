@@ -19,42 +19,46 @@
 
 <body>
 
-<header>
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/HTML/EcoRide_Accueil.html">
-                <img src="/Image/EcoRide.svg" alt="logo EcoRide" class="logo">
-            </a>
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/HTML/EcoRide_Accueil.html">
+                    <img src="/Image/EcoRide.svg" alt="logo EcoRide" class="logo">
+                </a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <div class="navbar-nav ms-auto align-items-center">
-                    <a class="nav-link" href="/HTML/EcoRide_Accueil.html">Accueil</a>
-                    <a class="nav-link" href="/HTML/Connexion-inscription.html">Connexion/Inscription</a>
-                    <a class="nav-link" href="/HTML/contact.html">Contact</a>
-                    <!-- Mon compte avec menu déroulant pour l'utilisateur connecté -->
-                    <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle btn-mon-compte" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Mon compte
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="navbarDropdown">
-                            <li class="dropdown-item-text text-center border-bottom pb-2 mb-2">
-                                <span class="badge bg-success py-2 px-3">20 Crédits</span>
-                            </li>
-                            <li><a class="dropdown-item" href="/HTML/Espace_utilisateur.html">Accéder au profil</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item text-danger" href="#">Déconnexion</a></li>
-                        </ul>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="navbar-nav ms-auto align-items-center">
+                        <a class="nav-link" href="/HTML/EcoRide_Accueil.html">Accueil</a>
+                        <a class="nav-link" href="/HTML/Connexion-inscription.html">Connexion/Inscription</a>
+                        <a class="nav-link" href="/HTML/contact.html">Contact</a>
+                        <!-- Mon compte avec menu déroulant pour l'utilisateur connecté -->
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle btn-mon-compte" href="#" id="navbarDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Mon compte
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="navbarDropdown">
+                                <li class="dropdown-item-text text-center border-bottom pb-2 mb-2">
+                                    <span class="badge bg-success py-2 px-3">20 Crédits</span>
+                                </li>
+                                <li><a class="dropdown-item" href="/HTML/Espace_utilisateur.html">Accéder au profil</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item text-danger" href="#">Déconnexion</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </nav>
-</header>
+        </nav>
+    </header>
 
 
     <main class="conteneur">
@@ -88,9 +92,6 @@
         </div>
         <!-- Fin barre de recherche -->
         <!-- Formulaire de tri -->
-
-        <!-- Fieldset pour mobile -->
-
         <div class="container-xl">
             <div class="row" style="--bs-gap: 1rem">
                 <!-- Bouton visible uniquement sur mobile  -->
@@ -104,6 +105,7 @@
                     <fieldset id="BoutonFiltre" class="collapse d-md-block">
                         <form action="" method="get" class="filtre">
                             <h2>Trier par</h2>
+
                             <div class="conteneurFiltre">
                                 <input type="checkbox" id="plus-rapide" name="plus-rapide">
                                 <label for="plus-rapide"> Le plus rapide.</label>
@@ -112,15 +114,20 @@
                                 <input type="checkbox" id="plus-ecologique" name="plus-ecologique">
                                 <label for="plus-ecologique">Le plus écologique.</label>
                             </div>
+
                             <div class="conteneurFiltre">
-                                <input type="checkbox" id="mieux-note" name="mieux-note">
-                                <label for="mieux-note">Les mieux notés.</label>
+                                <label for="prix-max">Prix max :</label>
+                                <input type="number" id="prix-max" name="prix-max"
+                                    style="width: 60px; border: 1px solid var(--color-primary); border-radius: 5px;">
                             </div>
                             <div class="conteneurFiltre">
-                                <input type="checkbox" id="moins-chere" name="moins-chere">
-                                <label for="moins-chere">Le moins cher</label>
-                            </div class="conteneurFiltre">
+                                <label for="duree-max">Durée max (h) :</label>
+                                <input type="number" id="duree-max" name="duree-max"
+                                    style="width: 60px; border: 1px solid var(--color-primary); border-radius: 5px;">
+                            </div>
+
                             <div class="separation-2"></div>
+
                             <h2>Horaires</h2>
                             <div class="conteneurFiltre">
                                 <input type="checkbox" id="avant-6h" name="avant-6h">
@@ -138,82 +145,53 @@
                                 <input type="checkbox" id="apres-18h" name="apres-18h">
                                 <label for="apres-18h">Après 18 h 00</label>
                             </div>
+
                             <div class="separation-2"></div>
+
                             <h2>Sécurité</h2>
                             <div class="conteneurFiltre">
                                 <input type="checkbox" id="profile-verifie" name="profile-verifie">
                                 <label for="profile-verifie">Profil vérifié</label>
                             </div>
                             <div class="conteneurFiltre">
-                                <input type="checkbox" id="femme-conductrice" name="femme-conductrice">
-                                <label for="femme-conductrice">Femme conductrice</label>
-                            </div>
-                            <div class="conteneurFiltre">
                                 <input type="checkbox" id="note-superieur-a-3" name="note-superieur-a-3">
-                                <label for="note-superieur-a-3">note-superieur-a-3</label>
+                                <label for="note-superieur-a-3">Note > 3 étoiles</label>
                             </div>
                         </form>
                     </fieldset>
                 </div>
-
-
-                <!-- Fieldset pour desktop -->
-
-
-
-
-
                 <!-- Section résultat -->
                 <div class="conteneurResultat col-12 col-md-8">
-                    <div class="recap">
-                        <section class="recap-resultat">
-                            <div class="recapTotal">Total: 4</div>
-                            <div class="recapEcolo">Voiture électrique: 3</div>
-                            <div class="recapThermique">Voiture thermique: 1</div>
-                        </section>
-                    </div>
 
+                    <div class="recap-resultat d-flex justify-content-around p-2 mb-4">
+                        <div class="recap"><strong>4</strong> voyages trouvés</div>
+                        <div class="recap">Paris → Toulouse</div>
+                        <div class="recap">24/05/2026</div>
+                    </div>
+                    <!-- Cartes 1 début -->
                     <div class="covoiturage">
                         <div class="destinationHoraire">
-
                             <div class="trajet">
                                 <span class="départ">Paris</span>
                                 <span class="arrivée">Toulouse</span>
                             </div>
-
                             <div class="heure_depart">10h30</div>
-                            <div class="FlechesH">
-                                <span class="material-symbols-outlined">
-                                    line_end_arrow_notch
-                                </span>
+                            <div class="FlechesH"><span class="material-symbols-outlined">line_end_arrow_notch</span>
                             </div>
                             <div class="tempsTrajetTotal">06h37</div>
-                            <div class="FlechesH">
-                                <span class="material-symbols-outlined">
-                                    line_end_arrow_notch
-                                </span>
+                            <div class="FlechesH"><span class="material-symbols-outlined">line_end_arrow_notch</span>
                             </div>
                             <div class="heure_arrivee">16h07</div>
-                            <div class="date_arrivee">24/05/2026
-                            </div>
-
+                            <div class="date_arrivee">24/05/2026</div>
                         </div>
                         <div class="ligneDeSeparation">
                             <hr />
                         </div>
-
                         <div class="info-conducteur">
-
-                            <div class="photoDeProfil">
+                            <div class="photo-pseudo">
                                 <img src="/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82878.png"
-                                    alt="photo" class="photoDeProfil">
-                            </div>
-
-
-                            <div class="pseudo">
-
-                                <span class="prénom">Jean</span>
-                                <span class="nom">Dupond</span>
+                                    alt="Jean" class="photoDeProfil">
+                                <span class="pseudo">JeanP75</span>
                             </div>
                             <div class="note">
                                 <span class="material-symbols-outlined">star</span>
@@ -221,64 +199,45 @@
                             </div>
                             <div class="icon-electrique">
                                 <span class="material-symbols-outlined">electric_car</span>
-                                <span>Energie</span>
+                                <small>Écologique</small>
                             </div>
-
                             <div class="icon-credit">
-                                <span class="material-symbols-outlined">credit_score</span>
-                                <span>5</span>
+                                <span class="material-symbols-outlined">payments</span>
+                                <span>5 Credits</span>
                             </div>
-
                             <div class="passagerResultat">
                                 <span class="material-symbols-outlined">person</span>
-                                <span>2</span>
+                                <span>2 places</span>
                             </div>
-
+                            <div class="action-btn">
+                                <button class="btn btn-sm btn-outline-primary">Détails</button>
+                            </div>
                         </div>
                     </div>
-                    <!-- FIN premier  -->
-
+                    <!-- Cartes 2 début -->
                     <div class="covoiturage">
                         <div class="destinationHoraire">
-
                             <div class="trajet">
                                 <span class="départ">Paris</span>
                                 <span class="arrivée">Toulouse</span>
                             </div>
-
                             <div class="heure_depart">08h30</div>
-                            <div class="FlechesH">
-                                <span class="material-symbols-outlined">
-                                    line_end_arrow_notch
-                                </span>
+                            <div class="FlechesH"><span class="material-symbols-outlined">line_end_arrow_notch</span>
                             </div>
                             <div class="tempsTrajetTotal">07h07</div>
-                            <div class="FlechesH">
-                                <span class="material-symbols-outlined">
-                                    line_end_arrow_notch
-                                </span>
+                            <div class="FlechesH"><span class="material-symbols-outlined">line_end_arrow_notch</span>
                             </div>
                             <div class="heure_arrivee">15h37</div>
-                            <div class="date_arrivee">24/05/2026
-                            </div>
-
+                            <div class="date_arrivee">24/05/2026</div>
                         </div>
                         <div class="ligneDeSeparation">
                             <hr />
                         </div>
-
                         <div class="info-conducteur">
-
-                            <div class="photoDeProfil">
+                            <div class="photo-pseudo">
                                 <img src="/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82876.png"
-                                    alt="photo" class="photoDeProfil">
-                            </div>
-
-
-                            <div class="pseudo">
-
-                                <span class="prénom">Erika</span>
-                                <span class="nom">Bichara</span>
+                                    alt="Erika" class="photoDeProfil">
+                                <span class="pseudo">ErikaB</span>
                             </div>
                             <div class="note">
                                 <span class="material-symbols-outlined">star</span>
@@ -286,65 +245,45 @@
                             </div>
                             <div class="icon-electrique">
                                 <span class="material-symbols-outlined">electric_car</span>
-                                <span>Energie</span>
+                                <small>Écologique</small>
                             </div>
-
                             <div class="icon-credit">
-                                <span class="material-symbols-outlined">credit_score</span>
-                                <span>6</span>
+                                <span class="material-symbols-outlined">payments</span>
+                                <span>6 Credits</span>
                             </div>
-
                             <div class="passagerResultat">
                                 <span class="material-symbols-outlined">person</span>
-                                <span>1</span>
+                                <span>1 place</span>
                             </div>
-
+                            <div class="action-btn">
+                                <button class="btn btn-sm btn-outline-primary">Détails</button>
+                            </div>
                         </div>
                     </div>
-                    <!-- Fin deuxièmes -->
-
-
+                    <!-- Carte 3 début -->
                     <div class="covoiturage">
                         <div class="destinationHoraire">
-
                             <div class="trajet">
                                 <span class="départ">Paris</span>
                                 <span class="arrivée">Toulouse</span>
                             </div>
-
                             <div class="heure_depart">19h00</div>
-                            <div class="FlechesH">
-                                <span class="material-symbols-outlined">
-                                    line_end_arrow_notch
-                                </span>
+                            <div class="FlechesH"><span class="material-symbols-outlined">line_end_arrow_notch</span>
                             </div>
                             <div class="tempsTrajetTotal">06h07</div>
-                            <div class="FlechesH">
-                                <span class="material-symbols-outlined">
-                                    line_end_arrow_notch
-                                </span>
+                            <div class="FlechesH"><span class="material-symbols-outlined">line_end_arrow_notch</span>
                             </div>
                             <div class="heure_arrivee">01h07</div>
-                            <div class="date_arrivee">25/05/2026
-                            </div>
-
+                            <div class="date_arrivee">25/05/2026</div>
                         </div>
                         <div class="ligneDeSeparation">
                             <hr />
                         </div>
-
                         <div class="info-conducteur">
-
-                            <div class="photoDeProfil">
+                            <div class="photo-pseudo">
                                 <img src="/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82877.png"
-                                    alt="photo" class="photoDeProfil">
-                            </div>
-
-
-                            <div class="pseudo">
-
-                                <span class="prénom">Léa</span>
-                                <span class="nom">Martin</span>
+                                    alt="Léa" class="photoDeProfil">
+                                <span class="pseudo">LeaMrt</span>
                             </div>
                             <div class="note">
                                 <span class="material-symbols-outlined">star</span>
@@ -352,89 +291,72 @@
                             </div>
                             <div class="icon-electrique">
                                 <span class="material-symbols-outlined">electric_car</span>
-                                <span>Energie</span>
+                                <small>Écologique</small>
                             </div>
-
                             <div class="icon-credit">
-                                <span class="material-symbols-outlined">credit_score</span>
-                                <span>4</span>
+                                <span class="material-symbols-outlined">payments</span>
+                                <span>4 Credits</span>
                             </div>
-
                             <div class="passagerResultat">
                                 <span class="material-symbols-outlined">person</span>
-                                <span>4</span>
+                                <span>4 places</span>
                             </div>
-
+                            <div class="action-btn">
+                                <button class="btn btn-sm btn-outline-primary">Détails</button>
+                            </div>
                         </div>
                     </div>
-                    <!-- fin troisièmes -->
+                    <!-- Cartes 4 début -->
                     <div class="covoiturage">
                         <div class="destinationHoraire">
-
                             <div class="trajet">
                                 <span class="départ">Paris</span>
                                 <span class="arrivée">Toulouse</span>
                             </div>
-
                             <div class="heure_depart">10h30</div>
-                            <div class="FlechesH">
-                                <span class="material-symbols-outlined">
-                                    line_end_arrow_notch
-                                </span>
+                            <div class="FlechesH"><span class="material-symbols-outlined">line_end_arrow_notch</span>
                             </div>
                             <div class="tempsTrajetTotal">06h30</div>
-                            <div class="FlechesH">
-                                <span class="material-symbols-outlined">
-                                    line_end_arrow_notch
-                                </span>
+                            <div class="FlechesH"><span class="material-symbols-outlined">line_end_arrow_notch</span>
                             </div>
                             <div class="heure_arrivee">16h07</div>
-                            <div class="date_arrivee">24/05/2026
-                            </div>
-
+                            <div class="date_arrivee">24/05/2026</div>
                         </div>
                         <div class="ligneDeSeparation">
                             <hr />
                         </div>
-
                         <div class="info-conducteur">
-
-                            <div class="photoDeProfil">
+                            <div class="photo-pseudo">
                                 <img src="/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82879.png"
-                                    alt="photo" class="photoDeProfil">
-                            </div>
-
-
-                            <div class="pseudo">
-
-                                <span class="prénom">Marc</span>
-                                <span class="nom">Calabre</span>
+                                    alt="Marc" class="photoDeProfil">
+                                <span class="pseudo">MarcCal</span>
                             </div>
                             <div class="note">
                                 <span class="material-symbols-outlined">star</span>
                                 <span>2,5</span>
                             </div>
-                            <div class="icon-electrique">
-                                <span class="material-symbols-outlined">car_crash</span>
-                                <span>Energie</span>
+                            <div class="icon-thermique">
+                                <span class="material-symbols-outlined">gas_meter</span>
+                                <small>Thermique</small>
                             </div>
-
                             <div class="icon-credit">
-                                <span class="material-symbols-outlined">credit_score</span>
-                                <span>8</span>
+                                <span class="material-symbols-outlined">payments</span>
+                                <span>8 Credits</span>
                             </div>
-
                             <div class="passagerResultat">
                                 <span class="material-symbols-outlined">person</span>
-                                <span>2</span>
+                                <span>2 places</span>
                             </div>
-
+                            <div class="action-btn">
+                                <button class="btn btn-sm btn-outline-primary">Détails</button>
+                            </div>
                         </div>
                     </div>
-                    <!-- fin quatrièmes -->
 
-                    <!-- <div class="separation-3"></div> -->
-                    <!-- <div class="ligneDeSeparation"></div> -->
+                </div> ```
+
+                <!-- fin section résultat -->
+            </div>
 
     </main>
     <footer>

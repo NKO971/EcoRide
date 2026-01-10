@@ -1,24 +1,21 @@
+/* ============================================
+   1. BASES & VARIABLES
+   ============================================ */
 body {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     min-height: 100vh;
     overflow-x: hidden;
-    /* Empeche le débordemant horizontal */
 }
 
-
-/* Fin du travaille sur la barre de recherche */
-
-.conteneur-global {
-    display: flex;
-    gap: 2rem;
-}
-
+/* ============================================
+   2. RECHERCHE & RECAPITULATIF
+   ============================================ */
 .recap-resultat {
     font-size: var(--font-size-normal);
     white-space: nowrap;
     color: var(--color-dark);
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.1));
     border-radius: var(--radius-medium);
     border: 0.1rem solid var(--color-primary);
     align-items: center;
@@ -28,13 +25,15 @@ body {
 .recap {
     margin: var(--spacing-sm);
     flex: 1;
-    /* Permet de prendre tout l'espace disponible */
     text-align: center;
 }
 
-/* Travaille sur les filtres */
+/* ============================================
+   3. FILTRES (Chirurgie effectuée ici)
+   ============================================ */
 fieldset {
     border: solid 0.1rem var(--color-primary);
+    border-radius: var(--radius-medium);
     height: auto;
     width: 100%;
 }
@@ -43,54 +42,46 @@ h2 {
     font-family: 'Montserrat', sans-serif;
     font-size: var(--font-size-xlarge);
     color: var(--color-dark);
-    white-space: nowrap;
+    margin-top: 1rem;
 }
 
 .filtre {
     font-size: var(--font-size-normal);
     color: var(--color-primary);
     padding: 1rem 1.5rem;
-    margin: 1rem auto;
+}
+
+.conteneurFiltre {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Style spécifique pour les inputs numériques */
+.conteneurFiltre input[type="number"] {
+    padding: 2px 5px;
+    color: var(--color-dark);
+    font-weight: bold;
+    text-align: center;
 }
 
 .separation-2 {
-    height: 2%;
-    padding: 0.3rem;
+    height: 4px;
     background-color: var(--color-primary);
     border-radius: var(--radius-medium);
     margin: var(--spacing-md) 0;
-    margin-left: var(--spacing-xs);
-    flex-shrink: 0;
     width: 90%;
 }
 
-/* Fin du travaille sur les filtres */
-
-/* Travaille sur les résultats */
-.material-symbols-outlined {
-    color: var(--color-primary);
-}
-
-.conteneurResultat {
-    margin-bottom: 2rem;
-}
-
-
-.photoDeProfil {
-    width: 4rem;
-    height: 4rem;
-    border-radius: var(--radius-medium);
-    margin-right: var(--spacing-lg);
-    object-fit: cover;
-    /* Assure que l'image remplit le conteneur sans déformation */
-}
-
+/* ============================================
+   4. RÉSULTATS (Nettoyage des doublons)
+   ============================================ */
 .covoiturage {
     margin-top: var(--spacing-xl);
     border: 0.1rem solid var(--color-primary);
     border-radius: var(--radius-medium);
     padding: var(--spacing-sm);
-    font-family: 'Montserrat', sans-serif;
     color: var(--color-dark);
 }
 
@@ -100,157 +91,71 @@ h2 {
     align-items: center;
 }
 
-.heure_depart {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-}
-
-.separation-3 {
-    border: 0.1rem solid var(--color-dark);
-    width: var(--spacing-xl);
-}
-
 .info-conducteur {
     display: grid;
-    grid-template-columns: 60px 2fr 80px 1fr 2fr 80px;
-    /* ajuster selon contenu*/
+    grid-template-columns: 80px 1.5fr 1fr 1fr 1fr 1fr; 
+    gap: 10px;
     align-items: center;
     text-align: center;
 }
 
-.ligneDeSeparation {
+.photo-pseudo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.photoDeProfil {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%; 
+    object-fit: cover;
+    border: 2px solid var(--color-primary);
+}
+
+.note, .icon-electrique, .icon-thermique, .icon-credit, .passagerResultat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.85rem;
+}
+
+.material-symbols-outlined {
     color: var(--color-primary);
 }
 
-
-
 /* ============================================
-   RESPONSIVE - Mobile uniquement
+   5. RESPONSIVE
    ============================================ */
 
+/* Tablettes */
 @media (max-width: 991.98px) {
     fieldset {
-        width: 80%;
-        height: auto;
-        margin: 0 auto var(--spacing-lg);
-
-    }
-
-    .conteneurFiltre {
-        display: flex;
-        align-items: center;
-        text-wrap: nowrap;
-        gap: 0.5rem;
+        width: 100%;
+        margin-bottom: var(--spacing-lg);
     }
 }
 
+/* Mobiles */
 @media (max-width: 767.98px) {
-    .divBouton {
-        display: flex;
-        justify-content: center;
-    }
-
-    fieldset {
-        width: 80%;
-        height: auto;
-        margin: 0 auto var(--spacing-md);
-        background-color: var(--color-secondary);
-        border: none;
-    }
-
     .btnFiltre {
-        width: 90%;
-        font-size: var(--font-size-large);
+        width: 100%;
         background-color: var(--color-secondary);
         color: var(--color-primary);
+        border: 1px solid var(--color-primary);
+        padding: 10px;
         border-radius: var(--radius-medium);
-        border-color: var(--color-primary);
-    }
-}
-
-@media (max-width: 575.98px) {
-    hr {
-        border-top: 2px solid var(--color-primary);
-    }
-
-    .covoiturage {
-        border: solid 1px var(--color-primary);
-        border-radius: var(--radius-medium);
-        font-size: var(--font-size-small);
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-        margin: 2rem 0;
-    }
-
-    .info-conducteur,
-    .destinationHoraire {
-        margin: 1rem;
-        display: flex;
-        justify-items: center;
-        align-items: center;
     }
 
     .info-conducteur {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    .info-conducteur {
-
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    img {
-        max-width: 50px;
-        border-radius: 50%;
-        height: auto;
-
-    }
-
-    .photoDeProfil {
-
-        display: flex;
-        justify-items: center;
-        align-items: center;
-    }
-
-    .note {
-
-        display: flex;
-        flex-direction: column;
-    }
-
-    .icon-electrique {
-
-        display: flex;
-        flex-direction: column;
-    }
-
-    .icon-credit {
-
-        display: flex;
-        flex-direction: column;
-    }
-
-    .passagerResultat {
-
-        display: flex;
-        flex-direction: column;
-    }
-
-    .pseudo,
-    .trajet {
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         flex-wrap: wrap;
-        font-size: var(--font-size-normal);
+        justify-content: space-around;
     }
-
+    
+    .info-conducteur > div {
+        margin: 5px;
+        min-width: 80px;
+    }
 }
+
