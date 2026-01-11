@@ -1,5 +1,5 @@
 /* ============================================
-   STYLES CSS - Espace utilisateur (AÉRÉ PAR LES MARGES)
+   STYLES CSS - Espace utilisateur
    ============================================ */
 
 legend {
@@ -98,5 +98,51 @@ button:not(.navbar-toggler, .btn-outline-primary),
 @media (max-width: 991.98px) {
     fieldset {
         padding: var(--spacing-md); /* On réduit un peu l'espace sur tablette */
+    }
+}
+
+@media (max-width: 575.98px) {
+  /* 1. CENTRAGE DU CONTENEUR PRINCIPAL */
+    main {
+        width: 90% !important; /* On utilise 90% pour avoir un petit bord propre */
+        margin-left: auto !important;
+        margin-right: auto !important;
+        display: block !important;
+    }
+
+    /* 2. CENTRAGE DES SECTIONS (Infos, Rôles, etc.) */
+    .infos-personnelles, 
+    .choix-role, 
+    #section_vehicule, 
+    .form-trajet {
+        width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding: 1rem !important; /* 16px */
+    }
+
+    /* 3. CENTRAGE DES CARTES DE RÔLE */
+    .roles {
+        flex-direction: column !important; /* On les empile en mobile */
+        align-items: center !important;   /* On les centre horizontalement */
+        width: 100% !important;
+    }
+
+    .role-card {
+        width: 100% !important;
+        max-width: 18.75rem; /* ~300px pour éviter qu'elles soient trop larges */
+    }
+
+    /* 4. AJUSTEMENT DU FLEX CHAUFFEUR */
+    .conteneur-chauffeur-flex {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        width: 100% !important;
+    }
+
+    /* 5. REGLAGE DES INPUTS ET BOUTONS */
+    .form-control, .form-select, .publier-btn {
+        width: 100% !important;
     }
 }

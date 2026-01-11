@@ -56,94 +56,89 @@
     </nav>
 </header>
 
-    <main>
-        <div class="row">
-
-            <div class="col-6 test">
-                <div class="row recap">
-                    <div class="col-2 ville">
-                        <span class="bold">Paris</span>
-                    </div>
-                    <div class="col-2 departTrajet">
-                        <span class="bold">10 h 30</span>
-                    </div>
-                    <div class="col-1 traitSeparation"></div>
-                    <div class="col-2 tempsTrajet">
-                        <span>06 H 07</span>
-                    </div>
-                    <div class="col-1 traitSeparation"></div>
-                    <div class="col-2 arriveeTrajet">
-                        <span class="bold">16 h 37</span>
-                    </div>
-
-                    <div class="col-2 ville">
-                        <span class="bold">Toulouse</span>
-                    </div>
+   <main class="container mt-4"> <div class="row justify-content-center mb-4">
+        <div class="col-12 col-md-8 test">
+            <div class="row recap align-items-center text-center p-3 border rounded">
+                <div class="col-4 col-md-2 ville">
+                    <span class="bold">Paris</span>
+                </div>
+                <div class="col-4 col-md-2 departTrajet">
+                    <span class="bold">10 h 30</span>
+                </div>
+                <div class="col-md-1 d-none d-md-block traitSeparation"></div>
+                <div class="col-4 col-md-2 tempsTrajet">
+                    <span>06 H 07</span>
+                </div>
+                <div class="col-md-1 d-none d-md-block traitSeparation"></div>
+                <div class="col-6 col-md-2 arriveeTrajet">
+                    <span class="bold">16 h 37</span>
+                </div>
+                <div class="col-6 col-md-2 ville">
+                    <span class="bold">Toulouse</span>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-6">
-                <div class="row detailCovoiturage">
-                    <div class="col">
-                        <div class="conducteur">
-                            <div class="profil">
-                                <img src="/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82878.png"
-                                    alt="photo de profil jean dupont" class="photo-profil">
-                                <h4>Jean Dupond</h4>
-                            </div>
-                            <div class="noteConducteur">
-                                <span class="material-symbols-outlined">star</span>
-                                <span>4.5/5 Avis : 2</span>
-                            </div>
-                            <div>
-                                <span class="material-symbols-outlined">electric_car</span>
-                                <span>Voiture électrique.</span>
-                            </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <div class="detailCovoiturage p-4 border rounded shadow-sm">
+                <div class="conducteur">
+                    <div class="profil d-flex align-items-center gap-3 mb-3">
+                        <img src="/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82878.png"
+                             alt="photo de profil jean dupont" class="photo-profil" style="width: 4rem; height: 4rem; border-radius: 50%;">
+                        <h4 class="m-0">Jean Dupond</h4>
+                    </div>
 
-                            <div class="critères_conducteur">
-                                <p>Non fumeur, pas d'animaux.</p>
-                            </div>
-                            <div class="separation"></div>
-                            <div>
-                                <span class="material-symbols-outlined">calendar_month</span>
-                                <span>La réservation sera confirmée par le conducteur</span>
-                            </div>
+                    <div class="info-item d-flex align-items-center gap-2 mb-2">
+                        <span class="material-symbols-outlined">star</span>
+                        <span>4.5/5 Avis : 2</span>
+                    </div>
+
+                    <div class="info-item d-flex align-items-center gap-2 mb-2">
+                        <span class="material-symbols-outlined">electric_car</span>
+                        <span>Voiture électrique.</span>
+                    </div>
+
+                    <div class="critères_conducteur mb-3">
+                        <p class="mb-1 text-muted">Non fumeur, pas d'animaux.</p>
+                    </div>
+
+                    <div class="separation border-top my-3"></div>
+
+                    <div class="info-item d-flex align-items-center gap-2 mb-2">
+                        <span class="material-symbols-outlined">calendar_month</span>
+                        <span>La réservation sera confirmée par le conducteur</span>
+                    </div>
+
+                    <div class="info-item d-flex align-items-center gap-2 mb-4">
+                        <span class="material-symbols-outlined">person</span>
+                        <span>2 places restantes.</span>
+                    </div>
+
+                    <div class="row reservation bg-light p-3 rounded align-items-center">
+                        <div class="col-6 text-center border-end">
                             <div class="nombrePlace">
-                                <span class="material-symbols-outlined">person</span>
-                                <span>2 places restantes.</span>
-                            </div>
-                            <div class="button">
-                                <button class="btn btn-primary">Contact conducteur</button>
+                                <span class="material-symbols-outlined d-block">person</span>
+                                <strong>1 place</strong>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-5">
-                <div class="row reservation">
-                    <div class="col-6">
-                        <div class="nombrePlace">
-                            <span class="material-symbols-outlined">person</span>
-                            <span>1 place</span>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="prixPlace">
-                            <span class="material-symbols-outlined">credit_score</span>
-                            <span>8 crédits</span>
+                        <div class="col-6 text-center">
+                            <div class="prixPlace">
+                                <span class="material-symbols-outlined d-block">credit_score</span>
+                                <strong>8 crédits</strong>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="row envoiReservationButton">
-                        <button class="btn btn-primary">Demande de réservation</button>
-
+                    <div class="envoiReservationButton mt-4 text-center">
+                        <button class="btn btn-primary w-100 py-2">Demande de réservation</button>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
+</main>
 
   <footer>
         <!-- Pied de page avec informations de contact -->

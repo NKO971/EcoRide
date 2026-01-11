@@ -279,27 +279,6 @@ header {
 }
 
 
-
-/* Bouton "Proposez un trajet" */
-.button button {
-    padding: var(--spacing-md) var(--spacing-xl);
-    font-size: var(--font-size-large);
-    background-color: var(--color-secondary);
-    color: var(--color-primary);
-    border: 2px solid var(--color-primary);
-    border-radius: var(--radius-medium);
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-
-    /* 👇 POUR CENTRER LE TEXTE DANS LE BOUTON */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
 .button button:hover {
     background-color: var(--color-primary);
     color: var(--color-white);

@@ -12,24 +12,13 @@ body {
    2. RECHERCHE & RECAPITULATIF
    ============================================ */
 .recap-resultat {
-    font-size: var(--font-size-normal);
-    white-space: nowrap;
-    color: var(--color-dark);
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.1));
-    border-radius: var(--radius-medium);
-    border: 0.1rem solid var(--color-primary);
-    align-items: center;
-    background-color: var(--color-white);
-}
-
-.recap {
-    margin: var(--spacing-sm);
-    flex: 1;
+    font-size: var(--font-size-small);
+    color: var(--color-primary);
     text-align: center;
 }
 
 /* ============================================
-   3. FILTRES (Chirurgie effectuée ici)
+   3. FILTRES 
    ============================================ */
 fieldset {
     border: solid 0.1rem var(--color-primary);
@@ -60,10 +49,12 @@ h2 {
 
 /* Style spécifique pour les inputs numériques */
 .conteneurFiltre input[type="number"] {
-    padding: 2px 5px;
     color: var(--color-dark);
     font-weight: bold;
     text-align: center;
+    width: 60px; 
+    border: 1px solid var(--color-primary); 
+    border-radius: 5px;
 }
 
 .separation-2 {
@@ -75,8 +66,10 @@ h2 {
 }
 
 /* ============================================
-   4. RÉSULTATS (Nettoyage des doublons)
+   4. RÉSULTATS 
    ============================================ */
+
+
 .covoiturage {
     margin-top: var(--spacing-xl);
     border: 0.1rem solid var(--color-primary);
@@ -91,10 +84,17 @@ h2 {
     align-items: center;
 }
 
+.ligneDeSeparation {
+    height: 2px;
+    background-color: var(--color-primary);
+    margin: var(--spacing-sm) 0;
+    border-radius: var(--radius-medium);
+}
+
 .info-conducteur {
     display: grid;
     grid-template-columns: 80px 1.5fr 1fr 1fr 1fr 1fr; 
-    gap: 10px;
+    gap: var(--spacing-sm);
     align-items: center;
     text-align: center;
 }
@@ -147,6 +147,10 @@ h2 {
         border-radius: var(--radius-medium);
     }
 
+    .recap-resultat {
+        font-size: var(--font-size-small);
+    }
+
     .info-conducteur {
         display: flex;
         flex-wrap: wrap;
@@ -159,3 +163,74 @@ h2 {
     }
 }
 
+@media (max-width: 575.98px) {
+    main {
+        width: 100%;
+    }
+    .recap-resultat {
+        font-size: var(--font-size-small);
+    }
+
+    .resultats {
+        width: 80%;
+        margin: 0 auto !important;
+    }
+
+  .destinationHoraire {
+        display: grid !important;
+        /* Deux colonnes : une pour les villes, une pour les heures */
+        grid-template-columns: 1fr 1fr !important;
+        /* On définit les zones : villes à gauche, heures à droite, date sur toute la ligne en bas */
+        grid-template-areas: 
+            "villes heures"
+            "date date" !important;
+        gap: 0.5rem !important; /* Espacement en rem */
+        align-items: center !important;
+    }
+
+    /* Bloc Villes à gauche */
+    .trajet {
+        grid-area: villes !important;
+        display: flex !important;
+        flex-direction: column !important;
+        text-align: left !important;
+        gap: 0.25rem !important;
+    }
+
+    /* On force les horaires à s'empiler dans la zone de droite */
+    .heure_depart, 
+    .heure_arrivee {
+        grid-area: heures !important;
+        display: block !important;
+        text-align: right !important;
+        width: 100% !important;
+    }
+
+    /* Positionnement spécifique pour l'heure de départ (en haut) */
+    .heure_depart {
+        align-self: start !important;
+        margin-bottom: 0.25rem !important;
+    }
+
+    /* Positionnement spécifique pour l'heure d'arrivée (au milieu, face à la ville d'arrivée) */
+    .heure_arrivee {
+        align-self: end !important;
+    }
+
+    /* On cache les flèches pour un alignement vertical parfait */
+    .FlechesH {
+        display: none !important;
+    }
+
+    /* La date prend toute la largeur en bas et se centre */
+    .date_arrivee {
+        grid-area: date !important;
+        text-align: center !important;
+        margin-top: 1rem !important;
+        font-size: 0.9rem !important;
+    }
+    .note, .icon-electrique, .icon-thermique, .icon-credit, .passagerResultat {
+        font-size: 0.75rem;
+    }
+
+}
