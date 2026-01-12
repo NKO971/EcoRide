@@ -60,24 +60,24 @@
     <main>
         <!-- Barre de recherche -->
 <div class="bdr">
-        <form class="input-group d-flex flex-wrap justify-content-center">
+        <form class="input-group d-flex flex-wrap justify-content-center" method="get" role="search">
             <!-- Ville de départ -->
             <div class="col-12 col-md-8 col-lg-2 mx-auto">
-                <label for="vdd" class="visually-hidden">Ville de départ</label>
-                <input type="text" placeholder="Départ" id="vdd" value="" class="form-control">
+                <label for="lieu_depart" class="visually-hidden">Ville de départ</label>
+                <input type="text" placeholder="Départ" id="lieu_depart" value="" class="form-control">
             </div>
 
             <!-- Ville d'arrivée -->
             <div class="col-12 col-md-8
             col-lg-2 mx-auto">
-                <label for="vda" class="visually-hidden">Ville d'arrivée</label>
-                <input type="text" placeholder="Arrivée" id="vda" value="" class="form-control">
+                <label for="lieu_arrivee" class="visually-hidden">Ville d'arrivée</label>
+                <input type="text" placeholder="Arrivée" id="lieu_arrivee" value="" class="form-control">
             </div>
             
             <!-- Date -->
             <div class="col-12 col-md-8 col-lg-2 mx-auto">
-                <label for="dateTrajet" class="visually-hidden">Date du trajet</label>
-                <input type="date" id="dateTrajet" name="dateTrajet" class="date form-control">
+                <label for="date_depart" class="visually-hidden">Date du trajet</label>
+                <input type="date" id="date_depart" name="date_depart" class="date form-control">
             </div>
             
             <!-- Bouton -->
@@ -87,27 +87,50 @@
         </form>
 </div>
 <!-- Fin barre de recherche -->
-        </div>
 
-        <img src="/Image/6365344.jpg" alt="Image d'illustration" class="illustration-image">
-        
-        <div class="conteneur">
-            <div class="texte">
-                <p>
-                    EcoRide est une plateforme de covoiturage éco-responsable conçue pour faciliter les trajets
-                    quotidiens tout en réduisant l’impact environnemental.
-                    Que vous soyez conducteur ou passager, trouvez ou proposez facilement un trajet, en toute
-                    sécurité.<br>
-                    Grâce à une interface intuitive, EcoRide favorise une mobilité partagée, économique et respectueuse
-                    de la planète.
-                    Rejoignez une communauté engagée dans un mode de transport plus durable !
-                </p>
-            </div>
-            </div>
-                <div class="image-container">
-                    <img class="image" src="/Image/7178884.jpg" alt="Image d'illustration" class="illustration-image">
+    <section class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="texte">
+                        <p>
+                            EcoRide est une plateforme de covoiturage éco-responsable conçue pour faciliter les trajets
+                            quotidiens tout en réduisant l’impact environnemental.
+                            Que vous soyez conducteur ou passager, trouvez ou proposez facilement un trajet, en toute
+                            sécurité.<br>
+                            <strong>Ensemble, adoptons une mobilité plus verte !</strong>
+                        </p>
+                    </div>
                 </div>
+                <div class="col-lg-6 text-center">
+                    <img src="/Image/6365344.jpg" alt="Illustration trajet" class="img-accueil shadow-sm">
+                </div>
+            </div>
         </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center flex-lg-row-reverse">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="texte-partie2">
+                        <p>
+                            Rejoignez notre communauté d'utilisateurs engagés pour un avenir plus vert. Avec EcoRide,
+                            chaque trajet compte pour la planète.
+                        </p>
+                    </div>
+                     <div class="mt-4">
+                            <a href="/HTML/Connexion-inscription.html" class="btn btn-inscription">
+                                Rejoindre la communauté
+                            </a>
+                        </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="/Image/7178884.jpg" alt="Illustration communauté" class="img-accueil shadow-sm">
+                </div>
+            </div>
+        </div>
+    </section>
     </main>
 
     <footer>

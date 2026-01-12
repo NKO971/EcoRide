@@ -7,44 +7,58 @@
    PAGE D'ACCUEIL - Contenu spécifique
    ============================================ */
 
-/* Image illustration */
-main img {
-    width: 50%;
-    max-width: 37.5rem;
-    height: auto;
-    display: block;
-    margin: var(--spacing-lg) auto;
-    border-bottom: 1px solid var(--color-secondary);
-    padding-bottom: var(--spacing-lg);
-    margin-top: var(--spacing-lg);
-    margin-bottom: var(--spacing-lg);
-}
-
-/* Conteneur texte + bouton */
-.conteneur {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: var(--spacing-xl);
+/* Style des images d'illustration */
+.img-accueil {
     width: 100%;
-    max-width: 75rem; /* 1200px Limite sur très grand écrand */
-    margin: 0 auto; /* Centre le conteneur */
-    padding: var(--spacing-xl);
-    box-sizing: border-box;
+    max-width: 31.25rem; /* 500px */
+    height: auto;
+    border-radius: var(--radius-medium);
+    border-bottom: 3px solid var(--color-secondary); /* Rappel du vert menthe */
 }
 
-.texte {
-    max-width: 60%;
-    margin: auto;
+/* Le bouton d'inscription (Bleu EcoRide) */
+.btn-inscription {
+    background-color: var(--color-primary) !important;
+    color: var(--color-white) !important;
+    font-size: var(--font-size-normal);
+    font-weight: bold;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--radius-medium);
+    border: 2px solid var(--color-primary);
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
 }
 
-.texte p {
-    margin: 0 0 var(--spacing-md) 0; /* Espace sous les paragraphes */
+.btn-inscription {
+    background-color: var(--color-secondary) !important;
+    color: var(--color-primary) !important;
+    transform: scale(1.05);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Espacements des textes */
+.texte p, .texte-partie2 p {
+    font-size: var(--font-size-normal);
+    line-height: 1.8;
+    color: var(--color-dark);
 }
 
 /* ============================================
    RESPONSIVE - Mobile & Tablette
    ============================================ */
+
+@media (max-width: 991.98px) {
+    .texte, .texte-partie2 {
+        text-align: center;
+        padding: var(--spacing-md);
+    }
+    
+    .img-accueil {
+        max-width: 80%;
+        margin-top: var(--spacing-lg);
+    }
+}
 
 /* Tablette */
 @media (max-width: 991.98px) {
