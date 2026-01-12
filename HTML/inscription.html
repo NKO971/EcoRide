@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoRide - Accueil</title>
+    <title>EcoRide - Inscription</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/mediaquerise_base.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <!-- Je récupère des icons sur google front -->
+    <link rel="stylesheet" href="/css/connexion-inscription.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <!-- Je récupère des icons sur google front -->
     <script src="/js/bootstrap.bundle.min.js" defer></script>
     <script src="/js/jquery-3.7.1.min.js" defer></script>
 
@@ -20,7 +20,7 @@
 
 <body>
 
-<header>
+  <header>
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="/HTML/EcoRide_Accueil.html">
@@ -58,81 +58,44 @@
     </nav>
 </header>
 
-    <main>
-        <!-- Barre de recherche -->
-<div class="bdr">
-        <form class="input-group d-flex flex-wrap justify-content-center" method="get" role="search">
-            <!-- Ville de départ -->
-            <div class="col-12 col-md-8 col-lg-2 mx-auto">
-                <label for="lieu_depart" class="visually-hidden">Ville de départ</label>
-                <input type="text" placeholder="Départ" id="lieu_depart" value="" class="form-control">
-            </div>
-
-            <!-- Ville d'arrivée -->
-            <div class="col-12 col-md-8
-            col-lg-2 mx-auto">
-                <label for="lieu_arrivee" class="visually-hidden">Ville d'arrivée</label>
-                <input type="text" placeholder="Arrivée" id="lieu_arrivee" value="" class="form-control">
-            </div>
-            
-            <!-- Date -->
-            <div class="col-12 col-md-8 col-lg-2 mx-auto">
-                <label for="date_depart" class="visually-hidden">Date du trajet</label>
-                <input type="date" id="date_depart" name="date_depart" class="date form-control">
-            </div>
-            
-            <!-- Bouton -->
-            <div class="col-12 col-md-4 col-lg-3 d-grid mx-auto">
-                <button class="btn btn-primary" type="submit">Rechercher</button>
-            </div>
-        </form>
-</div>
-<!-- Fin barre de recherche -->
-
-    <section class="py-5">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <div class="texte">
-                        <p>
-                            EcoRide est une plateforme de covoiturage éco-responsable conçue pour faciliter les trajets
-                            quotidiens tout en réduisant l’impact environnemental.
-                            Que vous soyez conducteur ou passager, trouvez ou proposez facilement un trajet, en toute
-                            sécurité.<br>
-                            <strong>Ensemble, adoptons une mobilité plus verte !</strong>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-6 text-center">
-                    <img src="/Image/6365344.jpg" alt="Illustration trajet" class="img-accueil shadow-sm">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-5 bg-light">
-        <div class="container">
-            <div class="row align-items-center flex-lg-row-reverse">
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <div class="texte-partie2">
-                        <p>
-                            Rejoignez notre communauté d'utilisateurs engagés pour un avenir plus vert. Avec EcoRide,
-                            chaque trajet compte pour la planète.
-                        </p>
-                    </div>
-                     <div class="mt-4">
-                            <a href="/HTML/inscription.html" class="btn btn-inscription">
-                                Rejoindre la communauté
-                            </a>
+<main class="container my-5">
+    <div class="row inscription-form-et-img">
+        
+        <div class="col-12 col-lg-6">
+            <div class="formulaires2">
+                <form action="" method="post">
+                    <fieldset class="fieldset-inscription">
+                        <legend>Inscription</legend>
+                        <div class="inscription">
+                            <label for="pseudo">Pseudo</label>
+                            <input type="text" id="pseudo" name="pseudo" placeholder="Entrez votre pseudo" required>
                         </div>
-                </div>
-                <div class="col-lg-6 text-center">
-                    <img src="/Image/7178884.jpg" alt="Illustration communauté" class="img-accueil shadow-sm">
-                </div>
+                        <div class="inscription">
+                            <label for="email-inscription">Email</label>
+                            <input type="email" id="email" name="email" placeholder="@example.com" required>
+                        </div>
+                        <div class="inscription">
+                            <label for="mot-de-passe">Mot de passe</label>
+                            <input type="password" id="mot-de-passe" name="mot-de-passe" placeholder="Mot de passe" required>
+                        </div>
+                        <div class="inscription">
+                            <label for="confirmer-mot-de-passe">Confirmer mot de passe</label>
+                            <input type="password" id="confirmer-mot-de-passe" name="confirmer-mot-de-passe" placeholder="Confirmer" required>
+                        </div>
+                        <div>
+                            <button type="submit">Inscription</button>
+                        </div>
+                    </fieldset>
+                </form>
             </div>
         </div>
-    </section>
-    </main>
+
+        <div class="col-12 col-lg-6 text-center">
+            <img src="/Image/convertible car-bro.png" alt="Image de voiture" class="image-voiture img-fluid">
+        </div>
+
+    </div>
+</main>
 
     <footer>
         <!-- Pied de page avec informations de contact -->

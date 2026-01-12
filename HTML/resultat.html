@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoRide - Résultat</title>
+    <title>EcoRide - Covoiturage</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/mediaquerise_base.css">
@@ -34,7 +34,8 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <div class="navbar-nav ms-auto align-items-center">
                         <a class="nav-link" href="/HTML/EcoRide_Accueil.html">Accueil</a>
-                        <a class="nav-link" href="/HTML/Connexion-inscription.html">Connexion/Inscription</a>
+                        <a class="nav-link" href="/HTML/resultat.html">Covoiturage</a>
+                        <a class="nav-link" href="/HTML/Connexion.html">Connexion</a>
                         <a class="nav-link" href="/HTML/contact.html">Contact</a>
                         <div class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle btn-mon-compte" href="#" id="navbarDropdown"
@@ -165,6 +166,12 @@
 
                     <!-- Résultats -->
                     <div class="resultats">
+                        <div id="alerte-trajet-proche" class="alerte-suggestion d-none">
+    <div class="message-info">
+        <p>Aucun trajet trouvé pour cette date. Voici les résultats les plus proches :</p>
+    </div>
+</div>
+                        <!-- Carte 1 -->
                         <div class="covoiturage">
                             <div class="destinationHoraire ">
                                 <div class="trajet">
@@ -212,6 +219,8 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- fin carte 1 -->
+                        <!-- Carte 2 -->
                         <div class="covoiturage">
                             <div class="destinationHoraire">
                                 <div class="trajet">
@@ -259,6 +268,8 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- fin carte 2 -->
+                        <!-- Carte 3 -->
                         <div class="covoiturage">
                             <div class="destinationHoraire">
                                 <div class="trajet">
@@ -306,6 +317,8 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- fin carte 3 -->
+                        <!-- Carte 4 -->
                         <div class="covoiturage">
                             <div class="destinationHoraire">
                                 <div class="trajet">
@@ -353,7 +366,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        <!-- fin carte 4 -->
                     </div>
                 </div>
             </div>

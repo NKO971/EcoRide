@@ -35,7 +35,8 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <div class="navbar-nav ms-auto align-items-center">
                     <a class="nav-link" href="/HTML/EcoRide_Accueil.html">Accueil</a>
-                    <a class="nav-link" href="/HTML/Connexion-inscription.html">Connexion/Inscription</a>
+                    <a class="nav-link" href="/HTML/resultat.html">Covoiturage</a>
+                    <a class="nav-link" href="/HTML/Connexion.html">Connexion</a>
                     <a class="nav-link" href="/HTML/contact.html">Contact</a>
                     <!-- Mon compte avec menu déroulant pour l'utilisateur connecté -->
                     <div class="nav-item dropdown">
@@ -60,7 +61,7 @@
     <main>
         <div class="container-fluid px-4">
             <div class="row gx-5 justify-content-evenly">
-                <div class="col-12 col-md-6 col-lg-5 formulaires1">
+                <div class="col-12 col-md-6 col-lg-5 formulaires_connexion">
                     <!-- Formulaire de connexion -->
                     <form action="" method="post">
                         <fieldset class="fieldset-connexion">
@@ -84,47 +85,10 @@
                                 <button type="submit">Connexion</button>
                             </div>
                             <div>
-                                <button type="button"
+                                <button class="motDePasseOublie" type="button"
                                     onclick="location.href='mot-de-passe-mot-de-passe-oublie.html'">Mot de passe
                                     oublié</button>
                             </div>
-                        </fieldset>
-                    </form>
-                </div>
-                <div class="col-12 col-md-6 col-lg-5 formulaires2">
-                    <!-- Formulaire d'inscription -->
-                    <form action="" method="post">
-                        <fieldset class="fieldset-inscription">
-                            <legend>Inscription</legend>
-                            <div class="inscription">
-                                <label for="nom">Nom</label>
-                                <input type="text" id="nom" name="nom" required>
-                            </div>
-                            <div class="inscription">
-                                <label for="prenom">Prénom</label>
-                                <input type="text" id="prenom" name="prenom" required>
-                            </div>
-                            <div class="inscription">
-                                <label for="pseudo">Pseudo</label>
-                                <input type="text" id="pseudo" name="pseudo" required>
-                            </div>
-                            <div class="inscription">
-                                <label for="email-inscription">Email</label>
-                                <input type="email" id="email-inscription" name="email-inscription" required>
-                            </div>
-                            <div class="inscription">
-                                <label for="mot-de-passe">Mot de passe</label>
-                                <input type="password" id="mot-de-passe" name="mot-de-passe" required>
-                            </div>
-                            <div class="inscription">
-                                <label for="confirmer-mot-de-passe">Confirmer mot de passe</label>
-                                <input type="password" id="confirmer-mot-de-passe" name="confirmer-mot-de-passe"
-                                    required>
-                            </div>
-                            <div>
-                                <button type="submit">Inscription</button>
-                            </div>
-
                         </fieldset>
                     </form>
                 </div>

@@ -68,7 +68,25 @@ h2 {
 /* ============================================
    4. RÉSULTATS 
    ============================================ */
+   /* Message d'alerte pour les trajets non trouvés */
+.alerte-suggestion {
+    background-color: rgba(145, 236, 184, 0.1);
+    border: 2px solid var(--color-secondary);
+    border-radius: var(--radius-medium);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    filter: drop-shadow(var(--shadow-small));
+}
 
+.alerte-suggestion p {
+    margin: 0;
+    color: var(--color-primary);
+    font-weight: 500;
+}
+/* Fin .alerte-suggestion */
 
 .covoiturage {
     margin-top: var(--spacing-xl);
