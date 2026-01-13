@@ -56,6 +56,12 @@ fieldset {
     gap: var(--spacing-xs);
 }
 
+/* Cible spécifiquement l'input email ou tous les inputs du formulaire */
+.connexion input[type="email"], 
+.inscription input[type="email"] {
+    font-size: var(--font-size-normal);
+}
+
 /* Labels */
 label {
     color: var(--color-dark);
@@ -74,7 +80,7 @@ select,
     font-size: var(--font-size-large);
     color: var(--color-primary);
     width: 100%; 
-    padding: var(--spacing-xs); /* On garde ton padding d'origine */
+    padding: var(--spacing-xs); /* On garde le padding d'origine */
     transition: background-color 0.3s ease;
 }
 

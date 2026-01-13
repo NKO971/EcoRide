@@ -1,120 +1,56 @@
-* {
-    font-family: 'montserrat', sans-serif;
-    color: #2C3E50;
-    /*overflow-x: hidden;*/
+/* Style global de la pop-up */
+.detailCovoiturage {
+    background-color: var(--color-white);
+    border: 2px solid var(--color-primary) !important;
+    border-radius: var(--radius-medium) !important;
+    padding: var(--spacing-lg);
+    filter: drop-shadow(var(--shadow-medium));
 }
 
-.recap,
-.detailCovoiturage,
-.reservation {
-    border: #3498DB solid 1px;
-    border-radius: 25px;
-    padding: 2%;
+/* Badge Écologique (MCD: Voiture.energie) */
+.badge-eco {
+    background-color: var(--color-secondary); /* Ton vert menthe */
+    color: var(--color-primary);
+    padding: 2px 8px;
+    border-radius: var(--radius-small);
+    font-weight: 600;
+    font-size: 0.8rem;
 }
 
-.col-5 {
-    justify-items: center;
-}
-
-.row {
-    margin: 2% 0 2% 0;
-}
-
-/* Travail sur le trajet */
-.recap {
-    border: #3498DB solid 1px;
-    border-radius: 25px;
-    align-items: center;
-    text-align: center;
-    flex-wrap: nowrap;
-    padding: 2%;
-}
-
-.traitSeparation {
-    border: 0.5px solid #2C3E50;
-    width: 8%;
-}
-
-.ville,
-.departTrajet,
-.arriveeTrajet {
-    /*font-size: 32px;*/
-    color: #2C3E50;
-}
-
-.bold {
-    font-weight: 800;
-}
-
-/* Travail sur les information du trajet */
-.profil img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
-    margin-right: 10px;
+/* Photo de profil (US 5) */
+.photo-profil {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
     object-fit: cover;
-    /* Assure que l'image remplit le conteneur sans déformation */
+    border: 2px solid var(--color-secondary);
 }
 
-.material-symbols-outlined {
-    color: #3498DB;
+/* Le bouton de réservation façon EcoRide */
+.btn-reservation-modal {
+    width: 100%;
+    height: 3.5rem;
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-medium);
+    font-weight: bold;
+    font-size: var(--font-size-large);
+    filter: drop-shadow(var(--shadow-small));
+    transition: all 0.3s ease;
 }
 
-.profil {
-    display: flex;
-    margin-bottom: 25px;
+.btn-reservation-modal:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    transform: translateY(-2px);
 }
 
-.noteConducteur,
-.ennergie,
-.critères_conducteur,
-.reservation,
-.nombrePlace,
-.button,
-.separation {
-    margin-bottom: 25px;
-}
-
-.nombrePlace {
-    text-align: start;
-}
-
-.prixPlace {
-    text-align: end;
-}
-
-.separation {
-    border: 1px solid #2C3E50;
-    width: 90%;
-}
-
-
-.button button,
-.button button:hover {
-    padding: 20px 40px;
-    font-size: 24px;
-    background-color: #91ECB8;
-    color: #3498DB;
-    border: 2px solid #3498DB;
-    border-radius: 25px;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-}
-
-.reservation {
-    height: 52px;
-    border: 1px solid #3498DB;
-    border-radius: 25px;
-    margin-top: 35%;
-    /* Ajuster en incorporant la partis avis */
-}
-
-.envoiReservationButton button,
-.envoiReservationButton button:hover {
-    border: solid 1px #3498DB;
-    border-radius: 25px;
-    padding: 5% 10%;
-    background-color: #91ECB8;
-    color: #3498DB;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+/* Alignement du trajet dans la pop-up */
+.recap {
+    border: 1px solid #eee;
+    background-color: var(--color-background);
+    border-radius: var(--radius-small);
+    padding: 15px;
 }
 

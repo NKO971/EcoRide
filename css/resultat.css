@@ -143,7 +143,111 @@ h2 {
 }
 
 /* ============================================
-   5. RESPONSIVE
+   5. MODALE DÉTAILS DU TRAJET
+   ============================================ */
+
+/* Conteneur principal de la modale */
+.style-modal-ecoride {
+    border: 0.125rem solid var(--color-primary) !important; /* 2px */
+    border-radius: var(--radius-medium) !important;
+    background-color: var(--color-white);
+    filter: drop-shadow(var(--shadow-medium));
+}
+
+/* Zone récapitulative du trajet */
+.recap-trajet-modal {
+    background: var(--color-background);
+    border-radius: var(--radius-small);
+    padding: var(--spacing-sm); /* 16px */
+}
+
+.icone-fleche {
+    vertical-align: middle;
+    color: var(--color-primary);
+    font-size: var(--font-size-large); /* 24px */
+}
+
+.info-horaire-details {
+    font-size: var(--font-size-small);
+    color: var(--color-dark);
+    opacity: 0.7;
+    margin-top: var(--spacing-xs);
+}
+
+/* Photo et Profil */
+.photoDeProfil-details {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%; 
+    object-fit: cover;
+    border: 2px solid var(--color-primary);
+}
+
+.icone-star {
+    font-size: var(--font-size-normal); /* 18px */ 
+}
+
+.note-chiffre {
+    font-weight: 600;
+}
+
+/* Zone des préférences */
+.preferences-zone {
+    margin-top: var(--spacing-sm);
+}
+
+.titre-pref {
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+.texte-pref {
+    font-size: var(--font-size-small); /* 14px */
+    font-style: italic;
+}
+
+/* Badge Énergie */
+.badge-energie {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-xs); /* 4px 12px */
+    border-radius: var(--radius-medium);
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+/* Séparateur interne */
+.separation-modal {
+    margin: 1rem 0;
+    opacity: 0.1;
+}
+
+/* Prix */
+.prix-credits {
+    font-size: var(--font-size-large);
+    font-weight: 800;
+    color: var(--color-primary);
+}
+
+/* Bouton de réservation */
+.btn-reservation-eco {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    border: 0.125rem solid var(--color-primary);
+    border-radius: var(--radius-medium);
+    padding: 0.9rem; /* ~15px */
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-reservation-eco:hover {
+    background-color: var(--color-primary);
+}
+
+/* ============================================
+   6. RESPONSIVE
    ============================================ */
 
 /* Tablettes */
