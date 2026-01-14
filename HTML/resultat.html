@@ -167,11 +167,11 @@
                     <!-- Résultats -->
                     <div class="resultats">
                         <div id="alerte-trajet-proche" class="alerte-suggestion d-none">
-    <div class="message-info">
+                            <div class="message-info">
 
-        <p>Aucun trajet trouvé pour cette date. Voici les résultats les plus proches :</p>
-    </div>
-</div>
+                                <p>Aucun trajet trouvé pour cette date. Voici les résultats les plus proches :</p>
+                            </div>
+                        </div>
                         <!-- Carte 1 -->
                         <div class="covoiturage">
                             <div class="destinationHoraire ">
@@ -217,7 +217,7 @@
                                 </div>
                                 <div class="action-btn col-12 col-md-auto">
                                     <button class="btn btn-sm btn-outline-primary w-100 w-md-auto"
-                                    data-bs-toggle="modal" data-bs-target="#modalDetailsTrajet">Détails</button>
+                                        data-bs-toggle="modal" data-bs-target="#modalDetailsTrajet">Détails</button>
                                 </div>
                             </div>
                         </div>
@@ -267,7 +267,7 @@
                                 </div>
                                 <div class="action-btn col-12 col-md-auto">
                                     <button class="btn btn-sm btn-outline-primary w-100 w-md-auto"
-                                       data-bs-toggle="modal" data-bs-target="#modalDetailsTrajet">Détails</button>
+                                        data-bs-toggle="modal" data-bs-target="#modalDetailsTrajet">Détails</button>
                                 </div>
                             </div>
                         </div>
@@ -317,7 +317,7 @@
                                 </div>
                                 <div class="action-btn col-12 col-md-auto">
                                     <button class="btn btn-sm btn-outline-primary w-100 w-md-auto"
-                                    data-bs-toggle="modal" data-bs-target="#modalDetailsTrajet">Détails</button>
+                                        data-bs-toggle="modal" data-bs-target="#modalDetailsTrajet">Détails</button>
                                 </div>
                             </div>
                         </div>
@@ -367,7 +367,7 @@
                                 </div>
                                 <div class="action-btn col-12 col-md-auto">
                                     <button class="btn btn-sm btn-outline-primary w-100 w-md-auto"
-                                    data-bs-toggle="modal" data-bs-target="#modalDetailsTrajet">Détails</button>
+                                        data-bs-toggle="modal" data-bs-target="#modalDetailsTrajet">Détails</button>
                                 </div>
                             </div>
                         </div>
@@ -394,62 +394,79 @@
     </footer>
     <!-- Modal Détails du trajet -->
     <div class="modal fade" id="modalDetailsTrajet" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-            
-            <div class="modal-header border-0">
-                <h5 class="modal-title bold">Détails du voyage</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
 
-            <div class="modal-body">
-                <div class="recap-trajet-modal mb-4 p-3 text-center">
-                    <span class="bold">Paris</span> 
-                    <span class="material-symbols-outlined icone-fleche">arrow_forward</span> 
-                    <span class="bold">Toulouse</span>
-                    <div class="info-horaire-details">Départ à 10h30 - Arrivée prévue à 16h07</div>
+                <div class="modal-header border-0">
+                    <h5 class="modal-title bold">Détails du voyage</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-6 border-end">
-                        <div class="d-flex align-items-center gap-3 mb-3">
-                            <img src="/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82878.png" alt="Jean" class="photoDeProfil-details">
-                            <div class="conducteur-meta">
-                                <h4 class="m-0">JeanP75</h4>
-                                <div class="note-container">
-                                    <span class="material-symbols-outlined">star</span> 
-                                    <span class="note-chiffre">4,5/5</span> (2 avis)
+                <div class="modal-body">
+                    <div class="recap-trajet-modal mb-4 p-3 text-center">
+                        <span class="bold">Paris</span>
+                        <span class="material-symbols-outlined icone-fleche">arrow_forward</span>
+                        <span class="bold">Toulouse</span>
+                        <div class="info-horaire-details">Départ à 10h30 - Arrivée prévue à 16h07</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 border-end">
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                <img src="/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82878.png"
+                                    alt="Jean" class="photoDeProfil-details">
+                                <div class="conducteur-meta">
+                                    <h4 class="m-0">JeanP75</h4>
+                                    <div class="note-container">
+                                        <span class="material-symbols-outlined">star</span>
+                                        <span class="note-chiffre">4,5/5</span> (2 avis)
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="preferences-zone">
-                            <p class="titre-pref">Préférences :</p>
-                            <p class="texte-pref">"Non fumeur, pas d'animaux. Je discute volontiers !"</p>
-                        </div>
-                    </div>
+                            <!-- Travaille sur les avis a pofiner -->
+                            <button class="btn btn-outline-primary btn-sm mb-3" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseAvis" aria-expanded="false">
+                                Voir les commentaires
+                            </button>
 
-                    <div class="col-md-6 ps-md-4">
-                        <h6 class="bold mb-3">Véhicule</h6>
-                        <div class="d-flex align-items-center gap-2 mb-2">
-                            <span class="material-symbols-outlined">electric_car</span>
-                            <span class="nom-vehicule">Tesla Model 3 (Blanc)</span>
+                            <div class="collapse" id="collapseAvis">
+                                <div class="card card-body bg-light border-0 mb-3 p-2" style="font-size: 0.85rem;">
+                                    <div class="mb-2 border-bottom pb-1">
+                                        <strong>Marie_L :</strong> "Top conducteur !"
+                                    </div>
+                                    <div>
+                                        <strong>Lucas_P :</strong> "Très ponctuel."
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="preferences-zone">
+                                <p class="titre-pref">Préférences :</p>
+                                <p class="texte-pref">"Non fumeur, pas d'animaux. Je discute volontiers !"</p>
+                            </div>
                         </div>
-                        <div class="badge-energie">Électrique</div>
-                        <hr class="separation-modal">
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <div class="places-restantes">Places : <strong>2</strong></div>
-                            <div class="prix-credits">5 Credits</div>
+
+                        <div class="col-md-6 ps-md-4">
+                            <h6 class="bold mb-3">Véhicule</h6>
+                            <div class="d-flex align-items-center gap-2 mb-2">
+                                <span class="material-symbols-outlined">electric_car</span>
+                                <span class="nom-vehicule">Tesla Model 3 (Blanc)</span>
+                            </div>
+                            <div class="badge-energie">Électrique</div>
+                            <hr class="separation-modal">
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div class="places-restantes">Places : <strong>2</strong></div>
+                                <div class="prix-credits">5 Credits</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="modal-footer border-0">
-                <button class="btn-reservation-eco w-100">Demander la réservation</button>
+                <div class="modal-footer border-0">
+                    <button class="btn-reservation-eco w-100">Demander la réservation</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </body>
 
 </html>

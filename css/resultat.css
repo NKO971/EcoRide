@@ -246,6 +246,16 @@ h2 {
     background-color: var(--color-primary);
 }
 
+/* Bouton des avias dans le modal */
+.btn {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    border: 0.125rem solid var(--color-primary);
+    border-radius: var(--radius-medium);
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
 /* ============================================
    6. RESPONSIVE
    ============================================ */
