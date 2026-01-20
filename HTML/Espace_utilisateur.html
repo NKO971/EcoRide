@@ -60,7 +60,7 @@
 
     <main>
         <!-- Profil utilisateur -->
-       <section class="infos-personnelles mb-5 p-4 border rounded shadow-sm">
+       <section class="infos-personnelles">
     <legend class="mb-4">Mes informations de profil</legend>
     <div class="profil row g-3">
         <div class="col-md-6">
@@ -142,7 +142,21 @@
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="modele">Modèle du véhicule</label>
-                        <input type="text" id="modele" name="modele" class="form-control" placeholder="Ex: Renault Clio" required>
+                        <input type="text" id="modele" name="modele" class="form-control" placeholder="Ex: Renault Clio 3" required>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="marque">Marque</label>
+                        <input type="text" id="marque" name="marque" class="form-control" placeholder="Ex: Renault" required>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="nb_places">Nombre de places</label>
+                        <input type="number" id="nb_places" name="nb_places" class="form-control" min="2" max="9" placeholder="Ex: 5" required>
                     </div>
                 </div>
 
@@ -182,11 +196,11 @@
                 </div>
 
                 <div class="col-12 text-center mt-3">
-                    <button type="submit" class="publier-btn">Enregistrer le véhicule</button>
+                    <button type="submit" class="enregistrer-btn">Enregistrer le véhicule</button>
                 </div>
             </div>
         </fieldset>
-        <button type="button" class="btn btn-outline-primary btn-sm mt-2">+ Ajouter un autre véhicule</button>
+        <button type="button" class="btn btn-outline-primary">+ Ajouter un autre véhicule</button>
     </section>
 <!-- Formulaire Trajet -->
     <section id="section_trajet" class="form-trajet">
@@ -255,6 +269,7 @@
                     <!-- Type du boutton submit pour envoyer les infos -->
                     <div class="text-center mt-4">
                         <button type="submit" class="publier-btn">Publier</button>
+                    </div>
                 </fieldset>
             </form>
                 </main>

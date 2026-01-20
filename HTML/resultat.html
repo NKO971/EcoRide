@@ -44,7 +44,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="navbarDropdown">
                                 <li class="dropdown-item-text text-center border-bottom pb-2 mb-2">
-                                    <span class="badge bg-success py-2 px-3">20 Crédits</span>
+                                    <span class="badge bg-success py-2 px-3"><span id="user-credits-header">20</span> Crédits</span>
                                 </li>
                                 <li><a class="dropdown-item" href="/HTML/Espace_utilisateur.html">Accéder au profil</a>
                                 </li>
@@ -354,7 +354,7 @@
                                     <span>2,5</span>
                                 </div>
                                 <div class="icon-thermique">
-                                    <span class="material-symbols-outlined">gas_meter</span>
+                                    <span class="material-symbols-outlined">directions_car</span>
                                     <small>Thermique</small>
                                 </div>
                                 <div class="icon-credit">
@@ -423,7 +423,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Travaille sur les avis a pofiner -->
+                            <!-- Travaille sur les avis -->
                             <button class="btn btn-outline-primary btn-sm mb-3" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapseAvis" aria-expanded="false">
                                 Voir les commentaires
@@ -454,19 +454,63 @@
                             <div class="badge-energie">Électrique</div>
                             <hr class="separation-modal">
                             <div class="d-flex justify-content-between align-items-center mt-3">
-                                <div class="places-restantes">Places : <strong>2</strong></div>
-                                <div class="prix-credits">5 Credits</div>
+                                <div class="places-restantes">Places : <strong id="modal-nb-place">2</strong></div>
+                                <div class="prix-credits"><span id="modal-prix-personne">5</span> Credits</div>
                             </div>
+                            <p class="prix-place">Prix pour une place !</p>
                         </div>
                     </div>
                 </div>
-
                 <div class="modal-footer border-0">
-                    <button class="btn-reservation-eco w-100">Demander la réservation</button>
+                    <button class="btn-reservation-eco"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalConfirmationPaiment"
+                    data-covoiturage-id="123">Participer au trajet</button>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Modal Confirmation Paiement -->
+     <div class="modal fade" id="modalConfirmationPaiment" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content modal-confirmation-eco">
+            <div class="modal-body text-center p-4">
+                <div class="icon-container-confirmation">
+                    <span class="material-symbols-outlined">account_balance_wallet</span>
+                </div>
+                <h5 class="modal-confirm-title">Confirmer la réservation ?</h5>
+                <p class="modal-confirm-text">
+                    Le montant de <span class="highlight-credit">5 crédits</span> sera prélevé de votre compte pour ce trajet.
+                </p>
+                <div class="d-grid gap-2 mt-4">
+                    <button type="button" class="btn btn-confirm-final">Confirmer et payer</button>
+                    <button type="button" class="btn btn-cancel-link" data-bs-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal de connexion requise -->
+ <div class="modal fade" id="modalConnexionRequise" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content modal-confirmation-eco">
+            <div class="modal-body text-center p-4">
+                <div class="icon-container-visitor">
+                    <span class="material-symbols-outlined">person_add</span>
+                </div>
+                <h5 class="modal-confirm-title">Connexion requise</h5>
+                <p class="modal-confirm-text">
+                    Vous devez être connecté pour réserver un trajet et utiliser vos crédits.
+                </p>
+                <div class="d-grid gap-2 mt-4">
+                    <a href="/HTML/Connexion.html" class="btn btn-primary-eco">Se connecter</a>
+                    <a href="/HTML/Inscription.html" class="btn btn-secondary-eco">S'inscrire</a>
+                    <button type="button" class="btn btn-cancel-link" data-bs-dismiss="modal">Plus tard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 
 </html>

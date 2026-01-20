@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoRide - Connexion-inscription</title>
+    <title>EcoRide - Connexion</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/mediaquerise_base.css">
@@ -63,16 +63,16 @@
             <div class="row gx-5 justify-content-evenly">
                 <div class="col-12 col-md-6 col-lg-5 formulaires_connexion">
                     <!-- Formulaire de connexion -->
-                    <form action="" method="post">
+                    <form id="connexion-form" method="post">
                         <fieldset class="fieldset-connexion">
                             <legend>Connexion</legend>
-                            <div class="connexion">
+                            <div class="connexion" id="email-div">
                                 <label for="email">Email</label>
                                 <input type="email" id="email" name="email" required>
                             </div>
-                            <div class="connexion">
-                                <label for="pass">Mot de passe</label>
-                                <input type="password" id="pass" required>
+                            <div class="connexion" id="password-div">
+                                <label for="password">Mot de passe</label>
+                                <input type="password" id="password" name="password" required>
                             </div>
                             <div class="connexion">
                                 <label class="checkbox">

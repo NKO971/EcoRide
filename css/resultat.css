@@ -52,7 +52,7 @@ h2 {
     color: var(--color-dark);
     font-weight: bold;
     text-align: center;
-    width: 60px; 
+    width: 3.75rem; /* 60px */
     border: 1px solid var(--color-primary); 
     border-radius: 5px;
 }
@@ -142,6 +142,14 @@ h2 {
     color: var(--color-primary);
 }
 
+.btn:hover {
+    background-color: var(--color-primary) !important;
+    color: var(--color-white) !important;
+    border-color: var(--color-secondary);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-medium);
+}
+
 /* ============================================
    5. MODALE DÉTAILS DU TRAJET
    ============================================ */
@@ -229,21 +237,32 @@ h2 {
     font-weight: 800;
     color: var(--color-primary);
 }
+.prix-place {
+    font-size: var(--font-size-small);
+    font-style: italic;
+    color: var(--color-dark);
+    margin-top: 0.25rem;
+}
 
 /* Bouton de réservation */
 .btn-reservation-eco {
+    width: 100%;
     background-color: var(--color-secondary);
     color: var(--color-primary);
     border: 0.125rem solid var(--color-primary);
     border-radius: var(--radius-medium);
-    padding: 0.9rem; /* ~15px */
+    padding: var(--spacing-sm);
     font-weight: bold;
     font-size: 1.1rem;
     transition: all 0.3s ease;
 }
 
 .btn-reservation-eco:hover {
-    background-color: var(--color-primary);
+    background-color: var(--color-primary) !important;
+    color: var(--color-white) !important;
+    border-color: var(--color-secondary);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-medium);
 }
 
 /* Bouton des avias dans le modal */
@@ -254,6 +273,114 @@ h2 {
     border-radius: var(--radius-medium);
     font-size: 1.1rem;
     transition: all 0.3s ease;
+}
+
+/* Modal Confirmation Paiement */
+/* Design de la modale de confirmation (US 6) */
+.modal-confirmation-eco {
+    border: none;
+    border-radius: var(--radius-medium); /* 1.5625rem */
+    box-shadow: var(--shadow-medium);
+    background-color: var(--color-white);
+}
+
+.icon-container-confirmation {
+    /* Utilisation de ton vert menthe avec une légère transparence */
+    background-color: rgba(145, 236, 184, 0.2); 
+    color: var(--color-dark); 
+    width: var(--spacing-xl);  /* 3rem */
+    height: var(--spacing-xl); /* 3rem */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 0 auto var(--spacing-sm);
+}
+
+.icon-container-confirmation .material-symbols-outlined {
+    font-size: var(--font-size-xlarge);
+}
+
+.modal-confirm-title {
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: var(--spacing-xs);
+    font-size: var(--font-size-normal);
+}
+
+.modal-confirm-text {
+    font-size: var(--font-size-small);
+    color: var(--color-light);
+}
+
+.highlight-credit {
+    font-weight: 800;
+    color: var(--color-dark);
+    background-color: var(--color-secondary);
+    padding: 0.1rem var(--spacing-xs);
+    border-radius: var(--radius-small);
+}
+
+/* Boutons de la modale */
+.btn-confirm-final {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    border-radius: var(--radius-small);
+    padding: var(--spacing-xs);
+    font-weight: 600;
+    font-size: var(--font-size-small);
+    transition: all 0.3s ease;
+}
+
+.btn-confirm-final:hover {
+    background-color: var(--color-primary) !important;
+    color: var(--color-white) !important;
+    border-color: var(--color-secondary);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-medium);
+}
+
+.btn-cancel-link {
+    color: var(--color-light);
+    font-size: var(--font-size-small);
+    text-decoration: none;
+    background: none;
+    border: none;
+    margin-top: var(--spacing-xs);
+}
+
+.btn-cancel-link:hover {
+    color: var(--color-primary); /* Bleu au survol pour annuler */
+}
+
+/* Modal connexion requise */
+.icon-container-visitor {
+    background-color: rgba(52, 152, 219, 0.1); /* Bleu primaire transparent */
+    color: var(--color-primary);
+    width: var(--spacing-xl);
+    height: var(--spacing-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 0 auto var(--spacing-sm);
+}
+
+.btn-primary-eco, .btn-secondary-eco {
+    background-color: var(--color-secondary);
+    border-radius: var(--radius-small);
+    padding: var(--spacing-xs);
+    font-weight: 600;
+    font-size: var(--font-size-small);
+    transition: all 0.3s ease;
+}
+
+.btn-primary-eco:hover, .btn-secondary-eco:hover {
+    background-color: var(--color-primary) !important;
+    color: var(--color-white) !important;
+    border-color: var(--color-secondary);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-medium);
 }
 
 /* ============================================

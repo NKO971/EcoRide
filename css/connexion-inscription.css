@@ -56,10 +56,10 @@ fieldset {
     gap: var(--spacing-xs);
 }
 
-/* Cible spécifiquement l'input email ou tous les inputs du formulaire */
+/* Cible spécifiquement l'input email */
 .connexion input[type="email"], 
 .inscription input[type="email"] {
-    font-size: var(--font-size-normal);
+    font-size: var(--font-size-small);
 }
 
 /* Labels */
@@ -77,7 +77,7 @@ select,
     border-radius: var(--radius-medium);
     border: 1px solid transparent; 
     outline: none;
-    font-size: var(--font-size-large);
+    font-size: var(--font-size-small);
     color: var(--color-primary);
     width: 100%; 
     padding: var(--spacing-xs); /* On garde le padding d'origine */
@@ -125,9 +125,11 @@ button:not(.navbar-toggler, .motDePasseOublie) {
 }
 
 button:hover {
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    transform: scale(1.02);
+    background-color: var(--color-primary) !important;
+    color: var(--color-white) !important;
+    border-color: var(--color-secondary);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-medium);
 }
 
 /* Espacement entre les éléments */
@@ -178,6 +180,11 @@ form > fieldset > div:last-child {
     
     legend {
         font-size: var(--font-size-large);
+    }
+
+    .image-voiture {
+        max-width: 80%;
+        margin-top: var(--spacing-lg);
     }
 }
 
