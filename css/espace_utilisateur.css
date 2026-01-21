@@ -14,6 +14,8 @@ legend {
     text-align: center;
 }
 
+
+
 label {
     font-size: var(--font-size-medium);
     color: var(--color-dark);
@@ -46,15 +48,24 @@ input:hover, .form-control:hover {
 
 /* Formulaire profil */
 .infos-personnelles {
-    margin: var(--spacing-xxl); /* Espace entre les sections */
+    margin: var(--spacing-xl); /* Espace entre les sections */
     padding: var(--spacing-xl);       /* Espace interne aéré */
+}
+
+/* Choix role */
+.choix-role {
+    background-color: var(--color-background);
+}
+
+.role-instruction, .roles {
+    margin-left: var(--spacing-lg); /* Espace entre le texte et les cartes */
 }
 
 /* Fieldset et Conteneurs */
 fieldset {
     border: 2px solid var(--color-primary);
     border-radius: var(--radius-medium);
-    filter: drop-shadow(var(--shadow-medium));
+    filter: (var(--shadow-medium));
     margin-bottom: var(--spacing-xl); /* Plus d'espace entre les blocs de formulaires */
     padding: var(--spacing-xl);      /* Très aéré : grand vide entre le cadre et le contenu */
     width: 100%;
@@ -67,6 +78,13 @@ fieldset {
 
 .form-check-label {
     color: var(--color-primary);
+}
+
+.commission {
+    font-size: var(--font-size-small);
+    color: var(--color-dark);
+    text-align: center;
+    margin-top: var(--spacing-sm);
 }
 
 /* --- Layout Côte à Côte (Chauffeur) --- */

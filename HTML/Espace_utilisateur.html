@@ -20,261 +20,290 @@
 
 <body>
 
-<header>
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/HTML/EcoRide_Accueil.html">
-                <img src="/Image/EcoRide.svg" alt="logo EcoRide" class="logo">
-            </a>
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/HTML/EcoRide_Accueil.html">
+                    <img src="/Image/EcoRide.svg" alt="logo EcoRide" class="logo">
+                </a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <div class="navbar-nav ms-auto align-items-center">
-                    <a class="nav-link" href="/HTML/EcoRide_Accueil.html">Accueil</a>
-                    <a class="nav-link" href="/HTML/resultat.html">Covoiturage</a>
-                    <a class="nav-link" href="/HTML/Connexion.html">Connexion</a>
-                    <a class="nav-link" href="/HTML/contact.html">Contact</a>
-                    <!-- Mon compte avec menu déroulant pour l'utilisateur connecté -->
-                    <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle btn-mon-compte" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Mon compte
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="navbarDropdown">
-                            <li class="dropdown-item-text text-center border-bottom pb-2 mb-2">
-                                <span class="badge bg-success py-2 px-3">20 Crédits</span>
-                            </li>
-                            <li><a class="dropdown-item" href="/HTML/Espace_utilisateur.html">Accéder au profil</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item text-danger" href="#">Déconnexion</a></li>
-                        </ul>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="navbar-nav ms-auto align-items-center">
+                        <a class="nav-link" href="/HTML/EcoRide_Accueil.html">Accueil</a>
+                        <a class="nav-link" href="/HTML/resultat.html">Covoiturage</a>
+                        <a class="nav-link" href="/HTML/Connexion.html">Connexion</a>
+                        <a class="nav-link" href="/HTML/contact.html">Contact</a>
+                        <!-- Mon compte avec menu déroulant pour l'utilisateur connecté -->
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle btn-mon-compte" href="#" id="navbarDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Mon compte
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="navbarDropdown">
+                                <li class="dropdown-item-text text-center border-bottom pb-2 mb-2">
+                                    <span class="badge bg-success py-2 px-3">20 Crédits</span>
+                                </li>
+                                <li><a class="dropdown-item" href="/HTML/Espace_utilisateur.html">Accéder au profil</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item text-danger" href="#">Déconnexion</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </nav>
-</header>
+        </nav>
+    </header>
 
     <main>
         <!-- Profil utilisateur -->
-       <section class="infos-personnelles">
-    <legend class="mb-4">Mes informations de profil</legend>
-    <div class="profil row g-3">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="telephone" class="form-label">Téléphone</label>
-                <input type="tel" class="form-control" id="telephone" name="telephone" placeholder="06 00 00 00 00">
-            </div>
-        </div>
-        
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="date_naissance" class="form-label">Date de naissance</label>
-                <input type="date" class="form-control" id="date_naissance" name="date_naissance">
-            </div>
-        </div>
-
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="adresse" class="form-label">Adresse complète</label>
-                <input type="text" class="form-control" id="adresse" name="adresse" placeholder="123 rue de l'Écologie, 31000 Toulouse">
-            </div>
-        </div>
-
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="photo" class="form-label">Photo de profil</label>
-                <input class="form-control" type="file" id="photo" name="photo">
-            </div>
-        </div>
-    </div>
-
-    <div class="actions-formulaire mt-5 text-center">
-        <button type="submit" class="btn-sauvegarde-profil">
-            Enregistrer mon profil
-        </button>
-    </div>
-</section>
-<!-- Fin du profil utilisateur -->
-
-<!-- Choix du rôle -->
-<section class="choix-role mb-5 p-4 border rounded shadow-sm">
-    <legend class="mb-3">Mon statut sur la plateforme</legend>
-    <p class="text-muted">Je choisis mon rôle sur EcoRide :</p>
-
-    <div class="roles d-flex gap-3">
-        <div class="form-check role-card">
-            <input class="form-check-input" type="radio" name="role_utilisateur" id="passager" value="passager" checked>
-            <label class="form-check-label" for="passager">
-                <strong>Passager</strong><br>
-                <small>Je cherche des trajets</small>
-            </label>
-        </div>
-
-        <div class="form-check role-card">
-            <input class="form-check-input" type="radio" name="role_utilisateur" id="chauffeur" value="chauffeur">
-            <label class="form-check-label" for="chauffeur">
-                <strong>Chauffeur</strong><br>
-                <small>Je propose mes services</small>
-            </label>
-        </div>
-
-        <div class="form-check role-card">
-            <input class="form-check-input" type="radio" name="role_utilisateur" id="les_deux" value="les_deux">
-            <label class="form-check-label" for="les_deux">
-                <strong>Les deux</strong><br>
-                <small>Je voyage et je conduis</small>
-            </label>
-        </div>
-    </div>
-</section>
-<!-- Fin du choix du rôle -->
-
-<div class="conteneur-chauffeur-flex">
-<!-- Formualire véhicule -->
-    <section id="section_vehicule">
-        <fieldset class="infos-vehicule">
-            <legend>Mon Véhicule</legend>
-            <div class="row g-3">
-                <div class="col-12 col-md-6">
+        <section class="infos-personnelles">
+            <legend>Mes informations de profil</legend>
+            <div class="profil row">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="modele">Modèle du véhicule</label>
-                        <input type="text" id="modele" name="modele" class="form-control" placeholder="Ex: Renault Clio 3" required>
+                        <label for="telephone">Téléphone</label>
+                        <input type="tel" id="telephone" name="telephone" placeholder="06 00 00 00 00">
                     </div>
                 </div>
 
-                <div class="col-12 col-md-6">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="marque">Marque</label>
-                        <input type="text" id="marque" name="marque" class="form-control" placeholder="Ex: Renault" required>
+                        <label for="date_naissance">Date de naissance</label>
+                        <input type="date" id="date_naissance" name="date_naissance">
                     </div>
                 </div>
 
-                <div class="col-12 col-md-6">
+                <div class="col-md-12">
                     <div class="form-group">
-                        <label for="nb_places">Nombre de places</label>
-                        <input type="number" id="nb_places" name="nb_places" class="form-control" min="2" max="9" placeholder="Ex: 5" required>
+                        <label for="adresse">Adresse complète</label>
+                        <input type="text" id="adresse" name="adresse"
+                            placeholder="123 rue de l'Écologie, 31000 Toulouse">
                     </div>
                 </div>
 
-                <div class="col-12 col-md-6">
+                <div class="col-md-12">
                     <div class="form-group">
-                        <label for="immatriculation">Immatriculation</label>
-                        <input type="text" id="immatriculation" name="immatriculation" class="form-control" placeholder="AA-123-BB" required>
+                        <label for="photo">Photo de profil</label>
+                        <input type="file" id="photo" name="photo">
                     </div>
-                </div>
-
-                <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        <label for="date_immat">1ère immatriculation</label>
-                        <input type="date" id="date_immat" name="date_immat" class="form-control" required>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        <label for="couleur">Couleur</label>
-                        <input type="text" id="couleur" name="couleur" class="form-control" placeholder="Ex: Gris Anthracite">
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <div class="form-group">
-                        <label for="energie">Type d'énergie</label>
-                        <select id="energie" name="energie" class="form-select">
-                            <option value="" selected disabled>Choisir l'énergie...</option>
-                            <option value="electrique">Électrique</option>
-                            <option value="essence">Essence</option>
-                            <option value="diesel">Diesel</option>
-                            <option value="hybride">Hybride</option>
-                            <option value="gpl">GPL</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-12 text-center mt-3">
-                    <button type="submit" class="enregistrer-btn">Enregistrer le véhicule</button>
                 </div>
             </div>
-        </fieldset>
-        <button type="button" class="btn btn-outline-primary">+ Ajouter un autre véhicule</button>
-    </section>
-<!-- Formulaire Trajet -->
-    <section id="section_trajet" class="form-trajet">
-        <div class="infos-trajet">
-            <form action="" method="post">
-                <fieldset>
-                    <legend>Publier un trajet</legend>
 
-                    <div class="form-group mb-3">
-                        <label for="lieu_depart" class="visually-hidden">Ville de départ</label>
-                        <input type="text" id="lieu_depart" name="lieu_depart" class="form-control" placeholder="Ville de départ" required>
-                    </div>
+            <div class="actions-formulaire">
+                <button type="submit" class="btn-sauvegarde-profil">
+                    Enregistrer mon profil
+                </button>
+            </div>
+        </section>
+        <!-- Fin du profil utilisateur -->
 
-                    <div class="form-group mb-3">
-                        <label for="lieu_arrivee" class="visually-hidden">Ville d'arrivée</label>
-                        <input type="text" id="lieu_arrivee" name="lieu_arrivee" class="form-control" placeholder="Ville d'arrivée" required>
-                    </div>
+        <!-- Choix du rôle -->
+        <section class="choix-role">
+            <legend>Mon statut sur la plateforme</legend>
+            <p class="role-instruction">Je choisis mon rôle sur EcoRide :</p>
 
-                    <div class="row g-2">
+            <div class="roles d-flex">
+                <div class="form-check role-card">
+                    <input class="form-check-input" type="radio" name="role_utilisateur" id="passager" value="passager"
+                        checked>
+                    <label class="form-check-label" for="passager">
+                        <strong>Passager</strong><br>
+                        <small>Je cherche des trajets</small>
+                    </label>
+                </div>
+
+                <div class="form-check role-card">
+                    <input class="form-check-input" type="radio" name="role_utilisateur" id="chauffeur"
+                        value="chauffeur">
+                    <label class="form-check-label" for="chauffeur">
+                        <strong>Chauffeur</strong><br>
+                        <small>Je propose mes services</small>
+                    </label>
+                </div>
+
+                <div class="form-check role-card">
+                    <input class="form-check-input" type="radio" name="role_utilisateur" id="les_deux" value="les_deux">
+                    <label class="form-check-label" for="les_deux">
+                        <strong>Les deux</strong><br>
+                        <small>Je voyage et je conduis</small>
+                    </label>
+                </div>
+            </div>
+        </section>
+        <!-- Fin du choix du rôle -->
+
+        <div class="conteneur-chauffeur-flex">
+            <!-- Formualire véhicule -->
+            <section id="section_vehicule">
+                <fieldset class="infos-vehicule">
+                    <legend>Mon Véhicule</legend>
+                    <div class="row">
                         <div class="col-12 col-md-6">
-                            <label for="date_depart">Date de départ</label>
-                            <input type="date" id="date_depart" name="date_depart" class="form-control" required>
+                            <div class="form-group">
+                                <label for="modele">Modèle du véhicule</label>
+                                <input type="text" id="modele" name="modele" placeholder="Ex: Renault Clio 3" required>
+                            </div>
                         </div>
+
                         <div class="col-12 col-md-6">
-                            <label for="heure_depart">Heure de départ</label>
-                            <input type="time" id="heure_depart" name="heure_depart" class="form-control" required>
+                            <div class="form-group">
+                                <label for="marque">Marque</label>
+                                <input type="text" id="marque" name="marque" placeholder="Ex: Renault" required>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="row g-2 mt-3">
                         <div class="col-12 col-md-6">
-                            <label for="date_arrivee">Date d'arrivée</label>
-                            <input type="date" id="date_arrivee" name="date_arrivee" class="form-control" required>
+                            <div class="form-group">
+                                <label for="nb_places">Nombre de places</label>
+                                <input type="number" id="nb_places" name="nb_places" min="2" max="9" placeholder="Ex: 5"
+                                    required>
+                            </div>
                         </div>
+
                         <div class="col-12 col-md-6">
-                            <label for="heure_arrivee">Heure d'arrivée</label>
-                            <input type="time" id="heure_arrivee" name="heure_arrivee" class="form-control" required>
+                            <div class="form-group">
+                                <label for="immatriculation">Immatriculation</label>
+                                <input type="text" id="immatriculation" name="immatriculation" placeholder="AA-123-BB"
+                                    required>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group mt-3">
-                        <label for="nb_place" class="visually-hidden">Nombre de places</label>
-                        <input type="number" id="nb_place" name="nb_place" class="form-control" min="1" max="6" placeholder="Nombre de places" required>
-                    </div>
-
-                    <div class="form-group mt-2">
-                        <label for="prix_personne" class="visually-hidden">Prix en crédits</label>
-                        <input type="number" id="prix_personne" name="prix_personne" class="form-control" step="0.01" placeholder="Prix en crédits" required>
-                    </div>
-
-                    <h4 class="mt-4">Mes Préférences</h4>
-                    <div class="d-flex gap-4 mt-2">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="accept_fumeur" name="pref_fumeur">
-                            <label class="form-check-label" for="accept_fumeur">
-                                Fumeur
-                            </label>
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label for="date_immat">1ère immatriculation</label>
+                                <input type="date" id="date_immat" name="date_immat" required>
+                            </div>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="accept_animaux" name="pref_animaux">
-                            <label class="form-check-label" for="accept_animaux">
-                                Animaux
-                            </label>
+
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label for="couleur">Couleur</label>
+                                <input type="text" id="couleur" name="couleur" placeholder="Ex: Gris Anthracite">
+                            </div>
                         </div>
-                    </div>
-                    <!-- Type du boutton submit pour envoyer les infos -->
-                    <div class="text-center mt-4">
-                        <button type="submit" class="publier-btn">Publier</button>
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="energie">Type d'énergie</label>
+                                <select id="energie" name="energie">
+                                    <option value="" selected disabled>Choisir l'énergie...</option>
+                                    <option value="electrique">Électrique</option>
+                                    <option value="essence">Essence</option>
+                                    <option value="diesel">Diesel</option>
+                                    <option value="hybride">Hybride</option>
+                                    <option value="gpl">GPL</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-12 container-btn-vehicule">
+                            <button type="submit" class="enregistrer-btn">Enregistrer le véhicule</button>
+                        </div>
                     </div>
                 </fieldset>
-            </form>
-                </main>
+                <button type="button" class="btn btn-outline-primary">+ Ajouter un autre véhicule</button>
+            </section>
+            <!-- Formulaire Trajet -->
+            <section id="section_trajet" class="form-trajet">
+                <div class="infos-trajet">
+                    <form action="" method="post">
+                        <fieldset>
+                            <legend>Publier un trajet</legend>
 
-      <footer>
+                            <div class="form-group">
+                                <label for="lieu_depart">Ville de départ</label>
+                                <input type="text" id="lieu_depart" name="lieu_depart" placeholder="Ville de départ"
+                                    required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lieu_arrivee">Ville d'arrivée</label>
+                                <input type="text" id="lieu_arrivee" name="lieu_arrivee" placeholder="Ville d'arrivée"
+                                    required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="choix_vehicule">Véhicule utilisé</label>
+                                <select id="choix_vehicule" name="id_vehicule" required>
+                                    <option value="" disabled selected>Choisir un véhicule...</option>
+                                    <option value="1">Ma Renault Clio (AA-123-BB)</option>
+                                </select>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="date_depart">Date de départ</label>
+                                        <input type="date" id="date_depart" name="date_depart" required>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="heure_depart">Heure de départ</label>
+                                        <input type="time" id="heure_depart" name="heure_depart" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="date_arrivee">Date d'arrivée</label>
+                                        <input type="date" id="date_arrivee" name="date_arrivee" required>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="heure_arrivee">Heure d'arrivée</label>
+                                        <input type="time" id="heure_arrivee" name="heure_arrivee" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nb_place">Nombre de places</label>
+                                <input type="number" id="nb_place" name="nb_place" min="1" max="6"
+                                    placeholder="Nombre de places" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="prix_personne">Prix en crédits</label>
+                                <input type="number" id="prix_personne" name="prix_personne" step="0.01"
+                                    placeholder="Prix en crédits" required>
+                                <p class="commission">EcoRide prélèvera 2 crédits de commission par passager.</p>
+                            </div>
+
+                            <h4>Mes Préférences</h4>
+                            <div class="preferences-container">
+                                <div class="preference-item">
+                                    <input type="checkbox" id="accept_fumeur" name="pref_fumeur">
+                                    <label for="accept_fumeur">Fumeur</label>
+                                </div>
+                                <div class="preference-item">
+                                    <input type="checkbox" id="accept_animaux" name="pref_animaux">
+                                    <label for="accept_animaux">Animaux</label>
+                                </div>
+                            </div>
+
+                            <div class="container-publier">
+                                <button type="submit" class="publier-btn">Publier</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
         <!-- Pied de page avec informations de contact -->
         <div class="container-fluid">
             <div class="row">
