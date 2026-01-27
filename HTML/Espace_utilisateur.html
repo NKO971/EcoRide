@@ -149,21 +149,21 @@
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="modele">Modèle du véhicule</label>
-                                <input type="text" id="modele" name="modele" placeholder="Ex: Renault Clio 3" required>
+                                <input type="text" id="modele" name="modele[]" placeholder="Ex: Renault Clio 3" required>
                             </div>
                         </div>
 
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="marque">Marque</label>
-                                <input type="text" id="marque" name="marque" placeholder="Ex: Renault" required>
+                                <input type="text" id="marque" name="marque[]" placeholder="Ex: Renault" required>
                             </div>
                         </div>
 
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="nb_places">Nombre de places</label>
-                                <input type="number" id="nb_places" name="nb_places" min="2" max="9" placeholder="Ex: 5"
+                                <input type="number" id="nb_places" name="nb_places[]" min="2" max="9" placeholder="Ex: 5"
                                     required>
                             </div>
                         </div>
@@ -171,7 +171,7 @@
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="immatriculation">Immatriculation</label>
-                                <input type="text" id="immatriculation" name="immatriculation" placeholder="AA-123-BB"
+                                <input type="text" id="immatriculation" name="immatriculation[]" placeholder="AA-123-BB"
                                     required>
                             </div>
                         </div>
@@ -179,21 +179,21 @@
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="date_immat">1ère immatriculation</label>
-                                <input type="date" id="date_immat" name="date_immat" required>
+                                <input type="date" id="date_immat" name="date_immat[]" required>
                             </div>
                         </div>
 
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="couleur">Couleur</label>
-                                <input type="text" id="couleur" name="couleur" placeholder="Ex: Gris Anthracite">
+                                <input type="text" id="couleur" name="couleur[]" placeholder="Ex: Gris Anthracite">
                             </div>
                         </div>
 
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="energie">Type d'énergie</label>
-                                <select id="energie" name="energie">
+                                <select id="energie" name="energie[]">
                                     <option value="" selected disabled>Choisir l'énergie...</option>
                                     <option value="electrique">Électrique</option>
                                     <option value="essence">Essence</option>
@@ -220,13 +220,13 @@
 
                             <div class="form-group">
                                 <label for="lieu_depart">Ville de départ</label>
-                                <input type="text" id="lieu_depart" name="lieu_depart" placeholder="Ville de départ"
+                                <input type="text" id="lieu_depart" name="lieu_depart" placeholder="Toulouse"
                                     required>
                             </div>
 
                             <div class="form-group">
                                 <label for="lieu_arrivee">Ville d'arrivée</label>
-                                <input type="text" id="lieu_arrivee" name="lieu_arrivee" placeholder="Ville d'arrivée"
+                                <input type="text" id="lieu_arrivee" name="lieu_arrivee" placeholder="Montpellier"
                                     required>
                             </div>
 
@@ -319,5 +319,5 @@
             </div>
         </div>
     </footer>
-
+<script src="/js/EspaceUtilisateur.js" type="module" defer></script>
 </body>

@@ -62,6 +62,11 @@ input:hover, .form-control:hover {
 }
 
 /* Fieldset et Conteneurs */
+.choix-role {
+    margin-bottom: var(--spacing-xl); 
+}
+
+
 fieldset {
     border: 2px solid var(--color-primary);
     border-radius: var(--radius-medium);
@@ -89,7 +94,7 @@ fieldset {
 
 /* --- Layout Côte à Côte (Chauffeur) --- */
 .conteneur-chauffeur-flex {
-    display: flex;
+    display: none; /* Caché par défaut, affiché en responsive */
     flex-wrap: wrap;
     justify-content: center;
     gap: var(--spacing-xl); /* Grand espace vide entre la colonne gauche et droite */
