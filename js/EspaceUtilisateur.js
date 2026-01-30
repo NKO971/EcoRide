@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sectionVehicule = document.getElementById('section_vehicule');
     let vehiculeCount = 1; // Compteur de véhicules
 
-    // Affichage des roles Chauffeur/PassagerradioRoles.forEach(radio => {
+    // Affichage des roles Chauffeur/Passager bouttons radio
  if (radioRoles.length > 0 && blocChauffeur) {
         radioRoles.forEach(radio => {
             radio.addEventListener('change', () => {
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Ecouteur de saisie (Calcul en temps réel)
     inputPrix.addEventListener('input', () => {
-        const prix = parseFloat(inputPrix.value);
+        const prix = parseInt(inputPrix.value); // parseInt pour obtenir un entier mieux que parseFloat qui donne des décimales
         const frais = 2;
 
         if (prix > frais) {
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Ecouteur de clic (Validation finale)
     publierBtn.addEventListener('click', (event) => {
         // Récupérer la valeur AU MOMENT du clic
-        const prixAuClic = parseFloat(inputPrix.value); 
+        const prixAuClic = parseInt(inputPrix.value); 
 
         if (!prixAuClic || prixAuClic <= 2) {
             event.preventDefault(); // Bloque l'envoi

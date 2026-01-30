@@ -149,7 +149,8 @@
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="modele">Modèle du véhicule</label>
-                                <input type="text" id="modele" name="modele[]" placeholder="Ex: Renault Clio 3" required>
+                                <input type="text" id="modele" name="modele[]" placeholder="Ex: Renault Clio 3"
+                                    required>
                             </div>
                         </div>
 
@@ -163,8 +164,8 @@
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="nb_places">Nombre de places</label>
-                                <input type="number" id="nb_places" name="nb_places[]" min="2" max="9" placeholder="Ex: 5"
-                                    required>
+                                <input type="number" id="nb_places" name="nb_places[]" min="2" max="9"
+                                    placeholder="Ex: 5" required>
                             </div>
                         </div>
 
@@ -220,8 +221,7 @@
 
                             <div class="form-group">
                                 <label for="lieu_depart">Ville de départ</label>
-                                <input type="text" id="lieu_depart" name="lieu_depart" placeholder="Toulouse"
-                                    required>
+                                <input type="text" id="lieu_depart" name="lieu_depart" placeholder="Toulouse" required>
                             </div>
 
                             <div class="form-group">
@@ -301,6 +301,85 @@
                 </div>
             </section>
         </div>
+        <!-- Historique des trajets -->
+<div class="historique">
+    <div class="card border-0 shadow-sm">
+        
+        <div class="card-header bg-white border-bottom-0 pt-3">
+            <ul class="nav nav-tabs card-header-tabs" id="historiqueTabs" role="tablist">
+                <li class="nav-item">
+                    <button class="nav-link active fw-bold" id="passager-tab" data-bs-toggle="tab" data-bs-target="#vue-passager" type="button">
+                        Mes Réservations
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link fw-bold" id="chauffeur-tab" data-bs-toggle="tab" data-bs-target="#vue-chauffeur" type="button">
+                        Mes Trajets Proposés
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="card-body p-0">
+            <div class="tab-content">
+                
+                <div class="tab-pane fade show active" id="vue-passager">
+                    
+                    <div class="px-4 py-3 bg-light d-flex gap-3 border-bottom">
+                        <span id="btn-avenir" style="cursor: pointer" class="small fw-bold text-uppercase text-primary" onclick="switchVue('avenir')">
+                            À venir
+                        </span>
+                        <span id="btn-passe" style="cursor: pointer" class="small fw-bold text-uppercase text-muted opacity-50" onclick="switchVue('passe')">
+                            Historique
+                        </span>
+                    </div>
+
+                    <div class="list-group list-group-flush">
+                        
+                        <div id="liste-avenir">
+                            <div class="list-group-item p-4 border-0 border-bottom trajet-hover">
+                                <div class="row align-items-center">
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-center mb-1">
+                                            <span class="h5 mb-0 fw-bold">Paris</span>
+                                            <i class="bi bi-arrow-right mx-2 text-muted"></i>
+                                            <span class="h5 mb-0 fw-bold">Lyon</span>
+                                        </div>
+                                        <div class="text-muted small">12 Mars • 08:30 • Chauffeur : <strong>Marc</strong></div>
+                                    </div>
+                                    <div class="col-md-3 text-md-center mt-3 mt-md-0">
+                                        <span class="badge rounded-pill bg-success-subtle text-success border border-success-subtle px-3 py-2">Confirmé</span>
+                                    </div>
+                                    <div class="col-md-3 text-md-end mt-3 mt-md-0">
+                                        <div class="fw-bold mb-1">15 Crédits</div>
+                                        <button class="btn btn-sm text-danger p-0 border-0 fw-bold">Annuler</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="liste-historique" style="display: none;">
+                            <div id="historique-vide" class="trajet-passé text-center">
+                                <i class="bi bi-clock-history d-block mb-3 h1 text-muted opacity-50"></i>
+                                <p class="text-muted fw-bold">Aucun trajet dans l'historique</p>
+                                <p class="small text-muted">Vos anciens voyages s'afficheront ici une fois terminés.</p>
+                            </div>
+                            
+                            </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="vue-chauffeur">
+                    <div class="p-5 text-center">
+                        <p class="text-muted fw-bold">Aucun trajet proposé pour le moment.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+        <!-- Fin de l'historique des trajets -->
     </main>
 
     <footer>
@@ -319,5 +398,5 @@
             </div>
         </div>
     </footer>
-<script src="/js/EspaceUtilisateur.js" type="module" defer></script>
+    <script src="/js/EspaceUtilisateur.js" type="module" defer></script>
 </body>

@@ -108,6 +108,78 @@ fieldset {
     min-width: 18rem;    
 }
 
+/* Historique des trajets */
+/* --- 1. Ajustements de la Carte --- */
+.historique .card {
+    border-radius: 12px; /* Arrondis un peu plus modernes */
+    overflow: hidden;    /* Empêche le contenu de dépasser */
+}
+
+/* --- 2. Les Onglets du haut (Passager / Chauffeur) --- */
+.historique .nav-tabs .nav-link {
+    border: none;
+    color: #6c757d;      /* Gris par défaut */
+    transition: 0.3s;
+}
+
+.historique .nav-tabs .nav-link:hover {
+    color: #0d6efd;      /* Bleu au survol */
+    background: transparent;
+}
+
+.historique .nav-tabs .nav-link.active {
+    color: #000;         /* Noir quand actif */
+    border-bottom: 2px solid #0d6efd; /* Petite ligne bleue en bas */
+    background: transparent;
+}
+
+/* --- 3. Filtres "À venir / Historique" --- */
+/* Rend les textes cliquables visuellement */
+#btn-avenir, #btn-passe {
+    transition: all 0.2s ease;
+    padding-bottom: 2px;
+}
+
+#btn-avenir:hover, #btn-passe:hover {
+    color: #0d6efd !important; /* Force le bleu au survol */
+    opacity: 1 !important;
+}
+
+/* Classe utilitaire pour changer le curseur */
+[onclick] {
+    cursor: pointer;
+}
+
+/* --- 4. Liste des Trajets --- */
+.trajet-hover {
+    transition: background-color 0.2s ease;
+}
+
+.trajet-hover:hover {
+    background-color: #f8f9fa; /* Gris très clair au survol de la ligne */
+}
+
+/* --- 5. Badge Confirmé (Fallback si Bootstrap 5.3 n'est pas chargé) --- */
+/* Si bg-success-subtle ne marche pas chez toi, ceci prendra le relais */
+.bg-success-subtle {
+    background-color: #d1e7dd !important;
+    color: #0f5132 !important;
+}
+.border-success-subtle {
+    border-color: #badbcc !important;
+}
+
+/* --- 6. Zone Historique Vide --- */
+#historique-vide {
+    padding: 3rem;
+}
+
+#historique-vide i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #dee2e6; /* Gris très pâle pour l'icône */
+}
+
 /* Boutons */
 button:not(.navbar-toggler, .btn-outline-primary), 
 .publier-btn, 
