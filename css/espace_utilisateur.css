@@ -113,6 +113,7 @@ fieldset {
 }
 
 /* Historique des trajets */
+
 /* Ajustements de la Carte */
 .historique .card {
     border-radius: var(--radius-medium);
@@ -197,13 +198,18 @@ button:not(.navbar-toggler, .btn-outline-primary),
 .btn-sauvegarde-profil:hover,
 .enregistrer-btn:hover,
 .publier-btn:hover,
-.btn-outline-primary:hover {
+.btn-outline-primary:hover
+.nav-link:hover {
     background-color: var(--color-primary) !important;
     color: var(--color-white) !important;
     border-color: var(--color-secondary);
     transform: scale(1.05);
     box-shadow: var(--shadow-medium);
 }     
+
+.nav-link {
+    color: var(--color-primary) !important;
+}
 
 .btn-annuler {
     text-decoration: underline !important;
