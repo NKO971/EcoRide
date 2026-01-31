@@ -30,6 +30,9 @@ header .navbar {
     /* Gris clair */
     --color-white: #ffffff;
     --color-background: #f9f9f9;
+    /* Fond général */
+    --color-danger: #e74c3c;
+    
 
     /* Espacements standardisés */
     --spacing-xs: 0.5rem;

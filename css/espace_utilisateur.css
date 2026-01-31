@@ -1,6 +1,10 @@
 /* ============================================
    STYLES CSS - Espace utilisateur
    ============================================ */
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
 main {
     width: 80%; /* On réduit un peu la largeur pour un meilleur confort de lecture */
     margin: 0 auto;
@@ -109,39 +113,44 @@ fieldset {
 }
 
 /* Historique des trajets */
-/* --- 1. Ajustements de la Carte --- */
+/* Ajustements de la Carte */
 .historique .card {
-    border-radius: 12px; /* Arrondis un peu plus modernes */
+    border-radius: var(--radius-medium);
     overflow: hidden;    /* Empêche le contenu de dépasser */
 }
 
-/* --- 2. Les Onglets du haut (Passager / Chauffeur) --- */
+.card {
+    border: none;       /* On enlève la bordure par défaut */
+    background-color: var(--color-white);
+}
+
+/* Les Onglets du haut (Passager / Chauffeur) */
 .historique .nav-tabs .nav-link {
     border: none;
-    color: #6c757d;      /* Gris par défaut */
+    color: var(--color-dark); 
     transition: 0.3s;
 }
 
 .historique .nav-tabs .nav-link:hover {
-    color: #0d6efd;      /* Bleu au survol */
+    color: var(--color-primary);      /* Bleu au survol */
     background: transparent;
 }
 
 .historique .nav-tabs .nav-link.active {
-    color: #000;         /* Noir quand actif */
-    border-bottom: 2px solid #0d6efd; /* Petite ligne bleue en bas */
+    color: var(--color-dark);         
+    border-bottom: 2px solid var(--color-primary); /* Petite ligne bleue en bas */
     background: transparent;
 }
 
-/* --- 3. Filtres "À venir / Historique" --- */
+
 /* Rend les textes cliquables visuellement */
 #btn-avenir, #btn-passe {
     transition: all 0.2s ease;
-    padding-bottom: 2px;
+    padding-bottom: var(--spacing-xs);
 }
 
 #btn-avenir:hover, #btn-passe:hover {
-    color: #0d6efd !important; /* Force le bleu au survol */
+    color: var(--color-primary) !important; /* Force le bleu au survol */
     opacity: 1 !important;
 }
 
@@ -150,34 +159,18 @@ fieldset {
     cursor: pointer;
 }
 
-/* --- 4. Liste des Trajets --- */
-.trajet-hover {
-    transition: background-color 0.2s ease;
-}
-
 .trajet-hover:hover {
-    background-color: #f8f9fa; /* Gris très clair au survol de la ligne */
+    background-color: var(--color-background);
 }
 
-/* --- 5. Badge Confirmé (Fallback si Bootstrap 5.3 n'est pas chargé) --- */
-/* Si bg-success-subtle ne marche pas chez toi, ceci prendra le relais */
-.bg-success-subtle {
-    background-color: #d1e7dd !important;
-    color: #0f5132 !important;
-}
-.border-success-subtle {
-    border-color: #badbcc !important;
-}
-
-/* --- 6. Zone Historique Vide --- */
 #historique-vide {
-    padding: 3rem;
+    padding: var(--spacing-xl);
 }
 
 #historique-vide i {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: #dee2e6; /* Gris très pâle pour l'icône */
+    color: var(--color-light); /* Gris très pâle pour l'icône */
 }
 
 /* Boutons */
@@ -212,18 +205,32 @@ button:not(.navbar-toggler, .btn-outline-primary),
     box-shadow: var(--shadow-medium);
 }     
 
+.btn-annuler {
+    text-decoration: underline !important;
+    background: none !important;
+    border: none !important;
+    color: var(--color-danger) !important;
+    font-size: var(--font-size-xlarge);
+    cursor: pointer;
+    padding: 0;
+}
+
+.btn-annuler:hover {
+    color: darken(var(--color-danger), 10%) !important;
+}
+
 /* ============================================
    RESPONSIVE
    ============================================ */
 
 @media (max-width: 991.98px) {
     fieldset {
-        padding: var(--spacing-md); /* On réduit un peu l'espace sur tablette */
+        padding: var(--spacing-md); /* Réduit un peu l'espace sur tablette */
     }
 }
 
 @media (max-width: 575.98px) {
-  /* 1. CENTRAGE DU CONTENEUR PRINCIPAL */
+  /* CENTRAGE DU CONTENEUR PRINCIPAL */
     main {
         width: 90% !important; /* On utilise 90% pour avoir un petit bord propre */
         margin-left: auto !important;
@@ -231,7 +238,7 @@ button:not(.navbar-toggler, .btn-outline-primary),
         display: block !important;
     }
 
-    /* 2. CENTRAGE DES SECTIONS (Infos, Rôles, etc.) */
+    /* CENTRAGE DES SECTIONS (Infos, Rôles, etc.) */
     .infos-personnelles, 
     .choix-role, 
     #section_vehicule, 
@@ -242,7 +249,7 @@ button:not(.navbar-toggler, .btn-outline-primary),
         padding: 1rem !important; /* 16px */
     }
 
-    /* 3. CENTRAGE DES CARTES DE RÔLE */
+    /* CENTRAGE DES CARTES DE RÔLE */
     .roles {
         flex-direction: column !important; /* On les empile en mobile */
         align-items: center !important;   /* On les centre horizontalement */
@@ -254,7 +261,7 @@ button:not(.navbar-toggler, .btn-outline-primary),
         max-width: 18.75rem; /* ~300px pour éviter qu'elles soient trop larges */
     }
 
-    /* 4. AJUSTEMENT DU FLEX CHAUFFEUR */
+    /* AJUSTEMENT DU FLEX CHAUFFEUR */
     .conteneur-chauffeur-flex {
         display: flex !important;
         flex-direction: column !important;
@@ -262,7 +269,7 @@ button:not(.navbar-toggler, .btn-outline-primary),
         width: 100% !important;
     }
 
-    /* 5. REGLAGE DES INPUTS ET BOUTONS */
+    /* REGLAGE DES INPUTS ET BOUTONS */
     .form-control, .form-select, .publier-btn {
         width: 100% !important;
     }

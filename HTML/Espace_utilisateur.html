@@ -302,10 +302,11 @@
             </section>
         </div>
         <!-- Historique des trajets -->
-<div class="historique">
-    <div class="card border-0 shadow-sm">
+<section class="historique">
+    <div class="card shadow-sm">
+        <legend>Mon historique de trajets</legend>
         
-        <div class="card-header bg-white border-bottom-0 pt-3">
+        <div class="card-header border-bottom-0 pt-3">
             <ul class="nav nav-tabs card-header-tabs" id="historiqueTabs" role="tablist">
                 <li class="nav-item">
                     <button class="nav-link active fw-bold" id="passager-tab" data-bs-toggle="tab" data-bs-target="#vue-passager" type="button">
@@ -324,7 +325,6 @@
             <div class="tab-content">
                 
                 <div class="tab-pane fade show active" id="vue-passager">
-                    
                     <div class="px-4 py-3 bg-light d-flex gap-3 border-bottom">
                         <span id="btn-avenir" style="cursor: pointer" class="small fw-bold text-uppercase text-primary" onclick="switchVue('avenir')">
                             À venir
@@ -335,7 +335,6 @@
                     </div>
 
                     <div class="list-group list-group-flush">
-                        
                         <div id="liste-avenir">
                             <div class="list-group-item p-4 border-0 border-bottom trajet-hover">
                                 <div class="row align-items-center">
@@ -351,34 +350,57 @@
                                         <span class="badge rounded-pill bg-success-subtle text-success border border-success-subtle px-3 py-2">Confirmé</span>
                                     </div>
                                     <div class="col-md-3 text-md-end mt-3 mt-md-0">
-                                        <div class="fw-bold mb-1">15 Crédits</div>
-                                        <button class="btn btn-sm text-danger p-0 border-0 fw-bold">Annuler</button>
+                                        <div class="fw-bold mb-1">10 Crédits</div>
+                                        <button class="btn-annuler">Annuler !</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div id="liste-historique" style="display: none;">
-                            <div id="historique-vide" class="trajet-passé text-center">
+                            <div id="historique-vide" class="trajet-passé text-center p-5">
                                 <i class="bi bi-clock-history d-block mb-3 h1 text-muted opacity-50"></i>
                                 <p class="text-muted fw-bold">Aucun trajet dans l'historique</p>
                                 <p class="small text-muted">Vos anciens voyages s'afficheront ici une fois terminés.</p>
                             </div>
-                            
-                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="tab-pane fade" id="vue-chauffeur">
-                    <div class="p-5 text-center">
-                        <p class="text-muted fw-bold">Aucun trajet proposé pour le moment.</p>
+                    <div class="px-4 py-3 bg-light d-flex gap-3 border-bottom">
+                        <span id="btn-avenir-c" style="cursor: pointer" class="small fw-bold text-uppercase text-primary" onclick="switchVueChauffeur('avenir')">
+                            À venir
+                        </span>
+                        <span id="btn-passe-c" style="cursor: pointer" class="small fw-bold text-uppercase text-muted opacity-50" onclick="switchVueChauffeur('passe')">
+                            Historique
+                        </span>
+                    </div>
+
+                    <div class="list-group list-group-flush">
+                        <div id="liste-avenir-c">
+                            <div class="p-5 text-center">
+                                <i class="bi bi-plus-circle d-block mb-3 h1 text-muted opacity-50"></i>
+                                <p class="text-muted fw-bold">Vous n'avez aucun trajet proposé à venir.</p>
+                               <a href="#section_trajet" class="btn btn-sm btn-outline-primary mt-2 fw-bold">
+            <i class="bi bi-pencil-square me-1"></i> Publier un trajet
+        </a>
+                            </div>
+                        </div>
+
+                        <div id="liste-historique-c" style="display: none;">
+                            <div class="p-5 text-center text-muted">
+                                <i class="bi bi-archive d-block mb-3 h1 opacity-50"></i>
+                                <p class="fw-bold">Pas d'historique de conducteur.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
             </div>
         </div>
     </div>
-</div>
+</section>
         <!-- Fin de l'historique des trajets -->
     </main>
 
