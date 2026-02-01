@@ -113,6 +113,11 @@ document.addEventListener('DOMContentLoaded', () => {
             input.style.border = "";
         });
 
+        const labels = nouveauFormVehicule.querySelectorAll('label');
+        labels.forEach(label => {
+            label.removeAttribute('for'); // Supprime l'attribut 'for' dupliqué
+        });
+
         // Insérer le clone avant le bouton
         formOriginal.parentNode.insertBefore(nouveauFormVehicule, btnAjouterVehicule);
 
