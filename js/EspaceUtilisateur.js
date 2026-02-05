@@ -14,8 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const sectionVehicule = document.getElementById('section_vehicule');
     let vehiculeCount = 1; // Compteur de véhicules
 
-    // Sélection des éléments de l'historique des trajets
-    
+    // Sélection des éléments de l'historique des trajets pour les changement en fonction du clique sur les boutons à venir ou historique
+    const tabAvenir = document.getElementById('tab-avenir');
+    const tabHistorique = document.getElementById('tab-historique');
+
 
     // Affichage en fonction des roles Chauffeur/Passager bouttons radio
     function affichageEnFonctionDesRoles(valeurRole) {
@@ -109,18 +111,51 @@ document.addEventListener('DOMContentLoaded', () => {
         if (premierInput) premierInput.focus();
     });
 
-    // Gestion de l'affichage de l'historique des trajets et des trajets à venir
-    function switchVue(cible) {
-        // Définition du suffixe -b
-        let suffixe = (role === 'chauffeur') ? '-b' : '';
-          // Sélection des boutons à venir et de passé
-    const btnAVenir = document.getElementById('btn-avenir' + suffixe);
-    const btnHistorique = document.getElementById('btn-passe' + suffixe);
-    const btnAVenirB = document.getElementById('btn-avenir-b' + suffixe);
-    const btnPasseB = document.getElementById('btn-passe-b' + suffixe);
-
-    // Sélection des éléments de la listeà venir et de l'historique
-    
+    // Sélection des éléments de la liste à venir et de l'historique et changement de style.
+    function updateTabStyles(activeTab, inactiveTab) {
+        // On s'assure que Bootstrap ne met pas de background bleu
+        activeTab.style.backgroundColor = "transparent";
+        inactiveTab.style.backgroundColor = "transparent";
+        // Styles pour l'onglet actif
+        activeTab.classList.add('text-primary');
+        activeTab.classList.remove('text-muted', 'opacity-50');
+        // Styles pour l'onglet inactif
+        inactiveTab.classList.add('text-muted', 'opacity-50');
+        inactiveTab.classList.remove('text-primary');
     }
 
+    // Ecoute du clic sur "À venir"
+    tabAvenir.addEventListener('click', () => {
+        updateTabStyles(tabAvenir, tabHistorique);
+    });
+    // Ecoute du clic sur "Historique"
+    tabHistorique.addEventListener('click', () => {
+        updateTabStyles(tabHistorique, tabAvenir);
+    });
+
+    // Annulation d'un trajet
+    window.annulerTrajet = function(bouton, role) {
+        if (confirm("Confirmer l'annulation ?")) {
+            const trajet = bouton.closest('.list-group-item');
+            
+            // On prépare l'animation
+            trajet.style.transition = "all 0.5s ease";
+            trajet.style.transform = "translateX(100px)"; // Glisse à droite
+            trajet.style.opacity = "0";
+
+            // On attend la fin de l'animation pour supprimer
+            setTimeout(() => {
+                trajet.remove();
+                
+                // On vérifie si c'est vide pour mettre la phrase
+                const liste = document.getElementById('liste-avenir');
+                if (liste && liste.querySelectorAll('.list-group-item').length === 0) {
+                    liste.innerHTML = `
+                        <div class="text-center p-5">
+                            <p class="text-muted fw-bold">Vous n'avez plus aucun trajet à venir.</p>
+                        </div>`;
+                }
+            }, 500);
+        }
+    };
 });

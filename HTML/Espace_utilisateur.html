@@ -308,22 +308,22 @@
             <div class="px-4 py-3 bg-light border-bottom">
                 <ul class="nav nav-pills gap-3" id="historique-tab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active small fw-bold text-uppercase border-0 bg-transparent p-0" 
-                                id="tab-avenir" 
-                                data-bs-toggle="pill" 
-                                data-bs-target="#liste-avenir" 
-                                type="button" role="tab">
-                            À venir
-                        </button>
+                    <button class="nav-link active small fw-bold text-uppercase border-0 p-0 bg-transparent text-primary" 
+        id="tab-avenir" 
+        data-bs-toggle="pill" 
+        data-bs-target="#liste-avenir" 
+        type="button" role="tab">
+    À venir
+</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link text-muted opacity-50 small fw-bold text-uppercase border-0 bg-transparent p-0" 
-                                id="tab-historique" 
-                                data-bs-toggle="pill" 
-                                data-bs-target="#liste-historique" 
-                                type="button" role="tab">
-                            Historique
-                        </button>
+                   <button class="nav-link small fw-bold text-uppercase border-0 p-0 bg-transparent text-muted opacity-50" 
+        id="tab-historique" 
+        data-bs-toggle="pill" 
+        data-bs-target="#liste-historique" 
+        type="button" role="tab">
+    Historique
+</button>
                     </li>
                 </ul>
             </div>
@@ -351,7 +351,7 @@
                                 </div>
                                 <div class="col-md-3 text-md-end">
                                     <div class="fw-bold mb-1">10 Crédits</div>
-                                    <button class="btn btn-sm btn-outline-danger">Annuler réservation</button>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="annulerTrajet(this, 'passager')">Annuler réservation</button>
                                 </div>
                             </div>
                         </div>
@@ -373,7 +373,7 @@
                                     <span class="badge rounded-pill bg-warning-subtle text-warning border border-warning-subtle px-3 py-2">En cours</span>
                                 </div>
                                 <div class="col-md-3 text-md-end">
-                                    <button class="btn btn-sm btn-danger">Annuler le trajet</button>
+                                    <button class="btn btn-sm btn-danger" onclick="annulerTrajet(this, 'chauffeur')">Annuler le trajet</button>
                                 </div>
                             </div>
                         </div>
@@ -410,5 +410,5 @@
             </div>
         </div>
     </footer>
-    <script src="/js/EspaceUtilisateur.js" type="module" defer></script>
+    <script src="../js/EspaceUtilisateur.js" type="module" defer></script>
 </body>

@@ -211,20 +211,6 @@ button:not(.navbar-toggler, .btn-outline-primary),
     color: var(--color-primary) !important;
 }
 
-.btn-annuler {
-    text-decoration: underline !important;
-    background: none !important;
-    border: none !important;
-    color: var(--color-danger) !important;
-    font-size: var(--font-size-xlarge);
-    cursor: pointer;
-    padding: 0;
-}
-
-.btn-annuler:hover {
-    color: darken(var(--color-danger), 10%) !important;
-}
-
 /* ============================================
    RESPONSIVE
    ============================================ */
