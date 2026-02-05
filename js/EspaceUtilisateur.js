@@ -15,11 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let vehiculeCount = 1; // Compteur de véhicules
 
     // Sélection des éléments de l'historique des trajets
-    const historiqueTrajets = document.getElementById('li-passager');
-    const historiqueProposes = document.getElementById('li-chauffeur');
-    // Bouton pour activer l'onglet
-    const btnChauffeur = document.getElementById('chauffeur-tab');
-    const btnPassager = document.getElementById('passager-tab');
+    
 
     // Affichage en fonction des roles Chauffeur/Passager bouttons radio
     function affichageEnFonctionDesRoles(valeurRole) {
@@ -28,20 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             blocChauffeur.style.display = 'none';
         }
-        // Gestion de l'affichage des onglets d'historique
-        if (valeurRole === 'passager') {
-            btnPassager.click(); // Active l'onglet Passager par défaut
-            historiqueTrajets.style.display = 'block';
-            historiqueProposes.style.display = 'none';
-        } else if (valeurRole === 'chauffeur') {
-            btnChauffeur.click(); // Active l'onglet Chauffeur par défaut
-            historiqueTrajets.style.display = 'none';
-            historiqueProposes.style.display = 'block';
-        } else if (valeurRole === 'les_deux') {
-            historiqueTrajets.style.display = 'block';
-            historiqueProposes.style.display = 'block';
-        } 
-    }
+    } // Penser a modifier la fonction avec switch case pour que le code soit plus propre et plus lisible
 
     // Initialisation de l'affichage selon le rôle sélectionné au chargement
     const roleSelectionne = document.querySelector('input[name="role_utilisateur"]:checked');
@@ -125,5 +108,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const premierInput = nouveauFormVehicule.querySelector('input');
         if (premierInput) premierInput.focus();
     });
+
+    // Gestion de l'affichage de l'historique des trajets et des trajets à venir
+    function switchVue(cible) {
+        // Définition du suffixe -b
+        let suffixe = (role === 'chauffeur') ? '-b' : '';
+          // Sélection des boutons à venir et de passé
+    const btnAVenir = document.getElementById('btn-avenir' + suffixe);
+    const btnHistorique = document.getElementById('btn-passe' + suffixe);
+    const btnAVenirB = document.getElementById('btn-avenir-b' + suffixe);
+    const btnPasseB = document.getElementById('btn-passe-b' + suffixe);
+
+    // Sélection des éléments de la listeà venir et de l'historique
+    
+    }
 
 });

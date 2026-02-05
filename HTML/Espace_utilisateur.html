@@ -304,96 +304,86 @@
         <!-- Historique des trajets -->
 <section class="historique">
     <div class="card shadow-sm">
-        <legend>Mon historique de trajets</legend>
-        
-        <div class="card-header border-bottom-0 pt-3">
-            <ul class="nav nav-tabs card-header-tabs" id="historiqueTabs" role="tablist">
-                <li class="nav-item" id="li-passager">
-                    <button class="nav-link active fw-bold" id="passager-tab" data-bs-toggle="tab" data-bs-target="#vue-passager" type="button">
-                        Mes Réservations
-                    </button>
-                </li>
-                <li class="nav-item" id="li-chauffeur">
-                    <button class="nav-link fw-bold" id="chauffeur-tab" data-bs-toggle="tab" data-bs-target="#vue-chauffeur" type="button">
-                        Mes Trajets Proposés
-                    </button>
-                </li>
-            </ul>
-        </div>
-
         <div class="card-body p-0">
-            <div class="tab-content">
-                
-                <div class="tab-pane fade show active" id="vue-passager">
-                    <div class="px-4 py-3 bg-light d-flex gap-3 border-bottom">
-                        <span id="btn-avenir" style="cursor: pointer" class="small fw-bold text-uppercase text-primary" onclick="switchVue('avenir')">
+            <div class="px-4 py-3 bg-light border-bottom">
+                <ul class="nav nav-pills gap-3" id="historique-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active small fw-bold text-uppercase border-0 bg-transparent p-0" 
+                                id="tab-avenir" 
+                                data-bs-toggle="pill" 
+                                data-bs-target="#liste-avenir" 
+                                type="button" role="tab">
                             À venir
-                        </span>
-                        <span id="btn-passe" style="cursor: pointer" class="small fw-bold text-uppercase text-muted opacity-50" onclick="switchVue('passe')">
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link text-muted opacity-50 small fw-bold text-uppercase border-0 bg-transparent p-0" 
+                                id="tab-historique" 
+                                data-bs-toggle="pill" 
+                                data-bs-target="#liste-historique" 
+                                type="button" role="tab">
                             Historique
-                        </span>
-                    </div>
+                        </button>
+                    </li>
+                </ul>
+            </div>
 
+            <div class="tab-content" id="historique-tabContent">
+                
+                <div class="tab-pane fade show active" id="liste-avenir" role="tabpanel">
                     <div class="list-group list-group-flush">
-                        <div id="liste-avenir">
-                            <div class="list-group-item p-4 border-0 border-bottom trajet-hover">
-                                <div class="row align-items-center">
-                                    <div class="col-md-6">
-                                        <div class="d-flex align-items-center mb-1">
-                                            <span class="h5 mb-0 fw-bold">Paris</span>
-                                            <i class="bi bi-arrow-right mx-2 text-muted"></i>
-                                            <span class="h5 mb-0 fw-bold">Lyon</span>
-                                        </div>
-                                        <div class="text-muted small">12 Mars • 08:30 • Chauffeur : <strong>Marc</strong></div>
+                        
+                        <div class="list-group-item p-4 border-0 border-bottom trajet-hover">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <div class="mb-2">
+                                        <span class="badge bg-info-subtle text-info border border-info-subtle small">Passager</span>
                                     </div>
-                                    <div class="col-md-3 text-md-center mt-3 mt-md-0">
-                                        <span class="badge rounded-pill bg-success-subtle text-success border border-success-subtle px-3 py-2">Confirmé</span>
+                                    <div class="d-flex align-items-center mb-1">
+                                        <span class="h5 mb-0 fw-bold">Paris</span>
+                                        <i class="bi bi-arrow-right mx-2 text-muted"></i>
+                                        <span class="h5 mb-0 fw-bold">Lyon</span>
                                     </div>
-                                    <div class="col-md-3 text-md-end mt-3 mt-md-0">
-                                        <div class="fw-bold mb-1">10 Crédits</div>
-                                        <button class="btn-annuler">Annuler !</button>
-                                    </div>
+                                    <div class="text-muted small">12 Mars • 08:30 • Chauffeur : <strong>Marc</strong></div>
+                                </div>
+                                <div class="col-md-3 text-md-center">
+                                    <span class="badge rounded-pill bg-success-subtle text-success border border-success-subtle px-3 py-2">Confirmé</span>
+                                </div>
+                                <div class="col-md-3 text-md-end">
+                                    <div class="fw-bold mb-1">10 Crédits</div>
+                                    <button class="btn btn-sm btn-outline-danger">Annuler réservation</button>
                                 </div>
                             </div>
                         </div>
 
-                        <div id="liste-historique" style="display: none;">
-                            <div id="historique-vide" class="trajet-passé text-center p-5">
-                                <i class="bi bi-clock-history d-block mb-3 h1 text-muted opacity-50"></i>
-                                <p class="text-muted fw-bold">Aucun trajet dans l'historique</p>
-                                <p class="small text-muted">Vos anciens voyages s'afficheront ici une fois terminés.</p>
+                        <div class="list-group-item p-4 border-0 border-bottom trajet-hover">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <div class="mb-2">
+                                        <span class="badge bg-primary-subtle text-primary border border-primary-subtle small">Conducteur</span>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-1">
+                                        <span class="h5 mb-0 fw-bold">Toulouse</span>
+                                        <i class="bi bi-arrow-right mx-2 text-muted"></i>
+                                        <span class="h5 mb-0 fw-bold">Bordeaux</span>
+                                    </div>
+                                    <div class="text-muted small">15 Mars • 10:00 • <strong>3 places restantes</strong></div>
+                                </div>
+                                <div class="col-md-3 text-md-center">
+                                    <span class="badge rounded-pill bg-warning-subtle text-warning border border-warning-subtle px-3 py-2">En cours</span>
+                                </div>
+                                <div class="col-md-3 text-md-end">
+                                    <button class="btn btn-sm btn-danger">Annuler le trajet</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="tab-pane fade" id="vue-chauffeur">
-                    <div class="px-4 py-3 bg-light d-flex gap-3 border-bottom">
-                        <span id="btn-avenir-c" style="cursor: pointer" class="small fw-bold text-uppercase text-primary" onclick="switchVueChauffeur('avenir')">
-                            À venir
-                        </span>
-                        <span id="btn-passe-c" style="cursor: pointer" class="small fw-bold text-uppercase text-muted opacity-50" onclick="switchVueChauffeur('passe')">
-                            Historique
-                        </span>
-                    </div>
-
-                    <div class="list-group list-group-flush">
-                        <div id="liste-avenir-c">
-                            <div class="p-5 text-center">
-                                <i class="bi bi-plus-circle d-block mb-3 h1 text-muted opacity-50"></i>
-                                <p class="text-muted fw-bold">Vous n'avez aucun trajet proposé à venir.</p>
-                               <a href="#section_trajet" class="btn btn-sm btn-outline-primary mt-2 fw-bold">
-            <i class="bi bi-pencil-square me-1"></i> Publier un trajet
-        </a>
-                            </div>
-                        </div>
-
-                        <div id="liste-historique-c" style="display: none;">
-                            <div class="p-5 text-center text-muted">
-                                <i class="bi bi-archive d-block mb-3 h1 opacity-50"></i>
-                                <p class="fw-bold">Pas d'historique de conducteur.</p>
-                            </div>
-                        </div>
+                <div class="tab-pane fade" id="liste-historique" role="tabpanel">
+                    <div class="text-center p-5">
+                        <i class="bi bi-clock-history d-block mb-3 h1 text-muted opacity-50"></i>
+                        <p class="text-muted fw-bold">Aucun trajet passé</p>
                     </div>
                 </div>
 
