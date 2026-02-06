@@ -21,12 +21,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Affichage en fonction des roles Chauffeur/Passager bouttons radio
     function affichageEnFonctionDesRoles(valeurRole) {
-        if (valeurRole === 'les_deux' || valeurRole === 'chauffeur') {
-            blocChauffeur.style.display = 'flex';
-        } else {
-            blocChauffeur.style.display = 'none';
+        switch (valeurRole) {
+            case 'chauffeur':
+            case 'les_deux': // on groupe les cas qui font la même chose !
+                blocChauffeur.style.display = 'flex';
+                break;
+            case 'passager':
+                blocChauffeur.style.display = 'none';
+                break;
         }
-    } // Penser a modifier la fonction avec switch case pour que le code soit plus propre et plus lisible
+    }
 
     // Initialisation de l'affichage selon le rôle sélectionné au chargement
     const roleSelectionne = document.querySelector('input[name="role_utilisateur"]:checked');
@@ -134,28 +138,46 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Annulation d'un trajet
-    window.annulerTrajet = function(bouton, role) {
-        if (confirm("Confirmer l'annulation ?")) {
-            const trajet = bouton.closest('.list-group-item');
-            
-            // On prépare l'animation
-            trajet.style.transition = "all 0.5s ease";
-            trajet.style.transform = "translateX(100px)"; // Glisse à droite
-            trajet.style.opacity = "0";
+    window.annulerTrajet = function (bouton, role) {
+        if (!confirm("Confirmer l'annulation ?")) return; // Si l'utilisateur confirme, on sort de la fonction pour laisser le processus d'annulation se faire normalement
 
-            // On attend la fin de l'animation pour supprimer
-            setTimeout(() => {
-                trajet.remove();
-                
-                // On vérifie si c'est vide pour mettre la phrase
-                const liste = document.getElementById('liste-avenir');
-                if (liste && liste.querySelectorAll('.list-group-item').length === 0) {
-                    liste.innerHTML = `
+        switch (role) {
+            case 'chauffeur':
+                // ANTICIPATION BACK-END : Cette partie sera remplacée par un appel API (fetch)
+                // Le serveur devra supprimer le trajet et déclencher l'envoi de mails automatique aux passagers concernés.
+                console.log("LOGIQUE CHAUFFEUR : Suppression trajet + Alerte mail passagers.");
+                break;
+
+            case 'passager':
+                // ANTICIPATION BACK-END : Le serveur devra recréditer le passager par un appel API (fetch)?
+                // et incrémenter le nombre de places disponibles sur le trajet concerné 
+                console.log("LOGIQUE PASSAGER : Libération place + Remboursement.");
+                break;
+
+            default:
+                console.warn("Rôle inconnu, annulation visuelle uniquement.");
+        }
+        // Suppression visuelle du trajet
+        const trajet = bouton.closest('.list-group-item');
+        if (!trajet) return; // Si on ne trouve pas le trajet, on arrête
+
+        // Ajout d'une classe pour l'animation de disparition
+        trajet.style.transition = "all 0.5s ease";
+        trajet.style.transform = "translateX(100px)";
+        trajet.style.opacity = "0";
+
+        // On attend la fin de l'animation pour supprimer
+        setTimeout(() => {
+            trajet.remove();
+
+            // On vérifie si c'est vide pour mettre la phrase
+            const liste = document.getElementById('liste-avenir');
+            if (liste && liste.querySelectorAll('.list-group-item').length === 0) {
+                liste.innerHTML = `
                         <div class="text-center p-5">
                             <p class="text-muted fw-bold">Vous n'avez plus aucun trajet à venir.</p>
                         </div>`;
-                }
-            }, 500);
-        }
-    };
+            }
+        }, 500);
+    }
 });
