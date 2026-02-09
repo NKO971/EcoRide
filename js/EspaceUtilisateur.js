@@ -1,5 +1,8 @@
 // Attendre que le DOM soit complètement chargé
 document.addEventListener('DOMContentLoaded', () => {
+
+    // --- SÉLECTION DES ÉLÉMENTS DU DOM ---
+
     // Sélection des bouton radio pour le choix du rôle
     const radioRoles = document.querySelectorAll('input[name="role_utilisateur"]');
     const blocChauffeur = document.querySelector('.conteneur-chauffeur-flex');
@@ -32,6 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // --- LOGIQUE D'AFFICHAGE EN FONCTION DES ROLES ---
+
     // Initialisation de l'affichage selon le rôle sélectionné au chargement
     const roleSelectionne = document.querySelector('input[name="role_utilisateur"]:checked');
     if (roleSelectionne) {
@@ -45,6 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // --- LOGIQUE DE CALCUL DE LA COMMISSION ---
 
     // Ecouteur de saisie (Calcul en temps réel)
     const frais = 2;
@@ -69,7 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const prixSaisi = parseInt(inputPrix.value) || 0;
         calculCommission(prixSaisi);
     });
-
     // Ecouteur de clic (Validation finale)
     publierBtn.addEventListener('click', (event) => {
         const prixFinal = parseInt(inputPrix.value) || 0;
@@ -79,6 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
             inputPrix.style.border = "2px solid red";
         }
     });
+
+    // --- LOGIQUE D'AJOUT DE FORMULAIRE VÉHICULE ---
 
     // Ajout d'un nouveau formulaire pour ajouter un véhicule 
     btnAjouterVehicule.addEventListener('click', () => {
@@ -115,6 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (premierInput) premierInput.focus();
     });
 
+    //--- LOGIQUE DE GESTION DES TRAJETS À VENIR ET HISTORIQUE ---
+
     // Sélection des éléments de la liste à venir et de l'historique et changement de style.
     function updateTabStyles(activeTab, inactiveTab) {
         // On s'assure que Bootstrap ne met pas de background bleu
@@ -136,6 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
     tabHistorique.addEventListener('click', () => {
         updateTabStyles(tabHistorique, tabAvenir);
     });
+
+    //--- LOGIQUE D'ANNULATION DE TRAJET ---
 
     // Annulation d'un trajet
     window.annulerTrajet = function (bouton, role) {
@@ -181,3 +193,67 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
     }
 });
+
+//--- LOGIQUE DE GESTION DU WORKFLOW DE TRAJET ---
+
+// Fonction pour gérer le workflow du trajet (Démarrer, Terminer)
+window.gererWorkflow = function (bouton) {
+    const etatActuel = bouton.getAttribute('data-etat');
+
+    switch (etatActuel) {
+        case 'initial':
+            // Sélection du bouton d'annulation dans la même zone d'action que le bouton workflow
+            const zoneActions = bouton.closest('.zone-actions-');
+            const boutonAnnuler = zoneActions ? zoneActions.querySelector('.btn-annuler-chauffeur') : null;
+            if (boutonAnnuler) {
+                boutonAnnuler.remove(); // Supprime le bouton d'annulation
+            };
+            bouton.textContent = "Arriveée à destination";
+            // ANTICIPATION BACK-END : Appel API pour changer l'état du trajet à "en-cours"
+            bouton.setAttribute('data-etat', 'en-cours');
+
+            // On désactive le bouton de supression du trajet pour éviter les annulations une fois le trajet démarré
+            const boutonSupprimer = document.querySelector('.btn-annuler-passager');
+            if (boutonSupprimer) {
+                boutonSupprimer.remove(); // Supprime le bouton de suppression pour les passagers
+            }
+
+            bouton.classList.remove("btn-primary"); // Retrait du style d'annulation
+            bouton.classList.add("btn-warning"); // Changement de style pour indiquer que c'est en cours
+            console.log("LOGIQUE CHAUFFEUR : Trajet démarré, état changé en 'en-cours'.");
+            break;
+        case 'en-cours':
+            bouton.textContent = "Trajet terminé - En attente de validation";
+            
+            // On affiche le bouton de validation pour le passager après que le chauffeur ait terminé le trajet
+            const boutonPassager = document.querySelector('.btn-valider-trajet');
+            if (boutonPassager) {
+                boutonPassager.disabled = false; // On lève le verrouillage du bouton de validation pour le passager
+            }
+
+            // ANTICIPATION BACK-END : Appel API pour changer l'état du trajet à "terminé"
+            bouton.setAttribute('data-etat', 'termine');
+            // On désactive le bouton pour éviter les clics multiples
+            bouton.disabled = true;
+
+            bouton.classList.remove("btn-warning");
+            bouton.classList.add("btn-success"); // Changement de style pour indiquer que c'est terminé
+            console.log("LOGIQUE CHAUFFEUR : Trajet en cours, état changé en 'terminé'.");
+            break;
+    }
+}
+
+//--- LOGIQUE DE VALIDATION DE TRAJET PAR LE PASSAGER ---
+
+// Fonction pour que le passager puisse valider le trajet une fois terminé
+window.validerTrajet = function (bouton) {
+    if (!confirm("Confirmer la validation du trajet ?")) return; // Si l'utilisateur confirme, on sort de la fonction pour laisser le processus de validation se faire normalement
+    bouton.textContent = "Trajet validé";
+    bouton.disabled = true; // On désactive le bouton pour éviter les clics multiples
+
+    bouton.classList.remove("btn-success");
+    bouton.classList.add("btn-secondary"); // Changement de style pour indiquer que c'est validé
+
+    // ANTICIPATION BACK-END : Appel API pour valider le trajet, créditer le chauffeurs et déclencher l'envoi de mails automatique au chauffeur.
+    console.log("LOGIQUE PASSAGER : Validation du trajet, crédit du passager, alerte mail chauffeur.");
+}

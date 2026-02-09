@@ -351,7 +351,11 @@
                                 </div>
                                 <div class="col-md-3 text-md-end">
                                     <div class="fw-bold mb-1">10 Crédits</div>
-                                    <button class="btn btn-sm btn-outline-danger" onclick="annulerTrajet(this, 'passager')">Annuler réservation</button>
+                                    <div class="zone-actions-passager">
+                                    <button class=" btn btn-sm btn-outline-danger btn-annuler-passager" onclick="annulerTrajet(this, 'passager')">Annuler réservation</button>
+
+                                    <button class="btn btn-sm btn-success btn-valider-trajet" onclick="validerTrajet(this)" disabled>Valider le trajet</button>
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -372,8 +376,10 @@
                                 <div class="col-md-3 text-md-center">
                                     <span class="badge rounded-pill bg-warning-subtle text-warning border border-warning-subtle px-3 py-2">En cours</span>
                                 </div>
-                                <div class="col-md-3 text-md-end">
-                                    <button class="btn btn-sm btn-danger" onclick="annulerTrajet(this, 'chauffeur')">Annuler le trajet</button>
+                                <div class="col-md-3 text-md-end zone-actions-">
+                                    <button class="btn btn-sm btn-danger btn-annuler-chauffeur" onclick="annulerTrajet(this, 'chauffeur')">Annuler le trajet</button>
+
+                                    <button class="btn btn-sm btn-primary btn-workflow" data-etat="initial" onclick="gererWorkflow(this)">Démarrer le trajet</button>
                                 </div>
                             </div>
                         </div>
