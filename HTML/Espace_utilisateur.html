@@ -416,5 +416,57 @@
             </div>
         </div>
     </footer>
+
+    <!-- Modal de validation du trajet par le passager -->
+
+    <div class="modal fade" id="modalAvis" tabindex="-1" aria-labelledby="modalAvisLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title" id="modalAvisLabel">Validation du trajet</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <p class="text-muted small">Votre confirmation permet de libérer les crédits pour le chauffeur.</p>
+                
+                <form id="formAvis">
+                    <div class="mb-3">
+                        <label for="noteChauffeur" class="form-label fw-bold">Notez votre expérience :</label>
+                        <select class="form-select" id="noteChauffeur">
+                            <option value="5">⭐⭐⭐⭐⭐ - Excellent</option>
+                            <option value="4">⭐⭐⭐⭐ - Très bien</option>
+                            <option value="3" selected>⭐⭐⭐ - Moyen</option>
+                            <option value="2">⭐⭐ - Décevant</option>
+                            <option value="1">⭐ - Mauvais</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="commentaireAvis" class="form-label fw-bold">Votre avis :</label>
+                        <textarea class="form-control" id="commentaireAvis" rows="3" placeholder="Comment s'est déroulé le trajet ?"></textarea>
+                        <div class="form-text text-info">
+                            <i class="bi bi-info-circle"></i> Cet avis sera modéré par nos équipes.
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer d-flex justify-content-between">
+                <button type="button" class="btn btn-outline-danger btn-sm" onclick="signalerProbleme()">
+                    Signaler un problème
+                </button>
+                
+                <div>
+                    <button type="button" class="btn btn-success btn-sm" onclick="envoyerAvis()">
+                        Confirmer et Envoyer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
     <script src="../js/EspaceUtilisateur.js" type="module" defer></script>
+
 </body>

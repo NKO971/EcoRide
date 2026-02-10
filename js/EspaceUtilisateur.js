@@ -252,8 +252,47 @@ window.validerTrajet = function (bouton) {
     bouton.disabled = true; // On désactive le bouton pour éviter les clics multiples
 
     bouton.classList.remove("btn-success");
-    bouton.classList.add("btn-secondary"); // Changement de style pour indiquer que c'est validé
+    bouton.classList.add("btn-warning"); // Changement de style pour indiquer que c'est en cours de validation
+
+    //On garde le bouton en mémoire pour la suite du processus de validation
+    window.boutonEnCoursDeValidation = bouton;
+
+    // Affichage de la modale pour laisser un avis au chauffeur
+    const modalElement = document.getElementById('modalAvis');
+    const instanceModale = new bootstrap.Modal(modalElement);
+    instanceModale.show();
 
     // ANTICIPATION BACK-END : Appel API pour valider le trajet, créditer le chauffeurs et déclencher l'envoi de mails automatique au chauffeur.
     console.log("LOGIQUE PASSAGER : Validation du trajet, crédit du passager, alerte mail chauffeur.");
+}
+
+//--- LOGIQUE DE GESTION DE L'AVIS PASSAGER ---
+
+// Fonction pour gérer la validation de l'avis du passager
+// --- LOGIQUE DE VALIDATION FINALE (DANS LA MODALE) ---
+
+window.envoyerAvis = function() {
+    // On récupère les éléments
+    const note = document.getElementById('noteChauffeur').value;
+    const commentaire = document.getElementById('commentaireAvis').value;
+    const modalElement = document.getElementById('modalAvis');
+
+    // ANTICIPATION BACK-END : Envoi des données vers l'API
+    console.log("DONNÉES ENVOYÉES : Note " + note + "/5, Avis : " + commentaire);
+    // Ici on imagine l'appel fetch('/api/valider-trajet', { method: 'POST', body: ... })
+
+    // On utilise la variable globale qu'on a créée dans validerTrajet
+    if (window.boutonEnCoursDeValidation) {
+        window.boutonEnCoursDeValidation.textContent = "Trajet validé";
+        window.boutonEnCoursDeValidation.classList.remove("btn-warning");
+        window.boutonEnCoursDeValidation.classList.add("btn-secondary");
+        window.boutonEnCoursDeValidation.disabled = true; // Sécurité supplémentaire
+    }
+
+    // FERMETURE DE LA MODALE
+    const instanceModale = bootstrap.Modal.getInstance(modalElement);
+    instanceModale.hide();
+
+    // FEEDBACK UTILISATEUR
+    alert("Merci ! Votre trajet est validé et les crédits ont été transférés au chauffeur.");
 }

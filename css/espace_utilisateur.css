@@ -175,7 +175,7 @@ fieldset {
 }
 
 /* Boutons */
-button:not(.navbar-toggler, .btn-outline-primary), 
+button:not(.navbar-toggler, .btn-outline-primary, .btn-close), 
 .publier-btn, 
 .btn-sauvegarde-profil {
     display: block;
