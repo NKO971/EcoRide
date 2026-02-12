@@ -1,0 +1,107 @@
+/* ============================================
+Espace Employé - Styles CSS
+============================================ */
+
+/* ============================================
+   STYLE SPÉCIFIQUE - ESPACE EMPLOYÉ
+   ============================================ */
+
+/* --- SECTION PROFIL --- */
+.avatar-wrapper {
+    position: relative;
+    width: 4rem; /* Taille relative (environ 64px) */
+    height: 4rem;
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%; 
+    border: 0.2rem solid var(--color-primary); /* Ton bleu variable */
+}
+
+.status-indicator {
+    position: absolute;
+    bottom: 0.1rem;
+    right: 0.1rem;
+    width: 0.9rem;
+    height: 0.9rem;
+    background-color: #27ae60; /* Vert actif */
+    border: 0.125rem solid var(--color-white);
+    border-radius: 50%;
+}
+
+/* --- CARTES ET TABLEAUX --- */
+.card {
+    border: none;
+    border-radius: var(--radius-medium); 
+    box-shadow: var(--shadow-small); 
+    overflow: hidden;
+    background-color: var(--color-white);
+    margin-bottom: var(--spacing-lg);
+}
+
+.table thead th {
+    background-color: var(--color-background);
+    color: var(--color-light); 
+    font-size: var(--font-size-small);
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    padding: var(--spacing-sm);
+    /* Utilisation de ton vert secondaire pour souligner les titres */
+    border-bottom: 0.15rem solid var(--color-secondary); 
+}
+
+/* Effet de survol sur les lignes (Confort de lecture) */
+.table-hover tbody tr:hover {
+    /* On utilise ton bleu primary très transparent pour le survol */
+    background-color: rgba(52, 152, 219, 0.08) !important;
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* --- ÉLÉMENTS DE TEXTE --- */
+.text-muted-small {
+    color: var(--color-light);
+    font-size: var(--font-size-small);
+    display: block;
+    margin-top: var(--spacing-xs);
+}
+
+/* Ajustement des boutons pour respecter tes arrondis */
+.btn-sm {
+    border-radius: var(--radius-small);
+    padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+/* ============================================
+   RESPONSIVE - GESTION DU CHEVAUCHEMENT NAVBAR
+   ============================================ */
+
+@media (max-width: 992px) {
+    
+    /* On réduit l'espace et la taille du texte à côté du logo */
+    .navbar-brand span {
+        font-size: var(--font-size-small);
+        margin-left: var(--spacing-xs) !important;
+        padding-left: var(--spacing-xs) !important;
+        /* On limite la largeur pour éviter qu'il ne pousse trop vers le burger */
+        max-width: 120px; 
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; /* Ajoute "..." si c'est vraiment trop long */
+        vertical-align: middle;
+    }
+
+    /* Optionnel : Réduire un peu la taille du logo sur mobile pour gagner de la place */
+    .navbar-brand img {
+        height: 2rem !important;
+    }
+}
+
+@media (max-width: 400px) {
+    .navbar-brand span {
+        display: none; /* Ici, on le cache car il n'y a physiquement plus de place */
+    }
+}

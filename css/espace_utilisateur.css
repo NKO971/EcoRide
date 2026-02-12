@@ -18,8 +18,6 @@ legend {
     text-align: center;
 }
 
-
-
 label {
     font-size: var(--font-size-medium);
     color: var(--color-dark);
@@ -125,6 +123,12 @@ fieldset {
     background-color: var(--color-white);
 }
 
+/* Styles pour les lieux dans l'historique des trajets */
+.lieux {
+    font-size: var(--font-size-large);
+    color: var(--color-primary);
+}
+
 /* Les Onglets du haut (Passager / Chauffeur) */
 .historique .nav-tabs .nav-link {
     border: none;
@@ -206,10 +210,6 @@ button:not(.navbar-toggler, .btn-outline-primary, .btn-close),
     transform: scale(1.05);
     box-shadow: var(--shadow-medium);
 }     
-
-.nav-link {
-    color: var(--color-primary) !important;
-}
 
 /* ============================================
    RESPONSIVE
