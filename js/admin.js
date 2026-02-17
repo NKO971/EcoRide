@@ -1,16 +1,20 @@
 // Attendre que le DOM soit complètement chargé
 document.addEventListener('DOMContentLoaded', () => {
-    // On simule ce que la DB nous enverrait plus tard
+// Cible des élément du DOM pour les statistiques
+const totalCredits = document.getElementById('total-credits');
+// Cible du canvas pour le graphique
+const graphiqueRecettes = document.getElementById('chart-credits').getContext('2d');
+// Cible du canvas pour le graphique des trajets
+const graphiqueTrajets = document.getElementById('chart-trajets').getContext('2d');
+
+    // On simule ce que la DB nous enverrait plus tar
 const listeUtilisateurs = [
     { id: 1, pseudo: "EcoAdmin", role: "admin", statut: "actif" },
     { id: 2, pseudo: "Christelle", role: "employe", statut: "actif" },
     { id: 3, pseudo: "EmployeDuMois", role: "employe", statut: "suspendu" }
 ];
 
-// Cible des élément du DOM pour les statistiques
-const totalCredits = document.getElementById('total-credits');
-
-// Ont simule un tableau de recettes pour les statistiques
+// On simule un tableau de recettes pour les statistiques
 const donneesRecettes = [
     { date: "10/02", total: 150 },
     { date: "11/02", total: 230 },
@@ -18,6 +22,15 @@ const donneesRecettes = [
     { date: "13/02", total: 450 }, // Grosse journée !
     { date: "14/02", total: 310 }
 ];
+
+// On simule le tableau pour les statistiques des trajets
+const donneesTrajets = [
+    { date: "10/02", total: 20 },
+    { date: "11/02", total: 35 },
+    { date: "12/02", total: 28 },
+    { date: "13/02", total: 50 }, // Grosse journée !
+    { date: "14/02", total: 40 }
+]
 
 // Fonction pour afficher les utilisateurs dans le tableau
 function afficherUtilisateurs() {
@@ -66,15 +79,43 @@ function modifierStatut(id) {
         afficherUtilisateurs();
     };
 }
-// Appeler la fonction pour afficher les utilisateurs au chargement de la page
-afficherUtilisateurs();
 
 // Fonction pour calculer le total des recettes
 function calculerTotalRecettes() {
     // Parcourir le tableau de données des recettes et additionner les totaux
-    const total = donneesRecettes.reduce((accumulateur, element) => accumulateur + element.total, 0);
+    const total = donneesRecettes.reduce((accumulateur, element) => accumulateur + element.total, 0); // Je transfore tableau en une seule valeur (le total) en additionnant les totaux de chaque élément du tableau avec  l'outil de précision reduce()
     totalCredits.textContent = total;
     
-};
+}
 
+// GRAPHIQUE DES REVENUS
+// Fonction pour tous les graphiques du site
+function creerGraphique(ctx, donneesSource, labelLegende, couleur) {
+    
+    // Extraction des labels et des valeurs à partir des données source
+    const labels = donneesSource.map(item => item.date);
+    const valeurs = donneesSource.map(item => item.total);
+
+    // On retourne l'objet Chart créé avec les données et les options de configuration
+    return new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: labelLegende,
+                data: valeurs,
+                borderColor: couleur,
+                tension: 0.1
+            }]
+        }
+    });
+}
+
+// Appel des fonctions
+afficherUtilisateurs();
+calculerTotalRecettes();
+// Appel de la fonction de création de graphique pour les recettes
+creerGraphique(graphiqueRecettes, donneesRecettes, "Revenus en crédits", "rgb(75, 192, 192)");
+// Appel de la fonction de création de graphique pour les trajets
+creerGraphique(graphiqueTrajets, donneesTrajets, "Nombre de trajets", "rgb(255, 99, 132)");
 });
