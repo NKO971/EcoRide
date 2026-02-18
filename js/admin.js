@@ -8,6 +8,12 @@ const graphiqueRecettes = document.getElementById('chart-credits').getContext('2
 const graphiqueTrajets = document.getElementById('chart-trajets').getContext('2d');
 // Cible du champ de recherche pour les utilisateurs
 const champRecherche = document.getElementById('search-user');
+// Cible du formulaire de création d'utilisateur
+const formCreationEmploye = document.getElementById('form-creation-employe');
+const inputNom = document.getElementById('emp-nom');
+const inputEmail = document.getElementById('emp-email');
+const inputPassword = document.getElementById('emp-password');
+
 
     // On simule ce que la DB nous enverrait plus tar
 const listeUtilisateurs = [
@@ -33,6 +39,37 @@ const donneesTrajets = [
     { date: "13/02", total: 50 }, // Grosse journée !
     { date: "14/02", total: 40 }
 ]
+
+// Fonction pour calculer le total des recettes
+function calculerTotalRecettes() {
+    // Parcourir le tableau de données des recettes et additionner les totaux
+    const total = donneesRecettes.reduce((accumulateur, element) => accumulateur + element.total, 0); // Je transfore tableau en une seule valeur (le total) en additionnant les totaux de chaque élément du tableau avec  l'outil de précision reduce()
+    totalCredits.textContent = total;
+    
+}
+
+// GRAPHIQUE DES REVENUS
+// Fonction pour tous les graphiques du site
+function creerGraphique(ctx, donneesSource, labelLegende, couleur) {
+    
+    // Extraction des labels et des valeurs à partir des données source
+    const labels = donneesSource.map(item => item.date);
+    const valeurs = donneesSource.map(item => item.total);
+
+    // On retourne l'objet Chart créé avec les données et les options de configuration
+    return new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: labelLegende,
+                data: valeurs,
+                borderColor: couleur,
+                tension: 0.1
+            }]
+        }
+    });
+}
 
 // Fonction pour afficher les utilisateurs dans le tableau
 function afficherUtilisateurs(listeAAfficher = listeUtilisateurs) {
@@ -91,36 +128,23 @@ function modifierStatut(id) {
     };
 }
 
-// Fonction pour calculer le total des recettes
-function calculerTotalRecettes() {
-    // Parcourir le tableau de données des recettes et additionner les totaux
-    const total = donneesRecettes.reduce((accumulateur, element) => accumulateur + element.total, 0); // Je transfore tableau en une seule valeur (le total) en additionnant les totaux de chaque élément du tableau avec  l'outil de précision reduce()
-    totalCredits.textContent = total;
-    
-}
+// Ecoute de l'événement de soumission du formulaire de création d'employé
+formCreationEmploye.addEventListener('submit', (event) => {
+    event.preventDefault(); // Empêcher le comportement par défaut du formulaire (rechargement de la page)
 
-// GRAPHIQUE DES REVENUS
-// Fonction pour tous les graphiques du site
-function creerGraphique(ctx, donneesSource, labelLegende, couleur) {
-    
-    // Extraction des labels et des valeurs à partir des données source
-    const labels = donneesSource.map(item => item.date);
-    const valeurs = donneesSource.map(item => item.total);
+    // fabrication de l'objet employé à partir des valeurs saisies dans le formulaire
+    const nouvelEmploye = {
+        id: listeUtilisateurs.length + 1, // Générer un ID unique (simplement en prenant la longueur actuelle de la liste + 1)
+        pseudo: inputNom.value,
+        role: "employe",
+        statut: "actif"
+    };
 
-    // On retourne l'objet Chart créé avec les données et les options de configuration
-    return new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: labelLegende,
-                data: valeurs,
-                borderColor: couleur,
-                tension: 0.1
-            }]
-        }
-    });
-}
+    listeUtilisateurs.push(nouvelEmploye);
+    afficherUtilisateurs();// Mise à jour de l'affichage des utilisateurs après l'ajout du nouvel employé
+    formCreationEmploye.reset(); // Réinitialiser le formulaire après la soumission
+    console.log("Création d'un nouvel employé :");
+});
 
 // Appel des fonctions
 afficherUtilisateurs();
