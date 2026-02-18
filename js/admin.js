@@ -6,6 +6,8 @@ const totalCredits = document.getElementById('total-credits');
 const graphiqueRecettes = document.getElementById('chart-credits').getContext('2d');
 // Cible du canvas pour le graphique des trajets
 const graphiqueTrajets = document.getElementById('chart-trajets').getContext('2d');
+// Cible du champ de recherche pour les utilisateurs
+const champRecherche = document.getElementById('search-user');
 
     // On simule ce que la DB nous enverrait plus tar
 const listeUtilisateurs = [
@@ -33,11 +35,11 @@ const donneesTrajets = [
 ]
 
 // Fonction pour afficher les utilisateurs dans le tableau
-function afficherUtilisateurs() {
+function afficherUtilisateurs(listeAAfficher = listeUtilisateurs) {
     const tbody = document.getElementById('liste-utilisateurs');
     tbody.innerHTML = ''; // Vider le tableau avant de le remplir
     
-    listeUtilisateurs.forEach(element => {
+    listeAAfficher.forEach(element => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
         <td>${element.pseudo}</td>
@@ -56,6 +58,7 @@ function afficherUtilisateurs() {
         </td>
     `;
     tbody.appendChild(tr);
+
     const boutonCree = tr.querySelector('.btn-statut');
     boutonCree.addEventListener('click', () => {
         // Récupérer l'ID de l'utilisateur à partir de l'attribut data-id
@@ -65,7 +68,15 @@ function afficherUtilisateurs() {
     });
 })
 }
-afficherUtilisateurs();
+// Travaille sur le champ de recherche pour filtrer les utilisateurs en temps réel
+// Ecoute de l'événement de saisie dans le champ de recherche
+champRecherche.addEventListener('input', () => {
+    const rechercheUtilisateur = champRecherche.value.toLowerCase(); // Récupérer la valeur saisie et la convertir en minuscules pour une recherche insensible à la casse
+    const utilisateursFiltres = listeUtilisateurs.filter(user => user.pseudo.toLowerCase().includes(rechercheUtilisateur)); // Filtrer la liste des utilisateurs en fonction de la recherche
+
+    afficherUtilisateurs(utilisateursFiltres); // Appel de la fonction en lui passant la liste filtrée pour mettre à jour l'affichage des utilisateurs dans le tableau
+});
+
 
 // Fonction pour modifier le statut d'un utilisateur
 function modifierStatut(id) {
