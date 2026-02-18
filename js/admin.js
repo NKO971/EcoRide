@@ -16,7 +16,7 @@ const inputPassword = document.getElementById('emp-password');
 
 
     // On simule ce que la DB nous enverrait plus tar
-const listeUtilisateurs = [
+let listeUtilisateurs = [
     { id: 1, pseudo: "EcoAdmin", role: "admin", statut: "actif" },
     { id: 2, pseudo: "Christelle", role: "employe", statut: "actif" },
     { id: 3, pseudo: "EmployeDuMois", role: "employe", statut: "suspendu" }
@@ -91,7 +91,7 @@ function afficherUtilisateurs(listeAAfficher = listeUtilisateurs) {
                 `<button class="btn btn-outline-warning btn-sm btn-statut" data-id="${element.id}">Suspendre</button>` :
                 `<button class="btn btn-outline-success btn-sm btn-statut" data-id="${element.id}">Activer</button>`
             }
-            <button class="btn btn-outline-danger btn-sm ms-2">Supprimer</button>
+            <button class="btn btn-outline-danger btn-sm ms-2 btn-delete" data-id="${element.id}">Supprimer</button>
         </td>
     `;
     tbody.appendChild(tr);
@@ -103,7 +103,20 @@ function afficherUtilisateurs(listeAAfficher = listeUtilisateurs) {
         // Passer l'attribut a la fonction de modification de statut
         modifierStatut(idAmodifier);
     });
-})
+    const boutonSupprimer = tr.querySelector('.btn-delete');
+    boutonSupprimer.addEventListener('click', () => {
+        const idASupprimer = parseInt(boutonSupprimer.getAttribute('data-id'));
+        // Supprimer l'utilisateur de la liste en filtrant la liste pour exclure l'utilisateur avec l'ID spécifié
+        const indexASupprimer = listeUtilisateurs.findIndex(user => user.id === idASupprimer);
+        if (indexASupprimer !== -1) {
+            const confirmation = confirm(`Êtes-vous sûr de vouloir supprimer l'utilisateur ${listeUtilisateurs[indexASupprimer].pseudo} ?`); // Afficher une alerte de confirmation avant de supprimer l'utilisateur
+            if (confirmation) {
+                listeUtilisateurs = listeUtilisateurs.filter(user => user.id !== idASupprimer); // Supprimer l'utilisateur de la liste
+                afficherUtilisateurs(); // Mettre à jour l'affichage des utilisateurs après la suppression
+            }
+        }
+    });
+});
 }
 // Travaille sur le champ de recherche pour filtrer les utilisateurs en temps réel
 // Ecoute de l'événement de saisie dans le champ de recherche
