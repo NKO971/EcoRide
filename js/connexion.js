@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const listeUtilisateurs = [
+    const listeusers = [
     { email: "admin@ecoride.fr", password: "123", role: "admin", pseudo: "SuperAdmin" },
     { email: "employe@ecoride.fr", password: "456", role: "employe", pseudo: "Jean_Modo" },
-    { email: "client@mail.com", password: "789", role: "utilisateur", pseudo: "EcoRider31" }
+    { email: "client@mail.com", password: "789", role: "user", pseudo: "EcoRider31" }
 ];
     
     // CIBLE LES ELEMENTS DU DOM
@@ -18,24 +18,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = passwordInput.value;
     
        // VERIFICATION DES INFORMATIONS DE CONNEXION
-        const utilisateur = listeUtilisateurs.find(user => user.email === email && user.password === password);
-        
-        if (utilisateur) {
-            localStorage.setItem('utilisateur', JSON.stringify(utilisateur));
+        const user = listeusers.find(user => user.email === email && user.password === password);
+        // Local Storage
+        if (user) {
+            localStorage.setItem('user', JSON.stringify(user));
 
-
-        switch (utilisateur?.role) {
+        switch (user?.role) {
             case 'admin':
-                alert(`Bienvenue ${utilisateur.pseudo} ! Vous êtes connecté en tant qu'administrateur.`);
+                alert(`Bienvenue ${user.pseudo} ! Vous êtes connecté en tant qu'administrateur.`);
                 window.location.href = "/HTML/admin.html";
                 break;
             case 'employe':
-                alert(`Bienvenue ${utilisateur.pseudo} ! Vous êtes connecté en tant qu'employé.`);
-                window.location.href = "/HTML/employe.html";
+                alert(`Bienvenue ${user.pseudo} ! Vous êtes connecté en tant qu'employé.`);
+                window.location.href = "/HTML/espace-employe.html";
                 break;
             default:
-                alert(`Bienvenue ${utilisateur.pseudo} ! Vous êtes connecté en tant qu'utilisateur.`);
-                window.location.href = "/HTML/utilisateur.html";
+                alert(`Bienvenue ${user.pseudo} ! Vous êtes connecté en tant qu'user.`);
+                window.location.href = "/HTML/Espace_utilisateur.html";
         }
     } else {
         alert("Identifiants incorrects.");
