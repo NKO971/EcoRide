@@ -21,6 +21,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const tabAvenir = document.getElementById('tab-avenir');
     const tabHistorique = document.getElementById('tab-historique');
 
+      // Récupérer les données de l'utilisateur depuis le localStorage
+    const userJson = localStorage.getItem('user');
+
+    if (!userJson) {
+        window.location.href = '../HTML/connexion.html'; // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+        return;
+    }
+    // Vérifier le rôle de l'utilisateur
+    const user = JSON.parse(userJson); // Récupérer les données de l'utilisateur depuis le localStorage
+    if (user.role !== 'user') {
+        window.location.href = '../HTML/connexion.html';
+        return;
+    }
+    // Afficher les données de l'utilisateur dans la console
+    console.log('Données de l\'utilisateur :', user);
+
+    // Afficher le nom de l'employé dans la section de profil
+    const nomEmployeElement = document.getElementById('menu-pseudo');
+    if (nomEmployeElement) {
+        nomEmployeElement.textContent = `Bienvenue, ${user.pseudo}`;
+    }
+
 
     // Affichage en fonction des roles Chauffeur/Passager bouttons radio
     function affichageEnFonctionDesRoles(valeurRole) {
