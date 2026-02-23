@@ -96,12 +96,12 @@
             <div class="row" style="--bs-gap: 1rem">
                 <div class="divBouton">
                     <button class="btnFiltre col-12 d-md-none mb-3" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#BoutonFiltre" aria-expanded="false" aria-controls="BoutonFiltre">
+                        data-bs-target="#zoneFiltres" aria-expanded="false" aria-controls="zoneFiltres">
                         <span class="material-symbols-outlined">filter_list</span> Afficher filtres.
                     </button>
                 </div>
                 <div class="col-md-3 offset-md-1">
-                    <fieldset id="BoutonFiltre" class="collapse d-md-block">
+                    <fieldset id="zoneFiltres" class="collapse d-md-block">
                         <form action="" method="get" class="filtre">
                             <h2>Trier par</h2>
 
@@ -161,11 +161,11 @@
                 <!-- Récap résultats -->
                 <div class="conteneurResultat col-12 col-md-8">
                     <div class="recap-resultat p-2 mb-4">
-                        ( <strong>4</strong> voyages trouvés )
+                        ( <strong id="nb-voyages-trouve">4</strong> voyages trouvés )
                     </div>
 
                     <!-- Résultats -->
-                    <div class="resultats">
+                    <div class="resultats" id="liste-trajet">
                         <div id="alerte-trajet-proche" class="alerte-suggestion d-none">
                             <div class="message-info">
 
@@ -176,8 +176,8 @@
                         <div class="covoiturage">
                             <div class="destinationHoraire ">
                                 <div class="trajet">
-                                    <span class="départ">Paris</span>
-                                    <span class="arrivée">Toulouse</span>
+                                    <span class="depart">Paris</span>
+                                    <span class="arrivee">Toulouse</span>
                                 </div>
                                 <div class="heure_depart">10h30</div>
                                 <div class="FlechesH"><span
@@ -201,177 +201,27 @@
                                 </div>
                                 <div class="note">
                                     <span class="material-symbols-outlined">star</span>
-                                    <span>4,5</span>
+                                    <span class="note-chauffeur">4,5</span>
                                 </div>
-                                <div class="icon-electrique">
+                                <div class="icon-energie">
                                     <span class="material-symbols-outlined">electric_car</span>
                                     <small>Écologique</small>
                                 </div>
                                 <div class="icon-credit">
                                     <span class="material-symbols-outlined">payments</span>
-                                    <span>5 Credits</span>
+                                    <span><span class="js-credits">5</span> Credits</span>
                                 </div>
-                                <div class="passagerResultat">
+                                <div class="icon-passager">
                                     <span class="material-symbols-outlined">person</span>
-                                    <span>2 places</span>
+                                    <span><span class="js-places">2</span> places</span>
                                 </div>
                                 <div class="action-btn col-12 col-md-auto">
-                                    <button class="btn btn-sm btn-outline-primary w-100 w-md-auto"
+                                    <button class="btn-details btn-sm btn-outline-primary w-100 w-md-auto"
                                         data-bs-toggle="modal" data-bs-target="#modalDetailsTrajet">Détails</button>
                                 </div>
                             </div>
                         </div>
                         <!-- fin carte 1 -->
-                        <!-- Carte 2 -->
-                        <div class="covoiturage">
-                            <div class="destinationHoraire">
-                                <div class="trajet">
-                                    <span class="départ">Paris</span>
-                                    <span class="arrivée">Toulouse</span>
-                                </div>
-                                <div class="heure_depart">08h30</div>
-                                <div class="FlechesH"><span
-                                        class="material-symbols-outlined">line_end_arrow_notch</span>
-                                </div>
-                                <div class="heure_arrivee">15h37</div>
-                                <div class="FlechesH"><span
-                                        class="material-symbols-outlined">line_end_arrow_notch</span>
-                                </div>
-                                <div class="date_arrivee">24/05/2026</div>
-                            </div>
-                            <div class="ligneDeSeparation">
-                                <hr />
-                            </div>
-                            <div class="info-conducteur">
-                                <div
-                                    class="photo-pseudo col-12 col-md-auto d-flex flex-column flex-md-row align-items-center gap-2">
-                                    <img src="/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82876.png"
-                                        alt="Erika" class="photoDeProfil">
-                                    <span class="pseudo">ErikaB</span>
-                                </div>
-                                <div class="note">
-                                    <span class="material-symbols-outlined">star</span>
-                                    <span>3,5</span>
-                                </div>
-                                <div class="icon-electrique">
-                                    <span class="material-symbols-outlined">electric_car</span>
-                                    <small>Écologique</small>
-                                </div>
-                                <div class="icon-credit">
-                                    <span class="material-symbols-outlined">payments</span>
-                                    <span>6 Credits</span>
-                                </div>
-                                <div class="passagerResultat">
-                                    <span class="material-symbols-outlined">person</span>
-                                    <span>1 place</span>
-                                </div>
-                                <div class="action-btn col-12 col-md-auto">
-                                    <button class="btn btn-sm btn-outline-primary w-100 w-md-auto"
-                                        data-bs-toggle="modal" data-bs-target="#modalDetailsTrajet">Détails</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- fin carte 2 -->
-                        <!-- Carte 3 -->
-                        <div class="covoiturage">
-                            <div class="destinationHoraire">
-                                <div class="trajet">
-                                    <span class="départ">Paris</span>
-                                    <span class="arrivée">Toulouse</span>
-                                </div>
-                                <div class="heure_depart">19h00</div>
-                                <div class="FlechesH"><span
-                                        class="material-symbols-outlined">line_end_arrow_notch</span>
-                                </div>
-                                <div class="heure_arrivee">01h07</div>
-                                <div class="FlechesH"><span
-                                        class="material-symbols-outlined">line_end_arrow_notch</span>
-                                </div>
-                                <div class="date_arrivee">25/05/2026</div>
-                            </div>
-                            <div class="ligneDeSeparation">
-                                <hr />
-                            </div>
-                            <div class="info-conducteur">
-                                <div
-                                    class="photo-pseudo col-12 col-md-auto d-flex flex-column flex-md-row align-items-center gap-2">
-                                    <img src="/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82877.png"
-                                        alt="Léa" class="photoDeProfil">
-                                    <span class="pseudo">LeaMrt</span>
-                                </div>
-                                <div class="note">
-                                    <span class="material-symbols-outlined">star</span>
-                                    <span>5,0</span>
-                                </div>
-                                <div class="icon-electrique">
-                                    <span class="material-symbols-outlined">electric_car</span>
-                                    <small>Écologique</small>
-                                </div>
-                                <div class="icon-credit">
-                                    <span class="material-symbols-outlined">payments</span>
-                                    <span>4 Credits</span>
-                                </div>
-                                <div class="passagerResultat">
-                                    <span class="material-symbols-outlined">person</span>
-                                    <span>4 places</span>
-                                </div>
-                                <div class="action-btn col-12 col-md-auto">
-                                    <button class="btn btn-sm btn-outline-primary w-100 w-md-auto"
-                                        data-bs-toggle="modal" data-bs-target="#modalDetailsTrajet">Détails</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- fin carte 3 -->
-                        <!-- Carte 4 -->
-                        <div class="covoiturage">
-                            <div class="destinationHoraire">
-                                <div class="trajet">
-                                    <span class="départ">Paris</span>
-                                    <span class="arrivée">Toulouse</span>
-                                </div>
-                                <div class="heure_depart">10h30</div>
-                                <div class="FlechesH"><span
-                                        class="material-symbols-outlined">line_end_arrow_notch</span>
-                                </div>
-                                <div class="heure_arrivee">16h07</div>
-                                <div class="FlechesH"><span
-                                        class="material-symbols-outlined">line_end_arrow_notch</span>
-                                </div>
-                                <div class="date_arrivee">24/05/2026</div>
-                            </div>
-                            <div class="ligneDeSeparation">
-                                <hr />
-                            </div>
-                            <div class="info-conducteur">
-                                <div
-                                    class="photo-pseudo col-12 col-md-auto d-flex flex-column flex-md-row align-items-center gap-2">
-                                    <img src="/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82879.png"
-                                        alt="Marc" class="photoDeProfil">
-                                    <span class="pseudo">MarcCal</span>
-                                </div>
-                                <div class="note">
-                                    <span class="material-symbols-outlined">star</span>
-                                    <span>2,5</span>
-                                </div>
-                                <div class="icon-thermique">
-                                    <span class="material-symbols-outlined">directions_car</span>
-                                    <small>Thermique</small>
-                                </div>
-                                <div class="icon-credit">
-                                    <span class="material-symbols-outlined">payments</span>
-                                    <span>8 Credits</span>
-                                </div>
-                                <div class="passagerResultat">
-                                    <span class="material-symbols-outlined">person</span>
-                                    <span>2 places</span>
-                                </div>
-                                <div class="action-btn col-12 col-md-auto">
-                                    <button class="btn btn-sm btn-outline-primary w-100 w-md-auto"
-                                        data-bs-toggle="modal" data-bs-target="#modalDetailsTrajet">Détails</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- fin carte 4 -->
                     </div>
                 </div>
             </div>
@@ -404,9 +254,9 @@
 
                 <div class="modal-body">
                     <div class="recap-trajet-modal mb-4 p-3 text-center">
-                        <span class="bold">Paris</span>
+                        <span class="v-depart bold">Paris</span>
                         <span class="material-symbols-outlined icone-fleche">arrow_forward</span>
-                        <span class="bold">Toulouse</span>
+                        <span class="v-arivee bold">Toulouse</span>
                         <div class="info-horaire-details">Départ à 10h30 - Arrivée prévue à 16h07</div>
                     </div>
 
@@ -414,9 +264,9 @@
                         <div class="col-md-6 border-end">
                             <div class="d-flex align-items-center gap-3 mb-3">
                                 <img src="/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82878.png"
-                                    alt="Jean" class="photoDeProfil-details">
+                                    alt="Jean" class="photoDeProfil-details" id="photo-chauffeur">
                                 <div class="conducteur-meta">
-                                    <h4 class="m-0">JeanP75</h4>
+                                    <h4 class="pseudo m-0">JeanP75</h4>
                                     <div class="note-container">
                                         <span class="material-symbols-outlined">star</span>
                                         <span class="note-chiffre">4,5/5</span> (2 avis)
@@ -425,17 +275,18 @@
                             </div>
                             <!-- Travaille sur les avis -->
                             <button class="btn btn-outline-primary btn-sm mb-3" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseAvis" aria-expanded="false">
+                                data-bs-target="#collapseAvis" aria-expanded="false"
+                                id="avis-bouton">
                                 Voir les commentaires
                             </button>
 
                             <div class="collapse" id="collapseAvis">
                                 <div class="card card-body bg-light border-0 mb-3 p-2" style="font-size: 0.85rem;">
                                     <div class="mb-2 border-bottom pb-1">
-                                        <strong>Marie_L :</strong> "Top conducteur !"
+                                        <strong class="avis-passager">Marie_L :</strong> "Top conducteur !"
                                     </div>
                                     <div>
-                                        <strong>Lucas_P :</strong> "Très ponctuel."
+                                        <strong class="avis-passager">Lucas_P :</strong> "Très ponctuel."
                                     </div>
                                 </div>
                             </div>
@@ -511,6 +362,7 @@
         </div>
     </div>
 </div>
+<script src="/js/resultat.js" defer></script>
 </body>
 
 </html>

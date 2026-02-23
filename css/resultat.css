@@ -131,7 +131,7 @@ h2 {
     border: 2px solid var(--color-primary);
 }
 
-.note, .icon-electrique, .icon-thermique, .icon-credit, .passagerResultat {
+.note, .icon-energie, .icon-credit, .icon-passager {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -265,8 +265,8 @@ h2 {
     box-shadow: var(--shadow-medium);
 }
 
-/* Bouton des avias dans le modal */
-.btn {
+/* Bouton detail pour ouvrire le modal */
+.btn-details {
     background-color: var(--color-secondary);
     color: var(--color-primary);
     border: 0.125rem solid var(--color-primary);
@@ -488,7 +488,7 @@ h2 {
         margin-top: 1rem !important;
         font-size: 0.9rem !important;
     }
-    .note, .icon-electrique, .icon-thermique, .icon-credit, .passagerResultat {
+    .note, .icon-energie, .icon-credit, .icon-passager {
         font-size: 0.75rem;
     }
 
