@@ -1,11 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     // MOCK DATA: des données pour les filtres
     const mockData = [
-        { id: 1, conducteur: "Jean Dupont", note: 4.5, verifie: true, depart: "Paris", arrivee: "Toulouse", heureDepart: 630, date: "2026-05-24", prix: 5, passagers: 2, ecologique: true },
-        { id: 2, conducteur: "Marie Curie", note: 3, verifie: false, depart: "Lyon", arrivee: "Marseille", heureDepart: 840, date: "2026-05-25", prix: 10, passagers: 1, ecologique: false }
+        { id: 1, conducteur: "Jean Dupont", photo: "/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82878.png", note: 4.5, verifie: true, depart: "Paris", arrivee: "Toulouse", heureDepart: 630, heureArrivee: 967, date: "2026-05-24", prix: 5, passagers: 2, ecologique: true },
+        { id: 2, conducteur: "Marie Curie", photo: "/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82877.png", note: 3, verifie: false, depart: "Lyon", arrivee: "Marseille", heureDepart: 840, heureArrivee: 990, date: "2026-05-25", prix: 10, passagers: 1, ecologique: false }
     ];
 
     // Constantes pour les éléments du DOM
+    const formulaireFiltres = document.querySelector('.filtre');
+    // Cble ID
     const conteneurTrajets = document.getElementById('liste-trajet');
     const inputDepart = document.getElementById('lieu_depart');
     const inputArrivee = document.getElementById('lieu_arrivee');
@@ -27,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fonction pour afficher les trajets
     function afficherTrajets(trajets) {
         conteneurTrajets.innerHTML = ''; // On vide le conteneur avant d'ajouter
-        
+
         if (trajets.length === 0) {
             conteneurTrajets.innerHTML = '<p class="text-center">Aucun trajet trouvé.</p>';
             return;
@@ -91,6 +93,42 @@ document.addEventListener('DOMContentLoaded', () => {
     // APPEL DE LA FONCTION
     afficherTrajets(mockData);
 
-    // TRAVAILLE SUR LES FILTRES
+    // TRAVAILLE SUR LES FILTRES AVEC .filter
+    function appliquerFiltres() {
+        let trajetsFiltres = [...mockData];
 
-}); // FIN DU DOMContentLoaded (Il manquait cette fermeture !)
+        // PREPARATION DES VALEURS 
+        const prixMaxValue = parseFloat(prixMax.value);
+        const dureeSaisie = parseFloat(dureeMax.value); // On récupère l'heure ici une seule fois
+
+        // FILTRE DUREE  
+        if (dureeMax.value) { // On vérifie si la case n'est pas vide
+            const minutesMaxSaisies = dureeSaisie * 60;// On convertie en minutes.
+            trajetsFiltres = trajetsFiltres.filter(trajet => {
+                const dureeReelle = trajet.heureArrivee - trajet.heureDepart;
+                return dureeReelle <= minutesMaxSaisies;
+            });
+        }
+
+        // FILTRE ECOLOGIQUE 
+        if (plusEcologique.checked) {
+            trajetsFiltres = trajetsFiltres.filter(trajet => trajet.ecologique === true);
+        }
+
+        // FILTRE PRIX 
+        if (prixMax.value) {
+            trajetsFiltres = trajetsFiltres.filter(trajet => trajet.prix <= prixMaxValue);
+        }
+
+        // FILTRE NOTE 
+        if (notePlus3.checked) {
+            trajetsFiltres = trajetsFiltres.filter(trajet => trajet.note > 3);
+        }
+
+        afficherTrajets(trajetsFiltres);
+    }
+
+    formulaireFiltres.addEventListener('input', appliquerFiltres);
+
+
+}); // FIN DU DOMContentLoaded
