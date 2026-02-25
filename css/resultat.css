@@ -275,6 +275,14 @@ h2 {
     transition: all 0.3s ease;
 }
 
+.btn-details:hover {
+    background-color: var(--color-primary) !important;
+    color: var(--color-white) !important;
+    border-color: var(--color-secondary);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-medium);
+}
+
 /* Modal Confirmation Paiement */
 /* Design de la modale de confirmation (US 6) */
 .modal-confirmation-eco {
