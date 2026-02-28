@@ -100,13 +100,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     } // FIN DE LA FONCTION afficherTrajets
 
-    // APPEL DE LA FONCTION
-    afficherTrajets(mockData);
     // Initialisation du nombre de voyages trouvés
     nbVoyagesTrouves.textContent = mockData.length; // A adapter selon les résultats réels post DB 
 
     // TRAVAILLE SUR LES FILTRES AVEC .filter
     function appliquerFiltres() {
+        console.log("Moteur de recherche : Je lance le filtrage...");
         let trajetsFiltres = [...mockData];
         // On vérifie si une des case est cochée pour le filtre horaire
         const unFiltreHoraireActif = avant6H.checked || entre6H12H.checked || entre12H18H.checked || apres18H.checked;
@@ -168,6 +167,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     formulaireFiltres.addEventListener('input', appliquerFiltres);
+    
+    // Affichage des trajets recherhés avec filtre 
+    appliquerFiltres(); 
     
 
 
