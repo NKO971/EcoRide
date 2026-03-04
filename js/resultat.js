@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const formulaireFiltres = document.querySelector('.filtre');
     // Cble ID
     const conteneurTrajets = document.getElementById('liste-trajet');
+    const barreRecherche = document.querySelector('.barreRecherche');
+    const messageErreur = document.getElementById('message-erreur');
     const inputDepart = document.getElementById('lieu_depart');
     const inputArrivee = document.getElementById('lieu_arrivee');
     const inputDate = document.getElementById('date_depart');
@@ -26,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const profilVerifie = document.getElementById('profile-verifie');
     const notePlus3 = document.getElementById('note-superieur-a-3');
 
-     // Formatge des heures pour l'affichage
+    // Formatge des heures pour l'affichage
     function formatHeure(minutes) {
         const heures = Math.floor(minutes / 60);// On calcule les heures
         const minutesRestantes = minutes % 60; // On calcule les minutes restantes
@@ -107,6 +109,35 @@ document.addEventListener('DOMContentLoaded', () => {
     function appliquerFiltres() {
         console.log("Moteur de recherche : Je lance le filtrage...");
         let trajetsFiltres = [...mockData];
+        // Travail sur les filtres de la barre de recherche
+        const departSaisi = inputDepart.value.trim().toLowerCase();
+        const arriveeSaisie = inputArrivee.value.trim().toLowerCase();
+        const dateSaisie = inputDate.value;
+        // On s'assure que les input de la barre de recherche ne sont pas vides avant de lancer la recherhe 
+        if (!departSaisi || !arriveeSaisie || !dateSaisie) {
+            if (lieuDepartInput) {
+                    messageErreur.classList.remove('d-none'); // Cache montre l'erreur
+                    conteneurTrajets.innerHTML = '';
+                    return; // On arrête la fonction ici si les champs ne sont pas remplis
+            } else {
+                    messageErreur.classList.add('d-none'); // Cache l'erreur
+            }
+        }
+
+        if (departSaisi) {
+            trajetsFiltres = trajetsFiltres.filter(trajet => trajet.depart.toLowerCase().includes(departSaisi));
+        }
+
+        if (arriveeSaisie) {
+            trajetsFiltres = trajetsFiltres.filter(trajet => trajet.arrivee.toLowerCase().includes(arriveeSaisie));
+        }
+
+        if (dateSaisie) {
+            trajetsFiltres = trajetsFiltres.filter(trajet => trajet.date === dateSaisie);
+        }
+
+        
+
         // On vérifie si une des case est cochée pour le filtre horaire
         const unFiltreHoraireActif = avant6H.checked || entre6H12H.checked || entre12H18H.checked || apres18H.checked;
 
@@ -116,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // FILTRE RAPIDITE
         if (plusRapide.checked) {
-            trajetsFiltres.sort((a, b) => { 
+            trajetsFiltres.sort((a, b) => {
                 return (a.heureArrivee - a.heureDepart) - (b.heureArrivee - b.heureDepart);
             });
         }
@@ -166,11 +197,14 @@ document.addEventListener('DOMContentLoaded', () => {
         afficherTrajets(trajetsFiltres);
     }
 
+    // Eouteur d'événement pour les filtres de la barre de recherche
+    barreRecherche.addEventListener('submit', appliquerFiltres);
+    // Eouteur d'événement pour les filtres avancés
     formulaireFiltres.addEventListener('input', appliquerFiltres);
-    
+
     // Affichage des trajets recherhés avec filtre 
-    appliquerFiltres(); 
-    
+    appliquerFiltres();
+
 
 
 }); // FIN DU DOMContentLoaded
