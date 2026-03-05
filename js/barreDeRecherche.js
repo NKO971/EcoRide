@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (barreRecherche) {
         barreRecherche.addEventListener('submit', (event) => {
             event.preventDefault(); // Empêche le rechargement de la page
-        if (lieuDepartInput.value.trim() === '' || lieuArriveeInput.value.trim() === '') {
+        if (lieuDepartInput.value.trim() === '' || lieuArriveeInput.value.trim() === '' || dateDepartInput.value.trim() === '') {
             messageErreur.classList.remove('d-none')
         } else {
             messageErreur.classList.add('d-none');

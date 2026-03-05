@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // MOCK DATA: des données pour les filtres
     const mockData = [
         { id: 1, conducteur: "Jean Dupont", photo: "/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82878.png", note: 4.5, verifie: true, depart: "Paris", arrivee: "Toulouse", heureDepart: 630, heureArrivee: 967, date: "2026-05-24", prix: 5, passagers: 2, ecologique: true },
-        { id: 2, conducteur: "Marie Curie", photo: "/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82877.png", note: 3, verifie: false, depart: "Lyon", arrivee: "Marseille", heureDepart: 840, heureArrivee: 990, date: "2026-05-25", prix: 10, passagers: 1, ecologique: false },
+        { id: 2, conducteur: "Marie Curie", photo: "/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82877.png", note: 3, verifie: false, depart: "Paris", arrivee: "Toulouse", heureDepart: 840, heureArrivee: 990, date: "2026-05-27", prix: 10, passagers: 1, ecologique: false },
         { id: 3, conducteur: "Alice Martin", photo: "/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82879.png", note: 4.8, verifie: true, depart: "Bordeaux", arrivee: "Nantes", heureDepart: 240, heureArrivee: 400, date: "2026-05-26", prix: 7, passagers: 3, ecologique: true },
     ];
 
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputArrivee = document.getElementById('lieu_arrivee');
     const inputDate = document.getElementById('date_depart');
     const nbVoyagesTrouves = document.getElementById('nb-voyages-trouve');
-    const listeFiltre = document.getElementById('zoneFiltres');
+    const messageErreurDate = document.getElementById('alerte-trajet-proche');
     const plusRapide = document.getElementById('plus-rapide');
     const plusEcologique = document.getElementById('plus-ecologique');
     const prixMax = document.getElementById('prix-max');
@@ -36,10 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${heures}h${minutesFormatees}`;
     }
 
-
     // Fonction pour afficher les trajets
     function afficherTrajets(trajets) {
-        conteneurTrajets.innerHTML = ''; // On vide le conteneur avant d'ajouter
+        conteneurTrajets.innerHTML = ''; 
 
         if (trajets.length === 0) {
             conteneurTrajets.innerHTML = '<p class="text-center">Aucun trajet trouvé.</p>';
@@ -55,18 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="arrivee">${trajet.arrivee}</span>
                     </div>
                     <div class="heure_depart">${formatHeure(trajet.heureDepart)}</div>
-                    <div class="FlechesH">
-                        <span class="material-symbols-outlined">line_end_arrow_notch</span>
-                    </div>
+                    <div class="FlechesH"><span class="material-symbols-outlined">line_end_arrow_notch</span></div>
                     <div class="heure_arrivee">${trajet.heureArrivee ? formatHeure(trajet.heureArrivee) : '--h--'}</div>
-                    <div class="FlechesH">
-                        <span class="material-symbols-outlined">line_end_arrow_notch</span>
-                    </div>
+                    <div class="FlechesH"><span class="material-symbols-outlined">line_end_arrow_notch</span></div>
                     <div class="date_arrivee">${trajet.date}</div>
                 </div>
-                <div class="ligneDeSeparation">
-                    <hr />
-                </div>
+                <div class="ligneDeSeparation"><hr /></div>
                 <div class="info-conducteur">
                     <div class="photo-pseudo col-12 col-md-auto d-flex flex-column flex-md-row align-items-center gap-2">
                         <img src="${trajet.photo || '/Photo profile/default.png'}" alt="${trajet.conducteur}" class="photoDeProfil">
@@ -78,9 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="note-chauffeur">${trajet.note}</span>
                     </div>
                     <div class="icon-energie">
-                        <span class="material-symbols-outlined">
-                            ${trajet.ecologique ? 'electric_car' : 'directions_car'}
-                        </span>
+                        <span class="material-symbols-outlined">${trajet.ecologique ? 'electric_car' : 'directions_car'}</span>
                         <small>${trajet.ecologique ? 'Écologique' : 'Thermique'}</small>
                     </div>
                     <div class="icon-credit">
@@ -97,114 +88,103 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
             </div>`;
-
             conteneurTrajets.innerHTML += card;
         });
-    } // FIN DE LA FONCTION afficherTrajets
-
-    // Initialisation du nombre de voyages trouvés
-    nbVoyagesTrouves.textContent = mockData.length; // A adapter selon les résultats réels post DB 
+    }
 
     // TRAVAILLE SUR LES FILTRES AVEC .filter
-    function appliquerFiltres() {
+    function appliquerFiltres(event) {
+        if (event && event.type === 'submit') event.preventDefault();
+        
         console.log("Moteur de recherche : Je lance le filtrage...");
-        let trajetsFiltres = [...mockData];
-        // Travail sur les filtres de la barre de recherche
+        
+        // Initialisation : on cache les messages avant de traiter
+        messageErreurDate.classList.add('d-none');
+        messageErreur.classList.add('d-none');
+        
         const departSaisi = inputDepart.value.trim().toLowerCase();
         const arriveeSaisie = inputArrivee.value.trim().toLowerCase();
         const dateSaisie = inputDate.value;
-        // On s'assure que les input de la barre de recherche ne sont pas vides avant de lancer la recherhe 
+
+        // On s'assure que les input ne sont pas vides
         if (!departSaisi || !arriveeSaisie || !dateSaisie) {
-            if (lieuDepartInput) {
-                    messageErreur.classList.remove('d-none'); // Cache montre l'erreur
-                    conteneurTrajets.innerHTML = '';
-                    return; // On arrête la fonction ici si les champs ne sont pas remplis
-            } else {
-                    messageErreur.classList.add('d-none'); // Cache l'erreur
-            }
+            // On ne montre l'erreur "champs vides" que si l'utilisateur a tenté de soumettre
+            if(event && event.type === 'submit') messageErreur.classList.remove('d-none');
+            conteneurTrajets.innerHTML = '';
+            nbVoyagesTrouves.textContent = 0;
+            return; 
         }
 
-        if (departSaisi) {
-            trajetsFiltres = trajetsFiltres.filter(trajet => trajet.depart.toLowerCase().includes(departSaisi));
-        }
+        // Filtrer d'abord uniquement par VILLES
+        let trajetsMêmesVilles = mockData.filter(trajet => 
+            trajet.depart.toLowerCase().includes(departSaisi) && 
+            trajet.arrivee.toLowerCase().includes(arriveeSaisie)
+        );
 
-        if (arriveeSaisie) {
-            trajetsFiltres = trajetsFiltres.filter(trajet => trajet.arrivee.toLowerCase().includes(arriveeSaisie));
-        }
+        // Filtrer par DATE sur ces villes
+        let trajetsFiltres = trajetsMêmesVilles.filter(trajet => trajet.date === dateSaisie);
 
-        if (dateSaisie) {
-            trajetsFiltres = trajetsFiltres.filter(trajet => trajet.date === dateSaisie);
-        }
-
-        
-
-        // On vérifie si une des case est cochée pour le filtre horaire
-        const unFiltreHoraireActif = avant6H.checked || entre6H12H.checked || entre12H18H.checked || apres18H.checked;
-
-        // PREPARATION DES VALEURS 
-        const prixMaxValue = parseFloat(prixMax.value);
-        const dureeSaisie = parseFloat(dureeMax.value); // On récupère l'heure ici une seule fois
-
-        // FILTRE RAPIDITE
-        if (plusRapide.checked) {
-            trajetsFiltres.sort((a, b) => {
-                return (a.heureArrivee - a.heureDepart) - (b.heureArrivee - b.heureDepart);
+        // LOGIQUE DE REPLI (FALLBACK)
+        if (trajetsFiltres.length === 0 && trajetsMêmesVilles.length > 0) {
+            const dateSaisieTimestamp = new Date(dateSaisie).getTime();
+            
+            // On trie les trajets des mêmes villes par proximité
+            trajetsFiltres = [...trajetsMêmesVilles].sort((a, b) => {
+                const diffA = Math.abs(new Date(a.date).getTime() - dateSaisieTimestamp);
+                const diffB = Math.abs(new Date(b.date).getTime() - dateSaisieTimestamp);
+                return diffA - diffB;
             });
+            // On affiche le message de suggestion de trajets proches
+            messageErreurDate.classList.remove('d-none');
         }
 
-        // FILTRE ECOLOGIQUE 
+        // --- FILTRES AVANCÉS ---
+        const unFiltreHoraireActif = avant6H.checked || entre6H12H.checked || entre12H18H.checked || apres18H.checked;
+        const prixMaxValue = parseFloat(prixMax.value);
+        const dureeSaisie = parseFloat(dureeMax.value);
+
+        if (plusRapide.checked) {
+            trajetsFiltres.sort((a, b) => (a.heureArrivee - a.heureDepart) - (b.heureArrivee - b.heureDepart));
+        }
+
         if (plusEcologique.checked) {
             trajetsFiltres = trajetsFiltres.filter(trajet => trajet.ecologique === true);
         }
 
-        // FILTRE PRIX 
         if (prixMax.value) {
             trajetsFiltres = trajetsFiltres.filter(trajet => trajet.prix <= prixMaxValue);
         }
 
-        // FILTRE DUREE  
-        if (dureeMax.value) { // On vérifie si la case n'est pas vide
-            const minutesMaxSaisies = dureeSaisie * 60;// On convertie en minutes.
-            trajetsFiltres = trajetsFiltres.filter(trajet => {
-                const dureeReelle = trajet.heureArrivee - trajet.heureDepart;
-                return dureeReelle <= minutesMaxSaisies;
-            });
+        if (dureeMax.value) {
+            const minutesMaxSaisies = dureeSaisie * 60;
+            trajetsFiltres = trajetsFiltres.filter(trajet => (trajet.heureArrivee - trajet.heureDepart) <= minutesMaxSaisies);
         }
 
-        // FILTRE NOTE 
         if (notePlus3.checked) {
             trajetsFiltres = trajetsFiltres.filter(trajet => trajet.note > 3);
         }
 
-        //FILTRE TRANCHE HORAIRE
-        trajetsFiltres = trajetsFiltres.filter(trajet => {
-            if (!unFiltreHoraireActif) return true;
-
-            return (avant6H.checked && trajet.heureDepart < 360) ||
-                (entre6H12H.checked && trajet.heureDepart >= 360 && trajet.heureDepart < 720) ||
-                (entre12H18H.checked && trajet.heureDepart >= 720 && trajet.heureDepart < 1080) ||
-                (apres18H.checked && trajet.heureDepart >= 1080);
-        });
-
-        // FILTRE PROFIL VERIFIE
+        if (unFiltreHoraireActif) {
+            trajetsFiltres = trajetsFiltres.filter(trajet => {
+                return (avant6H.checked && trajet.heureDepart < 360) ||
+                    (entre6H12H.checked && trajet.heureDepart >= 360 && trajet.heureDepart < 720) ||
+                    (entre12H18H.checked && trajet.heureDepart >= 720 && trajet.heureDepart < 1080) ||
+                    (apres18H.checked && trajet.heureDepart >= 1080);
+            });
+        }
+        // FILTRE PROFILE VERIFIE
         if (profilVerifie.checked) {
             trajetsFiltres = trajetsFiltres.filter(trajet => trajet.verifie === true);
         }
 
-        // COMPTAGE DES VOYAGES TROUVES
+        // COMPTAGE  DES VOYAGES TROUVES
         nbVoyagesTrouves.textContent = trajetsFiltres.length;
-
         afficherTrajets(trajetsFiltres);
     }
-
     // Eouteur d'événement pour les filtres de la barre de recherche
     barreRecherche.addEventListener('submit', appliquerFiltres);
     // Eouteur d'événement pour les filtres avancés
     formulaireFiltres.addEventListener('input', appliquerFiltres);
 
-    // Affichage des trajets recherhés avec filtre 
     appliquerFiltres();
-
-
-
-}); // FIN DU DOMContentLoaded
+});
