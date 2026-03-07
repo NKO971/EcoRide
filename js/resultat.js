@@ -6,6 +6,21 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 3, conducteur: "Alice Martin", photo: "/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82879.png", note: 4.8, verifie: true, depart: "Bordeaux", arrivee: "Nantes", heureDepart: 240, heureArrivee: 400, date: "2026-05-26", prix: 7, passagers: 3, ecologique: true },
     ];
 
+    // La simulation de la base de données pour les avis
+const baseDeDonneesAvis = {
+    1: [ // Avis pour le trajet ID 1
+        { auteur: "Marie_L", texte: "Superbe voyage avec Jean !" },
+        { auteur: "Lucas_P", texte: "Très ponctuel et voiture propre." }
+    ],
+    2: [ // Avis pour le trajet ID 2
+        { auteur: "Sophie_D", texte: "Un peu de retard, mais conduite sécurisante." }
+    ],
+    3: [ // Avis pour le trajet ID 3
+        { auteur: "Marc_T", texte: "Parfait, rien à dire !" },
+        { auteur: "Julie_B", texte: "Très sympathique, je recommande." }
+    ]
+};
+
     // Constantes pour les éléments du DOM
     const formulaireFiltres = document.querySelector('.filtre');
     // Cble ID
@@ -84,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="action-btn col-12 col-md-auto">
                         <button class="btn-details btn-sm btn-outline-primary w-100 w-md-auto"
+                                data-trajet-id="${trajet.id}"
                                 data-bs-toggle="modal" data-bs-target="#modalDetailsTrajet">Détails</button>
                     </div>
                 </div>
@@ -181,6 +197,77 @@ document.addEventListener('DOMContentLoaded', () => {
         nbVoyagesTrouves.textContent = trajetsFiltres.length;
         afficherTrajets(trajetsFiltres);
     }
+
+    // Mise a jour du modal avec les détails du trajet sélectionné
+
+    // Fonction pour afficher les détails du trajet dans le modal
+    function afficherDetailsTrajet(trajet) {
+        document.getElementById('modalDetailsTrajet').setAttribute('data-trajet-id', trajet.id);
+       // Cible par ID
+        const photoChauffeur = document.getElementById('photo-chauffeur');
+        const nombrePlaces = document.getElementById ('modal-nb-place');
+        const prixPersonne = document.getElementById('modal-prix-personne');
+        const iconVehicule = document.getElementById('icon-vehicule');
+
+       // Cible par classe
+         const villeDepart = document.querySelector('.v-depart');
+         const villeArrivee = document.querySelector('.v-arrivee');
+         const horraireTrajet = document.querySelector('.info-horaire-details');
+         const pseudoChauffeur = document.querySelector('.pseudo');
+         const note = document.querySelector('.note-chiffre');
+         const vehicule = document.querySelector('.nom-vehicule');
+         const badgeEnergie = document.querySelector('.badge-energie');
+         const reservationBtn = document.querySelector('.btn-reservation-eco');
+         // Mise à jour des éléments du modal avec les données du trajet
+        photoChauffeur.src = trajet.photo || '/Photo profile/default.png';
+        pseudoChauffeur.textContent = trajet.conducteur;
+        note.textContent = trajet.note;
+        villeDepart.textContent = trajet.depart;
+        villeArrivee.textContent = trajet.arrivee;
+
+        const heureA = trajet.heureArrivee ? formatHeure(trajet.heureArrivee) : '--h--';
+        horraireTrajet.textContent = `Départ à ${formatHeure(trajet.heureDepart)} - Arrivée prévue à ${heureA}`;
+
+        nombrePlaces.textContent = `${trajet.passagers}`;
+        prixPersonne.textContent = `${trajet.prix}`;
+        vehicule.textContent = `Véhicule : ${trajet.ecologique ? 'Écologique' : 'Thermique'}`;
+
+        // Gestion visuelle de l'énergie 
+        badgeEnergie.textContent = trajet.ecologique ? 'Électrique' : 'Thermique';
+        badgeEnergie.className = trajet.ecologique ? 'badge-energie badge-electrique' : 'badge-energie badge-thermique';
+
+        // Mise à jour du bouton de réservation
+         const boutonReservation = document.querySelector('.btn-reservation-eco');
+                boutonReservation.setAttribute('data-trajet-id', trajet.id);
+
+     const avisDuTrajet = baseDeDonneesAvis[trajet.id] || [];
+    const conteneurAvis = document.querySelector('#collapseAvis .card-body');
+
+    // Construction du HTML à partir des vraies données
+    if (avisDuTrajet.length > 0) {
+        conteneurAvis.innerHTML = avisDuTrajet.map(avis => `
+            <div class="mb-2 border-bottom pb-1">
+                <strong>${avis.auteur} :</strong> "${avis.texte}"
+            </div>
+        `).join('');
+    } else {
+        conteneurAvis.innerHTML = "<p>Aucun avis pour le moment.</p>";
+    }
+    }
+
+    // Travaille sur les détaisl des trajets (modal)
+    conteneurTrajets.addEventListener('click', event => {
+        if (event.target.classList.contains('btn-details')) {
+            const trajetId = parseInt(event.target.getAttribute('data-trajet-id'));
+            const trajet = mockData.find(t => t.id === trajetId);
+            
+            if (trajet) {
+            afficherDetailsTrajet(trajet);      
+        }
+        
+        }
+    });
+
     // Eouteur d'événement pour les filtres de la barre de recherche
     barreRecherche.addEventListener('submit', appliquerFiltres);
     // Eouteur d'événement pour les filtres avancés

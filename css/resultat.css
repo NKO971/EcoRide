@@ -245,7 +245,7 @@ input.prixDuree:focus {
 
 /* Prix */
 .prix-credits {
-    font-size: var(--font-size-large);
+    font-size: var(--font-size-normal);
     font-weight: 800;
     color: var(--color-primary);
 }
