@@ -122,37 +122,31 @@ const baseDeDonneesAvis = {
         const arriveeSaisie = inputArrivee.value.trim().toLowerCase();
         const dateSaisie = inputDate.value;
 
-        // On s'assure que les input ne sont pas vides
-        if (!departSaisi || !arriveeSaisie || !dateSaisie) {
-            // On ne montre l'erreur "champs vides" que si l'utilisateur a tenté de soumettre
-            if(event && event.type === 'submit') messageErreur.classList.remove('d-none');
-            conteneurTrajets.innerHTML = '';
-            nbVoyagesTrouves.textContent = 0;
-            return; 
-        }
+    // Filtrer d'abord uniquement par VILLES
+    let trajetsFiltres = mockData.filter(trajet => {
+        const matchDepart = departSaisi === "" || trajet.depart.toLowerCase().includes(departSaisi);
+        const matchArrivee = arriveeSaisie === "" || trajet.arrivee.toLowerCase().includes(arriveeSaisie);
+        return matchDepart && matchArrivee;
+    });
 
-        // Filtrer d'abord uniquement par VILLES
-        let trajetsMêmesVilles = mockData.filter(trajet => 
-            trajet.depart.toLowerCase().includes(departSaisi) && 
-            trajet.arrivee.toLowerCase().includes(arriveeSaisie)
-        );
-
-        // Filtrer par DATE sur ces villes
-        let trajetsFiltres = trajetsMêmesVilles.filter(trajet => trajet.date === dateSaisie);
-
-        // LOGIQUE DE REPLI (FALLBACK)
-        if (trajetsFiltres.length === 0 && trajetsMêmesVilles.length > 0) {
+    // Filtrer par DATE uniquement si elle est saisie
+    if (dateSaisie !== "") {
+        let trajetsParDate = trajetsFiltres.filter(trajet => trajet.date === dateSaisie);
+        
+        // Si aucune correspondance exacte, on applique la logique de proximité
+        if (trajetsParDate.length === 0 && trajetsFiltres.length > 0) {
             const dateSaisieTimestamp = new Date(dateSaisie).getTime();
             
-            // On trie les trajets des mêmes villes par proximité
-            trajetsFiltres = [...trajetsMêmesVilles].sort((a, b) => {
+            trajetsFiltres.sort((a, b) => {
                 const diffA = Math.abs(new Date(a.date).getTime() - dateSaisieTimestamp);
                 const diffB = Math.abs(new Date(b.date).getTime() - dateSaisieTimestamp);
                 return diffA - diffB;
             });
-            // On affiche le message de suggestion de trajets proches
-            messageErreurDate.classList.remove('d-none');
+            messageErreurDate.classList.remove('d-none'); // On affiche l'alerte
+        } else {
+            trajetsFiltres = trajetsParDate;
         }
+    }
 
         // --- FILTRES AVANCÉS ---
         const unFiltreHoraireActif = avant6H.checked || entre6H12H.checked || entre12H18H.checked || apres18H.checked;
