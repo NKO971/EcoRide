@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mockData = [
         { id: 1, conducteur: "Jean Dupont", photo: "/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82878.png", note: 4.5, verifie: true, depart: "Paris", arrivee: "Toulouse", heureDepart: 630, heureArrivee: 967, date: "2026-05-24", prix: 5, passagers: 2, ecologique: true },
         { id: 2, conducteur: "Marie Curie", photo: "/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82877.png", note: 3, verifie: false, depart: "Paris", arrivee: "Toulouse", heureDepart: 840, heureArrivee: 990, date: "2026-05-27", prix: 10, passagers: 1, ecologique: false },
-        { id: 3, conducteur: "Alice Martin", photo: "/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82879.png", note: 4.8, verifie: true, depart: "Bordeaux", arrivee: "Nantes", heureDepart: 240, heureArrivee: 400, date: "2026-05-26", prix: 7, passagers: 3, ecologique: true },
+        { id: 3, conducteur: "Pierre Martin", photo: "/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82879.png", note: 4.8, verifie: true, depart: "Bordeaux", arrivee: "Nantes", heureDepart: 240, heureArrivee: 400, date: "2026-05-26", prix: 7, passagers: 3, ecologique: true },
     ];
 
     // La simulation de la base de données pour les avis
@@ -207,14 +207,14 @@ const baseDeDonneesAvis = {
          const villeDepart = document.querySelector('.v-depart');
          const villeArrivee = document.querySelector('.v-arrivee');
          const horraireTrajet = document.querySelector('.info-horaire-details');
-         const pseudoChauffeur = document.querySelector('.pseudo');
+         const pseudoChauffeur = document.querySelector('.pseudo-modal');
          const note = document.querySelector('.note-chiffre');
          const vehicule = document.querySelector('.nom-vehicule');
          const badgeEnergie = document.querySelector('.badge-energie');
          const reservationBtn = document.querySelector('.btn-reservation-eco');
          // Mise à jour des éléments du modal avec les données du trajet
         photoChauffeur.src = trajet.photo || '/Photo profile/default.png';
-        pseudoChauffeur.textContent = trajet.conducteur;
+        pseudoChauffeur.textContent = `${trajet.conducteur}`;
         note.textContent = trajet.note;
         villeDepart.textContent = trajet.depart;
         villeArrivee.textContent = trajet.arrivee;
