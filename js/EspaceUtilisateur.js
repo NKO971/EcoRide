@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- SÉLECTION DES ÉLÉMENTS DU DOM ---
 
     // Sélection des bouton radio pour le choix du rôle
-    const radioRoles = document.querySelectorAll('input[name="role_utilisateur"]');
+    const radioRoles = document.querySelectorAll('input[name="role_preference"]');
     const blocChauffeur = document.querySelector('.conteneur-chauffeur-flex');
 
     // Sélection des éléments pour le calcul de la commission
@@ -17,38 +17,46 @@ document.addEventListener('DOMContentLoaded', () => {
     const sectionVehicule = document.getElementById('section_vehicule');
     let vehiculeCount = 1; // Compteur de véhicules
 
-    // Sélection des éléments de l'historique des trajets pour les changement en fonction du clique sur les boutons à venir ou historique
+    // Sélection des éléments de l'historique des trajets
     const tabAvenir = document.getElementById('tab-avenir');
     const tabHistorique = document.getElementById('tab-historique');
 
-      // Récupérer les données de l'utilisateur depuis le localStorage
+    // Récupérer les données de l'utilisateur depuis le localStorage
     const userJson = localStorage.getItem('user');
 
     if (!userJson) {
-        window.location.href = '../HTML/connexion.html'; // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+        window.location.href = '../HTML/connexion.html';
         return;
     }
+
     // Vérifier le rôle de l'utilisateur
-    const user = JSON.parse(userJson); // Récupérer les données de l'utilisateur depuis le localStorage
+    const user = JSON.parse(userJson);
     if (user.role !== 'user') {
         window.location.href = '../HTML/connexion.html';
         return;
     }
+
     // Afficher les données de l'utilisateur dans la console
     console.log('Données de l\'utilisateur :', user);
 
-    // Afficher le nom de l'employé dans la section de profil
+    // Afficher le pseudo de l'utilisateur dans le menu
     const nomEmployeElement = document.getElementById('menu-pseudo');
     if (nomEmployeElement) {
-        nomEmployeElement.textContent = `Bienvenue, ${user.pseudo}`;
+        nomEmployeElement.textContent = user.pseudo;
     }
 
+    // Peupler l'input caché organisateur_id avec l'ID de l'utilisateur connecté
+    const organisateurIdInput = document.getElementById('organisateur_id');
+    if (organisateurIdInput) {
+        organisateurIdInput.value = user.utilisateur_id || '';
+    }
 
-    // Affichage en fonction des roles Chauffeur/Passager bouttons radio
+    // --- LOGIQUE D'AFFICHAGE EN FONCTION DES ROLES ---
+
     function affichageEnFonctionDesRoles(valeurRole) {
         switch (valeurRole) {
             case 'chauffeur':
-            case 'les_deux': // on groupe les cas qui font la même chose !
+            case 'les_deux':
                 blocChauffeur.style.display = 'flex';
                 break;
             case 'passager':
@@ -57,14 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- LOGIQUE D'AFFICHAGE EN FONCTION DES ROLES ---
-
     // Initialisation de l'affichage selon le rôle sélectionné au chargement
-    const roleSelectionne = document.querySelector('input[name="role_utilisateur"]:checked');
+    const roleSelectionne = document.querySelector('input[name="role_preference"]:checked');
     if (roleSelectionne) {
         affichageEnFonctionDesRoles(roleSelectionne.value);
     }
 
+    // Ajout des écouteurs de changement sur les radios
     if (radioRoles.length > 0 && blocChauffeur) {
         radioRoles.forEach(radio => {
             radio.addEventListener('change', () => {
@@ -75,246 +82,383 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- LOGIQUE DE CALCUL DE LA COMMISSION ---
 
-    // Ecouteur de saisie (Calcul en temps réel)
     const frais = 2;
+
     function calculCommission(valeurNumerique) {
         if (valeurNumerique > frais) {
-            const gainsutilisateur = valeurNumerique - frais;
-            texteCommission.textContent = `Après une commission de ${frais} crédits, vous gagnez ${gainsutilisateur.toFixed(2)} crédits par passager.`;
+            const gainsUtilisateur = valeurNumerique - frais;
+            texteCommission.textContent = `Après une commission de ${frais} crédits, vous gagnez ${gainsUtilisateur.toFixed(2)} crédits par passager.`;
             texteCommission.style.color = "var(--color-primary)";
             inputPrix.style.border = "1px solid var(--color-light)";
             return true;
         } else if (valeurNumerique > 0 && valeurNumerique <= frais) {
             texteCommission.textContent = `Le prix doit être supérieur à ${frais} crédits pour couvrir les frais de commission.`;
             texteCommission.style.color = "red";
+            inputPrix.style.border = "2px solid red";
+            return false;
         } else {
             texteCommission.textContent = "EcoRide prélèvera 2 crédits de commission par passager.";
             texteCommission.style.color = "var(--color-dark)";
+            inputPrix.style.border = "1px solid var(--color-light)";
+            return false;
         }
-        return false;
     }
-    // Saisie du prix
+
+    // Saisie du prix en temps réel
     inputPrix.addEventListener('input', () => {
-        const prixSaisi = parseInt(inputPrix.value) || 0;
+        const prixSaisi = parseFloat(inputPrix.value) || 0;
         calculCommission(prixSaisi);
     });
-    // Ecouteur de clic (Validation finale)
+
+    // Écouteur de clic sur le bouton Publier (Validation finale)
     publierBtn.addEventListener('click', (event) => {
-        const prixFinal = parseInt(inputPrix.value) || 0;
+        const prixFinal = parseFloat(inputPrix.value) || 0;
+
+        // Vérification du prix
         if (calculCommission(prixFinal) === false) {
-            event.preventDefault(); // Bloque l'envoi
+            event.preventDefault();
             alert("Action impossible : veuillez choisir un prix supérieur aux frais de commission (2 crédits).");
             inputPrix.style.border = "2px solid red";
+            return;
         }
+
+        // Vérification : au moins un véhicule renseigné
+        const formulairesVehicules = document.querySelectorAll('.infos-vehicule');
+        let vehiculeValide = false;
+
+        formulairesVehicules.forEach(formulaire => {
+            const inputImmatriculation = formulaire.querySelector('input[name="immatriculation"]');
+            if (inputImmatriculation && inputImmatriculation.value.trim() !== '') {
+                vehiculeValide = true;
+            }
+        });
+
+        if (!vehiculeValide) {
+            event.preventDefault();
+            alert("Veuillez enregistrer au moins un véhicule avant de publier un trajet.");
+            return;
+        }
+
+        // Affichage du payload en console (ANTICIPATION BACK-END)
+        console.log("✅ PUBLICATION TRAJET VALIDÉE - Prêt à envoyer à l'API");
+        console.log("📤 Payload à envoyer :", {
+            utilisateur_id: user.utilisateur_id,
+            prix_personne: prixFinal,
+            organisateur_id: organisateurIdInput.value,
+            timestamp: new Date().toISOString()
+        });
     });
 
     // --- LOGIQUE D'AJOUT DE FORMULAIRE VÉHICULE ---
 
-    // Ajout d'un nouveau formulaire pour ajouter un véhicule 
     btnAjouterVehicule.addEventListener('click', () => {
-        // Le bloc à cloner
         const formOriginal = document.querySelector('.infos-vehicule');
 
-        // Le clone
-        const nouveauFormVehicule = formOriginal.cloneNode(true);
+        if (!formOriginal) {
+            console.warn("⚠️ Formulaire original introuvable");
+            return;
+        }
 
+        // Clone du formulaire
+        const nouveauFormVehicule = formOriginal.cloneNode(true);
         vehiculeCount++;
 
         // Changer le titre (Legend)
         const legend = nouveauFormVehicule.querySelector('legend');
         if (legend) legend.textContent = `Mon Véhicule ${vehiculeCount}`;
 
-        // Nettoyer les champs du clone
+        // Nettoyer et renommer les IDs pour éviter les doublons
         const inputs = nouveauFormVehicule.querySelectorAll('input, select');
         inputs.forEach(input => {
-            input.value = ""; // Vide le champ
-            input.removeAttribute('id'); // Supprime l'ID dupliqué
+            const originalId = input.getAttribute('id');
+            const name = input.getAttribute('name');
+
+            // Vider le champ
+            input.value = "";
             input.style.border = "";
+
+            // Générer un nouvel ID unique (ex: immatriculation_2, marque_id_2)
+            if (originalId) {
+                const newId = `${originalId}_${vehiculeCount}`;
+                input.setAttribute('id', newId);
+            }
         });
 
+        // Mettre à jour les labels pour pointer vers les nouveaux IDs
         const labels = nouveauFormVehicule.querySelectorAll('label');
         labels.forEach(label => {
-            label.removeAttribute('for'); // Supprime l'attribut 'for' dupliqué
+            const forAttribute = label.getAttribute('for');
+            if (forAttribute) {
+                const newForAttribute = `${forAttribute}_${vehiculeCount}`;
+                label.setAttribute('for', newForAttribute);
+            }
         });
 
         // Insérer le clone avant le bouton
         formOriginal.parentNode.insertBefore(nouveauFormVehicule, btnAjouterVehicule);
 
-        // Focus sur le premier champ du nouveau formulaire 
+        // Focus sur le premier input du nouveau formulaire
         const premierInput = nouveauFormVehicule.querySelector('input');
-        if (premierInput) premierInput.focus();
+        if (premierInput) {
+            premierInput.focus();
+            console.log(`✅ Véhicule ${vehiculeCount} ajouté avec succès`);
+        }
     });
 
-    //--- LOGIQUE DE GESTION DES TRAJETS À VENIR ET HISTORIQUE ---
+    // --- LOGIQUE DE GESTION DES ONGLETS (À VENIR / HISTORIQUE) ---
 
-    // Sélection des éléments de la liste à venir et de l'historique et changement de style.
     function updateTabStyles(activeTab, inactiveTab) {
-        // On s'assure que Bootstrap ne met pas de background bleu
         activeTab.style.backgroundColor = "transparent";
         inactiveTab.style.backgroundColor = "transparent";
+
         // Styles pour l'onglet actif
         activeTab.classList.add('text-primary');
         activeTab.classList.remove('text-muted', 'opacity-50');
+
         // Styles pour l'onglet inactif
         inactiveTab.classList.add('text-muted', 'opacity-50');
         inactiveTab.classList.remove('text-primary');
     }
 
-    // Ecoute du clic sur "À venir"
-    tabAvenir.addEventListener('click', () => {
-        updateTabStyles(tabAvenir, tabHistorique);
-    });
-    // Ecoute du clic sur "Historique"
-    tabHistorique.addEventListener('click', () => {
-        updateTabStyles(tabHistorique, tabAvenir);
-    });
+    // Écouteur sur l'onglet "À venir"
+    if (tabAvenir) {
+        tabAvenir.addEventListener('click', () => {
+            updateTabStyles(tabAvenir, tabHistorique);
+        });
+    }
 
-    //--- LOGIQUE D'ANNULATION DE TRAJET ---
+    // Écouteur sur l'onglet "Historique"
+    if (tabHistorique) {
+        tabHistorique.addEventListener('click', () => {
+            updateTabStyles(tabHistorique, tabAvenir);
+        });
+    }
 
-    // Annulation d'un trajet
+    // --- LOGIQUE D'ANNULATION DE TRAJET ---
+
     window.annulerTrajet = function (bouton, role) {
-        if (!confirm("Confirmer l'annulation ?")) return; // Si l'utilisateur confirme, on sort de la fonction pour laisser le processus d'annulation se faire normalement
+        if (!confirm("Confirmer l'annulation ?")) return;
 
-        switch (role) {
-            case 'chauffeur':
-                // ANTICIPATION BACK-END : Cette partie sera remplacée par un appel API (fetch)
-                // Le serveur devra supprimer le trajet et déclencher l'envoi de mails automatique aux passagers concernés.
-                console.log("LOGIQUE CHAUFFEUR : Suppression trajet + Alerte mail passagers.");
-                break;
-
-            case 'passager':
-                // ANTICIPATION BACK-END : Le serveur devra recréditer le passager par un appel API (fetch)?
-                // et incrémenter le nombre de places disponibles sur le trajet concerné 
-                console.log("LOGIQUE PASSAGER : Libération place + Remboursement.");
-                break;
-
-            default:
-                console.warn("Rôle inconnu, annulation visuelle uniquement.");
-        }
-        // Suppression visuelle du trajet
         const trajet = bouton.closest('.list-group-item');
-        if (!trajet) return; // Si on ne trouve pas le trajet, on arrête
+        if (!trajet) {
+            console.error("❌ Élément trajet introuvable");
+            return;
+        }
 
-        // Ajout d'une classe pour l'animation de disparition
+        const covoiturageId = trajet.getAttribute('data-covoiturage-id');
+        const reservationId = trajet.getAttribute('data-reservation-id');
+
+        // ANTICIPATION BACK-END : Log structuré pour l'API
+        const payloadAnnulation = {
+            action: 'annuler_trajet',
+            covoiturage_id: covoiturageId,
+            reservation_id: reservationId,
+            utilisateur_id: user.utilisateur_id,
+            role: role,
+            timestamp: new Date().toISOString()
+        };
+
+        console.log("🔴 ANNULATION TRAJET - Prêt à envoyer :", payloadAnnulation);
+
+        // Animation de disparition
         trajet.style.transition = "all 0.5s ease";
         trajet.style.transform = "translateX(100px)";
         trajet.style.opacity = "0";
 
-        // On attend la fin de l'animation pour supprimer
         setTimeout(() => {
             trajet.remove();
 
-            // On vérifie si c'est vide pour mettre la phrase
+            // Vérifier si la liste est vide
             const liste = document.getElementById('liste-avenir');
             if (liste && liste.querySelectorAll('.list-group-item').length === 0) {
                 liste.innerHTML = `
-                        <div class="text-center p-5">
-                            <p class="text-muted fw-bold">Vous n'avez plus aucun trajet à venir.</p>
-                        </div>`;
+                    <div class="text-center p-5">
+                        <i class="bi bi-calendar-x d-block mb-3 h1 text-muted opacity-50"></i>
+                        <p class="text-muted fw-bold">Vous n'avez plus aucun trajet à venir.</p>
+                    </div>`;
             }
         }, 500);
-    }
+    };
+
+    // --- LOGIQUE DE GESTION DU WORKFLOW DE TRAJET ---
+
+    window.gererWorkflow = function (bouton) {
+        const etatActuel = bouton.getAttribute('data-etat');
+        const trajet = bouton.closest('.list-group-item');
+
+        if (!trajet) {
+            console.error("❌ Trajet introuvable pour le workflow");
+            return;
+        }
+
+        const covoiturageId = trajet.getAttribute('data-covoiturage-id');
+
+        switch (etatActuel) {
+            case 'initial':
+                // Désactiver le bouton d'annulation
+                const zoneActions = bouton.closest('.zone-actions-');
+                const boutonAnnuler = zoneActions ? zoneActions.querySelector('.btn-annuler-chauffeur') : null;
+                if (boutonAnnuler) {
+                    boutonAnnuler.style.display = 'none';
+                }
+
+                // Mettre à jour le bouton
+                bouton.textContent = "Arrivée à destination";
+                bouton.setAttribute('data-etat', 'en-cours');
+                bouton.classList.remove("btn-primary");
+                bouton.classList.add("btn-warning");
+
+                // ANTICIPATION BACK-END
+                const payloadDemarrage = {
+                    action: 'demarrer_trajet',
+                    covoiturage_id: covoiturageId,
+                    utilisateur_id: user.utilisateur_id,
+                    statut: 'en-cours',
+                    timestamp: new Date().toISOString()
+                };
+
+                console.log("🟡 DÉMARRAGE TRAJET - Prêt à envoyer :", payloadDemarrage);
+                break;
+
+            case 'en-cours':
+                // Mettre à jour le bouton
+                bouton.textContent = "Trajet terminé - En attente de validation";
+                bouton.setAttribute('data-etat', 'termine');
+                bouton.disabled = true;
+                bouton.classList.remove("btn-warning");
+                bouton.classList.add("btn-success");
+
+                // Activer le bouton de validation passager
+                const boutonValidationPassager = trajet.querySelector('.btn-valider-trajet');
+                if (boutonValidationPassager) {
+                    boutonValidationPassager.disabled = false;
+                }
+
+                // ANTICIPATION BACK-END
+                const payloadTerminaison = {
+                    action: 'terminer_trajet',
+                    covoiturage_id: covoiturageId,
+                    utilisateur_id: user.utilisateur_id,
+                    statut: 'termine',
+                    timestamp: new Date().toISOString()
+                };
+
+                console.log("🟢 TERMINAISON TRAJET - Prêt à envoyer :", payloadTerminaison);
+                break;
+
+            default:
+                console.warn("⚠️ État inconnu :", etatActuel);
+        }
+    };
+
+    // --- LOGIQUE DE VALIDATION DE TRAJET PAR LE PASSAGER ---
+
+    window.validerTrajet = function (bouton) {
+        if (!confirm("Confirmer la validation du trajet ?")) return;
+
+        const trajet = bouton.closest('.list-group-item');
+        if (!trajet) {
+            console.error("❌ Trajet introuvable pour validation");
+            return;
+        }
+
+        const covoiturageId = trajet.getAttribute('data-covoiturage-id');
+
+        // Mise à jour du bouton
+        bouton.textContent = "Trajet validé";
+        bouton.disabled = true;
+        bouton.classList.remove("btn-success");
+        bouton.classList.add("btn-warning");
+
+        // Stocker l'ID du trajet pour la modal
+        window.covoiturageIdEnCoursDeValidation = covoiturageId;
+
+        // Peupler les champs cachés de la modale
+        const covoiturageIdAvis = document.getElementById('covoiturage-id-avis');
+        const utilisateurIdAvis = document.getElementById('utilisateur-id-avis');
+
+        if (covoiturageIdAvis) covoiturageIdAvis.value = covoiturageId;
+        if (utilisateurIdAvis) utilisateurIdAvis.value = user.utilisateur_id;
+
+        // Affichage de la modale
+        const modalElement = document.getElementById('modalAvis');
+        if (modalElement) {
+            const instanceModale = new bootstrap.Modal(modalElement);
+            instanceModale.show();
+            console.log(`📋 VALIDATION TRAJET - Modale ouverte pour trajet ID: ${covoiturageId}`);
+        } else {
+            console.error("❌ Modal introuvable");
+        }
+    };
+
+    // --- LOGIQUE DE GESTION DE L'AVIS PASSAGER ---
+
+    window.envoyerAvis = function() {
+        const noteElement = document.getElementById('note');
+        const commentaireElement = document.getElementById('commentaire');
+        const covoiturageIdAvis = document.getElementById('covoiturage-id-avis');
+        const utilisateurIdAvis = document.getElementById('utilisateur-id-avis');
+        const statutElement = document.querySelector('input[name="statut"]');
+
+        // Vérification des champs
+        if (!noteElement || !commentaireElement) {
+            console.error("❌ Éléments du formulaire d'avis introuvables");
+            return;
+        }
+
+        const note = noteElement.value;
+        const commentaire = commentaireElement.value;
+        const covoiturageId = covoiturageIdAvis ? covoiturageIdAvis.value : '';
+        const utilisateurId = utilisateurIdAvis ? utilisateurIdAvis.value : '';
+        const statut = statutElement ? statutElement.value : 'en attente';
+
+        if (!note || !commentaire) {
+            alert("Veuillez remplir tous les champs obligatoires.");
+            return;
+        }
+
+        // ANTICIPATION BACK-END : Payload structuré
+        const payloadAvis = {
+            action: 'envoyer_avis',
+            avis: {
+                covoiturage_id: covoiturageId,
+                utilisateur_id: utilisateurId,
+                note: parseInt(note),
+                commentaire: commentaire,
+                statut: statut,
+                date_creation: new Date().toISOString()
+            }
+        };
+
+        console.log("⭐ AVIS PASSAGER - Prêt à envoyer :", payloadAvis);
+
+        // Fermeture de la modale
+        const modalElement = document.getElementById('modalAvis');
+        if (modalElement) {
+            const instanceModale = bootstrap.Modal.getInstance(modalElement);
+            if (instanceModale) instanceModale.hide();
+        }
+
+        // Réinitialisation du formulaire
+        const formAvis = document.getElementById('formAvis');
+        if (formAvis) formAvis.reset();
+
+        alert("Merci ! Votre avis a été enregistré et sera modéré par nos équipes.");
+    };
+
+    window.signalerProbleme = function() {
+        const covoiturageIdAvis = document.getElementById('covoiturage-id-avis');
+        const covoiturageId = covoiturageIdAvis ? covoiturageIdAvis.value : '';
+
+        // ANTICIPATION BACK-END
+        const payloadSignalement = {
+            action: 'signaler_probleme',
+            covoiturage_id: covoiturageId,
+            utilisateur_id: user.utilisateur_id,
+            timestamp: new Date().toISOString()
+        };
+
+        console.log("🚨 SIGNALEMENT - Prêt à envoyer :", payloadSignalement);
+        alert("Votre signalement a été transmis à notre équipe de support.");
+    };
 });
-
-//--- LOGIQUE DE GESTION DU WORKFLOW DE TRAJET ---
-
-// Fonction pour gérer le workflow du trajet (Démarrer, Terminer)
-window.gererWorkflow = function (bouton) {
-    const etatActuel = bouton.getAttribute('data-etat');
-
-    switch (etatActuel) {
-        case 'initial':
-            // Sélection du bouton d'annulation dans la même zone d'action que le bouton workflow
-            const zoneActions = bouton.closest('.zone-actions-');
-            const boutonAnnuler = zoneActions ? zoneActions.querySelector('.btn-annuler-chauffeur') : null;
-            if (boutonAnnuler) {
-                boutonAnnuler.remove(); // Supprime le bouton d'annulation
-            };
-            bouton.textContent = "Arriveée à destination";
-            // ANTICIPATION BACK-END : Appel API pour changer l'état du trajet à "en-cours"
-            bouton.setAttribute('data-etat', 'en-cours');
-
-            // On désactive le bouton de supression du trajet pour éviter les annulations une fois le trajet démarré
-            const boutonSupprimer = document.querySelector('.btn-annuler-passager');
-            if (boutonSupprimer) {
-                boutonSupprimer.remove(); // Supprime le bouton de suppression pour les passagers
-            }
-
-            bouton.classList.remove("btn-primary"); // Retrait du style d'annulation
-            bouton.classList.add("btn-warning"); // Changement de style pour indiquer que c'est en cours
-            console.log("LOGIQUE CHAUFFEUR : Trajet démarré, état changé en 'en-cours'.");
-            break;
-        case 'en-cours':
-            bouton.textContent = "Trajet terminé - En attente de validation";
-            
-            // On affiche le bouton de validation pour le passager après que le chauffeur ait terminé le trajet
-            const boutonPassager = document.querySelector('.btn-valider-trajet');
-            if (boutonPassager) {
-                boutonPassager.disabled = false; // On lève le verrouillage du bouton de validation pour le passager
-            }
-
-            // ANTICIPATION BACK-END : Appel API pour changer l'état du trajet à "terminé"
-            bouton.setAttribute('data-etat', 'termine');
-            // On désactive le bouton pour éviter les clics multiples
-            bouton.disabled = true;
-
-            bouton.classList.remove("btn-warning");
-            bouton.classList.add("btn-success"); // Changement de style pour indiquer que c'est terminé
-            console.log("LOGIQUE CHAUFFEUR : Trajet en cours, état changé en 'terminé'.");
-            break;
-    }
-}
-
-//--- LOGIQUE DE VALIDATION DE TRAJET PAR LE PASSAGER ---
-
-// Fonction pour que le passager puisse valider le trajet une fois terminé
-window.validerTrajet = function (bouton) {
-    if (!confirm("Confirmer la validation du trajet ?")) return; // Si l'utilisateur confirme, on sort de la fonction pour laisser le processus de validation se faire normalement
-    bouton.textContent = "Trajet validé";
-    bouton.disabled = true; // On désactive le bouton pour éviter les clics multiples
-
-    bouton.classList.remove("btn-success");
-    bouton.classList.add("btn-warning"); // Changement de style pour indiquer que c'est en cours de validation
-
-    //On garde le bouton en mémoire pour la suite du processus de validation
-    window.boutonEnCoursDeValidation = bouton;
-
-    // Affichage de la modale pour laisser un avis au chauffeur
-    const modalElement = document.getElementById('modalAvis');
-    const instanceModale = new bootstrap.Modal(modalElement);
-    instanceModale.show();
-
-    // ANTICIPATION BACK-END : Appel API pour valider le trajet, créditer le chauffeurs et déclencher l'envoi de mails automatique au chauffeur.
-    console.log("LOGIQUE PASSAGER : Validation du trajet, crédit du passager, alerte mail chauffeur.");
-}
-
-//--- LOGIQUE DE GESTION DE L'AVIS PASSAGER ---
-
-// Fonction pour gérer la validation de l'avis du passager
-// --- LOGIQUE DE VALIDATION FINALE (DANS LA MODALE) ---
-
-window.envoyerAvis = function() {
-    // On récupère les éléments
-    const note = document.getElementById('noteChauffeur').value;
-    const commentaire = document.getElementById('commentaireAvis').value;
-    const modalElement = document.getElementById('modalAvis');
-
-    // ANTICIPATION BACK-END : Envoi des données vers l'API
-    console.log("DONNÉES ENVOYÉES : Note " + note + "/5, Avis : " + commentaire);
-    // Ici on imagine l'appel fetch('/api/valider-trajet', { method: 'POST', body: ... })
-
-    // On utilise la variable globale qu'on a créée dans validerTrajet
-    if (window.boutonEnCoursDeValidation) {
-        window.boutonEnCoursDeValidation.textContent = "Trajet validé";
-        window.boutonEnCoursDeValidation.classList.remove("btn-warning");
-        window.boutonEnCoursDeValidation.classList.add("btn-secondary");
-        window.boutonEnCoursDeValidation.disabled = true; // Sécurité supplémentaire
-    }
-
-    // FERMETURE DE LA MODALE
-    const instanceModale = bootstrap.Modal.getInstance(modalElement);
-    instanceModale.hide();
-
-    // FEEDBACK UTILISATEUR
-    alert("Merci ! Votre trajet est validé et les crédits ont été transférés au chauffeur.");
-}

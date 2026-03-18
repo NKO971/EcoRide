@@ -1,191 +1,338 @@
 // Attendre que le DOM soit complètement chargé
 document.addEventListener('DOMContentLoaded', () => {
-// Cible des élément du DOM pour les statistiques
-const totalCredits = document.getElementById('total-credits');
-// Cible du canvas pour le graphique
-const graphiqueRecettes = document.getElementById('chart-credits').getContext('2d');
-// Cible du canvas pour le graphique des trajets
-const graphiqueTrajets = document.getElementById('chart-trajets').getContext('2d');
-// Cible du champ de recherche pour les utilisateurs
-const champRecherche = document.getElementById('search-user');
-// Cible du formulaire de création d'utilisateur
-const formCreationEmploye = document.getElementById('form-creation-employe');
-const inputNom = document.getElementById('emp-nom');
-const inputEmail = document.getElementById('emp-email');
-const inputPassword = document.getElementById('emp-password');
+    // ===== CIBLES DU DOM =====
+    
+    // Statistiques
+    const totalCredits = document.getElementById('total-credits');
+    const graphiqueRecettes = document.getElementById('chart-credits').getContext('2d');
+    const graphiqueTrajets = document.getElementById('chart-trajets').getContext('2d');
+    
+    // Gestion des utilisateurs
+    const champRecherche = document.getElementById('search-user');
+    const listeUtilisateursContainer = document.getElementById('liste-utilisateurs');
+    
+    // Formulaire création employé
+    const formCreationEmploye = document.getElementById('form-creation-employe');
+    const inputNomComplet = document.getElementById('emp-nom');
+    const inputEmail = document.getElementById('emp-email');
+    const inputPassword = document.getElementById('emp-password');
+    
+    // Header admin
+    const nomAdminElement = document.getElementById('nom-admin');
+    const btnLogoutAdmin = document.getElementById('btn-logout-admin');
+
+    // ===== AUTHENTIFICATION & AUTORISATION =====
 
     // Récupérer les données de l'utilisateur depuis le localStorage
     const userJson = localStorage.getItem('user');
 
     if (!userJson) {
-        window.location.href = '../HTML/connexion.html'; // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+        console.error("❌ Utilisateur non authentifié - Redirection...");
+        window.location.href = '/HTML/connexion.html';
         return;
     }
+
     // Vérifier le rôle de l'utilisateur
-    const user = JSON.parse(userJson); // Récupérer les données de l'utilisateur depuis le localStorage
+    const user = JSON.parse(userJson);
     if (user.role !== 'admin') {
-        window.location.href = '../HTML/connexion.html';
+        console.error("❌ Accès refusé - Rôle insuffisant (attendu: admin, reçu: " + user.role + ")");
+        window.location.href = '/HTML/connexion.html';
         return;
     }
-    // Afficher les données de l'utilisateur dans la console
-    console.log('Données de l\'utilisateur :', user);
 
-    // Afficher le nom de l'employé dans la section de profil
-    const nomEmployeElement = document.getElementById('nom-admin');
-    if (nomEmployeElement) {
-        nomEmployeElement.textContent = `Bienvenue, ${user.pseudo}`;
+    console.log("✅ Authentification admin réussie :", user);
+
+    // Afficher le nom de l'admin dans la navbar
+    if (nomAdminElement) {
+        nomAdminElement.textContent = `Bienvenue, ${user.pseudo}`;
     }
 
+    // ===== DONNÉES SIMULÉES (Mock Data) =====
 
-    // On simule ce que la DB nous enverrait plus tar
-let listeUtilisateurs = [
-    { id: 1, pseudo: "EcoAdmin", role: "admin", statut: "actif" },
-    { id: 2, pseudo: "Christelle", role: "employe", statut: "actif" },
-    { id: 3, pseudo: "EmployeDuMois", role: "employe", statut: "suspendu" }
-];
+    // Simulation: Liste des utilisateurs (Table utilisateur + role)
+    let listeUtilisateurs = [
+        { id: 1, pseudo: "EcoAdmin", role: "admin", statut: "actif" },
+        { id: 2, pseudo: "Christelle", role: "employe", statut: "actif" },
+        { id: 3, pseudo: "EmployeDuMois", role: "employe", statut: "suspendu" }
+    ];
 
-// On simule un tableau de recettes pour les statistiques
-const donneesRecettes = [
-    { date: "10/02", total: 150 },
-    { date: "11/02", total: 230 },
-    { date: "12/02", total: 180 },
-    { date: "13/02", total: 450 }, // Grosse journée !
-    { date: "14/02", total: 310 }
-];
+    // Simulation: Données des recettes (Table statistiques - mots-clés: revenus, crédits)
+    const donneesRecettes = [
+        { date: "10/02", total: 150 },
+        { date: "11/02", total: 230 },
+        { date: "12/02", total: 180 },
+        { date: "13/02", total: 450 }, // Grosse journée !
+        { date: "14/02", total: 310 }
+    ];
 
-// On simule le tableau pour les statistiques des trajets
-const donneesTrajets = [
-    { date: "10/02", total: 20 },
-    { date: "11/02", total: 35 },
-    { date: "12/02", total: 28 },
-    { date: "13/02", total: 50 }, // Grosse journée !
-    { date: "14/02", total: 40 }
-]
+    // Simulation: Données des trajets (Table statistiques - mots-clés: fréquentation, trajets)
+    const donneesTrajets = [
+        { date: "10/02", total: 20 },
+        { date: "11/02", total: 35 },
+        { date: "12/02", total: 28 },
+        { date: "13/02", total: 50 }, // Grosse journée !
+        { date: "14/02", total: 40 }
+    ];
 
-// Fonction pour calculer le total des recettes
-function calculerTotalRecettes() {
-    // Parcourir le tableau de données des recettes et additionner les totaux
-    const total = donneesRecettes.reduce((accumulateur, element) => accumulateur + element.total, 0); // Je transfore tableau en une seule valeur (le total) en additionnant les totaux de chaque élément du tableau avec  l'outil de précision reduce()
-    totalCredits.textContent = total;
-    
-}
+    // ===== UTILITAIRES STATISTIQUES =====
 
-// GRAPHIQUE DES REVENUS
-// Fonction pour tous les graphiques du site
-function creerGraphique(ctx, donneesSource, labelLegende, couleur) {
-    
-    // Extraction des labels et des valeurs à partir des données source
-    const labels = donneesSource.map(item => item.date);
-    const valeurs = donneesSource.map(item => item.total);
+    /**
+     * Calcule le total des recettes
+     * Utilise reduce() pour additionner tous les totaux
+     */
+    function calculerTotalRecettes() {
+        const total = donneesRecettes.reduce(
+            (accumulateur, element) => accumulateur + element.total, 
+            0
+        );
+        totalCredits.textContent = total;
+        console.log(`💰 Total recettes calculé : ${total} crédits`);
+    }
 
-    // On retourne l'objet Chart créé avec les données et les options de configuration
-    return new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: labelLegende,
-                data: valeurs,
-                borderColor: couleur,
-                tension: 0.1
-            }]
-        }
-    });
-}
+    /**
+     * Crée un graphique Chart.js générique
+     * @param {CanvasRenderingContext2D} ctx - Contexte du canvas
+     * @param {Array} donneesSource - Tableau de données { date, [clé]: valeur }
+     * @param {string} labelLegende - Libellé pour la légende
+     * @param {string} couleur - Couleur du graphique (RGB)
+     * @param {string} cleValeur - Clé de la propriété à afficher (défaut: "total")
+     */
+    function creerGraphique(ctx, donneesSource, labelLegende, couleur, cleValeur = 'total') {
+        // Extraction des labels et des valeurs à partir des données source
+        const labels = donneesSource.map(item => item.date);
+        const valeurs = donneesSource.map(item => item[cleValeur]); // Utilise la clé dynamiquement
 
-// Fonction pour afficher les utilisateurs dans le tableau
-function afficherUtilisateurs(listeAAfficher = listeUtilisateurs) {
-    const tbody = document.getElementById('liste-utilisateurs');
-    tbody.innerHTML = ''; // Vider le tableau avant de le remplir
-    
-    listeAAfficher.forEach(element => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-        <td>${element.pseudo}</td>
-        <td><span class="badge bg-light text-dark border">${element.role}</span></td>
-        <td>
-            <span class="badge ${element.statut === 'actif' ? 'bg-success' : 'bg-danger'}">
-                ${element.statut}
-            </span>
-        </td>
-        <td class="text-end"> 
-            ${element.statut === 'actif' ?
-                `<button class="btn btn-outline-warning btn-sm btn-statut" data-id="${element.id}">Suspendre</button>` :
-                `<button class="btn btn-outline-success btn-sm btn-statut" data-id="${element.id}">Activer</button>`
+        return new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: labelLegende,
+                    data: valeurs,
+                    borderColor: couleur,
+                    backgroundColor: couleur.replace('rgb', 'rgba').replace(')', ', 0.1)'),
+                    tension: 0.3,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
             }
-            <button class="btn btn-outline-danger btn-sm ms-2 btn-delete" data-id="${element.id}">Supprimer</button>
-        </td>
-    `;
-    tbody.appendChild(tr);
+        });
+    }
 
-    const boutonCree = tr.querySelector('.btn-statut');
-    boutonCree.addEventListener('click', () => {
-        // Récupérer l'ID de l'utilisateur à partir de l'attribut data-id
-        const idAmodifier = parseInt(boutonCree.getAttribute('data-id'));
-        // Passer l'attribut a la fonction de modification de statut
-        modifierStatut(idAmodifier);
+    // ===== GESTION DES UTILISATEURS =====
+
+    /**
+     * Affiche les utilisateurs dans le tableau (Table utilisateur & role)
+     * @param {Array} listeAAfficher - Liste des utilisateurs à afficher
+     */
+    function afficherUtilisateurs(listeAAfficher = listeUtilisateurs) {
+        listeUtilisateursContainer.innerHTML = ''; // Vider avant de remplir
+
+        listeAAfficher.forEach(utilisateur => {
+            // Créer la ligne du tableau
+            const tr = document.createElement('tr');
+            tr.id = `user-${utilisateur.id}`; // ID dynamique pour se conformer au MCD
+            tr.setAttribute('data-utilisateur-id', utilisateur.id);
+
+            // Déterminer le badge de statut
+            const classeStatut = utilisateur.statut === 'actif' ? 'bg-success' : 'bg-danger';
+            const textStatut = utilisateur.statut.charAt(0).toUpperCase() + utilisateur.statut.slice(1);
+
+            // Déterminer le bouton d'action (Suspendre/Activer)
+            const boutonStatut = utilisateur.statut === 'actif' 
+                ? `<button class="btn btn-sm btn-warning btn-modifier-statut" data-utilisateur-id="${utilisateur.id}">Suspendre</button>`
+                : `<button class="btn btn-sm btn-success btn-modifier-statut" data-utilisateur-id="${utilisateur.id}">Activer</button>`;
+
+            // Remplir la ligne avec les éléments MCD
+            tr.innerHTML = `
+                <td>
+                    <span class="pseudo-utilisateur" data-pseudo="${utilisateur.pseudo}">${utilisateur.pseudo}</span>
+                </td>
+                <td>
+                    <span class="role-utilisateur badge bg-light text-dark border" data-role="${utilisateur.role}">
+                        ${utilisateur.role}
+                    </span>
+                </td>
+                <td>
+                    <span class="statut-utilisateur badge ${classeStatut}" data-statut="${utilisateur.statut}">
+                        ${textStatut}
+                    </span>
+                </td>
+                <td class="text-end">
+                    ${boutonStatut}
+                    <button class="btn btn-sm btn-danger btn-supprimer-utilisateur ms-2" data-utilisateur-id="${utilisateur.id}">
+                        Supprimer
+                    </button>
+                </td>
+            `;
+
+            listeUtilisateursContainer.appendChild(tr);
+
+            // Attachers les écouteurs aux boutons
+            const btnModifier = tr.querySelector('.btn-modifier-statut');
+            const btnSupprimer = tr.querySelector('.btn-supprimer-utilisateur');
+
+            btnModifier.addEventListener('click', () => {
+                const idUtilisateur = parseInt(btnModifier.getAttribute('data-utilisateur-id'));
+                modifierStatut(idUtilisateur);
+            });
+
+            btnSupprimer.addEventListener('click', () => {
+                const idUtilisateur = parseInt(btnSupprimer.getAttribute('data-utilisateur-id'));
+                supprimerUtilisateur(idUtilisateur);
+            });
+        });
+
+        console.log(`📋 ${listeAAfficher.length} utilisateur(s) affichés`);
+    }
+
+    /**
+     * Filtre et affiche les utilisateurs en temps réel
+     */
+    champRecherche.addEventListener('input', () => {
+        const rechercheUtilisateur = champRecherche.value.toLowerCase();
+        const utilisateursFiltres = listeUtilisateurs.filter(user => 
+            user.pseudo.toLowerCase().includes(rechercheUtilisateur)
+        );
+
+        afficherUtilisateurs(utilisateursFiltres);
+        console.log(`🔍 Recherche : "${rechercheUtilisateur}" - ${utilisateursFiltres.length} résultat(s)`);
     });
-    const boutonSupprimer = tr.querySelector('.btn-delete');
-    boutonSupprimer.addEventListener('click', () => {
-        const idASupprimer = parseInt(boutonSupprimer.getAttribute('data-id'));
-        // Supprimer l'utilisateur de la liste en filtrant la liste pour exclure l'utilisateur avec l'ID spécifié
-        const indexASupprimer = listeUtilisateurs.findIndex(user => user.id === idASupprimer);
-        if (indexASupprimer !== -1) {
-            const confirmation = confirm(`Êtes-vous sûr de vouloir supprimer l'utilisateur ${listeUtilisateurs[indexASupprimer].pseudo} ?`); // Afficher une alerte de confirmation avant de supprimer l'utilisateur
-            if (confirmation) {
-                listeUtilisateurs = listeUtilisateurs.filter(user => user.id !== idASupprimer); // Supprimer l'utilisateur de la liste
-                afficherUtilisateurs(); // Mettre à jour l'affichage des utilisateurs après la suppression
-            }
+
+    /**
+     * Modifie le statut d'un utilisateur (actif <-> suspendu)
+     */
+    function modifierStatut(idUtilisateur) {
+        const utilisateur = listeUtilisateurs.find(user => user.id === idUtilisateur);
+
+        if (utilisateur) {
+            utilisateur.statut = utilisateur.statut === 'actif' ? 'suspendu' : 'actif';
+            afficherUtilisateurs();
+            console.log(`✏️ Statut modifié pour ${utilisateur.pseudo} : ${utilisateur.statut}`);
+        } else {
+            console.error(`❌ Utilisateur ID ${idUtilisateur} introuvable`);
         }
-    });
-});
-}
-// Travaille sur le champ de recherche pour filtrer les utilisateurs en temps réel
-// Ecoute de l'événement de saisie dans le champ de recherche
-champRecherche.addEventListener('input', () => {
-    const rechercheUtilisateur = champRecherche.value.toLowerCase(); // Récupérer la valeur saisie et la convertir en minuscules pour une recherche insensible à la casse
-    const utilisateursFiltres = listeUtilisateurs.filter(user => user.pseudo.toLowerCase().includes(rechercheUtilisateur)); // Filtrer la liste des utilisateurs en fonction de la recherche
+    }
 
-    afficherUtilisateurs(utilisateursFiltres); // Appel de la fonction en lui passant la liste filtrée pour mettre à jour l'affichage des utilisateurs dans le tableau
-});
+    /**
+     * Supprime un utilisateur après confirmation
+     */
+    function supprimerUtilisateur(idUtilisateur) {
+        const utilisateur = listeUtilisateurs.find(user => user.id === idUtilisateur);
 
+        if (!utilisateur) {
+            console.error(`❌ Utilisateur ID ${idUtilisateur} introuvable`);
+            return;
+        }
 
-// Fonction pour modifier le statut d'un utilisateur
-function modifierStatut(id) {
-    // Trouver l'utilisateur dans la liste à partir de son ID
-    const utilisateur = listeUtilisateurs.find(user => user.id === id);
+        const confirmation = confirm(
+            `⚠️ Êtes-vous sûr de vouloir supprimer l'utilisateur "${utilisateur.pseudo}" ?`
+        );
 
-// Inverser le statut de l'utilisateur
-    if (utilisateur) {
-        utilisateur.statut = utilisateur.statut === 'actif' ? 'suspendu' : 'actif';
-        // Mettre à jour l'affichage des utilisateurs après la modification
+        if (confirmation) {
+            listeUtilisateurs = listeUtilisateurs.filter(user => user.id !== idUtilisateur);
+            afficherUtilisateurs();
+            console.log(`🗑️ Utilisateur ${utilisateur.pseudo} supprimé`);
+        } else {
+            console.log("🔓 Suppression annulée");
+        }
+    }
+
+    // ===== GESTION DU FORMULAIRE DE CRÉATION D'EMPLOYÉ =====
+
+    /**
+     * Crée un nouvel employé (Table utilisateur avec role: "employe")
+     */
+    formCreationEmploye.addEventListener('submit', (event) => {
+        event.preventDefault(); // Empêcher rechargement page
+
+        // Récupérer les valeurs via les attributs name (alignés MCD)
+        const nomComplet = inputNomComplet.value.trim();
+        const email = inputEmail.value.trim();
+        const password = inputPassword.value.trim();
+
+        // Validation basique
+        if (!nomComplet || !email || !password) {
+            console.warn("⚠️ Tous les champs sont requis");
+            alert("Veuillez remplir tous les champs");
+            return;
+        }
+
+        // Créer l'objet employé conforme au MCD
+        const nouvelEmploye = {
+            id: Math.max(...listeUtilisateurs.map(u => u.id), 0) + 1, // ID unique
+            pseudo: nomComplet, // Utilise nom_complet comme pseudo
+            role: "employe", // Role fixé à "employe" (champ caché du formulaire)
+            statut: "actif",
+            email: email, // Champ email (optionnel mais stocké)
+            password: password // Champ password (EN PRODUCTION: hasher avec bcrypt!)
+        };
+
+        listeUtilisateurs.push(nouvelEmploye);
         afficherUtilisateurs();
-    };
-}
+        formCreationEmploye.reset();
 
-// Ecoute de l'événement de soumission du formulaire de création d'employé
-formCreationEmploye.addEventListener('submit', (event) => {
-    event.preventDefault(); // Empêcher le comportement par défaut du formulaire (rechargement de la page)
+        console.log("✅ Nouvel employé créé :", {
+            id: nouvelEmploye.id,
+            pseudo: nouvelEmploye.pseudo,
+            email: nouvelEmploye.email,
+            role: nouvelEmploye.role,
+            statut: nouvelEmploye.statut
+        });
 
-    // fabrication de l'objet employé à partir des valeurs saisies dans le formulaire
-    const nouvelEmploye = {
-        id: listeUtilisateurs.length + 1, // Générer un ID unique (simplement en prenant la longueur actuelle de la liste + 1)
-        pseudo: inputNom.value,
-        role: "employe",
-        statut: "actif"
-    };
+        alert(`✅ Employé "${nomComplet}" créé avec succès !`);
+    });
 
-    listeUtilisateurs.push(nouvelEmploye);
-    afficherUtilisateurs();// Mise à jour de l'affichage des utilisateurs après l'ajout du nouvel employé
-    formCreationEmploye.reset(); // Réinitialiser le formulaire après la soumission
-    console.log("Création d'un nouvel employé :");
-});
+    // ===== GESTION DES BOUTONS SPÉCIAUX =====
 
-// Appel des fonctions
-afficherUtilisateurs();
-calculerTotalRecettes();
-// Appel de la fonction de création de graphique pour les recettes
-creerGraphique(graphiqueRecettes, donneesRecettes, "Revenus en crédits", "rgb(75, 192, 192)");
-// Appel de la fonction de création de graphique pour les trajets
-creerGraphique(graphiqueTrajets, donneesTrajets, "Nombre de trajets", "rgb(255, 99, 132)");
+    /**
+     * Bouton déconnexion
+     */
+    if (btnLogoutAdmin) {
+        btnLogoutAdmin.addEventListener('click', (event) => {
+            event.preventDefault();
+            localStorage.removeItem('user');
+            console.log("🔓 Déconnexion admin effectuée");
+            window.location.href = '/HTML/connexion.html';
+        });
+    }
+
+    // ===== INITIALISATION DE LA PAGE =====
+
+    console.log("🚀 Page admin.js initialisée");
+    
+    afficherUtilisateurs();
+    calculerTotalRecettes();
+    
+    // Créer les graphiques avec gestion générique des clés
+    creerGraphique(
+        graphiqueRecettes, 
+        donneesRecettes, 
+        "Revenus en crédits", 
+        "rgb(75, 192, 192)",
+        'total' // Clé de valeur pour les recettes
+    );
+    
+    creerGraphique(
+        graphiqueTrajets, 
+        donneesTrajets, 
+        "Nombre de trajets", 
+        "rgb(255, 99, 132)",
+        'total' // Clé de valeur pour les trajets
+    );
+
 });

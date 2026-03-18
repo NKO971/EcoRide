@@ -85,13 +85,14 @@
                             </tr>
                         </thead>
                         <tbody id="avis-table-body">
-                            <tr>
-                                <td>Client42</td>
-                                <td><span class="text-warning">★★★☆☆</span></td>
-                                <td>Chauffeur un peu en retard mais sympa.</td>
+                            <tr data-avis-id="1">
+                                <td data-covoiturage-id="101">#CV-101</td>
+                                <td data-utilisateur-pseudo="Client42">Client42</td>
+                                <td data-commentaire="Chauffeur un peu en retard mais sympa.">Chauffeur un peu en retard mais sympa.</td>
+                                <td data-note="3"><span class="text-warning">★★★☆☆</span></td>
                                 <td class="text-end">
-                                    <button class="btn btn-primary btn-sm" onclick="validerAvis(101)">Valider</button>
-                                    <button class="btn btn-danger btn-sm" onclick="refuserAvis(101)">Refuser</button>
+                                    <button class="btn btn-primary btn-sm" onclick="validerAvis(1)">Valider</button>
+                                    <button class="btn btn-danger btn-sm" onclick="refuserAvis(1)">Refuser</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -118,13 +119,13 @@
                             </tr>
                         </thead>
                         <tbody id="litiges-table-body">
-                            <tr>
-                                <td><strong>#TR-885</strong></td>
-                                <td>Marc92 <br> <small class="text-muted">marc@mail.com</small></td>
-                                <td>Julie_V <br> <small class="text-muted">julie@mail.com</small></td>
-                                <td>Paris → Lyon <br> <small>12/05/2026</small></td>
+                            <tr data-covoiturage-id="885">
+                                <td data-covoiturage-id="885"><strong>#CV-885</strong></td>
+                                <td data-utilisateur-id="5" data-utilisateur-pseudo="Marc92">Marc92 <br> <small class="text-muted">marc@mail.com</small></td>
+                                <td data-organisateur-id="8" data-organisateur-pseudo="Julie_V">Julie_V <br> <small class="text-muted">julie@mail.com</small></td>
+                                <td data-lieu-depart="Paris" data-lieu-arrivee="Lyon" data-date-depart="12/05/2026">Paris → Lyon <br> <small>12/05/2026</small></td>
                                 <td>
-                                    <button class="btn btn-outline-secondary btn-sm">Voir descriptif</button>
+                                    <button class="btn btn-outline-secondary btn-sm" onclick="voirDescriptif(885)">Voir descriptif</button>
                                 </td>
                             </tr>
                         </tbody>

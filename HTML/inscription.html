@@ -67,22 +67,30 @@
                     <fieldset class="fieldset-inscription">
                         <legend>Inscription</legend>
                         <div class="inscription">
+                            <label for="nom">Nom</label>
+                            <input type="text" id="nom" name="nom" placeholder="Entrez votre nom" required>
+                        </div>
+                        <div class="inscription">
+                            <label for="prenom">Prénom</label>
+                            <input type="text" id="prenom" name="prenom" placeholder="Entrez votre prénom" required>
+                        </div>
+                        <div class="inscription">
                             <label for="pseudo">Pseudo</label>
                             <input type="text" id="pseudo" name="pseudo" placeholder="Entrez votre pseudo" required>
                         </div>
                         <div class="inscription">
-                            <label for="email-inscription">Email</label>
+                            <label for="email">Email</label>
                             <input type="email" id="email" name="email" placeholder="@example.com" required>
                         </div>
                         <div class="inscription">
-                            <label for="mot-de-passe">Mot de passe</label>
-                            <input type="password" id="mot-de-passe" name="mot-de-passe" placeholder="8 caractère min, 1 majuscule, 1 chiffre"
+                            <label for="password">Mot de passe</label>
+                            <input type="password" id="password" name="password" placeholder="8 caractère min, 1 majuscule, 1 chiffre"
                             pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
                             title="Le mot de passe doit contenir au moins 8 caractères, une majuscule et un chiffre" required>
                         </div>
                         <div class="inscription">
-                            <label for="confirmer-mot-de-passe">Confirmer mot de passe</label>
-                            <input type="password" id="confirmer-mot-de-passe" name="confirmer-mot-de-passe" placeholder="Confirmer" required>
+                            <label for="confirmer-password">Confirmer mot de passe</label>
+                            <input type="password" id="confirmer-password" name="confirmer-password" placeholder="Confirmer" required>
                         </div>
                         <div>
                             <button type="submit">Inscription</button>

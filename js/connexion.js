@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // CIBLE LES ELEMENTS DU DOM
     const form = document.getElementById('connexion-form');
-    const emailInput = document.getElementById('emailInput');
-    const passwordInput = document.getElementById('passwordInput');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
 
     // AJOUT D'UN ECOUTEUR D'EVENEMENT SUR LE FORMULAIRE
     form.addEventListener('submit', async (event) => {
