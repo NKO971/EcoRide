@@ -6,15 +6,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoRide - Espace Employé</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/base.css">
-    <link rel="stylesheet" href="/css/mediaquerise_base.css">
-    <link rel="stylesheet" href="/css/espace-employe.css">
+    <link rel="stylesheet" href="/EcoRide/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/EcoRide/css/base.css">
+    <link rel="stylesheet" href="/EcoRide/css/mediaquerise_base.css">
+    <link rel="stylesheet" href="/EcoRide/css/espace-employe.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 
-    <script src="/js/bootstrap.bundle.min.js" defer></script>
-    <script src="/js/jquery-3.7.1.min.js" defer></script>
+    <script src="/EcoRide/js/bootstrap.bundle.min.js" defer></script>
+    <script src="/EcoRide/js/jquery-3.7.1.min.js" defer></script>
 </head>
 
 <body>
@@ -22,7 +22,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <div class="navbar-brand">
-                    <img src="/Image/EcoRide.svg" alt="logo EcoRide" class="logo">
+                    <img src="/EcoRide/Image/EcoRide.svg" alt="logo EcoRide" class="logo">
                     <span class="ms-2 border-start ps-2">Espace Back Office</span>
                 </div>
 
@@ -54,7 +54,7 @@
         <!-- Profile de l'employé -->
         <div class="profile-employe d-flex align-items-center mb-5 p-3 bg-white shadow-sm rounded-4 ">
             <div class="avatar-wrapper">
-                <img src="/Photo profile/pexels-italo-melo-881954-2379005.jpg" alt="Photo de l'employé"
+                <img src="/EcoRide/Photo profile/pexels-italo-melo-881954-2379005.jpg" alt="Photo de l'employé"
                     class="avatar-img">
                 <span class="status-indicator"></span>
             </div>

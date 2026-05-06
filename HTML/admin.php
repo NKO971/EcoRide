@@ -6,20 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoRide - Administration</title>
 
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/EcoRide/css/bootstrap.min.css">
     <!-- Charts.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <link rel="stylesheet" href="/css/base.css">
-    <link rel="stylesheet" href="/css/mediaquerise_base.css">
-    <script src="/js/bootstrap.bundle.min.js" defer></script>
+    <link rel="stylesheet" href="/EcoRide/css/base.css">
+    <link rel="stylesheet" href="/EcoRide/css/mediaquerise_base.css">
+    <script src="/EcoRide/js/bootstrap.bundle.min.js" defer></script>
 </head>
 
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="/Image/EcoRide.svg" alt="Logo EcoRide" class="me-2">
+                <img src="/EcoRide/Image/EcoRide.svg" alt="Logo EcoRide" class="me-2">
                 <span class="badge bg-danger ms-2" style="font-size: 0.5em;">ADMIN</span>
             </a>
 

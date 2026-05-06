@@ -1,1 +1,0 @@
-<?php echo "Le serveur me voit bien ici !"; ?>

@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoRide - Espace utilisateur</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/base.css">
-    <link rel="stylesheet" href="/css/mediaquerise_base.css">
-    <link rel="stylesheet" href="/css/espace_utilisateur.css">
+    <link rel="stylesheet" href="/EcoRide/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/EcoRide/css/base.css">
+    <link rel="stylesheet" href="/EcoRide/css/mediaquerise_base.css">
+    <link rel="stylesheet" href="/EcoRide/css/espace_utilisateur.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
     <!-- Je récupère des icons sur google front -->
-    <script src="/js/bootstrap.bundle.min.js" defer></script>
-    <script src="/js/jquery-3.7.1.min.js" defer></script>
+    <script src="/EcoRide/js/bootstrap.bundle.min.js" defer></script>
+    <script src="/EcoRide/js/jquery-3.7.1.min.js" defer></script>
 
 
 </head>
@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/HTML/EcoRide_Accueil.html">
-                    <img src="/Image/EcoRide.svg" alt="logo EcoRide" class="logo">
+                    <img src="/EcoRide/Image/EcoRide.svg" alt="logo EcoRide" class="logo">
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
