@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoRide - Inscription</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/base.css">
-    <link rel="stylesheet" href="/css/mediaquerise_base.css">
-    <link rel="stylesheet" href="/css/connexion-inscription.css">
+    <link rel="stylesheet" href="/EcoRide/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/EcoRide/css/base.css">
+    <link rel="stylesheet" href="/EcoRide/css/mediaquerise_base.css">
+    <link rel="stylesheet" href="/EcoRide/css/connexion-inscription.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
     <!-- Je récupère des icons sur google front -->
-    <script src="/js/bootstrap.bundle.min.js" defer></script>
-    <script src="/js/jquery-3.7.1.min.js" defer></script>
+    <script src="/EcoRide/js/bootstrap.bundle.min.js" defer></script>
+    <script src="/EcoRide/js/jquery-3.7.1.min.js" defer></script>
 
 
 </head>
@@ -63,7 +63,7 @@
         
         <div class="col-12 col-lg-6">
             <div class="formulaires2">
-                <form action="" method="post">
+                <form action="inscription_traitement.php" method="post">
                     <fieldset class="fieldset-inscription">
                         <legend>Inscription</legend>
                         <div class="inscription">
@@ -101,7 +101,7 @@
         </div>
 
         <div class="col-12 col-lg-6 text-center">
-            <img src="/Image/convertible car-bro.png" alt="Image de voiture" class="image-voiture img-fluid">
+            <img src="/EcoRide/Image/convertible car-bro.png" alt="Image de voiture" class="image-voiture img-fluid">
         </div>
 
     </div>
