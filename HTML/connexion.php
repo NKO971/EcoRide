@@ -1,3 +1,39 @@
+<?php
+session_start();
+// Connexion à la BDD
+if (file_exists('../config/db.php')) {
+    require_once '../config/db.php';
+}
+
+// Traitement du formulaire
+$message_erreur = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
+
+    // 1. On cherche l'utilisateur par son email
+    $sql = "SELECT * FROM utilisateur WHERE email = :email";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':email' => $email]);
+    $user = $stmt->fetch();
+
+    // 2. On compare le mot de passe saisi avec celui haché en BDD
+    if ($user && password_verify($password, $user['password'])) {
+        // Succès : On stocke les infos dans la SESSION
+        $_SESSION['user_id'] = $user['utilisateur_id'];
+        $_SESSION['pseudo'] = $user['pseudo'];
+        $_SESSION['role_id'] = $user['role_id'];
+
+        // Redirection vers l'accueil
+        header("Location: EcoRide_Accueil.php"); 
+        exit();
+    } else {
+        $message_erreur = "Email ou mot de passe incorrect.";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -19,13 +55,18 @@
 
 </head>
 
-<?php include '../includes/header.php'; ?>
+<?php require '../includes/header.php'; ?>
 
 <body>
     <main>
         <div class="container-fluid px-4">
             <div class="row gx-5 justify-content-evenly">
                 <div class="col-12 col-md-6 col-lg-5 formulaires_connexion">
+
+                <?php if ($message_erreur): ?>
+    <div class="alert alert-danger"><?php echo $message_erreur; ?></div>
+<?php endif; ?>
+
                     <!-- Formulaire de connexion -->
                     <form id="connexion-form" method="post">
                         <fieldset class="fieldset-connexion">
@@ -61,7 +102,7 @@
     </main>
   
     <!-- FOOTER -->
-<?php include '../includes/footer.php'; ?>
+<?php require '../includes/footer.php'; ?>
 
     <script src="/js/connexion.js" defer></script>
 </body>

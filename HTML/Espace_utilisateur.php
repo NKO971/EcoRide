@@ -18,7 +18,7 @@
 
 </head>
 
-<?php include '../includes/header.php'; ?>
+<?php require '../includes/header.php'; ?>
 
 <body>
     <main>
@@ -475,7 +475,7 @@
     </div>
 
 <!-- FOOTER -->
-    <?php include '../includes/footer.php'; ?> 
+    <?php require '../includes/footer.php'; ?> 
 
     <script src="/js/EspaceUtilisateur.js" defer></script>
 </body>

@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const listeusers = [
-    { email: "admin@ecoride.fr", password: "123", role: "admin", pseudo: "SuperAdmin" },
-    { email: "employe@ecoride.fr", password: "456", role: "employe", pseudo: "Jean_Modo" },
-    { email: "client@mail.com", password: "789", role: "user", pseudo: "EcoRider31" }
-];
+//     const listeusers = [
+//     { email: "admin@ecoride.fr", password: "123", role: "admin", pseudo: "SuperAdmin" },
+//     { email: "employe@ecoride.fr", password: "456", role: "employe", pseudo: "Jean_Modo" },
+//     { email: "client@mail.com", password: "789", role: "user", pseudo: "EcoRider31" }
+// ];
     
     // CIBLE LES ELEMENTS DU DOM
     const form = document.getElementById('connexion-form');

@@ -1,3 +1,46 @@
+<?php
+$message_succes = "";
+$message_erreur = "";
+
+// Connexion à la BDD
+if (file_exists('../config/db.php')) {
+    require_once '../config/db.php';
+}
+
+// Traitement du formulaire
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nom = $_POST['nom'] ?? '';
+    $prenom = $_POST['prenom'] ?? '';
+    $pseudo = $_POST['pseudo'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
+    $confirmer_password = $_POST['confirmer-password'] ?? '';
+
+    if ($password !== $confirmer_password) {
+        $message_erreur = "Les mots de passe ne correspondent pas.";
+    } else {
+        $password_hache = password_hash($password, PASSWORD_DEFAULT);
+
+        try {
+            $sql = "INSERT INTO utilisateur (nom, prenom, pseudo, email, password, role_id) VALUES (:nom, :prenom, :pseudo, :email, :mdp, :role_id)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                ':nom' => $nom,
+                ':prenom' => $prenom,
+                ':pseudo' => $pseudo,
+                ':email' => $email,
+                ':mdp' => $password_hache,
+                ':role_id' => 1 // Par défaut, nouvel utilisateur a le rôle "utilisateur"
+            ]);
+
+            $message_succes = "Félicitations $pseudo, ton compte a été créé !";
+        } catch (PDOException $e) {
+            $message_erreur = "Erreur : " . $e->getMessage();
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -18,15 +61,24 @@
 
 </head>
 
-<?php include '../includes/header.php'; ?>
+<?php require '../includes/header.php'; ?>
 
 <body>
 <main class="container my-5">
+    <!-- Messages de succès et d'erreur -->
+    <?php if ($message_succes): ?>
+    <div class="alert alert-success"><?php echo $message_succes; ?></div>
+<?php endif; ?>
+
+<?php if ($message_erreur): ?>
+    <div class="alert alert-danger"><?php echo $message_erreur; ?></div>
+<?php endif; ?>
+
     <div class="row inscription-form-et-img">
         
         <div class="col-12 col-lg-6">
             <div class="formulaires2">
-                <form action="inscription_traitement.php" method="post">
+                <form action="inscription.php" method="post">
                     <fieldset class="fieldset-inscription">
                         <legend>Inscription</legend>
                         <div class="inscription">
@@ -70,7 +122,7 @@
     </div>
 </main>
    <!-- FOOTER -->
-<?php include '../includes/footer.php'; ?> 
+<?php require '../includes/footer.php'; ?> 
 
 </body>
 

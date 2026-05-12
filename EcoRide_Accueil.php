@@ -17,7 +17,7 @@
 
 </head>
 
-<?php include '../includes/header.php'; ?>
+<?php require 'includes/header.php'; ?>
 
 <body>
     <main>
@@ -132,7 +132,7 @@
     </main>
 
     <!-- FOOTER -->
-<?php include '../includes/footer.php'; ?>
+<?php require 'includes/footer.php'; ?>
 
     <script src="/js/barreDeRecherche.js" defer></script>
 </body>

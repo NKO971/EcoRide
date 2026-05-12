@@ -15,7 +15,7 @@
     <script src="/EcoRide/js/jquery-3.7.1.min.js" defer></script>
 </head>
 
-<?php include '../includes/header.php'; ?>
+<?php require '../includes/header.php'; ?>
 
 <body>
     <main class="conteneur">
@@ -204,7 +204,7 @@
     </main>
 
     <!-- FOOTER -->
-<?php include '../includes/footer.php'; ?>
+<?php require '../includes/footer.php'; ?>
 
     <!-- Modal Détails du trajet -->
     <div class="modal fade" id="modalDetailsTrajet" tabindex="-1" aria-hidden="true">
