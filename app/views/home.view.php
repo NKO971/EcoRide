@@ -1,23 +1,3 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoRide - Accueil</title>
-    <link rel="stylesheet" href="/EcoRide/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/EcoRide/css/base.css">
-    <link rel="stylesheet" href="/EcoRide/css/mediaquerise_base.css">
-    <link rel="stylesheet" href="/EcoRide/css/style.css">
-    <!-- Je récupère des icons sur google front -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-    <script src="/EcoRide/js/bootstrap.bundle.min.js" defer></script>
-    <script src="/EcoRide/js/jquery-3.7.1.min.js" defer></script>
-
-</head>
-
-<?php require 'includes/header.php'; ?>
 
 <body>
     <main>
@@ -114,7 +94,7 @@
                             </p>
                         </div>
                         <div class="mt-4">
-                            <a href="/HTML/inscription.html" 
+                            <a href="?page=inscription" 
                                 class="btn btn-inscription"
                                 id="btn-inscription-accueil">
                                 Rejoindre la communauté
@@ -131,10 +111,7 @@
         </section>
     </main>
 
-    <!-- FOOTER -->
-<?php require 'includes/footer.php'; ?>
-
-    <script src="/js/barreDeRecherche.js" defer></script>
+    <script src="/EcoRide/js/barreDeRecherche.js" defer></script>
 </body>
 
 </html>

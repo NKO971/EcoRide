@@ -1,22 +1,3 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoRide - Covoiturage</title>
-    <link rel="stylesheet" href="/EcoRide/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/EcoRide/css/base.css">
-    <link rel="stylesheet" href="/EcoRide/css/mediaquerise_base.css">
-    <link rel="stylesheet" href="/EcoRide/css/resultat.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-    <script src="/EcoRide/js/bootstrap.bundle.min.js" defer></script>
-    <script src="/EcoRide/js/jquery-3.7.1.min.js" defer></script>
-</head>
-
-<?php require '../includes/header.php'; ?>
-
 <body>
     <main class="conteneur">
         <!-- Barre de recherche -->
@@ -168,7 +149,7 @@
                             </div>
                             <div class="info-conducteur">
                                 <div class="photo-pseudo col-12 col-md-auto d-flex flex-column flex-md-row align-items-center gap-2">
-                                    <img src="/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82878.png"
+                                    <img src="/EcoRide/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82878.png"
                                         alt="Jean" class="photoDeProfil" data-photo-chauffeur>
                                     <span class="pseudo" data-pseudo-chauffeur>JeanP75</span>
                                 </div>
@@ -203,9 +184,6 @@
         </div>
     </main>
 
-    <!-- FOOTER -->
-<?php require '../includes/footer.php'; ?>
-
     <!-- Modal Détails du trajet -->
     <div class="modal fade" id="modalDetailsTrajet" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -230,7 +208,7 @@
                     <div class="row">
                         <div class="col-md-6 border-end">
                             <div class="info-conducteur flex align-items-center gap-3 mb-3">
-                                <img src="/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82878.png"
+                                <img src="/EcoRide/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82878.png"
                                     alt="Jean" class="photoDeProfil-details" id="modal-photo-chauffeur">
                                 <div class="conducteur-meta">
                                     <h4 class="pseudo-modal m-0" id="modal-pseudo-chauffeur">JeanP75</h4>
@@ -334,8 +312,8 @@
                         Vous devez être connecté pour réserver un trajet et utiliser vos crédits.
                     </p>
                     <div class="d-grid gap-2 mt-4">
-                        <a href="/HTML/connexion.html" class="btn btn-primary-eco">Se connecter</a>
-                        <a href="/HTML/Inscription.html" class="btn btn-secondary-eco">S'inscrire</a>
+                        <a href="connexion.php" class="btn btn-primary-eco">Se connecter</a>
+                        <a href="inscription.php" class="btn btn-secondary-eco">S'inscrire</a>
                         <button type="button" class="btn btn-cancel-link" data-bs-dismiss="modal">Plus tard</button>
                     </div>
                 </div>
@@ -343,8 +321,8 @@
         </div>
     </div>
 
-    <script src="/js/barreDeRecherche.js" defer></script>
-    <script src="/js/resultat.js" defer></script>
+    <script src="/EcoRide/js/barreDeRecherche.js" defer></script>
+    <script src="/EcoRide/js/resultat.js" defer></script>
 </body>
 
 </html>

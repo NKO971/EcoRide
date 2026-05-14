@@ -1,24 +1,3 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoRide - Espace utilisateur</title>
-    <link rel="stylesheet" href="/EcoRide/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/EcoRide/css/base.css">
-    <link rel="stylesheet" href="/EcoRide/css/mediaquerise_base.css">
-    <link rel="stylesheet" href="/EcoRide/css/espace_utilisateur.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-    <!-- Je récupère des icons sur google front -->
-    <script src="/EcoRide/js/bootstrap.bundle.min.js" defer></script>
-    <script src="/EcoRide/js/jquery-3.7.1.min.js" defer></script>
-
-
-</head>
-
-<?php require '../includes/header.php'; ?>
 
 <body>
     <main>
@@ -30,37 +9,37 @@
                     <!-- Affichage des informations utilisateur -->
                     <div class="row mb-4 border-bottom pb-3">
                         <div class="col-md-6">
-                            <span class="text-muted small">Nom :</span> <span class="fw-bold" id="display-nom">DUCHAMP</span>
+                            <span class="text-muted small">Nom :</span> <span class="fw-bold" id="display-nom"><?php echo htmlspecialchars($user['nom'] ?? 'N/A'); ?></span>
                         </div>
                         <div class="col-md-6">
-                            <span class="text-muted small">Prénom :</span> <span class="fw-bold" id="display-prenom">Jean</span>
+                            <span class="text-muted small">Prénom :</span> <span class="fw-bold" id="display-prenom"><?php echo htmlspecialchars($user['prenom'] ?? 'N/A'); ?></span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="nom">Nom</label>
-                            <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+                            <input type="text" id="nom" name="nom" placeholder="Votre nom" value="<?php echo htmlspecialchars($user['nom'] ?? ''); ?>" required>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="prenom">Prénom</label>
-                            <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required>
+                            <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" value="<?php echo htmlspecialchars($user['prenom'] ?? ''); ?>" required>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="votre@email.com" required>
+                            <input type="email" id="email" name="email" placeholder="votre@email.com" value="<?php echo htmlspecialchars($user['email'] ?? ''); ?>" required>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="pseudo">Pseudo</label>
-                            <input type="text" id="pseudo" name="pseudo" placeholder="Votre pseudo" required>
+                            <input type="text" id="pseudo" name="pseudo" placeholder="Votre pseudo" value="<?php echo htmlspecialchars($user['pseudo'] ?? ''); ?>" required>
                         </div>
                     </div>
 
@@ -68,21 +47,21 @@
                         <div class="form-group">
                             <label for="adresse">Adresse complète</label>
                             <input type="text" id="adresse" name="adresse"
-                                placeholder="123 rue de l'Écologie, 31000 Toulouse">
+                                placeholder="123 rue de l'écologie, 31000 Toulouse" value="<?php echo htmlspecialchars($user['adresse'] ?? ''); ?>">
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="date_naissance">Date de naissance</label>
-                            <input type="date" id="date_naissance" name="date_naissance">
+                            <input type="date" id="date_naissance" name="date_naissance" value="<?php echo htmlspecialchars($user['date_naissance'] ?? ''); ?>">
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="telephone">Téléphone</label>
-                            <input type="tel" id="telephone" name="telephone" placeholder="06 00 00 00 00"
+                            <input type="tel" id="telephone" name="telephone" placeholder="06 00 00 00 00" value="<?php echo htmlspecialchars($user['telephone'] ?? ''); ?>"
                                 pattern="[0-9]{10}">
                         </div>
                     </div>
@@ -333,149 +312,23 @@
                     </div>
 
                     <div class="tab-content" id="historique-tabContent">
-
                         <div class="tab-pane fade show active" id="liste-avenir" role="tabpanel">
                             <div class="list-group list-group-flush">
-
-                                <div class="list-group-item p-4 border-0 border-bottom trajet-hover" data-covoiturage-id="101" data-reservation-id="1">
-                                    <div class="row align-items-center">
-                                        <div class="col-md-6">
-                                            <div class="mb-2">
-                                                <span
-                                                    class="badge bg-info-subtle text-info border border-info-subtle small">Passager</span>
-                                            </div>
-                                            <div class="d-flex align-items-center mb-1">
-                                                <span class="lieux h5 mb-0 fw-bold" data-lieu-depart>Paris</span>
-                                                <i class="bi bi-arrow-right mx-2 text-muted"></i>
-                                                <span class="lieux h5 mb-0 fw-bold" data-lieu-arrivee>Lyon</span>
-                                            </div>
-                                            <div class="text-muted small"><span data-date-depart>12 Mars</span> • <span data-heure-depart>08:30</span> • Chauffeur :
-                                                <strong data-organisateur-pseudo>Marc</strong>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 text-md-center">
-                                            <span
-                                                class="badge rounded-pill bg-success-subtle text-success border border-success-subtle px-3 py-2" data-statut>Confirmé</span>
-                                        </div>
-                                        <div class="col-md-3 text-md-end">
-                                            <div class="fw-bold mb-1"><span data-prix-personne>10</span> Crédits</div>
-                                            <div class="zone-actions-passager">
-                                                <button class="btn btn-sm btn-outline-danger btn-annuler-passager"
-                                                    onclick="annulerTrajet(this, 'passager')">Annuler
-                                                    réservation</button>
-
-                                                <button class="btn btn-sm btn-success btn-valider-trajet"
-                                                    onclick="validerTrajet(this)" disabled>Valider le trajet</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="list-group-item p-4 border-0 border-bottom trajet-hover" data-covoiturage-id="102">
-                                    <div class="row align-items-center">
-                                        <div class="col-md-6">
-                                            <div class="mb-2">
-                                                <span
-                                                    class="badge bg-primary-subtle text-primary border border-primary-subtle small">Conducteur</span>
-                                            </div>
-                                            <div class="d-flex align-items-center mb-1">
-                                                <span class="lieux h5 mb-0 fw-bold" data-lieu-depart>Toulouse</span>
-                                                <i class="bi bi-arrow-right mx-2 text-muted"></i>
-                                                <span class="lieux h5 mb-0 fw-bold" data-lieu-arrivee>Bordeaux</span>
-                                            </div>
-                                            <div class="text-muted small"><span data-date-depart>15 Mars</span> • <span data-heure-depart>10:00</span> • <strong><span data-nb-place>3</span> places
-                                                    restantes</strong></div>
-                                        </div>
-                                        <div class="col-md-3 text-md-center">
-                                            <span
-                                                class="badge rounded-pill bg-warning-subtle text-warning border border-warning-subtle px-3 py-2" data-statut>En
-                                                cours</span>
-                                        </div>
-                                        <div class="col-md-3 text-md-end zone-actions-">
-                                            <button class="btn btn-sm btn-danger btn-annuler-chauffeur"
-                                                onclick="annulerTrajet(this, 'chauffeur')">Annuler le trajet</button>
-
-                                            <button class="btn btn-sm btn-primary btn-workflow" data-etat="initial"
-                                                onclick="gererWorkflow(this)">Démarrer le trajet</button>
-                                        </div>
-                                    </div>
-                                </div>
+                                <!-- Les trajets à venir seront affichés ici dynamiquement -->
                             </div>
                         </div>
 
                         <div class="tab-pane fade" id="liste-historique" role="tabpanel">
-                            <div class="text-center p-5">
-                                <i class="bi bi-clock-history d-block mb-3 h1 text-muted opacity-50"></i>
-                                <p class="text-muted fw-bold">Aucun trajet passé</p>
+                            <div class="list-group list-group-flush">
+                                <!-- L'historique des trajets sera affichés ici dynamiquement -->
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Fin de l'historique des trajets -->
     </main>
 
-    <!-- Modal de validation du trajet par le passager -->
-    <div class="modal fade" id="modalAvis" tabindex="-1" aria-labelledby="modalAvisLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-light">
-                    <h5 class="modal-title" id="modalAvisLabel">Validation du trajet</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-                    <p class="text-muted small">Votre confirmation permet de libérer les crédits pour le chauffeur.</p>
-
-                    <form id="formAvis">
-                        <!-- Champ caché pour lier l'avis au covoiturage et à l'utilisateur -->
-                        <input type="hidden" id="covoiturage-id-avis" name="covoiturage_id" value="">
-                        <input type="hidden" id="utilisateur-id-avis" name="utilisateur_id" value="">
-
-                        <div class="mb-3">
-                            <label for="note" class="form-label fw-bold">Notez votre expérience :</label>
-                            <select class="form-select" id="note" name="note" required>
-                                <option value="" disabled selected>Sélectionner une note...</option>
-                                <option value="5">⭐⭐⭐⭐⭐ - Excellent</option>
-                                <option value="4">⭐⭐⭐⭐ - Très bien</option>
-                                <option value="3">⭐⭐⭐ - Moyen</option>
-                                <option value="2">⭐⭐ - Décevant</option>
-                                <option value="1">⭐ - Mauvais</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="commentaire" class="form-label fw-bold">Votre avis :</label>
-                            <textarea class="form-control" id="commentaire" name="commentaire" rows="3"
-                                placeholder="Comment s'est déroulé le trajet ?" required></textarea>
-                            <div class="form-text text-info">
-                                <i class="bi bi-info-circle"></i> Cet avis sera modéré par nos équipes.
-                            </div>
-                        </div>
-
-                        <input type="hidden" name="statut" value="en attente">
-                    </form>
-                </div>
-
-                <div class="modal-footer d-flex justify-content-between">
-                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="signalerProbleme()">
-                        Signaler un problème
-                    </button>
-
-                    <div>
-                        <button type="button" class="btn btn-success btn-sm" onclick="envoyerAvis()">
-                            Confirmer et Envoyer
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-<!-- FOOTER -->
-    <?php require '../includes/footer.php'; ?> 
-
-    <script src="/js/EspaceUtilisateur.js" defer></script>
 </body>
+
+</html>

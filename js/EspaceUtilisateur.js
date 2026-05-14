@@ -21,35 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const tabAvenir = document.getElementById('tab-avenir');
     const tabHistorique = document.getElementById('tab-historique');
 
-    // Récupérer les données de l'utilisateur depuis le localStorage
-    const userJson = localStorage.getItem('user');
-
-    if (!userJson) {
-        window.location.href = '../HTML/connexion.html';
-        return;
-    }
-
-    // Vérifier le rôle de l'utilisateur
-    const user = JSON.parse(userJson);
-    if (user.role !== 'user') {
-        window.location.href = '../HTML/connexion.html';
-        return;
-    }
-
-    // Afficher les données de l'utilisateur dans la console
-    console.log('Données de l\'utilisateur :', user);
-
-    // Afficher le pseudo de l'utilisateur dans le menu
-    const nomEmployeElement = document.getElementById('menu-pseudo');
-    if (nomEmployeElement) {
-        nomEmployeElement.textContent = user.pseudo;
-    }
-
-    // Peupler l'input caché organisateur_id avec l'ID de l'utilisateur connecté
-    const organisateurIdInput = document.getElementById('organisateur_id');
-    if (organisateurIdInput) {
-        organisateurIdInput.value = user.utilisateur_id || '';
-    }
+    // NOTE: L'authentification et les données utilisateur sont gérées par le serveur PHP
+    // Les formulaires envoient directement les données au serveur via l'attribut action
 
     // --- LOGIQUE D'AFFICHAGE EN FONCTION DES ROLES ---
 
@@ -110,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         calculCommission(prixSaisi);
     });
 
-    // Écouteur de clic sur le bouton Publier (Validation finale)
+    // Écouteur de clic sur le bouton Publier (Validation côté client uniquement)
     publierBtn.addEventListener('click', (event) => {
         const prixFinal = parseFloat(inputPrix.value) || 0;
 
@@ -139,14 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Affichage du payload en console (ANTICIPATION BACK-END)
-        console.log("✅ PUBLICATION TRAJET VALIDÉE - Prêt à envoyer à l'API");
-        console.log("📤 Payload à envoyer :", {
-            utilisateur_id: user.utilisateur_id,
-            prix_personne: prixFinal,
-            organisateur_id: organisateurIdInput.value,
-            timestamp: new Date().toISOString()
-        });
+        // ✅ Le formulaire est envoyé au serveur via l'attribut action
+        console.log("✅ Formulaire validé - Envoi au serveur");
     });
 
     // --- LOGIQUE D'AJOUT DE FORMULAIRE VÉHICULE ---
@@ -234,231 +201,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- LOGIQUE D'ANNULATION DE TRAJET ---
-
-    window.annulerTrajet = function (bouton, role) {
-        if (!confirm("Confirmer l'annulation ?")) return;
-
-        const trajet = bouton.closest('.list-group-item');
-        if (!trajet) {
-            console.error("❌ Élément trajet introuvable");
-            return;
-        }
-
-        const covoiturageId = trajet.getAttribute('data-covoiturage-id');
-        const reservationId = trajet.getAttribute('data-reservation-id');
-
-        // ANTICIPATION BACK-END : Log structuré pour l'API
-        const payloadAnnulation = {
-            action: 'annuler_trajet',
-            covoiturage_id: covoiturageId,
-            reservation_id: reservationId,
-            utilisateur_id: user.utilisateur_id,
-            role: role,
-            timestamp: new Date().toISOString()
-        };
-
-        console.log("🔴 ANNULATION TRAJET - Prêt à envoyer :", payloadAnnulation);
-
-        // Animation de disparition
-        trajet.style.transition = "all 0.5s ease";
-        trajet.style.transform = "translateX(100px)";
-        trajet.style.opacity = "0";
-
-        setTimeout(() => {
-            trajet.remove();
-
-            // Vérifier si la liste est vide
-            const liste = document.getElementById('liste-avenir');
-            if (liste && liste.querySelectorAll('.list-group-item').length === 0) {
-                liste.innerHTML = `
-                    <div class="text-center p-5">
-                        <i class="bi bi-calendar-x d-block mb-3 h1 text-muted opacity-50"></i>
-                        <p class="text-muted fw-bold">Vous n'avez plus aucun trajet à venir.</p>
-                    </div>`;
-            }
-        }, 500);
-    };
-
-    // --- LOGIQUE DE GESTION DU WORKFLOW DE TRAJET ---
-
-    window.gererWorkflow = function (bouton) {
-        const etatActuel = bouton.getAttribute('data-etat');
-        const trajet = bouton.closest('.list-group-item');
-
-        if (!trajet) {
-            console.error("❌ Trajet introuvable pour le workflow");
-            return;
-        }
-
-        const covoiturageId = trajet.getAttribute('data-covoiturage-id');
-
-        switch (etatActuel) {
-            case 'initial':
-                // Désactiver le bouton d'annulation
-                const zoneActions = bouton.closest('.zone-actions-');
-                const boutonAnnuler = zoneActions ? zoneActions.querySelector('.btn-annuler-chauffeur') : null;
-                if (boutonAnnuler) {
-                    boutonAnnuler.style.display = 'none';
-                }
-
-                // Mettre à jour le bouton
-                bouton.textContent = "Arrivée à destination";
-                bouton.setAttribute('data-etat', 'en-cours');
-                bouton.classList.remove("btn-primary");
-                bouton.classList.add("btn-warning");
-
-                // ANTICIPATION BACK-END
-                const payloadDemarrage = {
-                    action: 'demarrer_trajet',
-                    covoiturage_id: covoiturageId,
-                    utilisateur_id: user.utilisateur_id,
-                    statut: 'en-cours',
-                    timestamp: new Date().toISOString()
-                };
-
-                console.log("🟡 DÉMARRAGE TRAJET - Prêt à envoyer :", payloadDemarrage);
-                break;
-
-            case 'en-cours':
-                // Mettre à jour le bouton
-                bouton.textContent = "Trajet terminé - En attente de validation";
-                bouton.setAttribute('data-etat', 'termine');
-                bouton.disabled = true;
-                bouton.classList.remove("btn-warning");
-                bouton.classList.add("btn-success");
-
-                // Activer le bouton de validation passager
-                const boutonValidationPassager = trajet.querySelector('.btn-valider-trajet');
-                if (boutonValidationPassager) {
-                    boutonValidationPassager.disabled = false;
-                }
-
-                // ANTICIPATION BACK-END
-                const payloadTerminaison = {
-                    action: 'terminer_trajet',
-                    covoiturage_id: covoiturageId,
-                    utilisateur_id: user.utilisateur_id,
-                    statut: 'termine',
-                    timestamp: new Date().toISOString()
-                };
-
-                console.log("🟢 TERMINAISON TRAJET - Prêt à envoyer :", payloadTerminaison);
-                break;
-
-            default:
-                console.warn("⚠️ État inconnu :", etatActuel);
-        }
-    };
-
-    // --- LOGIQUE DE VALIDATION DE TRAJET PAR LE PASSAGER ---
-
-    window.validerTrajet = function (bouton) {
-        if (!confirm("Confirmer la validation du trajet ?")) return;
-
-        const trajet = bouton.closest('.list-group-item');
-        if (!trajet) {
-            console.error("❌ Trajet introuvable pour validation");
-            return;
-        }
-
-        const covoiturageId = trajet.getAttribute('data-covoiturage-id');
-
-        // Mise à jour du bouton
-        bouton.textContent = "Trajet validé";
-        bouton.disabled = true;
-        bouton.classList.remove("btn-success");
-        bouton.classList.add("btn-warning");
-
-        // Stocker l'ID du trajet pour la modal
-        window.covoiturageIdEnCoursDeValidation = covoiturageId;
-
-        // Peupler les champs cachés de la modale
-        const covoiturageIdAvis = document.getElementById('covoiturage-id-avis');
-        const utilisateurIdAvis = document.getElementById('utilisateur-id-avis');
-
-        if (covoiturageIdAvis) covoiturageIdAvis.value = covoiturageId;
-        if (utilisateurIdAvis) utilisateurIdAvis.value = user.utilisateur_id;
-
-        // Affichage de la modale
-        const modalElement = document.getElementById('modalAvis');
-        if (modalElement) {
-            const instanceModale = new bootstrap.Modal(modalElement);
-            instanceModale.show();
-            console.log(`📋 VALIDATION TRAJET - Modale ouverte pour trajet ID: ${covoiturageId}`);
-        } else {
-            console.error("❌ Modal introuvable");
-        }
-    };
-
-    // --- LOGIQUE DE GESTION DE L'AVIS PASSAGER ---
-
-    window.envoyerAvis = function() {
-        const noteElement = document.getElementById('note');
-        const commentaireElement = document.getElementById('commentaire');
-        const covoiturageIdAvis = document.getElementById('covoiturage-id-avis');
-        const utilisateurIdAvis = document.getElementById('utilisateur-id-avis');
-        const statutElement = document.querySelector('input[name="statut"]');
-
-        // Vérification des champs
-        if (!noteElement || !commentaireElement) {
-            console.error("❌ Éléments du formulaire d'avis introuvables");
-            return;
-        }
-
-        const note = noteElement.value;
-        const commentaire = commentaireElement.value;
-        const covoiturageId = covoiturageIdAvis ? covoiturageIdAvis.value : '';
-        const utilisateurId = utilisateurIdAvis ? utilisateurIdAvis.value : '';
-        const statut = statutElement ? statutElement.value : 'en attente';
-
-        if (!note || !commentaire) {
-            alert("Veuillez remplir tous les champs obligatoires.");
-            return;
-        }
-
-        // ANTICIPATION BACK-END : Payload structuré
-        const payloadAvis = {
-            action: 'envoyer_avis',
-            avis: {
-                covoiturage_id: covoiturageId,
-                utilisateur_id: utilisateurId,
-                note: parseInt(note),
-                commentaire: commentaire,
-                statut: statut,
-                date_creation: new Date().toISOString()
-            }
-        };
-
-        console.log("⭐ AVIS PASSAGER - Prêt à envoyer :", payloadAvis);
-
-        // Fermeture de la modale
-        const modalElement = document.getElementById('modalAvis');
-        if (modalElement) {
-            const instanceModale = bootstrap.Modal.getInstance(modalElement);
-            if (instanceModale) instanceModale.hide();
-        }
-
-        // Réinitialisation du formulaire
-        const formAvis = document.getElementById('formAvis');
-        if (formAvis) formAvis.reset();
-
-        alert("Merci ! Votre avis a été enregistré et sera modéré par nos équipes.");
-    };
-
-    window.signalerProbleme = function() {
-        const covoiturageIdAvis = document.getElementById('covoiturage-id-avis');
-        const covoiturageId = covoiturageIdAvis ? covoiturageIdAvis.value : '';
-
-        // ANTICIPATION BACK-END
-        const payloadSignalement = {
-            action: 'signaler_probleme',
-            covoiturage_id: covoiturageId,
-            utilisateur_id: user.utilisateur_id,
-            timestamp: new Date().toISOString()
-        };
-
-        console.log("🚨 SIGNALEMENT - Prêt à envoyer :", payloadSignalement);
-        alert("Votre signalement a été transmis à notre équipe de support.");
-    };
+    // NOTE: Gestion des trajets (annulation, workflow, validation, avis, signalements)
+    // confiée au backend PHP - Les formulaires POSTent directement au serveur
 });

@@ -1,7 +1,3 @@
-export default class Formulaire {
-    constructor(id) {
-        this.id = id;
-        this.form = document.getElementById(this);
-        this.formdata = new FormData(this.formHTML);
-    }
-    }
+// Gestion du formulaire contact
+// Les soumissions sont gérées directement par le backend PHP
+console.log("✅ Page contact chargée");

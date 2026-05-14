@@ -1,13 +1,53 @@
 <?php 
-// 1. Indispensable pour que le header sache qui est connecté
+// Indispensable pour que le header sache qui est connecté
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+// On n'appelle la BDD que si l'utilisateur est connecté pour récupérer ses crédits
+$credits_reels = 0; 
+if (isset($_SESSION['user_id'])) {
+    require_once __DIR__ . '/../app/config/db.php'; // Chemin sécurisé (includes/ → remonte 1 → app/)
+    
+    $stmt = $pdo->prepare("SELECT solde_credits FROM utilisateur WHERE utilisateur_id = :id");
+    $stmt->execute(['id' => $_SESSION['user_id']]);
+    $resultat = $stmt->fetch();
+    
+    if ($resultat) {
+        $credits_reels = $resultat['solde_credits'];
+    }
+}
 ?>
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+<?php 
+echo $title ?? 'EcoRide'; 
+?>
+    </title>
+         <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+<?php if (isset($specificCss)): ?>
+    <?php foreach ($specificCss as $css): ?>
+        <link rel="stylesheet" href="<?= $css ?>">
+    <?php endforeach; ?>
+<?php endif; ?>
+
+<?php if (isset($specificJS)): ?>
+    <?php foreach ($specificJS as $script): ?>
+        <script src="<?= $script ?>" defer></script>
+    <?php endforeach; ?>
+<?php endif; ?>
+</head>
 <header>
+    
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/EcoRide/Ecoride_Accueil.php">
+            <a class="navbar-brand" href="/EcoRide/public/?page=home">
                 <img src="/EcoRide/Image/EcoRide.svg" alt="logo EcoRide" class="logo">
             </a>
 
@@ -18,9 +58,9 @@ if (session_status() === PHP_SESSION_NONE) {
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <div class="navbar-nav ms-auto align-items-center">
-                    <a class="nav-link" href="/EcoRide/Ecoride_Accueil.php">Accueil</a>
-                    <a class="nav-link" href="/EcoRide/HTML/resultat.php">Covoiturage</a>
-                    <a class="nav-link" href="/EcoRide/HTML/contact.php">Contact</a>
+                    <a class="nav-link" href="/EcoRide/public/?page=home">Accueil</a>
+                    <a class="nav-link" href="/EcoRide/public/?page=search">Covoiturage</a>
+                    <a class="nav-link" href="/EcoRide/public/?page=contact">Contact</a>
 
                     <?php if (isset($_SESSION['user_id'])): ?>
                         
@@ -30,9 +70,9 @@ if (session_status() === PHP_SESSION_NONE) {
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="navbarDropdown">
                                 <li class="dropdown-item-text text-center border-bottom pb-2 mb-2">
-                                    <span class="badge bg-success py-2 px-3">20 Crédits</span>
+                                    <span class="badge bg-success py-2 px-3"><?php echo $credits_reels; ?> Crédits</span>
                                 </li>
-                                <li><a class="dropdown-item" href="/EcoRide/HTML/Espace_utilisateur.php">Accéder au profil</a></li>
+                                <li><a class="dropdown-item" href="/EcoRide/public/?page=profile">Accéder au profil</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item text-danger" href="/EcoRide/includes/deconnexion.php">Déconnexion</a></li>
                             </ul>
@@ -40,7 +80,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
                     <?php else: ?>
 
-                        <a class="nav-link" href="/EcoRide/HTML/connexion.php">Connexion</a>
+                        <a class="nav-link" href="/EcoRide/public/?page=connexion">Connexion</a>
 
                     <?php endif; ?>
                     </div>
