@@ -48,8 +48,9 @@ function profileController($pdo) {
         "/EcoRide/css/espace_utilisateur.css"
     ];
     $specificJS = [
-        "/js/bootstrap.bundle.min.js",
-        "/js/jquery-3.7.1.min.js"
+        "/EcoRide/js/bootstrap.bundle.min.js",
+        "/EcoRide/js/jquery-3.7.1.min.js",
+        "/EcoRide/js/EspaceUtilisateur.js"
     ];
 
     // Inclusion des morceaux dans l'ordre

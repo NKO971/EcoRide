@@ -70,7 +70,7 @@ echo $title ?? 'EcoRide';
                                     <p class="mb-0 text-light-dark fw-bold" id="nom-admin">Chargement...</p>
                                 </div>
                                 <a class="btn btn-outline-light btn-sm ms-lg-3 mt-2 mt-lg-0" 
-                                   href="/EcoRide/includes/deconnexion.php" 
+                                   href="../app/controllers/logout_controller.php" 
                                    id="btn-logout-admin">Déconnexion</a>
                             </li>
                         </ul>

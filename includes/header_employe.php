@@ -65,7 +65,7 @@ echo $title ?? 'EcoRide';
                                 <span class="material-symbols-outlined align-middle">account_circle</span>
                                 Session : Employé
                             </span>
-                            <a href="/EcoRide/includes/deconnexion.php" type="button" id="btnLogout" class="btn btn-outline-danger btn-sm">
+                            <a href="../app/controllers/logout_controller.php" type="button" id="btnLogout" class="btn btn-outline-danger btn-sm">
                                 Déconnexion
                             </a>
                         </div>

@@ -20,6 +20,8 @@ function loginController($pdo) {
             $_SESSION['user_id'] = $user['utilisateur_id'];
             $_SESSION['pseudo'] = $user['pseudo'];
             $_SESSION['role_id'] = $user['role_id'];
+            // AJOUT : On stocke les crédits pour que le header soit dynamique immédiatement
+            $_SESSION['credits'] = $user['solde_credits'];
 
             // REDIRECTION : On envoie l'utilisateur au bon endroit selon son rôle
             if ($user['role_id'] == 1) {
@@ -62,13 +64,15 @@ function registerController($pdo) {
     $success = '';
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $nom = $_POST['nom'] ?? '';
+        $prenom = $_POST['prenom'] ?? '';
         $pseudo = $_POST['pseudo'] ?? '';
         $email = $_POST['email'] ?? '';
         $password = $_POST['password'] ?? '';
         $password_confirm = $_POST['password_confirm'] ?? '';
 
         // Validation simple
-        if (empty($pseudo) || empty($email) || empty($password) || empty($password_confirm)) {
+        if (empty($nom) || empty($prenom) || empty($pseudo) || empty($email) || empty($password) || empty($password_confirm)) {
             $error = "Tous les champs sont obligatoires.";
         } elseif ($password !== $password_confirm) {
             $error = "Les mots de passe ne correspondent pas.";
@@ -79,7 +83,7 @@ function registerController($pdo) {
             $userModel = new User($pdo);
             
             // On appelle la méthode register()
-            $result = $userModel->register($pseudo, $email, $password);
+            $result = $userModel->register($nom, $prenom, $pseudo, $email, $password);
 
             if ($result) {
                 $success = "Inscription réussie ! Vous pouvez maintenant vous connecter.";
@@ -101,7 +105,8 @@ function registerController($pdo) {
     ];
     $specificJS = [
         "/EcoRide/js/bootstrap.bundle.min.js",
-        "/EcoRide/js/jquery-3.7.1.min.js"
+        "/EcoRide/js/jquery-3.7.1.min.js",
+        "/EcoRide/js/EspaceUtilisateur.js"
     ];
 
     // Inclusion des morceaux dans l'ordre

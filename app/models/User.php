@@ -10,7 +10,7 @@ class User {
     /**
      * Inscription avec injection de 20 crédits
      */
-    public function register($pseudo, $email, $password) {
+    public function register($nom, $prenom, $pseudo, $email, $password) {
         $hash = password_hash($password, PASSWORD_BCRYPT);
         
         // On force le role_id à 3 (User) et les crédits à 20
