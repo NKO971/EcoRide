@@ -21,7 +21,7 @@ body {
    3. FILTRES 
    ============================================ */
 fieldset {
-    border: solid 0.1rem var(--color-primary);
+    border: solid 0.1rem var(--color-primary) !important;
     border-radius: var(--radius-medium);
     height: auto;
     width: 100%;

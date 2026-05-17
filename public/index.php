@@ -32,11 +32,6 @@ switch ($page) {
         registerController($pdo); 
         break;
 
-    case 'search':
-        require_once __DIR__ . '/../app/controllers/search_controller.php';
-        searchController($pdo);
-        break;
-
     case 'contact':
         require_once __DIR__ . '/../app/controllers/contact_controller.php';
         contactController($pdo);

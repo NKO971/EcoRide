@@ -13,30 +13,18 @@ echo $title ?? 'EcoRide';
          <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 
 <?php 
-if (isset($specificCss)): 
-?>
-<?php 
-foreach ($specificCss as $css): 
-?>
+if (isset($specificCss)): ?>
+    <?php foreach ($specificCss as $css): ?>
         <link rel="stylesheet" href="<?= $css ?>">
+    <?php endforeach; ?>
+    <?php endif; ?>
+    
 <?php 
-endforeach; 
-?>
-<?php 
-endif; 
-?>
-
-<?php 
-if (isset($specificJS)): 
-?>
-<?php 
-foreach ($specificJS as $script): 
-?>
+if (isset($specificJS)): ?>
+   <?php foreach ($specificJS as $script): ?>
         <script src="<?= $script ?>" defer></script>
-<?php 
-endforeach; 
-?>
-<?php endif; ?>
+    <?php endforeach; ?>
+    <?php endif; ?>
 </head>
 <header>
     
@@ -54,7 +42,7 @@ endforeach;
             <div class="collapse navbar-collapse" id="navbarNav">
                 <div class="navbar-nav ms-auto align-items-center">
                     <a class="nav-link" href="/EcoRide/public/?page=home">Accueil</a>
-                    <a class="nav-link" href="/EcoRide/public/?page=search">Covoiturage</a>
+                    <a class="nav-link" href="/EcoRide/public/?page=covoiturage">Covoiturage</a>
                     <a class="nav-link" href="/EcoRide/public/?page=contact">Contact</a>
 
                     <?php if (isset($_SESSION['user_id'])): ?>

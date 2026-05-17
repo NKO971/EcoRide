@@ -1,27 +1,13 @@
+
 <body>
     <main class="conteneur">
         <!-- Barre de recherche -->
         <div class="bdr">
             <form class="barreRecherche input-group d-flex flex-wrap justify-content-center" method="get" role="search">
-                <!-- Ville de départ -->
-                <div class="col-12 col-md-8 col-lg-2 mx-auto">
-                    <label for="lieu_depart" class="visually-hidden">Ville de départ</label>
-                    <input type="text" placeholder="Départ" id="lieu_depart" name="lieu_depart" value="" class="form-control">
-                </div>
+               <input type="hidden" name="page" value="covoiturage">
 
-                <!-- Ville d'arrivée -->
-                <div class="col-12 col-md-8 col-lg-2 mx-auto">
-                    <label for="lieu_arrivee" class="visually-hidden">Ville d'arrivée</label>
-                    <input type="text" placeholder="Arrivée" id="lieu_arrivee" name="lieu_arrivee" value="" class="form-control">
-                </div>
+                <?php require __DIR__ . '/partials/search_bar.view.php'; ?>
 
-                <!-- Date -->
-                <div class="col-12 col-md-8 col-lg-2 mx-auto">
-                    <label for="date_depart" class="visually-hidden">Date du trajet</label>
-                    <input type="date" id="date_depart" name="date_depart" class="date form-control">
-                </div>
-
-                <!-- Bouton -->
                 <div class="col-12 col-md-4 col-lg-3 d-grid mx-auto">
                     <button class="btn btn-primary" type="submit">Rechercher</button>
                 </div>
@@ -49,60 +35,14 @@
                         <span class="material-symbols-outlined">filter_list</span> Afficher filtres.
                     </button>
                 </div>
+                
                 <div class="col-md-3 offset-md-1">
                     <fieldset id="zoneFiltres" class="collapse d-md-block">
-                        <form action="" method="get" class="filtre">
-                            <h2>Trier par</h2>
-
-                            <div class="conteneurFiltre">
-                                <input type="checkbox" id="plus-rapide" name="plus-rapide">
-                                <label for="plus-rapide"> Le plus rapide.</label>
-                            </div>
-                            <div class="conteneurFiltre">
-                                <input type="checkbox" id="plus-ecologique" name="plus-ecologique">
-                                <label for="plus-ecologique">Le plus écologique.</label>
-                            </div>
-
-                            <div class="conteneurFiltre">
-                                <label for="prix-max">Prix max :</label>
-                                <input class="prixDuree" type="number" id="prix-max" name="prix-max">
-                            </div>
-                            <div class="conteneurFiltre">
-                                <label for="duree-max">Durée max (h) :</label>
-                                <input class="prixDuree" type="number" id="duree-max" name="duree-max">
-                            </div>
-
-                            <div class="separation-2"></div>
-
-                            <h2>Horaires</h2>
-                            <div class="conteneurFiltre">
-                                <input type="checkbox" id="avant-6h" name="avant-6h">
-                                <label for="avant-6h">Avant 6 h 00</label>
-                            </div>
-                            <div class="conteneurFiltre">
-                                <input type="checkbox" id="entre-6h-12" name="entre-6h-12">
-                                <label for="entre-6h-12">6 h 00 - 12 h 00</label>
-                            </div>
-                            <div class="conteneurFiltre">
-                                <input type="checkbox" id="entre-12h-18h" name="entre-12h-18h">
-                                <label for="entre-12h-18h">12 h 00 - 18 h 00</label>
-                            </div>
-                            <div class="conteneurFiltre">
-                                <input type="checkbox" id="apres-18h" name="apres-18h">
-                                <label for="apres-18h">Après 18 h 00</label>
-                            </div>
-
-                            <div class="separation-2"></div>
-
-                            <h2>Sécurité</h2>
-                            <div class="conteneurFiltre">
-                                <input type="checkbox" id="profile-verifie" name="profile-verifie">
-                                <label for="profile-verifie">Profil vérifié</label>
-                            </div>
-                            <div class="conteneurFiltre">
-                                <input type="checkbox" id="note-superieur-a-3" name="note-superieur-a-3">
-                                <label for="note-superieur-a-3">Note > 3 étoiles</label>
-                            </div>
+                        <form action="/EcoRide/public/index.php" method="GET" class="filtre">
+                            <input type="hidden" name="page" value="covoiturage">
+                            
+                            <?php require __DIR__ . '/partials/search_filters.view.php'; ?>
+                            
                         </form>
                     </fieldset>
                 </div>
@@ -277,52 +217,38 @@
         </div>
     </div>
 
-    <!-- Modal Confirmation Paiement -->
+    <!-- Modal Confirmation de paiement -->
     <div class="modal fade" id="modalConfirmationPaiment" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
-            <div class="modal-content modal-confirmation-eco">
-                <div class="modal-body text-center p-4">
-                    <div class="icon-container-confirmation">
-                        <span class="material-symbols-outlined">account_balance_wallet</span>
-                    </div>
-                    <h5 class="modal-confirm-title">Confirmer la réservation ?</h5>
-                    <p class="modal-confirm-text">
-                        Le montant de <span class="highlight-credit" id="modal-montant-final">5 crédits</span> 
-                        sera prélevé de votre compte pour ce trajet.
-                    </p>
-                    <div class="d-grid gap-2 mt-4">
-                        <button type="button" class="btn btn-confirm-final" id="btn-confirmer-paiement">Confirmer et payer</button>
-                        <button type="button" class="btn btn-cancel-link" data-bs-dismiss="modal">Annuler</button>
-                    </div>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title bold">Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal de connexion requise -->
-    <div class="modal fade" id="modalConnexionRequise" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
-            <div class="modal-content modal-confirmation-eco">
-                <div class="modal-body text-center p-4">
-                    <div class="icon-container-visitor">
-                        <span class="material-symbols-outlined">person_add</span>
-                    </div>
-                    <h5 class="modal-confirm-title">Connexion requise</h5>
-                    <p class="modal-confirm-text">
-                        Vous devez être connecté pour réserver un trajet et utiliser vos crédits.
-                    </p>
-                    <div class="d-grid gap-2 mt-4">
-                        <a href="connexion.php" class="btn btn-primary-eco">Se connecter</a>
-                        <a href="inscription.php" class="btn btn-secondary-eco">S'inscrire</a>
-                        <button type="button" class="btn btn-cancel-link" data-bs-dismiss="modal">Plus tard</button>
-                    </div>
+                <div class="modal-body text-center">
+                    <p>Êtes-vous sûr de vouloir réserver ce trajet ?</p>
+                    <p class="prix-modal"><span id="prix-confirmation">5</span> Crédits seront débités</p>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="btn-confirmer-reservation">Confirmer</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script src="/EcoRide/js/barreDeRecherche.js" defer></script>
+    
+    <script>
+    // On prend la variable $trajets (qui viendra du contrôleur) et on la transforme en JSON
+    // Si $trajets n'existe pas encore ou est vide, on met un tableau vide [] par sécurité
+    window.trajetsDepuisBDD = <?php echo isset($trajets) ? json_encode($trajets) : '[]'; ?>;
+    
+    // Affichage dans la console pour vérifier que les données sont bien transmises
+    console.log("Données reçues de la BDD via PHP :", window.trajetsDepuisBDD);
+    </script>
     <script src="/EcoRide/js/resultat.js" defer></script>
+
 </body>
 
 </html>
