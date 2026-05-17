@@ -247,6 +247,10 @@
     // Affichage dans la console pour vérifier que les données sont bien transmises
     console.log("Données reçues de la BDD via PHP :", window.trajetsDepuisBDD);
     </script>
+    <script>
+    // Injection sécurisée des trajets PHP/BDD directement accessibles pour JavaScript
+    window.trajetsDepuisBDD = <?php echo json_encode($trajets); ?>;
+    </script>
     <script src="/EcoRide/js/resultat.js" defer></script>
 
 </body>

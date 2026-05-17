@@ -29,7 +29,28 @@ class CovoiturageModel {
                 INNER JOIN voiture v ON c.voiture_id = v.voiture_id
                 WHERE c.statut = 'ouvert'";
 
+            $params = [];
+
+        // Application dynamique des filtres de la barre principale si remplis
+        if (!empty($depart)) {
+            $sql .= " AND c.lieu_depart LIKE :depart";
+            $params[':depart'] = '%' . $depart . '%';
+        }
+        if (!empty($arrivee)) {
+            $sql .= " AND c.lieu_arivee LIKE :arrivee";
+            $params[':arrivee'] = '%' . $arrivee . '%';
+        }
+        if (!empty($date)) {
+            $sql .= " AND DATE(c.date_depart) = :date_depart";
+            $params[':date_depart'] = $date;
+        }
+
+        // On ordonne par date et heure les trajets les plus proches
+        $sql .= " ORDER BY c.date_depart ASC, c.heure_depart ASC";
+
+        // Exécution sécurisée de la requête avec les paramètres
         $stmt = $this->pdo->query($sql);
+        $stmt->execute($params);
         $trajetsRaw = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $trajetsFormates = [];
