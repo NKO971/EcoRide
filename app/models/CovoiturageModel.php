@@ -11,7 +11,7 @@ class CovoiturageModel {
     /**
      * Récupère tous les trajets ouverts avec les détails associés
      */
-    public function getTrajetsPourRecherche() {
+    public function getTrajetsPourRecherche($depart = null, $arrivee = null, $date = null) {
         // La requête SQL avec jointures pour rassembler toutes les données
         $sql = "SELECT 
                     c.covoiturage_id AS id,
@@ -19,7 +19,7 @@ class CovoiturageModel {
                     c.lieu_arivee AS arrivee, -- Respect de la typo de ta BDD
                     c.date_depart AS date,
                     c.heure_depart,
-                    c.heure_arivee,           -- Respect de la typo de ta BDD
+                    c.heure_arrivee,           -- Respect de la typo de ta BDD
                     c.prix_personne AS prix,
                     c.nb_place AS passagers,
                     u.pseudo AS conducteur,    -- On utilise le pseudo de l'utilisateur
@@ -49,7 +49,7 @@ class CovoiturageModel {
         $sql .= " ORDER BY c.date_depart ASC, c.heure_depart ASC";
 
         // Exécution sécurisée de la requête avec les paramètres
-        $stmt = $this->pdo->query($sql);
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute($params);
         $trajetsRaw = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -64,8 +64,8 @@ class CovoiturageModel {
 
             // CONVERSION HEURE ARRIVÉE (Ex: "16:07:00" -> 967)
             $minutesArrivee = null;
-            if (!empty($trajet['heure_arivee'])) {
-                $heuresArrivee = explode(':', $trajet['heure_arivee']);
+            if (!empty($trajet['heure_arrivee'])) {
+                $heuresArrivee = explode(':', $trajet['heure_arrivee']);
                 $minutesArrivee = ((int)$heuresArrivee[0] * 60) + (int)$heuresArrivee[1];
             }
 

@@ -10,7 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Sélection des éléments pour le calcul de la commission
     const inputPrix = document.getElementById('prix_personne');
     const texteCommission = document.querySelector('.commission');
-    const publierBtn = document.querySelector('.publier-btn');
+
+    // Formulaire de trajet complet pour cibler la soumission
+    const formTrajet = document.getElementById('form-trajet'); 
 
     // Sélection du bouton pour ajouter un véhicule
     const btnAjouterVehicule = document.querySelector('.btn-outline-primary');
@@ -30,20 +32,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- LOGIQUE D'AFFICHAGE EN FONCTION DES ROLES ---
 
-// On récupère le conteneur du bouton de recherche rapide
-const zoneActionPassager = document.querySelector('.action-passager');
+    // On récupère le conteneur du bouton de recherche rapide
+    const zoneActionPassager = document.querySelector('.action-passager');
 
-function affichageEnFonctionDesRoles(valeurRole) {
-    if (!blocChauffeur) return; // Sécurité
-    
-    // Gestion du bloc Chauffeur
-    if (valeurRole === 'chauffeur' || valeurRole === 'les_deux') {
-        blocChauffeur.style.display = 'flex';
-    } else {
-        blocChauffeur.style.display = 'none';
+  function affichageEnFonctionDesRoles(valeurRole) {
+    // Gestion du bloc Chauffeur (on vérifie s'il existe avant d'agir, sans bloquer le reste)
+    if (blocChauffeur) {
+        if (valeurRole === 'chauffeur' || valeurRole === 'les_deux') {
+            blocChauffeur.style.display = 'flex';
+        } else {
+            blocChauffeur.style.display = 'none';
+        }
     }
 
-    // Gestion du bouton de recherche Passager (affiché pour 'passager' et 'les_deux')
+    // Gestion du bouton de recherche Passager
     if (zoneActionPassager) {
         if (valeurRole === 'passager' || valeurRole === 'les_deux') {
             zoneActionPassager.style.display = 'block';
@@ -58,16 +60,36 @@ const roleSelectionne = document.querySelector('input[name="role_preference"]:ch
 if (roleSelectionne) {
     affichageEnFonctionDesRoles(roleSelectionne.value);
 } else {
-    // Si rien n'est coché par défaut, on cache par sécurité
     if (blocChauffeur) blocChauffeur.style.display = 'none';
     if (zoneActionPassager) zoneActionPassager.style.display = 'none';
 }
 
 // Ajout des écouteurs de changement sur les radios
-if (radioRoles.length > 0 && blocChauffeur) {
+if (radioRoles.length > 0) {
     radioRoles.forEach(radio => {
         radio.addEventListener('change', () => {
-            affichageEnFonctionDesRoles(radio.value);
+            const valeurRole = radio.value;
+
+            // 1. On change le visuel sur l'écran
+            affichageEnFonctionDesRoles(valeurRole);
+
+            // 2. ENVOI DE L'INFO À PHP (Le pont manquant)
+            fetch('?page=profile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `action=update_role_preference&role_preference=${valeurRole}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log("✅ Rôle enregistré en BDD :", valeurRole);
+                } else {
+                    console.error("❌ Erreur PHP :", data.message);
+                }
+            })
+            .catch(error => console.error("⚠️ Erreur réseau :", error));
         });
     });
 }
@@ -107,38 +129,34 @@ if (radioRoles.length > 0 && blocChauffeur) {
         });
     }
 
-    // Écouteur de clic sur le bouton Publier (Validation côté client uniquement)
-    if (publierBtn && inputPrix) {
-        publierBtn.addEventListener('click', (event) => {
+    // --- VALIDATION STRICTE DU FORMULAIRE DE TRAJET ---
+    // On écoute l'événement 'submit' du formulaire de trajet uniquement pour ne pas bloquer les véhicules
+   // --- VALIDATION STRICTE DU FORMULAIRE DE TRAJET ---
+    if (formTrajet && inputPrix) {
+        formTrajet.addEventListener('submit', (event) => {
+            console.log("🚀 Tentative de soumission du formulaire de trajet...");
+
             const prixFinal = parseFloat(inputPrix.value) || 0;
 
-            // Vérification du prix
+            // 1. Vérification du prix
             if (calculCommission(prixFinal) === false) {
                 event.preventDefault();
+                console.warn("❌ Soumission bloquée : Le prix est inférieur aux frais de commission.");
                 alert("Action impossible : veuillez choisir un prix supérieur aux frais de commission (2 crédits).");
                 inputPrix.style.border = "2px solid red";
                 return;
             }
 
-            // Vérification : au moins un véhicule renseigné
-            const formulairesVehicules = document.querySelectorAll('.infos-vehicule');
-            let vehiculeValide = false;
-
-            formulairesVehicules.forEach(formulaire => {
-                const inputImmatriculation = formulaire.querySelector('input[name="immatriculation"]');
-                if (inputImmatriculation && inputImmatriculation.value.trim() !== '') {
-                    vehiculeValide = true;
-                }
-            });
-
-            if (!vehiculeValide) {
+            // 2. Vérification du véhicule
+            const selectVehiculeTrajet = formTrajet.querySelector('#vehicule_id');
+            if (!selectVehiculeTrajet || selectVehiculeTrajet.value === "") {
                 event.preventDefault();
-                alert("Veuillez enregistrer au moins un véhicule avant de publier un trajet.");
+                console.warn("❌ Soumission bloquée : Aucun véhicule sélectionné.");
+                alert("Veuillez sélectionner un véhicule valide avant de publier votre trajet.");
                 return;
             }
 
-            // Le formulaire est envoyé au serveur via l'attribut action
-            console.log("✅ Formulaire validé - Envoi au serveur");
+            console.log("✅ Formulaire Trajet validé à 100% - Envoi au serveur PHP !");
         });
     }
 
@@ -231,13 +249,12 @@ if (radioRoles.length > 0 && blocChauffeur) {
         });
     }
 
-    // --- LOGIQUE DE GESTION DU MODE ÉDITION DU PROFIL (DÉPLACÉE ET SÉCURISÉE ICI) ---
+    // --- LOGIQUE DE GESTION DU MODE ÉDITION DU PROFIL ---
 
     if (btnActionProfil && formProfil) {
         btnActionProfil.addEventListener('click', function(event) {
             const inputs = formProfil.querySelectorAll('input:not([type="hidden"]), select, textarea');
             
-            // Sécurité essentielle : on vérifie qu'on a bien trouvé des inputs avant de lire l'index 0
             if (inputs.length > 0) {
                 const isReadOnly = inputs[0].hasAttribute('disabled');
 
@@ -255,7 +272,4 @@ if (radioRoles.length > 0 && blocChauffeur) {
             }
         });
     }
-
-    // NOTE: Gestion des trajets (annulation, workflow, validation, avis, signalements)
-    // confiée au backend PHP - Les formulaires POSTent directement au serveur
 });

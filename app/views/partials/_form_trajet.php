@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
 <!-- Formulaire Trajet -->
   <section id="section_trajet" class="form-trajet">
     <div class="infos-trajet">
-        <form id="form-covoiturage" method="post">
+        <form id="form-covoiturage" method="post" action="?page=profile">
             <fieldset>
                 <legend>Publier un trajet</legend>
                  <!-- Champ caché pour lier le trajet à l'utilisateur connecté -->
@@ -26,12 +26,12 @@ if (!isset($_SESSION['user_id'])) {
 
                 <div class="form-group">
                     <label for="vehicule_id">Véhicule utilisé</label>
-                    <select id="vehicule_id" name="vehicule_id" required <?php echo empty($listeVoitures) ? 'disabled' : ''; ?>>
-                        <?php if (empty($listeVoitures)) : ?>
+                    <select id="vehicule_id" name="vehicule_id" required <?php echo empty($ListeVoitures) ? 'disabled' : ''; ?>>
+                        <?php if (empty($ListeVoitures)) : ?>
                             <option value="" disabled selected>⚠️ Veuillez d'abord ajouter un véhicule dans votre garage</option>
                         <?php else : ?>
                             <option value="" disabled selected>Choisir un véhicule...</option>
-                            <?php foreach ($listeVoitures as $voiture) : ?>
+                            <?php foreach ($ListeVoitures as $voiture) : ?>
                                 <option value="<?php echo (int)$voiture['voiture_id']; ?>">
                                     <?php echo htmlspecialchars($voiture['modele']) . " (" . htmlspecialchars($voiture['immatriculation']) . ")"; ?>
                                 </option>
@@ -52,6 +52,13 @@ if (!isset($_SESSION['user_id'])) {
                             <label for="heure_depart">Heure de départ</label>
                             <input type="time" id="heure_depart" name="heure_depart" required>
                         </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label for="heure_arrivee">Heure d'arrivée</label>
+                      <input type="time" id="heure_arrivee" name="heure_arrivee" required>
                     </div>
                 </div>
 
@@ -84,7 +91,7 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
 
                 <div class="container-publier">
-                    <button type="submit" class="publier-btn" <?php echo empty($listeVoitures) ? 'disabled' : ''; ?>>Publier</button>
+                    <button type="submit" class="publier-btn" <?php echo empty($ListeVoitures) ? 'disabled' : ''; ?>>Publier</button>
                 </div>
             </fieldset>
         </form>

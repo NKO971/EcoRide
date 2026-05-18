@@ -52,47 +52,7 @@
             <!-- Formulaire trajet -->
 <?php require_once __DIR__ . '/partials/_form_trajet.php'; ?>
         </div>
-        <!-- Historique des trajets -->
-        <section class="historique">
-            <div class="card shadow-sm">
-                <div class="card-body p-0">
-                    <div class="px-4 py-3 bg-light border-bottom">
-                        <ul class="nav nav-pills gap-3" id="historique-tab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button
-                                    class="nav-link active small fw-bold text-uppercase border-0 p-0 bg-transparent text-primary"
-                                    id="tab-avenir" data-bs-toggle="pill" data-bs-target="#liste-avenir" type="button"
-                                    role="tab">
-                                    À venir
-                                </button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button
-                                    class="nav-link small fw-bold text-uppercase border-0 p-0 bg-transparent text-muted opacity-50"
-                                    id="tab-historique" data-bs-toggle="pill" data-bs-target="#liste-historique"
-                                    type="button" role="tab">
-                                    Historique
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="tab-content" id="historique-tabContent">
-                        <div class="tab-pane fade show active" id="liste-avenir" role="tabpanel">
-                            <div class="list-group list-group-flush">
-                                <!-- Les trajets à venir seront affichés ici dynamiquement -->
-                            </div>
-                        </div>
-
-                        <div class="tab-pane fade" id="liste-historique" role="tabpanel">
-                            <div class="list-group list-group-flush">
-                                <!-- L'historique des trajets sera affichés ici dynamiquement -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<?php require_once __DIR__ . '/partials/_historique_trajets.php'; ?>       
     </main>
 </body>
 

@@ -78,7 +78,7 @@
                                 <div class="FlechesH">
                                     <span class="material-symbols-outlined">line_end_arrow_notch</span>
                                 </div>
-                                <div class="heure_arrivee" data-heure-arrivee>16h07</div>
+                               <div class="heure_arrivee" data-heure-arrivee><?php echo htmlspecialchars($trajet['heure_arrivee'] ?? '--:--'); ?></div>
                                 <div class="FlechesH">
                                     <span class="material-symbols-outlined">line_end_arrow_notch</span>
                                 </div>
