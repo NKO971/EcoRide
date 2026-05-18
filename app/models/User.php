@@ -14,11 +14,13 @@ class User {
         $hash = password_hash($password, PASSWORD_BCRYPT);
         
         // On force le role_id à 3 (User) et les crédits à 20
-        $sql = "INSERT INTO utilisateur (pseudo, email, password, role_id, solde_credits) 
-                VALUES (:pseudo, :email, :password, 3, 20)";
+        $sql = "INSERT INTO utilisateur (nom, prenom, pseudo, email, password, role_id, solde_credits) 
+                VALUES (:nom, :prenom, :pseudo, :email, :password, 3, 20)";
         
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
+            'nom'      => $nom,
+            'prenom'   => $prenom,
             'pseudo'   => $pseudo,
             'email'    => $email,
             'password' => $hash
@@ -79,13 +81,26 @@ class User {
     /**
      * Met à jour le profil d'un utilisateur
      */
-    public function updateProfile($id, $pseudo, $email) {
-        $sql = "UPDATE utilisateur SET pseudo = :pseudo, email = :email WHERE utilisateur_id = :id";
+    public function updateProfile($id, $pseudo, $email, $nom, $prenom, $adresse, $date_naissance, $telephone) {
+        $sql = "UPDATE utilisateur 
+        SET pseudo = :pseudo,
+         email = :email,
+         nom = :nom,
+         prenom = :prenom,
+         adresse = :adresse,
+         date_naissance = :date_naissance,
+         telephone = :telephone
+        WHERE utilisateur_id = :id";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
-            'pseudo' => $pseudo,
-            'email'  => $email,
-            'id'     => $id
+            'id'             => $id,
+            'pseudo'         => $pseudo,
+            'email'          => $email,
+            'nom'            => $nom,
+            'prenom'         => $prenom,
+            'adresse'        => $adresse,
+            'date_naissance' => $date_naissance, // Sera inséré comme NULL en BDD si la valeur est null
+        'telephone'      => $telephone
         ]);
     }
 

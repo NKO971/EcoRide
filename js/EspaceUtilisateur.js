@@ -23,6 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // NOTE: L'authentification et les données utilisateur sont gérées par le serveur PHP
     // Les formulaires envoient directement les données au serveur via l'attribut action
+    
+    // --- SÉLECTION PROFIL ---
+    const btnActionProfil = document.getElementById('btn-action-profil');
+    const formProfil = document.getElementById('form-profil');
+
 
     // --- LOGIQUE D'AFFICHAGE EN FONCTION DES ROLES ---
 
@@ -119,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // ✅ Le formulaire est envoyé au serveur via l'attribut action
+            // Le formulaire est envoyé au serveur via l'attribut action
             console.log("✅ Formulaire validé - Envoi au serveur");
         });
     }
@@ -210,6 +215,31 @@ document.addEventListener('DOMContentLoaded', () => {
     if (tabHistorique && tabAvenir) {
         tabHistorique.addEventListener('click', () => {
             updateTabStyles(tabHistorique, tabAvenir);
+        });
+    }
+
+    // --- LOGIQUE DE GESTION DU MODE ÉDITION DU PROFIL (DÉPLACÉE ET SÉCURISÉE ICI) ---
+
+    if (btnActionProfil && formProfil) {
+        btnActionProfil.addEventListener('click', function(event) {
+            const inputs = formProfil.querySelectorAll('input:not([type="hidden"]), select, textarea');
+            
+            // Sécurité essentielle : on vérifie qu'on a bien trouvé des inputs avant de lire l'index 0
+            if (inputs.length > 0) {
+                const isReadOnly = inputs[0].hasAttribute('disabled');
+
+                if (isReadOnly) {
+                    // Empêche la soumission PHP au tout premier clic de déblocage
+                    event.preventDefault(); 
+                    
+                    // PASSER EN MODE ÉDITION
+                    inputs.forEach(input => input.removeAttribute('disabled'));
+                    
+                    // Mettre à jour le bouton
+                    this.textContent = 'Enregistrer mon profil';
+                    this.setAttribute('type', 'submit');
+                }
+            }
         });
     }
 

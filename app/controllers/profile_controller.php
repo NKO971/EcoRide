@@ -8,7 +8,10 @@ function profileController($pdo) {
     }
 
     require_once __DIR__ . '/../models/User.php';
+    require_once __DIR__ . '/../models/VoitureModel.php';
+    // Instanciation des modèles avec la connexion PDO
     $userModel = new User($pdo);
+    $voitureModel = new VoitureModel($pdo);  
 
     $error = '';
     $success = '';
@@ -17,6 +20,11 @@ function profileController($pdo) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pseudo = $_POST['pseudo'] ?? '';
         $email = $_POST['email'] ?? '';
+        $nom = $_POST['nom'] ?? '';
+        $prenom = $_POST['prenom'] ?? '';
+        $adresse = $_POST['adresse'] ?? '';
+        $date_naissance = $_POST['date_naissance'] ?? '';
+        $telephone = $_POST['telephone'] ?? '';
 
         // Validation simple
         if (empty($pseudo) || empty($email)) {
@@ -25,7 +33,7 @@ function profileController($pdo) {
             $error = "L'adresse email n'est pas valide.";
         } else {
             // Mettre à jour le profil
-            $result = $userModel->updateProfile($_SESSION['user_id'], $pseudo, $email);
+            $result = $userModel->updateProfile($_SESSION['user_id'], $pseudo, $email, $nom, $prenom, $adresse, $date_naissance, $telephone);
             
             if ($result) {
                 $_SESSION['pseudo'] = $pseudo;
@@ -38,6 +46,8 @@ function profileController($pdo) {
 
     // Récupérer les infos de l'utilisateur
     $user = $userModel->getById($_SESSION['user_id']);
+    // Récupérer les voitures de l'utilisateur
+    $Listevoitures = $voitureModel->getByUtilisateurId($_SESSION['user_id']);
 
     // Variables pour le header dynamique
     $title = "Mon Profil - EcoRide";
