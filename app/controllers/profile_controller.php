@@ -186,6 +186,7 @@ function profileController($pdo) {
     $trajetsAvenir = $trajetModel->getTrajetsAvenir($userId);
     $trajetsPasses = $trajetModel->getTrajetsPasses($userId);
 
+
     // Variables pour le header dynamique
     $title = "Mon Profil - EcoRide";
     $specificCss = [

@@ -57,10 +57,19 @@ public function createTrajet($lieu_depart, $lieu_arrivee, $date_depart, $heure_d
      * Récupère les trajets à venir d'un utilisateur (organisateur)
      */
     public function getTrajetsAvenir($organisateurId) {
-        $sql = "SELECT * FROM covoiturage 
+        $sql = "SELECT 
+                    covoiturage_id AS id,
+                    lieu_depart,
+                    lieu_arivee AS lieu_arrivee, -- Alias pour corriger la typo BDD face au HTML
+                    date_depart,
+                    heure_depart,
+                    nb_place,
+                    prix_personne,
+                    statut
+                FROM covoiturage 
                 WHERE organisateur_id = :organisateur_id 
                 AND date_depart >= CURDATE()
-                AND statut = 'En cours'
+                AND statut = 'ouvert' -- Aligné sur ton statut en BDD
                 ORDER BY date_depart ASC, heure_depart ASC";
         
         $stmt = $this->pdo->prepare($sql);
@@ -72,9 +81,18 @@ public function createTrajet($lieu_depart, $lieu_arrivee, $date_depart, $heure_d
      * Récupère l'historique des trajets (passés ou terminés) d'un utilisateur
      */
     public function getTrajetsPasses($organisateurId) {
-        $sql = "SELECT * FROM covoiturage 
+        $sql = "SELECT 
+                    covoiturage_id AS id,
+                    lieu_depart,
+                    lieu_arivee AS lieu_arrivee, -- Même alias ici
+                    date_depart,
+                    heure_depart,
+                    nb_place,
+                    prix_personne,
+                    statut
+                FROM covoiturage 
                 WHERE organisateur_id = :organisateur_id 
-                AND (date_depart < CURDATE() OR statut = 'Terminé')
+                AND (date_depart < CURDATE() OR statut = 'cloture' OR statut = 'annule')
                 ORDER BY date_depart DESC, heure_depart DESC";
         
         $stmt = $this->pdo->prepare($sql);

@@ -67,7 +67,7 @@
                                 <div class="list-group-item p-4 opacity-75">
                                     <div class="d-flex w-100 justify-content-between align-items-center mb-2">
                                         <h5 class="mb-1 text-secondary fw-bold">
-                                            <?php echo htmlspecialchars($trajet['lieu_depart']); ?> ➡️ <?php echo htmlspecialchars($trajet['lieu_arrivee']); ?>
+                                            <?php echo htmlspecialchars($trajet['lieu_depart']); ?> ➡️ <?php echo htmlspecialchars($trajet['lieu_arivee']); ?>
                                         </h5>
                                         <small class="badge bg-secondary-subtle text-secondary border border-secondary-subtle px-2 py-1">
                                             <?php echo $trajet['statut'] === 'En cours' ? 'Passé' : htmlspecialchars($trajet['statut']); ?>
