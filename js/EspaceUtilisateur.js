@@ -28,36 +28,49 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnActionProfil = document.getElementById('btn-action-profil');
     const formProfil = document.getElementById('form-profil');
 
-
     // --- LOGIQUE D'AFFICHAGE EN FONCTION DES ROLES ---
 
-    function affichageEnFonctionDesRoles(valeurRole) {
-        if (!blocChauffeur) return; // Sécurité
-        
-        if (valeurRole === 'chauffeur' || valeurRole === 'les_deux') {
-            blocChauffeur.style.display = 'flex';
+// On récupère le conteneur du bouton de recherche rapide
+const zoneActionPassager = document.querySelector('.action-passager');
+
+function affichageEnFonctionDesRoles(valeurRole) {
+    if (!blocChauffeur) return; // Sécurité
+    
+    // Gestion du bloc Chauffeur
+    if (valeurRole === 'chauffeur' || valeurRole === 'les_deux') {
+        blocChauffeur.style.display = 'flex';
+    } else {
+        blocChauffeur.style.display = 'none';
+    }
+
+    // Gestion du bouton de recherche Passager (affiché pour 'passager' et 'les_deux')
+    if (zoneActionPassager) {
+        if (valeurRole === 'passager' || valeurRole === 'les_deux') {
+            zoneActionPassager.style.display = 'block';
         } else {
-            blocChauffeur.style.display = 'none';
+            zoneActionPassager.style.display = 'none';
         }
     }
+}
 
-    // Initialisation de l'affichage selon le rôle sélectionné au chargement
-    const roleSelectionne = document.querySelector('input[name="role_preference"]:checked');
-    if (roleSelectionne) {
-        affichageEnFonctionDesRoles(roleSelectionne.value);
-    } else {
-        // Si rien n'est coché par défaut, on cache par sécurité
-        if (blocChauffeur) blocChauffeur.style.display = 'none';
-    }
+// Initialisation de l'affichage selon le rôle sélectionné au chargement
+const roleSelectionne = document.querySelector('input[name="role_preference"]:checked');
+if (roleSelectionne) {
+    affichageEnFonctionDesRoles(roleSelectionne.value);
+} else {
+    // Si rien n'est coché par défaut, on cache par sécurité
+    if (blocChauffeur) blocChauffeur.style.display = 'none';
+    if (zoneActionPassager) zoneActionPassager.style.display = 'none';
+}
 
-    // Ajout des écouteurs de changement sur les radios
-    if (radioRoles.length > 0 && blocChauffeur) {
-        radioRoles.forEach(radio => {
-            radio.addEventListener('change', () => {
-                affichageEnFonctionDesRoles(radio.value);
-            });
+// Ajout des écouteurs de changement sur les radios
+if (radioRoles.length > 0 && blocChauffeur) {
+    radioRoles.forEach(radio => {
+        radio.addEventListener('change', () => {
+            affichageEnFonctionDesRoles(radio.value);
         });
-    }
+    });
+}
 
     // --- LOGIQUE DE CALCUL DE LA COMMISSION ---
 

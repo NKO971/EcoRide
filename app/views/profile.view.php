@@ -6,7 +6,7 @@
         <!-- Fin du profil utilisateur -->
 
         <!-- Choix du rôle -->
-        <section class="choix-role">
+    <section class="choix-role">
             <legend>Mon statut sur la plateforme</legend>
             <p class="role-instruction">Je choisis mon rôle sur EcoRide :</p>
 
@@ -37,7 +37,13 @@
                     </label>
                 </div>
             </div>
-        </section>
+
+            <div class="action-passager mt-4 text-center">
+               <a href="?page=covoiturage" class="btn-recherche-trajet ">
+               Prêt à partir ? 
+               </a>
+            </div>
+    </section>
         <!-- Fin du choix du rôle -->
 
         <div class="conteneur-chauffeur-flex">

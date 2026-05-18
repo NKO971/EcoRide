@@ -181,7 +181,8 @@ fieldset {
 /* Boutons */
 button:not(.navbar-toggler, .btn-outline-primary, .btn-close), 
 .publier-btn, 
-.btn-sauvegarde-profil {
+.btn-sauvegarde-profil,
+.btn-recherche-trajet {
     display: block;
     width: 12.5rem; 
     height: 3.5rem; 
@@ -194,6 +195,11 @@ button:not(.navbar-toggler, .btn-outline-primary, .btn-close),
     border: 1px solid var(--color-primary);
     cursor: pointer;
 }
+.btn-recherche-trajet {
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; 
+}
 
 .btn-outline-primary {
     margin-bottom: var(--spacing-md);
@@ -202,14 +208,16 @@ button:not(.navbar-toggler, .btn-outline-primary, .btn-close),
 .btn-sauvegarde-profil:hover,
 .enregistrer-btn:hover,
 .publier-btn:hover,
-.btn-outline-primary:hover
-.nav-link:hover {
+.btn-outline-primary:hover,
+.nav-link:hover,
+.btn-recherche-trajet:hover {
     background-color: var(--color-primary) !important;
     color: var(--color-white) !important;
     border-color: var(--color-secondary);
     transform: scale(1.05);
     box-shadow: var(--shadow-medium);
 }     
+
 
 /* ============================================
    RESPONSIVE
