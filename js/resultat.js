@@ -41,29 +41,54 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         trajets.forEach(trajet => {
+            // Harmonisation des données PHP (gère les différences de clés entre les requêtes)
+            const idReal = trajet.id || trajet.covoiturage_id || 0;
+            const prixReal = trajet.prix || trajet.prix_personne || 0;
+            const placesReal = trajet.passagers || trajet.nb_place || 0;
+            const noteReal = trajet.note || trajet.note_chauffeur || 'N/A';
+            const pseudoReal = trajet.conducteur || trajet.pseudo || trajet.pseudo_chauffeur || 'Anonyme';
+            const departReal = trajet.depart || trajet.lieu_depart || 'Non renseigné';
+            const arriveeReal = trajet.arrivee || trajet.lieu_arivee || trajet.lieu_arrivee || 'Non renseigné';
+            const dateReal = trajet.date || trajet.date_depart || '--/--/----';
+            
+            // Gestion de l'heure (si chaîne "14:00:00", on prend les 5 premiers caractères, sinon formatHeure)
+            const hDepartReal = isNaN(trajet.heureDepart || trajet.heure_depart) 
+                ? (trajet.heureDepart || trajet.heure_depart || '--h--').substring(0, 5)
+                : formatHeure(trajet.heureDepart || trajet.heure_depart);
+
+            const hArriveeReal = isNaN(trajet.heureArrivee || trajet.heure_arrivee)
+                ? (trajet.heureArrivee || trajet.heure_arrivee || '--h--').substring(0, 5)
+                : formatHeure(trajet.heureArrivee || trajet.heure_arrivee);
+
             const card = `
-            <div class="covoiturage">
+            <div class="covoiturage"
+                data-trajet-id="${idReal}"
+                data-chauffeur-id="${trajet.chauffeurId || trajet.organisateur_id || ''}"
+                data-prix-centimes="${prixReal * 100}"
+                data-est-ecologique="${trajet.ecologique ? '1' : '0'}"
+                data-nb-places="${placesReal}"
+                data-note="${noteReal}">
                 <div class="destinationHoraire">
                     <div class="trajet">
-                        <span class="depart">${trajet.depart}</span>
-                        <span class="arrivee">${trajet.arrivee}</span>
+                        <span class="depart">${departReal}</span>
+                        <span class="arrivee">${arriveeReal}</span>
                     </div>
-                    <div class="heure_depart">${formatHeure(trajet.heureDepart)}</div>
+                    <div class="heure_depart">${hDepartReal}</div>
                     <div class="FlechesH"><span class="material-symbols-outlined">line_end_arrow_notch</span></div>
-                    <div class="heure_arrivee">${trajet.heureArrivee ? formatHeure(trajet.heureArrivee) : '--h--'}</div>
+                    <div class="heure_arrivee">${hArriveeReal}</div>
                     <div class="FlechesH"><span class="material-symbols-outlined">line_end_arrow_notch</span></div>
-                    <div class="date_arrivee">${trajet.date}</div>
+                    <div class="date_arrivee">${dateReal}</div>
                 </div>
                 <div class="ligneDeSeparation"><hr /></div>
                 <div class="info-conducteur">
                     <div class="photo-pseudo col-12 col-md-auto d-flex flex-column flex-md-row align-items-center gap-2">
-                        <img src="${trajet.photo || '/Photo profile/default.png'}" alt="${trajet.conducteur}" class="photoDeProfil">
-                        <span class="pseudo">${trajet.conducteur}</span>
+                        <img src="${trajet.photo ? trajet.photo : '/EcoRide/public/images/default.png'}" alt="${pseudoReal}" class="photoDeProfil">
+                        <span class="pseudo">${pseudoReal}</span>
                         ${trajet.verifie ? '<span class="material-symbols-outlined text-success" title="Profil vérifié">verified</span>' : ''}
                     </div>
                     <div class="note">
                         <span class="material-symbols-outlined">star</span>
-                        <span class="note-chauffeur">${trajet.note}</span>
+                        <span class="note-chauffeur">${noteReal}/5</span>
                     </div>
                     <div class="icon-energie">
                         <span class="material-symbols-outlined">${trajet.ecologique ? 'electric_car' : 'directions_car'}</span>
@@ -71,22 +96,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="icon-credit">
                         <span class="material-symbols-outlined">payments</span>
-                        <span><span class="js-credits">${trajet.prix}</span> Crédits</span>
+                        <span><span class="js-credits">${prixReal}</span> Crédits</span>
                     </div>
                     <div class="icon-passager">
                         <span class="material-symbols-outlined">person</span>
-                        <span><span class="js-places">${trajet.passagers}</span> places</span>
+                        <span><span class="js-places">${placesReal}</span> places</span>
                     </div>
                     <div class="action-btn col-12 col-md-auto">
                         <button class="btn-details btn-sm btn-outline-primary w-100 w-md-auto"
-                                data-bs-toggle="modal" data-bs-target="#modalDetailsTrajet">Détails</button>
+                                data-bs-toggle="modal" 
+                                data-bs-target="#modalDetailsTrajet-${idReal}"
+                                data-covoiturage-id="${idReal}">Détails</button>
                     </div>
                 </div>
             </div>`;
             conteneurTrajets.innerHTML += card;
         });
     }
-
     // TRAVAILLE SUR LES FILTRES ET LE TRI DYNAMIQUE
     function appliquerFiltres(event) {
         // Si c'est la barre de recherche qui est soumise, on laisse faire le rechargement PHP de la page

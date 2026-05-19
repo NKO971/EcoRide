@@ -1,4 +1,3 @@
-
 <body>
     <main class="conteneur">
         <!-- Barre de recherche -->
@@ -24,9 +23,6 @@
                 </div>
             </div>
         </div>
-        <!-- Fin barre de recherche -->
-
-        <!-- Filtres -->
         <div class="container-xl">
             <div class="row" style="--bs-gap: 1rem">
                 <div class="divBouton">
@@ -46,22 +42,17 @@
                         </form>
                     </fieldset>
                 </div>
-                <!-- Fin filtres -->
-
-                <!-- Récap résultats -->
                 <div class="conteneurResultat col-12 col-md-8">
                     <div class="recap-resultat p-2 mb-4">
                         ( <strong id="nb-voyages-trouve">0..</strong> voyages trouvés )
                     </div>
 
-                    <!-- Résultats -->
                     <div id="alerte-trajet-proche" class="alerte-suggestion d-none">
                         <div class="message-info">
                             <p>Aucun trajet trouvé pour cette date. Voici les résultats les plus proches :</p>
                         </div>
                     </div>
                     <div class="resultats" id="liste-trajet">
-                        <!-- Template de carte trajet -->
                         <div class="covoiturage"
                             data-trajet-id="123"
                             data-chauffeur-id="456"
@@ -111,113 +102,26 @@
                                 </div>
                                 <div class="action-btn col-12 col-md-auto">
                                     <button class="btn-details btn-sm btn-outline-primary w-100 w-md-auto"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#modalDetailsTrajet"
-                                        data-covoiturage-id="123">Détails</button>
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#modalDetailsTrajet-TEMP"
+                                      data-covoiturage-id="TEMP">
+                                      Détails
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <!-- Fin template carte -->
-                    </div>
+                        </div>
                 </div>
             </div>
         </div>
     </main>
-
-    <!-- Modal Détails du trajet -->
-    <div class="modal fade" id="modalDetailsTrajet" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-
-                <div class="modal-header border-0">
-                    <h5 class="modal-title bold">Détails du voyage</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-                    <div class="recap-trajet-modal mb-4 p-3 text-center">
-                        <span class="v-depart bold" id="modal-ville-depart">Paris</span>
-                        <span class="material-symbols-outlined icone-fleche">arrow_forward</span>
-                        <span class="v-arrivee bold" id="modal-ville-arrivee">Toulouse</span>
-                        <div class="info-horaire-details">
-                            Départ à <span id="modal-heure-depart">10h30</span> 
-                            - Arrivée prévue à <span id="modal-heure-arrivee">16h07</span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 border-end">
-                            <div class="info-conducteur flex align-items-center gap-3 mb-3">
-                                <img src="/EcoRide/Photo profile/freepik__the-style-is-candid-image-photography-with-natural__82878.png"
-                                    alt="Jean" class="photoDeProfil-details" id="modal-photo-chauffeur">
-                                <div class="conducteur-meta">
-                                    <h4 class="pseudo-modal m-0" id="modal-pseudo-chauffeur">JeanP75</h4>
-                                    <div class="note-container">
-                                        <span class="material-symbols-outlined">star</span>
-                                        <span class="note-chiffre" id="modal-note-chauffeur">4,5/5</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Bouton pour afficher les avis -->
-                            <button class="btn btn-outline-primary btn-sm mb-3" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseAvis" aria-expanded="false"
-                                id="avis-bouton">
-                                Voir les commentaires
-                            </button>
-
-                            <!-- Zone des avis -->
-                            <div class="collapse" id="collapseAvis">
-                                <div class="card card-body bg-light border-0 mb-3 p-2" style="font-size: 0.85rem;" id="modal-avis-list">
-                                    <div class="mb-2 border-bottom pb-1">
-                                        <strong class="avis-passager">Marie_L :</strong> "Top conducteur !"
-                                    </div>
-                                    <div>
-                                        <strong class="avis-passager">Lucas_P :</strong> "Très ponctuel."
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Zone des préférences -->
-                            <div class="preferences-zone">
-                                <p class="titre-pref">Préférences :</p>
-                                <p class="texte-pref" id="modal-preferences">"Non fumeur, pas d'animaux. Je discute volontiers !"</p>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 ps-md-4">
-                            <h6 class="bold mb-3">Véhicule</h6>
-                            <div class="d-flex align-items-center gap-2 mb-2">
-                                <span id="modal-icon-vehicule" class="material-symbols-outlined">electric_car</span>
-                                <span class="nom-vehicule" id="modal-nom-vehicule">Tesla Model 3 (Blanc)</span>
-                            </div>
-                            <div class="badge-energie" id="modal-type-energie">Électrique</div>
-                            <hr class="separation-modal">
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <div class="places-restantes">
-                                    Places : <strong id="modal-nb-place">2</strong>
-                                </div>
-                                <div class="prix-credits">
-                                    <span id="modal-prix-final">5</span> Crédits
-                                </div>
-                            </div>
-                            <p class="prix-place">Prix pour une place !</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-footer border-0">
-                    <button class="btn-reservation-eco"
-                        data-bs-toggle="modal"
-                        data-bs-target="#modalConfirmationPaiment"
-                        data-covoiturage-id="123"
-                        id="btn-participer-trajet">Participer au trajet</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Confirmation de paiement -->
+<!-- Modal détail trajet -->
+    <?php if (!empty($trajets)): ?>
+        <?php foreach ($trajets as $trajet): ?>
+            <?php require __DIR__ . '/partials/_modal_details_trajet.php'; ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+<!-- Modal de confirmation de paiement -->
     <div class="modal fade" id="modalConfirmationPaiment" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -240,19 +144,9 @@
     <script src="/EcoRide/js/barreDeRecherche.js" defer></script>
     
     <script>
-    // On prend la variable $trajets (qui viendra du contrôleur) et on la transforme en JSON
-    // Si $trajets n'existe pas encore ou est vide, on met un tableau vide [] par sécurité
     window.trajetsDepuisBDD = <?php echo isset($trajets) ? json_encode($trajets) : '[]'; ?>;
-    
-    // Affichage dans la console pour vérifier que les données sont bien transmises
     console.log("Données reçues de la BDD via PHP :", window.trajetsDepuisBDD);
     </script>
-    <script>
-    // Injection sécurisée des trajets PHP/BDD directement accessibles pour JavaScript
-    window.trajetsDepuisBDD = <?php echo json_encode($trajets); ?>;
-    </script>
     <script src="/EcoRide/js/resultat.js" defer></script>
-
 </body>
-
 </html>
