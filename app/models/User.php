@@ -45,6 +45,13 @@ class User {
         ]);
     }
 
+    public function updateStatut($utilisateur_id, $statut) {
+        $sql = "UPDATE utilisateur SET statut = :statut WHERE utilisateur_id = :id";
+        
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute(['statut' => $statut, 'id' => $utilisateur_id]);
+    }
+
     /**
      * Connexion : Vérifie l'email et le mot de passe
      */

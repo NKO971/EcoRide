@@ -187,6 +187,19 @@ header {
     color: white;
 }
 
+/* Fixe une hauteur maximale pour les conteneurs de graphiques */
+/* On cible spécifiquement les cartes qui contiennent un graphique */
+.chart-container {
+    position: relative;
+    width: 100%;
+}
+
+canvas {
+    display: block !important; /* Force le comportement de bloc */
+    width: 100% !important;
+    height: 100% !important;
+}
+
 /* Sur mobile, on aère un peu le menu déroulant dans le burger */
 @media (max-width: 991px) {
     .dropdown-menu {

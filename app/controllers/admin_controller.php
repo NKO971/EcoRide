@@ -6,9 +6,22 @@ function adminController($pdo) {
         header("Location: ?page=connexion");
         exit();
     }
-
+   
     require_once __DIR__ . '/../models/User.php';
+    // Inclusion du modèle statistique pour l'administration
+    require_once __DIR__ . '/../models/AdminModel.php'; 
+    
     $userModel = new User($pdo);
+    $adminModel = new AdminModel($pdo); // Instanciation
+   // Gestion de la modération (US 13)
+    if (isset($_GET['action']) && isset($_GET['id'])) {
+     if ($_GET['id'] != $_SESSION['user_id']) {
+        $nouvelEtat = ($_GET['action'] === 'suspendre') ? 'suspendu' : 'actif';
+        $userModel->updateStatut($_GET['id'], $nouvelEtat);
+     }
+    header("Location: ?page=admin");
+    exit();
+    }
     
     //  Traitement du formulaire de création d'employé
     $msg = null;
@@ -28,8 +41,31 @@ function adminController($pdo) {
 
     // Récupérer les infos de l'admin
     $admin = $userModel->getById($_SESSION['user_id']);
-
     $users = $userModel->getAll();
+
+    // ==========================================
+    // RÉCUPÉRATION ET PRÉPARATION DES STATISTIQUES
+    // ==========================================
+    $donneesTrajets = $adminModel->getCovoituragesParJour();
+    $donneesCredits = $adminModel->getCreditsGagnesParJour();
+    $totalCreditsAbsolu = $adminModel->getTotalCreditsAbsolu(); // Ira dans un badge HTML
+
+    // Préparation des axes pour le Graphique 1 (Trajets clôturés)
+    $labelsTrajets = [];
+    $valeursTrajets = [];
+    foreach ($donneesTrajets as $ligne) {
+        $labelsTrajets[] = $ligne['date_label'];
+        $valeursTrajets[] = (int)$ligne['total_trajets'];
+    }
+
+    // Préparation des axes pour le Graphique 2 (Crédits gagnés)
+    $labelsCredits = [];
+    $valeursCredits = [];
+    foreach ($donneesCredits as $ligne) {
+        $labelsCredits[] = $ligne['date_label'];
+        $valeursCredits[] = (int)$ligne['credits_jour'];
+    }
+    // ==========================================
 
     // Variables pour le header dynamique
     $title = "Administration - EcoRide";
@@ -41,7 +77,8 @@ function adminController($pdo) {
     $specificJS = [
         "/EcoRide/js/bootstrap.bundle.min.js",
         "/EcoRide/js/jquery-3.7.1.min.js",
-        "https://cdn.jsdelivr.net/npm/chart.js"
+        "https://cdn.jsdelivr.net/npm/chart.js",
+        "/EcoRide/js/admin.js"
     ];
 
     // Inclusion des morceaux dans l'ordre
