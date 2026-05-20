@@ -204,10 +204,22 @@ function profileController($pdo) {
     } // Fin du bloc POST
     
     // Récupérer les données fraîches pour l'affichage des listes
+// Récupération des voitures de l'utilisateur
     $ListeVoitures = $voitureModel->getByUtilisateurId($userId);
-    $trajetsAvenir = $trajetModel->getTrajetsAvenir($userId);
+
+    // SECTION "À VENIR" : Fusion des rôles Conducteur et Passager
+    $trajetsChauffeurAvenir = $trajetModel->getTrajetsAvenir($userId);
+    $reservationsPassagerAvenir = $trajetModel->getReservationsAvenir($userId);
+    // On assemble les deux tableaux dans la variable attendue par la vue
+    $trajetsAvenir = array_merge($trajetsChauffeurAvenir, $reservationsPassagerAvenir);
+
+    // SECTION "EN COURS"
     $trajetsEnCours = $trajetModel->getTrajetsEnCours($userId);
+    $reservationsEnCours = $trajetModel->getReservationsEnCours($userId);
+
+    // SECTION "PASSÉS" (Historique)
     $trajetsPasses = $trajetModel->getTrajetsPasses($userId);
+    $reservationsPasses = $trajetModel->getReservationsPasses($userId);
 
 
     // Variables pour le header dynamique

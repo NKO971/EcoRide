@@ -58,7 +58,61 @@ class TrajetModel {
         ]);
     }
 
-/**
+
+    /** Gestion des réservations **/
+public function getReservationsAvenir($userId) {
+    try {
+        $stmt = $this->pdo->prepare("
+            SELECT c.*, c.lieu_arivee AS lieu_arrivee, r.reservation_id, r.nb_place_reservees, r.STATUT as statut_reservation 
+            FROM reservation r
+            JOIN covoiturage c ON r.covoiturage_id = c.covoiturage_id
+            WHERE r.utilisateur_id = :userId 
+              AND c.statut = 'ouvert' 
+              AND r.STATUT != 'annule'
+            ORDER BY c.date_depart ASC
+        ");
+        $stmt->execute(['userId' => $userId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        return [];
+    }
+}
+
+public function getReservationsEnCours($userId) {
+    try {
+        $stmt = $this->pdo->prepare("
+            SELECT c.*, c.lieu_arivee AS lieu_arrivee, r.reservation_id, r.nb_place_reservees, r.STATUT as statut_reservation 
+            FROM reservation r
+            JOIN covoiturage c ON r.covoiturage_id = c.covoiturage_id
+            WHERE r.utilisateur_id = :userId 
+              AND c.statut = 'En cours' 
+              AND r.STATUT != 'annule'
+        ");
+        $stmt->execute(['userId' => $userId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        return [];
+    }
+}
+
+public function getReservationsPasses($userId) {
+    try {
+        $stmt = $this->pdo->prepare("
+            SELECT c.*, c.lieu_arivee AS lieu_arrivee, r.reservation_id, r.nb_place_reservees, r.STATUT as statut_reservation 
+            FROM reservation r
+            JOIN covoiturage c ON r.covoiturage_id = c.covoiturage_id
+            WHERE r.utilisateur_id = :userId 
+              AND (c.statut = 'termine' OR c.statut = 'cloture' OR r.STATUT = 'annule')
+            ORDER BY c.date_depart DESC
+        ");
+        $stmt->execute(['userId' => $userId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        return [];
+    }
+}
+
+    /**
      * Récupère les trajets à venir d'un utilisateur (organisateur) avec détails complets
      */
     public function getTrajetsAvenir($organisateurId) {

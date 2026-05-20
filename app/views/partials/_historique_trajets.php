@@ -60,20 +60,34 @@
                                         </div>
                                     </div>
 
-                                    <div class="mt-3 d-flex justify-content-end">
+                                    
+                                   <?php $isChauffeur = !isset($trajet['reservation_id']); ?>
+
+                                    <div class="mt-3 d-flex justify-content-end gap-2">
                                         <?php if ($trajet['statut'] === 'ouvert') : ?>
-                                            <a href="?page=profile&action=demarrer-trajet&id=<?php echo $trajet['covoiturage_id']; ?>" 
-                                               class="btn btn-sm btn-success fw-bold px-3 shadow-sm">
-                                                 Démarrer le covoiturage
-                                            </a>
+                                            
+                                            <?php if ($isChauffeur) : ?>
+                                                <a href="?page=profile&action=demarrer-trajet&id=<?php echo $trajet['covoiturage_id']; ?>" 
+                                                   class="btn btn-sm btn-success fw-bold px-3 shadow-sm">
+                                                     Démarrer le covoiturage
+                                                </a>
+                                                <a href="?page=profile&action=annuler-trajet&id=<?php echo $trajet['covoiturage_id']; ?>" 
+                                                   class="btn btn-sm btn-danger fw-bold px-3 shadow-sm">
+                                                    Annuler le covoiturage
+                                                </a>
+                                            <?php else : ?>
+                                                <a href="?page=profile&action=annuler-reservation&id=<?php echo $trajet['reservation_id']; ?>" 
+                                                   class="btn btn-sm btn-danger fw-bold px-3 shadow-sm text-dark">
+                                                    Annuler participation
+                                                </a>
+                                            <?php endif; ?>
+
                                         <?php endif; ?>
                                     </div>
-                                </div>
-                            <?php endforeach; ?>
+                                </div> <?php endforeach; ?>
                         <?php endif; ?>
                     </div>
                 </div>
-
                 <div class="tab-pane fade" id="liste-en-cours" role="tabpanel">
                     <div class="list-group list-group-flush">
                         <?php if (empty($trajetsEnCours)) : ?>
