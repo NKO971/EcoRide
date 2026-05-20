@@ -38,6 +38,8 @@ switch ($page) {
         break;
 
     case 'profile':
+    case 'demarrer-trajet':
+    case 'terminer-trajet':
         require_once __DIR__ . '/../app/controllers/profile_controller.php';
         profileController($pdo);
         break;

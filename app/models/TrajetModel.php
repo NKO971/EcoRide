@@ -138,4 +138,38 @@ class TrajetModel {
         $stmt->execute([':organisateur_id' => $organisateurId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+        /** GESTION DU STATUT DES TRAJETS **/
+
+    /**
+     * Passe le trajet du statut 'ouvert' à 'En cours'
+     */
+    public function demarrerTrajet($covoiturage_id) {
+        $sql = "UPDATE covoiturage SET statut = 'En cours' WHERE covoiturage_id = :id AND statut = 'ouvert'";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([':id' => $covoiturage_id]);
+    }
+
+    public function getTrajetsEnCours($userId) {
+    try {
+        $stmt = $this->pdo->prepare("
+            SELECT * FROM covoiturage 
+            WHERE organisateur_id = :userId AND statut = 'En cours' 
+            ORDER BY date_depart ASC, heure_depart ASC
+        ");
+        $stmt->execute(['userId' => $userId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        return []; // On renvoie un tableau vide en cas d'erreur pour éviter de faire crasher la vue
+    }
+}
+
+    /**
+     * Passe le trajet du statut 'En cours' à 'Terminé'
+     */
+    public function terminerTrajet($covoiturage_id) {
+        $sql = "UPDATE covoiturage SET statut = 'Terminé' WHERE covoiturage_id = :id AND statut = 'En cours'";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([':id' => $covoiturage_id]);
+    }
 }

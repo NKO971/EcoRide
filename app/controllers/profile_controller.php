@@ -16,6 +16,28 @@ function profileController($pdo) {
     $voitureModel = new VoitureModel($pdo);
     $trajetModel = new TrajetModel($pdo);
 
+// =========================================================================
+    // TRAITEMENT DES ACTIONS DE TRAJET (Démarrer / En cours/ Terminer)
+    // =========================================================================
+    $action = isset($_GET['action']) ? $_GET['action'] : null;
+    
+    if ($action === 'demarrer-trajet' || $action === 'terminer-trajet') {
+        $idTrajet = isset($_GET['id']) ? (int)$_GET['id'] : null;
+        
+        if ($idTrajet) {
+            if ($action === 'demarrer-trajet') {
+                // IMPORTANT : On utilise bien $trajetModel défini juste au-dessus
+                $trajetModel->demarrerTrajet($idTrajet); 
+            } elseif ($action === 'terminer-trajet') {
+                $trajetModel->terminerTrajet($idTrajet);
+            }
+        }
+        
+        // Redirection vers le profil pour rafraîchir la page proprement
+        header("Location: ?page=profile");
+        exit();
+    }
+
     $userId = (int)$_SESSION['user_id']; // Sécurité : s'assurer que c'est un entier
 
     // =========================================================================
@@ -184,6 +206,7 @@ function profileController($pdo) {
     // Récupérer les données fraîches pour l'affichage des listes
     $ListeVoitures = $voitureModel->getByUtilisateurId($userId);
     $trajetsAvenir = $trajetModel->getTrajetsAvenir($userId);
+    $trajetsEnCours = $trajetModel->getTrajetsEnCours($userId);
     $trajetsPasses = $trajetModel->getTrajetsPasses($userId);
 
 
