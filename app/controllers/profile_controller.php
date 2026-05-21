@@ -33,7 +33,59 @@ function profileController($pdo) {
             }
         }
         
-        // Redirection vers le profil pour rafraîchir la page proprement
+// =========================================================================
+    // NOUVEAU BLOCK : SOUMISSION DE L'AVIS SUR MONGODB
+    // =========================================================================
+    if ($action === 'soumettre-avis') {
+        $covoiturageId = filter_input(INPUT_POST, 'covoiturage_id', FILTER_VALIDATE_INT);
+        $note = filter_input(INPUT_POST, 'note', FILTER_VALIDATE_INT);
+        $commentaire = htmlspecialchars($_POST['commentaire'] ?? '');
+        $deroulement = htmlspecialchars($_POST['deroulement'] ?? 'OK');
+        
+        $idAuteur = (int)$_SESSION['user_id']; 
+
+        if ($covoiturageId && $note !== false && !empty($commentaire)) {
+            try {
+            
+                require_once __DIR__ . '/DatabaseMongo.php'; 
+                $manager = DatabaseMongo::getManager();
+                $dbName = DatabaseMongo::getDatabaseName();
+                
+                $namespace = $dbName . ".avis"; 
+
+                $documentAvis = [
+                   "covoiturage_id" => (int)$covoiturageId,
+                   "passager_id"    => (int)$idAuteur,       
+                   "chauffeur_id"   => (int)$idDestinataire,  
+                   "note"           => (int)$note,
+                   "commentaire"    => $commentaire,
+                   "deroulement"    => $deroulement,
+                   "statut"         => "en attente", 
+                   "date_creation"  => date('Y-m-d H:i:s')  
+   ];
+
+                $bulk = new MongoDB\Driver\BulkWrite();
+                $bulk->insert($documentAvis);
+
+                $resultat = $manager->executeBulkWrite($namespace, $bulk);
+
+                if ($resultat->getInsertedCount() > 0) {
+                    $_SESSION['success_message'] = "Merci ! Votre avis ($note/5) a été enregistré sur MongoDB Atlas.";
+                } else {
+                    $_SESSION['error_message'] = "L'avis n'a pas pu être enregistré.";
+                }
+
+            } catch (MongoDB\Driver\Exception\Exception $e) {
+                $_SESSION['error_message'] = "Erreur de connexion NoSQL : " . $e->getMessage();
+            }
+        } else {
+            $_SESSION['error_message'] = "Le formulaire d'avis est incomplet.";
+        }
+
+        header('Location: ?page=profile');
+        exit();
+    }
+
         header("Location: ?page=profile");
         exit();
     }

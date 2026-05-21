@@ -4,26 +4,20 @@
             <div class="px-4 py-3 bg-light border-bottom">
                 <ul class="nav nav-pills gap-3" id="historique-tab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button
-                            class="nav-link active small fw-bold text-uppercase border-0 p-0 bg-transparent text-primary"
-                            id="tab-avenir" data-bs-toggle="pill" data-bs-target="#liste-avenir" type="button"
-                            role="tab">
+                        <button class="nav-link active small fw-bold text-uppercase border-0 p-0 bg-transparent text-primary"
+                            id="tab-avenir" data-bs-toggle="pill" data-bs-target="#liste-avenir" type="button" role="tab">
                             À venir (<?php echo count($trajetsAvenir); ?>)
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button
-                            class="nav-link small fw-bold text-uppercase border-0 p-0 bg-transparent text-warning"
-                            id="tab-en-cours" data-bs-toggle="pill" data-bs-target="#liste-en-cours" type="button"
-                            role="tab">
+                        <button class="nav-link small fw-bold text-uppercase border-0 p-0 bg-transparent text-warning"
+                            id="tab-en-cours" data-bs-toggle="pill" data-bs-target="#liste-en-cours" type="button" role="tab">
                             En cours (<?php echo count($trajetsEnCours); ?>)
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button
-                            class="nav-link small fw-bold text-uppercase border-0 p-0 bg-transparent text-muted opacity-50"
-                            id="tab-historique" data-bs-toggle="pill" data-bs-target="#liste-historique"
-                            type="button" role="tab">
+                        <button class="nav-link small fw-bold text-uppercase border-0 p-0 bg-transparent text-muted opacity-50"
+                            id="tab-historique" data-bs-toggle="pill" data-bs-target="#liste-historique" type="button" role="tab">
                             Historique (<?php echo count($trajetsPasses); ?>)
                         </button>
                     </li>
@@ -65,23 +59,20 @@
                                     <div class="mt-3 d-flex justify-content-end gap-2">
                                         <?php if ($trajet['statut'] === 'ouvert') : ?>
                                             <?php if ($isChauffeur) : ?>
-                                                <a href="?page=profile&action=demarrer-trajet&id=<?php echo $trajet['covoiturage_id']; ?>" 
-                                                   class="btn btn-sm btn-success fw-bold px-3 shadow-sm">
+                                                <a href="?page=profile&action=demarrer-trajet&id=<?php echo $trajet['covoiturage_id']; ?>" class="btn btn-sm btn-success fw-bold px-3 shadow-sm">
                                                      Démarrer le covoiturage
                                                 </a>
-                                                <a href="?page=profile&action=annuler-trajet&id=<?php echo $trajet['covoiturage_id']; ?>" 
-                                                   class="btn btn-sm btn-danger fw-bold px-3 shadow-sm">
-                                                     Annuler le covoiturage
+                                                <a href="?page=profile&action=annuler-trajet&id=<?php echo $trajet['covoiturage_id']; ?>" class="btn btn-sm btn-danger fw-bold px-3 shadow-sm">
+                                                    Annuler le covoiturage
                                                 </a>
                                             <?php else : ?>
-                                                <a href="?page=profile&action=annuler-reservation&id=<?php echo $trajet['reservation_id']; ?>" 
-                                                   class="btn btn-sm btn-danger fw-bold px-3 shadow-sm text-dark">
-                                                     Annuler participation
+                                                <a href="?page=profile&action=annuler-reservation&id=<?php echo $trajet['reservation_id']; ?>" class="btn btn-sm btn-danger fw-bold px-3 shadow-sm text-dark">
+                                                    Annuler participation
                                                 </a>
                                             <?php endif; ?>
                                         <?php endif; ?>
                                     </div>
-                                </div> 
+                                </div>
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </div>
@@ -95,11 +86,10 @@
                             </div>
                         <?php else : ?>
                             <?php foreach ($trajetsEnCours as $trajet) : ?>
-                                <?php $isChauffeur = !isset($trajet['reservation_id']); ?>
                                 <div class="list-group-item p-4 bg-warning bg-opacity-10 border-warning border-start border-4">
                                     <div class="d-flex w-100 justify-content-between align-items-center mb-2">
                                         <h5 class="mb-1 text-warning-emphasis fw-bold">
-                                            <?php echo htmlspecialchars($trajet['lieu_depart']); ?> ➡️ <?php echo htmlspecialchars($trajet['lieu_arrivee']); ?>
+                                            <?php echo htmlspecialchars($trajet['lieu_depart']); ?> ➡️ <?php echo htmlspecialchars($trajet['lieu_arivee']); ?>
                                         </h5>
                                         <small class="badge bg-warning text-dark px-2 py-1 shadow-sm">
                                             En voyage
@@ -116,14 +106,9 @@
                                     </div>
 
                                     <div class="mt-3 d-flex justify-content-end">
-                                        <?php if ($isChauffeur) : ?>
-                                            <a href="?page=profile&action=terminer-trajet&id=<?php echo $trajet['covoiturage_id']; ?>" 
-                                               class="btn btn-sm btn-warning fw-bold px-3 shadow-sm text-dark border-secondary-subtle">
-                                                 Arrivée à destination
-                                            </a>
-                                        <?php else : ?>
-                                            <span class="text-muted small"><i class="bi bi-info-circle"></i> Covoiturage en cours avec votre chauffeur...</span>
-                                        <?php endif; ?>
+                                        <a href="?page=profile&action=terminer-trajet&id=<?php echo $trajet['covoiturage_id']; ?>" class="btn btn-sm btn-warning fw-bold px-3 shadow-sm text-dark border-secondary-subtle">
+                                             Arrivée à destination
+                                        </a>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
@@ -140,6 +125,7 @@
                         <?php else : ?>
                             <?php foreach ($trajetsPasses as $trajet) : ?>
                                 <?php $isChauffeur = !isset($trajet['reservation_id']); ?>
+                                
                                 <div class="list-group-item p-4 opacity-75">
                                     <div class="d-flex w-100 justify-content-between align-items-center mb-2">
                                         <h5 class="mb-1 text-secondary fw-bold">
@@ -149,7 +135,7 @@
                                             <?php echo htmlspecialchars($trajet['statut']); ?>
                                         </small>
                                     </div>
-                                    <div class="d-flex justify-content-between align-items-center text-muted small mb-2">
+                                    <div class="d-flex justify-content-between align-items-center text-muted small">
                                         <div>
                                             Le <?php echo date('d/m/Y', strtotime($trajet['date_depart'])); ?> 
                                             à <?php echo date('H\hi', strtotime($trajet['heure_depart'])); ?>
@@ -159,14 +145,15 @@
                                         </div>
                                     </div>
 
-                                    <div class="d-flex justify-content-end mt-2">
+                                    <div class="d-flex justify-content-end mt-3">
                                         <?php if (!$isChauffeur && ($trajet['statut'] === 'termine' || $trajet['statut'] === 'cloture')) : ?>
-                                            <a href="?page=avis&action=rediger&id=<?php echo $trajet['covoiturage_id']; ?>" 
-                                               class="btn btn-sm btn-outline-primary fw-bold px-3 shadow-sm">
-                                                <i class="bi bi-chat-left-text"></i> Valider le trajet / Laisser un avis
-                                            </a>
+                                            <button type="button" class="btn btn-sm btn-primary fw-bold" data-bs-toggle="modal" data-bs-target="#modalAvis<?php echo $trajet['covoiturage_id']; ?>">
+                                                Valider le trajet / Laisser un avis
+                                            </button>
                                         <?php endif; ?>
                                     </div>
+
+                                    <?php include __DIR__ . '/_modal_avis.php'; ?>
                                 </div>
                             <?php endforeach; ?>
                         <?php endif; ?>

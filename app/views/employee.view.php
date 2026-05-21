@@ -42,11 +42,16 @@
                             <?php if (!empty($avisEnAttente)): ?>
                                 <?php foreach ($avisEnAttente as $avis): ?>
                                 <tr>
-                                    <td>#<?php echo $avis['covoiturage_id']; ?></td>
-                                    <td><strong><?php echo htmlspecialchars($avis['passager_pseudo']); ?></strong></td>
-                                    <td><?php echo htmlspecialchars($avis['chauffeur_pseudo']); ?></td>
-                                    <td><span class="badge bg-warning text-dark"><?php echo htmlspecialchars($avis['note']); ?> / 5</span></td>
-                                    <td><span class="text-muted small"><?php echo htmlspecialchars($avis['commentaire']); ?></span></td>
+                                    <td>#<?php echo htmlspecialchars($avis['covoiturage_id'] ?? ''); ?></td>
+                                    <td><strong><?php echo htmlspecialchars($avis['passager_pseudo'] ?? 'Anonyme'); ?></strong></td>
+                                    <td><?php echo htmlspecialchars($avis['chauffeur_pseudo'] ?? 'Chauffeur'); ?></td>
+                                    <td><span class="badge bg-warning text-dark"><?php echo htmlspecialchars($avis['note'] ?? '0'); ?> / 5</span></td>
+                                    <td>
+                                        <span class="text-dark d-block fw-semibold mb-1"><?php echo htmlspecialchars($avis['commentaire'] ?? ''); ?></span>
+                                        <span class="badge bg-light text-secondary border small">
+                                            Déroulement : <?php echo htmlspecialchars($avis['deroulement'] ?? 'Non spécifié'); ?>
+                                        </span>
+                                    </td>
                                     <td>
                                         <a href="?page=employe&action=valider_avis&id=<?php echo $avis['avis_id']; ?>" class="btn btn-sm btn-success text-white me-1">Valider</a>
                                         <a href="?page=employe&action=refuser_avis&id=<?php echo $avis['avis_id']; ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Refuser cet avis définitivement ?');">Refuser</a>
