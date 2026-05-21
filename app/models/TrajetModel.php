@@ -12,7 +12,7 @@ class TrajetModel {
      */
     public function createTrajet($lieu_depart, $lieu_arrivee, $date_depart, $heure_depart, $heure_arrivee, $nb_place, $prix_personne, $vehicule_id, $userId, $accepte_fumeurs = 0, $accepte_animaux = 0) {
         
-        // Requête SQL corrigée (virgules ajoutées pour éviter les erreurs de syntaxe)
+        // Requête SQL pour insérer un nouveau covoiturage
         $sql = "INSERT INTO covoiturage (
                     date_depart, 
                     heure_depart,

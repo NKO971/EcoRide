@@ -204,22 +204,24 @@ function profileController($pdo) {
     } // Fin du bloc POST
     
     // Récupérer les données fraîches pour l'affichage des listes
-// Récupération des voitures de l'utilisateur
+    // Récupération des voitures de l'utilisateur
     $ListeVoitures = $voitureModel->getByUtilisateurId($userId);
 
     // SECTION "À VENIR" : Fusion des rôles Conducteur et Passager
-    $trajetsChauffeurAvenir = $trajetModel->getTrajetsAvenir($userId);
+    $trajetsChauffeurAvenir     = $trajetModel->getTrajetsAvenir($userId);
     $reservationsPassagerAvenir = $trajetModel->getReservationsAvenir($userId);
     // On assemble les deux tableaux dans la variable attendue par la vue
-    $trajetsAvenir = array_merge($trajetsChauffeurAvenir, $reservationsPassagerAvenir);
+    $trajetsAvenir              = array_merge($trajetsChauffeurAvenir, $reservationsPassagerAvenir);
 
-    // SECTION "EN COURS"
-    $trajetsEnCours = $trajetModel->getTrajetsEnCours($userId);
-    $reservationsEnCours = $trajetModel->getReservationsEnCours($userId);
+    // SECTION "EN COURS" : Fusion pour que le passager voie aussi le trajet actif
+    $trajetsChauffeurEnCours    = $trajetModel->getTrajetsEnCours($userId);
+    $reservationsPassagerEnCours = $trajetModel->getReservationsEnCours($userId);
+    //  p our que $trajetsEnCours contient les deux rôles
+    $trajetsEnCours = array_merge($trajetsChauffeurEnCours, $reservationsPassagerEnCours);
 
     // SECTION "PASSÉS" (Historique)
-    $trajetsPasses = $trajetModel->getTrajetsPasses($userId);
-    $reservationsPasses = $trajetModel->getReservationsPasses($userId);
+    $trajetsPasses              = $trajetModel->getTrajetsPasses($userId);
+    $reservationsPasses         = $trajetModel->getReservationsPasses($userId);
 
 
     // Variables pour le header dynamique

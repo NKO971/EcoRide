@@ -60,12 +60,10 @@
                                         </div>
                                     </div>
 
-                                    
-                                   <?php $isChauffeur = !isset($trajet['reservation_id']); ?>
+                                    <?php $isChauffeur = !isset($trajet['reservation_id']); ?>
 
                                     <div class="mt-3 d-flex justify-content-end gap-2">
                                         <?php if ($trajet['statut'] === 'ouvert') : ?>
-                                            
                                             <?php if ($isChauffeur) : ?>
                                                 <a href="?page=profile&action=demarrer-trajet&id=<?php echo $trajet['covoiturage_id']; ?>" 
                                                    class="btn btn-sm btn-success fw-bold px-3 shadow-sm">
@@ -73,21 +71,22 @@
                                                 </a>
                                                 <a href="?page=profile&action=annuler-trajet&id=<?php echo $trajet['covoiturage_id']; ?>" 
                                                    class="btn btn-sm btn-danger fw-bold px-3 shadow-sm">
-                                                    Annuler le covoiturage
+                                                     Annuler le covoiturage
                                                 </a>
                                             <?php else : ?>
                                                 <a href="?page=profile&action=annuler-reservation&id=<?php echo $trajet['reservation_id']; ?>" 
                                                    class="btn btn-sm btn-danger fw-bold px-3 shadow-sm text-dark">
-                                                    Annuler participation
+                                                     Annuler participation
                                                 </a>
                                             <?php endif; ?>
-
                                         <?php endif; ?>
                                     </div>
-                                </div> <?php endforeach; ?>
+                                </div> 
+                            <?php endforeach; ?>
                         <?php endif; ?>
                     </div>
                 </div>
+
                 <div class="tab-pane fade" id="liste-en-cours" role="tabpanel">
                     <div class="list-group list-group-flush">
                         <?php if (empty($trajetsEnCours)) : ?>
@@ -96,10 +95,11 @@
                             </div>
                         <?php else : ?>
                             <?php foreach ($trajetsEnCours as $trajet) : ?>
+                                <?php $isChauffeur = !isset($trajet['reservation_id']); ?>
                                 <div class="list-group-item p-4 bg-warning bg-opacity-10 border-warning border-start border-4">
                                     <div class="d-flex w-100 justify-content-between align-items-center mb-2">
                                         <h5 class="mb-1 text-warning-emphasis fw-bold">
-                                            <?php echo htmlspecialchars($trajet['lieu_depart']); ?> ➡️ <?php echo htmlspecialchars($trajet['lieu_arivee']); ?>
+                                            <?php echo htmlspecialchars($trajet['lieu_depart']); ?> ➡️ <?php echo htmlspecialchars($trajet['lieu_arrivee']); ?>
                                         </h5>
                                         <small class="badge bg-warning text-dark px-2 py-1 shadow-sm">
                                             En voyage
@@ -116,10 +116,14 @@
                                     </div>
 
                                     <div class="mt-3 d-flex justify-content-end">
-                                        <a href="?page=profile&action=terminer-trajet&id=<?php echo $trajet['covoiturage_id']; ?>" 
-                                           class="btn btn-sm btn-warning fw-bold px-3 shadow-sm text-dark border-secondary-subtle">
-                                             Arrivée à destination
-                                        </a>
+                                        <?php if ($isChauffeur) : ?>
+                                            <a href="?page=profile&action=terminer-trajet&id=<?php echo $trajet['covoiturage_id']; ?>" 
+                                               class="btn btn-sm btn-warning fw-bold px-3 shadow-sm text-dark border-secondary-subtle">
+                                                 Arrivée à destination
+                                            </a>
+                                        <?php else : ?>
+                                            <span class="text-muted small"><i class="bi bi-info-circle"></i> Covoiturage en cours avec votre chauffeur...</span>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
@@ -135,6 +139,7 @@
                             </div>
                         <?php else : ?>
                             <?php foreach ($trajetsPasses as $trajet) : ?>
+                                <?php $isChauffeur = !isset($trajet['reservation_id']); ?>
                                 <div class="list-group-item p-4 opacity-75">
                                     <div class="d-flex w-100 justify-content-between align-items-center mb-2">
                                         <h5 class="mb-1 text-secondary fw-bold">
@@ -144,7 +149,7 @@
                                             <?php echo htmlspecialchars($trajet['statut']); ?>
                                         </small>
                                     </div>
-                                    <div class="d-flex justify-content-between align-items-center text-muted small">
+                                    <div class="d-flex justify-content-between align-items-center text-muted small mb-2">
                                         <div>
                                             Le <?php echo date('d/m/Y', strtotime($trajet['date_depart'])); ?> 
                                             à <?php echo date('H\hi', strtotime($trajet['heure_depart'])); ?>
@@ -152,6 +157,15 @@
                                         <div>
                                             <?php echo htmlspecialchars($trajet['prix_personne']); ?> crédits
                                         </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-end mt-2">
+                                        <?php if (!$isChauffeur && ($trajet['statut'] === 'termine' || $trajet['statut'] === 'cloture')) : ?>
+                                            <a href="?page=avis&action=rediger&id=<?php echo $trajet['covoiturage_id']; ?>" 
+                                               class="btn btn-sm btn-outline-primary fw-bold px-3 shadow-sm">
+                                                <i class="bi bi-chat-left-text"></i> Valider le trajet / Laisser un avis
+                                            </a>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
